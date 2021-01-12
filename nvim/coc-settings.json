@@ -1,0 +1,68 @@
+{
+  "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "c",
+    "javascript",
+    "css",
+    "html",
+    "json",
+    "vue",
+    "htmldjango",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+  "eslint.autoFixOnSave": true,
+  "jedi.startupMessage": false,
+  "snippets.ultisnips.enable": false,
+  "diagnostic-languageserver.filetypes": {
+    "python": "pylint"
+  },
+  "diagnostic-languageserver.linters": {
+    "pylint": {
+      "sourceName": "pylint",
+      "command": "pylint",
+      "args": [
+        "--load-plugins=pylint_django",
+        "--output-format",
+        "text",
+        "--score",
+        "no",
+        "--msg-template",
+        "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+        "%file"
+      ],
+      "formatPattern": [
+        "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": 4
+        }
+      ],
+      "rootPatterns": [".git", "pyproject.toml", "setup.py"],
+      "securities": {
+        "informational": "hint",
+        "refactor": "info",
+        "convention": "info",
+        "warning": "warning",
+        "error": "error",
+        "fatal": "error"
+      },
+      "offsetColumn": 1,
+      "formatLines": 1
+    }
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "python": ["yapf"]
+  },
+  "diagnostic-languageserver.formatters": {
+    "yapf": {
+      "command": "yapf",
+      "args": ["--style", "{based_on_style: pep8}"]
+    }
+  }
+}
