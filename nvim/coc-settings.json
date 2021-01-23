@@ -15,8 +15,13 @@
     "vue"
   ],
   "eslint.autoFixOnSave": true,
+  "jedi.enable": true,
   "jedi.startupMessage": false,
-  "snippets.ultisnips.enable": false,
+  "jedi.trace.server": "messages",
+  "jedi.diagnostics.enable": true,
+  "jedi.diagnostics.didOpen": true,
+  "jedi.diagnostics.didSave": true,
+  "jedi.diagnostics.didChange": true,
   "diagnostic-languageserver.filetypes": {
     "python": "pylint"
   },

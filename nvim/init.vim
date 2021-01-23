@@ -75,6 +75,7 @@ Plug 'tweekmonster/django-plus.vim'
 Plug 'honza/vim-snippets'
 " Plug 'lilydjwg/colorizer'
 Plug 'luochen1990/rainbow'
+Plug 'frazrepo/vim-rainbow'
 Plug 'RRethy/vim-illuminate'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
@@ -83,7 +84,6 @@ call plug#end()
 
 
 colorscheme gruvbox
-let g:rainbow_active = 1
 highlight link CocErrorSign GruvboxRed
 let g:gruvbox_contrast_dark = 'hard'
 set background=dark
@@ -118,7 +118,9 @@ let g:coc_global_extensions = [
             \'coc-xml',
             \'coc-prettier',
             \'coc-pairs',
-			\'coc-highlight'
+			\'coc-highlight',
+			\'coc-java',
+			\'coc-java-debug'
             \]
 let g:coc_disable_transparent_cursor = 1
 
@@ -128,6 +130,7 @@ if executable('rg')
     let g:rg_highlight='true'
 endif
 
+let g:rainbow_active = 1
 
 " telescope
 " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -139,6 +142,7 @@ endif
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <leader>o :set nohlsearch!<CR>
 
 
 lua require'nvim-treesitter.configs'.setup  { ensure_installed = "maintained", highlight = { enable = true}}
@@ -299,3 +303,5 @@ vnoremap <leader>d "_d
 " replace currently selected text with default register
 " without yanking it
 vnoremap <leader>p "_dP"
+
+command! -nargs=0 Format :call CocAction('format')
