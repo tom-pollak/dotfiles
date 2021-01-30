@@ -1,0 +1,49 @@
+{
+  "adapters": {
+    "java-debug-server": {
+      "name": "vscode-java",
+      "port": "${AdapterPort}"
+    }
+  },
+  "configurations": {
+    "Python: Run current script": {
+      "adapter": "debugpy",
+      "configuration": {
+        "name": "Python: Current File",
+        "type": "python",
+        "request": "launch",
+        "program": "${file}",
+        "debugOptions": [],
+        "stopOnEntry": true,
+        "console": "integratedTerminal",
+        "cwd": "${workspaceRoot}"
+      },
+      "breakpoints": {
+        "exception": {
+          "caught": "N",
+          "uncaught": "N"
+        }
+      }
+    },
+    "Java Attach": {
+      "default": true,
+      "adapter": "vscode-java-debug",
+      "configuration": {
+        "name": "Java: Current File",
+        "type": "java",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "cwd": "${workspaceRoot}",
+        "debugOptions": [],
+        "stopOnEntry": true
+      },
+      "breakpoints": {
+        "exception": {
+          "caught": "N",
+          "uncaught": "N"
+        }
+      }
+    }
+  }
+}

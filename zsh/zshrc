@@ -1,13 +1,17 @@
-if [ -f ~/.zsh/zshalias ]; then
-	    source ~/dotfiles/fzf.zsh
-		source ~/.zsh/zsh_alias.zsh
-		source ~/.zsh/plugins.zsh
+source $HOME/.zsh/zinit.zsh
+source $HOME/.zsh/fzf.zsh
+source $HOME/.zsh/zsh_alias.zsh
+source $HOME/.zsh/plugins.zsh
 
 eval "$(starship init zsh)"
 
 export PATH=$PATH:/home/tom/.local/bin
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+# man 2 select
+export ZSH=~/.oh-my-zsh
 export PAGER=less
 export EDITOR=nvim
 export DOTFILES=$HOME/dotfiles
+
+source $ZSH/oh-my-zsh.sh
 cd
