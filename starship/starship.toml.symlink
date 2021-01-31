@@ -4,17 +4,30 @@ disabled = true
 [character]
 success_symbol = "[❯](bold white)"
 
-[aws]
-disabled = true
+[username]
+style_user = "yellow bold"
+style_root = "red bold"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format =  "[@$hostname](bold yellow) "
+disabled = false
 
 [package]
 display_private = true
 
-# Starship doesn't have any module for showing docker symbol
-# Issue: https://github.com/starship/starship/issues/393
 [custom.docker]
 description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.{yml,yaml} files"
 command = "echo 🐳"
 files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
 when = """ command -v docker &> /dev/null; exit (echo $?); """
 format = "in [$output]($style)"
+
+[python]
+python_binary = ["python3"]
+
+[git_branch]
+symbol = ""
