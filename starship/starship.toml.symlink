@@ -1,19 +1,27 @@
+# [line_break]
+# disabled = true
+
 [cmd_duration]
-disabled = true
+min_time = 500
+show_milliseconds = false
+disabled = false
+format = "[$duration](bold red)"
 
 [character]
-success_symbol = "[❯](bold white)"
+use_symbol_for_status = true
+success_symbol = "[λ](bold #FC0FC0)"
+error_sybol = "[λ](bold #red)"
 
 [username]
-style_user = "yellow bold"
+style_user = "purple"
 style_root = "red bold"
 format = "[$user]($style)"
 disabled = false
-show_always = true
+# show_always = true
 
 [hostname]
-ssh_only = false
-format =  "[@$hostname](bold yellow) "
+ssh_only = true
+format =  "[@$hostname](purple) "
 disabled = false
 
 [package]
