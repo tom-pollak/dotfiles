@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILES=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../" && pwd -P)
+
 [ ! -d "~/.zsh/" ] && mkdir ~/.zsh
 if [ ! -d "~/.oh-my-zsh/" ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && rm -v ~/.zshrc
@@ -17,3 +19,4 @@ if command -v zsh >/dev/null 2>&1; then
 else
     echo "[ NOTFOUND ] :: $MODULE"
 fi
+zsh
