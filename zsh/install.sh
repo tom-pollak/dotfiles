@@ -1,6 +1,9 @@
 #!/bin/bash
 
-mkdir ~/.zsh
+[ ! -d "~/.zsh/" ] && mkdir ~/.zsh
+if [ ! -d "~/.oh-my-zsh/" ]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && rm -v ~/.zshrc
+fi
 
 if command -v zsh >/dev/null 2>&1; then
     MODULE='zsh'
