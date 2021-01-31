@@ -140,7 +140,7 @@ let g:rainbow_active = 1
 " let g:netrw_winsize = 25
 
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
-nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
+nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <leader>o :set nohlsearch!<CR>
 
