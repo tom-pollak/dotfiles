@@ -4,6 +4,9 @@ DOTFILES=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../" && pwd -P)
 
 echo "[ LINKING ] :: Git >> config"
 
+rm $HOME/.gitconfig
+rm $HOME/.gitconfig.local
+
 ln -sf "$DOTFILES/git/gitconfig.local" $HOME/.gitconfig.local
 ln -sf "$DOTFILES/git/gitconfig" $HOME/.gitconfig
 
