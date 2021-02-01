@@ -1,6 +1,5 @@
 source $HOME/.zsh/zinit.zsh
 source $HOME/.zsh/plugins.zsh
-source $HOME/.zsh/fzf.zsh
 source $HOME/.zsh/zsh_alias.zsh
 
 eval "$(starship init zsh)"
