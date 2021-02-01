@@ -2,6 +2,9 @@ alias cat=batcat
 alias v=nvim
 alias fd=fdfind
 
+bindkey -s '^o' 'nvim $(fzf)^M'
+bindkey '^q' beginning-of-line
+
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
 alias ll='exa -lbG --git'

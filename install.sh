@@ -1,7 +1,5 @@
 cd $(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 
-source ./install_tools.sh
-
 for dictionary in `ls`; do
 	chmod +x $dictionary/install.sh
 	$dictionary/install.sh
