@@ -10,7 +10,7 @@ format = "[$duration](bold red)"
 [character]
 use_symbol_for_status = true
 success_symbol = "[λ](bold #FC0FC0)"
-error_sybol = "[λ](bold #red)"
+error_symbol = "[λ](bold red)"
 
 [username]
 style_user = "purple"
