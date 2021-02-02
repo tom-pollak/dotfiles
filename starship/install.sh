@@ -8,4 +8,4 @@ DOTFILES=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../" && pwd -P)
 echo "[ LINKING ] :: starship >> .starship.toml"
 
 rm $HOME/.starship.toml
-ln -sf $DOTFILES/starship/starship.toml.symlink $HOME/.starship.toml
+ln -sf $DOTFILES/starship/starship.toml.symlink $HOME/.config/starship.toml

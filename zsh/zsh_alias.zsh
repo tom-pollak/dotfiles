@@ -13,5 +13,5 @@ alias la='exa -abG --git'
 alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
 alias ..="cd .."
-alias ...="cd ..."
-alias ....="cd ...."
+alias ...="cd ../.."
+alias ....="cd ../../.."
