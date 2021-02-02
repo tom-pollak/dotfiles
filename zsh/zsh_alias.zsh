@@ -4,6 +4,7 @@ alias fd=fdfind
 
 bindkey -s '^o' 'nvim $(fzf)^M'
 bindkey '^q' beginning-of-line
+bindkey '^j' autosuggest-accept
 
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
