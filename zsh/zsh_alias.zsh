@@ -8,10 +8,10 @@ bindkey '^j' autosuggest-accept
 
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
-alias ll='exa -lbG --git'
-alias llm='exa -lbGd --git --sort=modified'                            # long list, modified date sort
+alias ll='exa -labG --git'
+alias llm='exa -labGd --git --sort=modified'                            # long list, modified date sort
 alias la='exa -abG --git'  
-alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
 alias ..="cd .."
 alias ...="cd ../.."

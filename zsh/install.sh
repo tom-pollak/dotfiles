@@ -7,6 +7,8 @@ if [ ! -d "~/.oh-my-zsh/" ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && rm -v ~/.zshrc
 fi
 
+[ ! -d ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/alias-tips ] && git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/alias-tips
+
 if command -v zsh >/dev/null 2>&1; then
     MODULE='zsh'
     echo "[ LINKING ] :: $MODULE >> .zshrc"
