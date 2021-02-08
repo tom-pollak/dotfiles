@@ -6,6 +6,7 @@ endfun
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 set modifiable
 
+set noshowmode
 set exrc
 set autoindent
 " set noautoindent
@@ -52,6 +53,7 @@ inoremap jk <esc>
 map Y y$
 
 
+if !exists('g:vscode')
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
@@ -80,6 +82,9 @@ Plug 'RRethy/vim-illuminate'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'joelbeedle/pseudo-syntax'
+Plug 'kassio/neoterm'
+Plug 'szymonmaszke/vimpyter'
+" Plug 'goerz/jupytext'
 call plug#end()
 
 
@@ -148,12 +153,16 @@ nnoremap <leader>o :set nohlsearch!<CR>
 lua require'nvim-treesitter.configs'.setup  { ensure_installed = "maintained", highlight = { enable = true}}
 "indent = { enable = true }, highlight = { enable = true}}
 " split windows
+endif
+
+
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>l :wincmd l<CR>
 
 
+if !exists('g:vscode')
 "other remaps
 nnoremap <leader>u :UndotreeShow<CR>:wincmd h<CR>
 nnoremap <leader>rr :update<cr>:split term://python3 %<cr><c-w>J:resize 22<cr>i
@@ -270,12 +279,13 @@ else
     nnoremap <leader>t :split term://zsh<cr><c-w>J:resize 22<cr>i
 endif
 
-set noshowmode
 
 
 " vimspector
-nnoremap <leader>m :MaximizerToggle!<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
+" autocmd BufNewFile,Bufread *.java nnoremap <leader>dd :call JavaDebug()<cr>
+
+nnoremap <leader>m :MaximizerToggle!<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
 nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
@@ -283,6 +293,7 @@ nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
 nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
 nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
 nnoremap <leader>de :call vimspector#Reset()<CR>
+" autocmd BufNewFile,Bufread *.java nnoremap <leader>de :call EndJava()<cr>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 
@@ -296,6 +307,24 @@ nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>db <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
 
+command! -nargs=0 Format :call CocAction('format')
+
+" function JavaDebug()
+" 	:!javac -g %
+" 	let b:filename = expand('%:t:r')
+" 	let b:filename_noextension = substitute(@%, ".java", "", "")
+" 	:T java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=y b:filename_noextension
+" 	:e b:filename
+" 	" :execute "<c-^>"
+" 	" :call feedkeys(":resize 5<cr><c-w>j<cr>")
+" 	:CocCommand java.debug.vimspector.start
+" endfunction
+"
+" function EndJava()
+" 	:call vimspector#Reset()<CR>
+" endfunction
+endif
+
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
@@ -304,4 +333,9 @@ vnoremap <leader>d "_d
 " without yanking it
 vnoremap <leader>p "_dP"
 
-command! -nargs=0 Format :call CocAction('format')
+autocmd Filetype ipynb nmap <silent><Leader>b :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nmap <silent><Leader>r :VimpyterStartJupyter<CR>
+autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
+
+let g:jupytext_enable = 1
+let g:jupytext_command = 'jupytext'

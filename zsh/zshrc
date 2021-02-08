@@ -4,10 +4,11 @@ source $HOME/.zsh/zsh_alias.zsh
 
 eval "$(starship init zsh)"
 
-export PATH=$PATH:/home/tom/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 export PAGER=less
 export EDITOR=nvim
+export VIMRC=$HOME/.config/nvim/init.vim
 # export ZSH_THEME="half-life"
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
