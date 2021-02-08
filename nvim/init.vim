@@ -20,7 +20,7 @@ set hidden
 set nowrap
 set ignorecase smartcase
 set noswapfile
-set nobackup
+" set nobackup
 set undodir=~/.vim/undordir
 set undofile
 set undolevels=10000
