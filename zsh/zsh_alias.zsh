@@ -1,6 +1,8 @@
 alias cat=batcat
 alias v=nvim
 alias fd=fdfind
+alias untar='tar -zxvf '
+alias ipe="curl -w '\n' ipinfo.io/ip"
 
 bindkey -s '^o' 'nvim $(fzf)^M'
 bindkey '^q' beginning-of-line
