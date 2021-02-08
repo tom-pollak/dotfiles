@@ -22,6 +22,7 @@
   "jedi.diagnostics.didOpen": true,
   "jedi.diagnostics.didSave": true,
   "jedi.diagnostics.didChange": true,
+  "jedi.executable.command": "$HOME/.local/bin/jedi-language-server",
   "diagnostic-languageserver.filetypes": {
     "python": "pylint"
   },
