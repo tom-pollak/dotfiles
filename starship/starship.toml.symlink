@@ -39,3 +39,6 @@ python_binary = ["python3"]
 
 [git_branch]
 symbol = ""
+
+[battery]
+disabled = true

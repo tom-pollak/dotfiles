@@ -12,7 +12,8 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "vue"
+    "vue",
+    "java"
   ],
   "eslint.autoFixOnSave": true,
   "jedi.enable": true,

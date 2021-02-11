@@ -9,9 +9,6 @@ set modifiable
 set noshowmode
 set exrc
 set autoindent
-" set noautoindent
-" set nocindent
-
 set relativenumber nu
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -75,7 +72,7 @@ Plug 'tweekmonster/django-plus.vim'
 Plug 'honza/vim-snippets'
 " Plug 'lilydjwg/colorizer'
 Plug 'luochen1990/rainbow'
-Plug 'frazrepo/vim-rainbow'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'RRethy/vim-illuminate'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
@@ -86,6 +83,7 @@ Plug 'szymonmaszke/vimpyter'
 call plug#end()
 
 
+let g:gruvbox_italic=1
 colorscheme gruvbox
 highlight link CocErrorSign GruvboxRed
 let g:gruvbox_contrast_dark = 'hard'
@@ -148,10 +146,13 @@ nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim
 nnoremap <leader>o :set nohlsearch!<CR>
 
 
-lua require'nvim-treesitter.configs'.setup  { ensure_installed = "maintained", highlight = { enable = true}}
-"indent = { enable = true }, highlight = { enable = true}}
+lua require'nvim-treesitter.configs'.setup {
+			\ ensure_installed = "maintained",
+			\ highlight = { enable = true},
+			\ rainbow = { enable = true },
+			\ }
+"
 " split windows
-
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>h :wincmd h<CR>
@@ -305,9 +306,12 @@ nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
 command! -nargs=0 Format :call CocAction('format')
 
 function RunJava()
-	" :update<cr>
+	execute 'update %'
+	let b:filename_noextension = substitute(@%, ".java", "", "")
+	if filereadable(b:filename_noextension . ".class")
+		execute '!rm' b:filename_noextension . ".class"
+	endif
 	execute '!javac -g %'
-	" let b:filename = expand('%:t:r')
 	let b:filename_noextension = substitute(@%, ".java", "", "")
 	execute '!java' b:filename_noextension
 endfunction
