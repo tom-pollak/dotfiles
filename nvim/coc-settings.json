@@ -15,6 +15,7 @@
     "vue",
     "java"
   ],
+  "snippets.snipmate.enable": false,
   "eslint.autoFixOnSave": true,
   "jedi.enable": true,
   "jedi.startupMessage": false,
