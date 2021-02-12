@@ -61,9 +61,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'mbbill/undotree'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install() }}
-" Plug 'wfxr/minimap.vim'
 Plug 'vim-airline/vim-airline'
-" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -79,9 +78,22 @@ Plug 'szw/vim-maximizer'
 Plug 'joelbeedle/pseudo-syntax'
 Plug 'kassio/neoterm'
 Plug 'szymonmaszke/vimpyter'
+Plug 'vim-test/vim-test'
+Plug 'junegunn/vim-easy-align'
+Plug 'pwntester/octo.nvim'
 " Plug 'goerz/jupytext'
 call plug#end()
 
+" vim test
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" easy align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 let g:gruvbox_italic=1
 colorscheme gruvbox
@@ -140,10 +152,10 @@ let g:rainbow_active = 1
 " let g:netrw_banner = 0
 " let g:netrw_winsize = 25
 
+lua require('telescope').load_extension('octo')
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
-nnoremap <leader>o :set nohlsearch!<CR>
 
 
 lua require'nvim-treesitter.configs'.setup {
@@ -160,6 +172,7 @@ nnoremap <leader>l :wincmd l<CR>
 
 "other remaps
 nnoremap <leader>u :UndotreeShow<CR>:wincmd h<CR>
+nnoremap <leader>o :set nohlsearch!<CR>
 
 autocmd BufNewFile,Bufread *.py nnoremap <leader>rr :update<cr>:split term://python3 %<cr><c-w>J:resize 22<cr>i
 autocmd BufNewFile,Bufread *.py nnoremap <leader>rt :update<cr>:split term://python3 -m unittest discover -s . -p 'test_*.py'<cr><c-w>J:resize 22<cr>i
@@ -330,3 +343,5 @@ autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
 
 let g:jupytext_enable = 1
 let g:jupytext_command = 'jupytext'
+
+nmap m <Plug>(easymotion-overwin-f)
