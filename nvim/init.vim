@@ -8,7 +8,7 @@ set modifiable
 
 set noshowmode
 set exrc
-set autoindent
+" set autoindent
 set relativenumber nu
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -27,7 +27,7 @@ set cmdheight=2
 set shortmess+=c
 set updatetime=50
 set signcolumn=yes
-filetype plugin indent on
+" filetype plugin indent on
 set backspace=indent,eol,start
 set swapfile
 set dir=~/.swp
@@ -83,6 +83,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'pwntester/octo.nvim'
 " Plug 'goerz/jupytext'
 call plug#end()
+filetype indent off " else double indents must be after call plug#end
 
 " vim test
 nmap <silent> t<C-n> :TestNearest<CR>
@@ -251,17 +252,14 @@ endfunction
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " vim easy motion
-nmap <leader>s <Plug>(easymotion-overwin-f2)
-nmap <leader>f <Plug>(easymotion-overwin-f)
-
+"
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
-
-nmap M <Plug>(easymotion-w)
+nmap m <Plug>(easymotion-overwin-f)
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -344,4 +342,6 @@ autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
 let g:jupytext_enable = 1
 let g:jupytext_command = 'jupytext'
 
-nmap m <Plug>(easymotion-overwin-f)
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+						\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
