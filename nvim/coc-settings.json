@@ -15,6 +15,7 @@
     "vue",
     "java"
   ],
+  "coc.preferences.formatOnType": true,
   "snippets.snipmate.enable": false,
   "eslint.autoFixOnSave": true,
   "jedi.enable": true,
