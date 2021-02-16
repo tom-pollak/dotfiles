@@ -1,11 +1,11 @@
 # [line_break]
 # disabled = true
 
-# [cmd_duration]
-# min_time = 500
-# show_milliseconds = false
-# disabled = false
-# format = "[$duration](bold red)"
+[cmd_duration]
+min_time = 500
+show_milliseconds = false
+disabled = false
+format = "[$duration](bold red)"
 
 [character]
 use_symbol_for_status = true
@@ -39,3 +39,6 @@ python_binary = ["python3"]
 
 [git_branch]
 symbol = ""
+
+[battery]
+disabled = true
