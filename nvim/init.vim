@@ -81,7 +81,7 @@ Plug 'szymonmaszke/vimpyter'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'pwntester/octo.nvim'
-" Plug 'goerz/jupytext'
+Plug 'goerz/jupytext'
 call plug#end()
 filetype indent off " else double indents must be after call plug#end
 
@@ -141,7 +141,8 @@ let g:coc_disable_transparent_cursor = 1
 " rip grep
 if executable('rg')
     let g:rg_derive_root='true'
-    let g:rg_highlight='true'
+	let g:rg_root_types = ['.git']
+	let g:rg_command = 'rg --vimgrep -S'
 endif
 
 let g:rainbow_active = 1
@@ -175,8 +176,8 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>:wincmd h<CR>
 nnoremap <leader>o :set nohlsearch!<CR>
 
-autocmd BufNewFile,Bufread *.py nnoremap <leader>rr :update<cr>:split term://python3 %<cr><c-w>J:resize 22<cr>i
-autocmd BufNewFile,Bufread *.py nnoremap <leader>rt :update<cr>:split term://python3 -m unittest discover -s . -p 'test_*.py'<cr><c-w>J:resize 22<cr>i
+autocmd BufNewFile,Bufread *.py nnoremap <leader>rr :call RunPython()<CR>
+autocmd BufNewFile,Bufread *.py nnoremap <leader>rt :call TestPython()<CR>
 autocmd BufNewFile,Bufread *.java nnoremap <leader>rr :call RunJava()<cr>
 
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
@@ -195,9 +196,10 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-nmap <leader>qf <Plug>(coc-fix-current)
+nmap <leader>f <Plug>(coc-fix-current)
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+xmap <leader>x  <Plug>(coc-convert-snippet)
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 
 nnoremap <leader>w :update<cr>
@@ -257,8 +259,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
-map <leader>j <Plug>(easymotion-j)
-map <leader>k <Plug>(easymotion-k)
 nmap m <Plug>(easymotion-overwin-f)
 
 " nerdtree
@@ -291,41 +291,32 @@ endif
 
 
 " vimspector
-nnoremap <leader>ddd :call vimspector#Launch()<CR>
+nnoremap <leader>sd :call vimspector#Launch()<CR>
 
 nnoremap <leader>m :MaximizerToggle!<CR>
-nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
-nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
-nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
-nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
-nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
-nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
-nnoremap <leader>de :call vimspector#Reset()<CR>
+nnoremap <leader>sc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>st :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>sv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>sw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ss :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>so :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>se :call vimspector#Reset()<CR>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+nmap <leader>sl <Plug>VimspectorStepInto
+nmap <leader>sj <Plug>VimspectorStepOver
+nmap <leader>sk <Plug>VimspectorStepOut
+nmap <leader>s_ <Plug>VimspectorRestart
+nnoremap <leader>s<space> :call vimspector#Continue()<CR>
 
-nmap <leader>drc <Plug>VimspectorRunToCursor
-nmap <leader>db <Plug>VimspectorToggleBreakpoint
-nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
+nmap <leader>src <Plug>VimspectorRunToCursor
+nmap <leader>sb <Plug>VimspectorToggleBreakpoint
+nmap <leader>scb <Plug>VimspectorToggleConditionalBreakpoint
 
 command! -nargs=0 Format :call CocAction('format')
 
-function RunJava()
-	execute 'update %'
-	let b:filename_noextension = substitute(@%, ".java", "", "")
-	if filereadable(b:filename_noextension . ".class")
-		execute '!rm' b:filename_noextension . ".class"
-	endif
-	execute '!javac -g %'
-	let b:filename_noextension = substitute(@%, ".java", "", "")
-	execute '!java' b:filename_noextension
-endfunction
+
 
 " delete without yanking
 nnoremap <leader>d "_d
@@ -342,6 +333,26 @@ autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
 let g:jupytext_enable = 1
 let g:jupytext_command = 'jupytext'
 
-
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 						\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function RunPython()
+	execute 'update %'
+	execute '!python3 %'
+endfunction
+
+function TestPython()
+	execute 'update %'
+	execute "!python3 -m unittest discover -s . -p 'test_*.py'"
+endfunction
+
+function RunJava()
+	execute 'update %'
+	let b:filename_noextension = substitute(@%, ".java", "", "")
+	if filereadable(b:filename_noextension . ".class")
+		execute '!rm' b:filename_noextension . ".class"
+	endif
+	execute '!javac -g %'
+	let b:filename_noextension = substitute(@%, ".java", "", "")
+	execute '!java' b:filename_noextension
+endfunction
