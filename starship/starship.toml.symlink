@@ -2,9 +2,9 @@
 # disabled = true
 
 [cmd_duration]
+disabled = true # Disabled cmd_duration
 min_time = 500
 show_milliseconds = false
-disabled = false
 format = "[$duration](bold red)"
 
 [character]
