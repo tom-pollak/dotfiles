@@ -11,6 +11,7 @@ format = "[$duration](bold red)"
 use_symbol_for_status = true
 success_symbol = "[λ](bold #FC0FC0)"
 error_symbol = "[✗](bold red)"
+vicmd_symbol = "[V](bold green) "
 
 [username]
 style_user = "purple"

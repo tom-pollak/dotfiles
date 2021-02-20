@@ -1,14 +1,6 @@
-fun GotoWindow(id)
-    call win_gotoid(a:id)
-    MaximizerToggle
-endfun
-
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 set modifiable
-
 set noshowmode
-set exrc
-" set autoindent
 set relativenumber nu
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -16,8 +8,6 @@ set shiftwidth=4
 set hidden
 set nowrap
 set ignorecase smartcase
-set noswapfile
-" set nobackup
 set undodir=~/.vim/undordir
 set undofile
 set undolevels=10000
@@ -27,11 +17,14 @@ set cmdheight=2
 set shortmess+=c
 set updatetime=50
 set signcolumn=yes
-" filetype plugin indent on
 set backspace=indent,eol,start
 set swapfile
 set dir=~/.swp
 set backupdir=~/.tmp
+set colorcolumn=80
+
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight Comment cterm=italic
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType html setlocal ts=2 sts=2 sw=2
@@ -43,9 +36,8 @@ autocmd FileType typescriptreact setlocal ts=2 sts=2 sw=2
 autocmd FileType vue setlocal ts=2 sts=2 sw=2
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
+let mapleader = " "
+let g:python3_host_prog = '/usr/bin/python3'
 inoremap jk <esc>
 map Y y$
 
@@ -77,40 +69,14 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'joelbeedle/pseudo-syntax'
 Plug 'kassio/neoterm'
-Plug 'szymonmaszke/vimpyter'
 Plug 'vim-test/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'pwntester/octo.nvim'
 Plug 'goerz/jupytext'
+Plug 'ConradIrwin/vim-bracketed-paste'
 call plug#end()
-filetype indent off " else double indents must be after call plug#end
-
-" vim test
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
-
-" easy align
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-let g:gruvbox_italic=1
-colorscheme gruvbox
-highlight link CocErrorSign GruvboxRed
-let g:gruvbox_contrast_dark = 'hard'
-set background=dark
-let mapleader = " "
-
-let g:python3_host_prog = '/usr/bin/python3'
-
-" vim airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
 " COC extensions
-            " \'coc-python',
 let g:coc_global_extensions = [
             \'coc-markdownlint',
             \'coc-highlight',
@@ -138,6 +104,28 @@ let g:coc_global_extensions = [
             \]
 let g:coc_disable_transparent_cursor = 1
 
+let g:gruvbox_italic=1
+colorscheme gruvbox
+highlight link CocErrorSign GruvboxRed
+let g:gruvbox_contrast_dark = 'hard'
+set background=dark
+
+" vim test
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" easy align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" vim airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
+
 " rip grep
 if executable('rg')
     let g:rg_derive_root='true'
@@ -148,33 +136,31 @@ endif
 let g:rainbow_active = 1
 
 " telescope
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-"
-" let g:netrw_browse_split = 2
-" let g:netrw_banner = 0
-" let g:netrw_winsize = 25
-
 lua require('telescope').load_extension('octo')
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 
 
+" treesitter
 lua require'nvim-treesitter.configs'.setup {
 			\ ensure_installed = "maintained",
 			\ highlight = { enable = true},
 			\ rainbow = { enable = true },
 			\ }
-"
+
 " split windows
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>l :wincmd l<CR>
 
-"other remaps
+" remaps
 nnoremap <leader>u :UndotreeShow<CR>:wincmd h<CR>
 nnoremap <leader>o :set nohlsearch!<CR>
+
+nnoremap <leader>w :update<cr>
+vnoremap <leader>p "_dP
 
 autocmd BufNewFile,Bufread *.py nnoremap <leader>rr :call RunPython()<CR>
 autocmd BufNewFile,Bufread *.py nnoremap <leader>rt :call TestPython()<CR>
@@ -182,11 +168,14 @@ autocmd BufNewFile,Bufread *.java nnoremap <leader>rr :call RunJava()<cr>
 
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
-"stuff don't really use yet
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+tnoremap <Esc> <C-\><C-n>
+
+nmap m <Plug>(easymotion-overwin-f)
 
 "COC remaps
 nmap <silent> gd <Plug>(coc-definition)
@@ -202,16 +191,6 @@ nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 xmap <leader>x  <Plug>(coc-convert-snippet)
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 
-nnoremap <leader>w :update<cr>
-
-" greatest remap ever
-vnoremap <leader>p "_dP
-
-" next greatest remap ever : asbjornHaland
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nnoremap <leader>Y gg"+yG
-
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -220,6 +199,8 @@ if exists('*complete_info')
 else
     inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -232,14 +213,9 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 "
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 let g:coc_snippet_prev = '<c-k>'
 
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)"
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -250,33 +226,17 @@ function! s:show_documentation()
     endif
 endfunction
 
-
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" vim easy motion
-"
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 
-" JK motions: Line motions
-nmap m <Plug>(easymotion-overwin-f)
-
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
-
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
-
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-:tnoremap <Esc> <C-\><C-n>
-
 function! GetTermWidth()
-    " if winwidth(0) < 163
-    "   return winwidth(0) - 83
-    " endif
-    " should be / 2
     let width = (winwidth(0) -3)
     :execute 'echo' . width
     return width
@@ -316,14 +276,11 @@ nmap <leader>scb <Plug>VimspectorToggleConditionalBreakpoint
 
 command! -nargs=0 Format :call CocAction('format')
 
-
-
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
-" replace currently selected text with default register
-" without yanking it
+" replace currently selected text with default register without yanking it
 vnoremap <leader>p "_dP"
 
 autocmd Filetype ipynb nmap <silent><Leader>b :VimpyterInsertPythonBlock<CR>
@@ -333,8 +290,8 @@ autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
 let g:jupytext_enable = 1
 let g:jupytext_command = 'jupytext'
 
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-						\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+" 						\: \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function RunPython()
 	execute 'update %'
@@ -356,3 +313,22 @@ function RunJava()
 	let b:filename_noextension = substitute(@%, ".java", "", "")
 	execute '!java' b:filename_noextension
 endfunction
+
+function GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfunction
+
+" copy to system keyboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+" WSL
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+	augroup WSLYank
+		autocmd!
+		autocmd TextYankPost * if v:event.operator ==# '<leader>y' | call system(s:clip, @0) | endif
+	augroup END
+endif
+filetype indent off " else double indents must be after call plug#end
