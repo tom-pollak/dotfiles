@@ -3,6 +3,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
 
 
-plugins=(git virtualenv zsh_reload alias-tips docker)
+plugins=(git virtualenv zsh_reload alias-tips docker vi-mode)
 source ~/.oh-my-zsh/oh-my-zsh.sh
 autoload -U compinit && compinit
