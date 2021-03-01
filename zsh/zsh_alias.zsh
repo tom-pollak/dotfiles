@@ -3,6 +3,7 @@ alias v=nvim
 alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
+alias sync="sudo ntpdate pool.ntp.org"
 
 bindkey -s '^o' 'nvim $(fzf)^M'
 bindkey '^q' beginning-of-line
@@ -18,3 +19,6 @@ alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+
+alias chrome="/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe"
+alias exp="explorer.exe"
