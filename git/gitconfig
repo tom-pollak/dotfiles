@@ -6,6 +6,7 @@
 	cmd = "code --wait "
 [core]
 	editor = nvim
+	pager = diff-so-fancy | less -FXRi
 [user]
 	email = tompollak1000@gmail.com
 	name = Tom Pollak

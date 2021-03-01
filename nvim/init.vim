@@ -61,7 +61,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tomtom/tcomment_vim'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'honza/vim-snippets'
-" Plug 'lilydjwg/colorizer'
+Plug 'lilydjwg/colorizer'
 Plug 'luochen1990/rainbow'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'RRethy/vim-illuminate'
@@ -74,6 +74,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'pwntester/octo.nvim'
 Plug 'goerz/jupytext'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'preservim/vimux'
 call plug#end()
 
 " COC extensions
@@ -136,7 +137,7 @@ endif
 let g:rainbow_active = 1
 
 " telescope
-lua require('telescope').load_extension('octo')
+" lua require('telescope').load_extension('octo')
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
@@ -252,6 +253,7 @@ endif
 
 " vimspector
 nnoremap <leader>sd :call vimspector#Launch()<CR>
+autocmd BufNewFile,Bufread *.java nnoremap <leader>sd :CocCommand java.debug.vimspector.start<cr>
 
 nnoremap <leader>m :MaximizerToggle!<CR>
 nnoremap <leader>sc :call GotoWindow(g:vimspector_session_windows.code)<CR>
@@ -290,8 +292,8 @@ autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
 let g:jupytext_enable = 1
 let g:jupytext_command = 'jupytext'
 
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-" 						\: \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function RunPython()
 	execute 'update %'
@@ -320,8 +322,8 @@ function GotoWindow(id)
 endfunction
 
 " copy to system keyboard
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
+" nnoremap <leader>y "+y
+" vnoremap <leader>y "+y
 
 " WSL
 let s:clip = '/mnt/c/Windows/System32/clip.exe'
@@ -332,3 +334,5 @@ if executable(s:clip)
 	augroup END
 endif
 filetype indent off " else double indents must be after call plug#end
+
+set pastetoggle=<leader>q
