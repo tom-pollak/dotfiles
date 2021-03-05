@@ -13,7 +13,8 @@
     "typescript",
     "typescriptreact",
     "vue",
-    "java"
+    "java",
+    "scss"
   ],
   "coc.preferences.formatOnType": true,
   "snippets.snipmate.enable": false,
