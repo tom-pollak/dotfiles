@@ -13,6 +13,7 @@ require('telescope').setup {
         mappings = {
             i = {
                 ["<C-q>"] = actions.send_to_qflist,
+                ["<CR>"] = actions.select_default + actions.center,
             },
         }
     },
@@ -30,7 +31,7 @@ local M = {}
 M.search_dotfiles = function() 
     require("telescope.builtin").find_files({
         prompt_title = "< VimRC >",
-        cwd = "$HOME/.config/nvim"
+        cwd = "$HOME/projects/dotfiles/nvim"
     })
 end
 

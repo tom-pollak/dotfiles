@@ -9,13 +9,8 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>o :set nohlsearch!<CR>
 
-" nnoremap <leader>h :wincmd h<CR>
-" nnoremap <leader>j :wincmd j<CR>
-" nnoremap <leader>k :wincmd k<CR>
-" nnoremap <leader>l :wincmd l<CR>
-
-nnoremap <C-k> :cnext<CR>
-nnoremap <C-j> :cprev<CR>
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprev<CR>
 nnoremap <leader>' :copen<CR>
 
 " no cut
@@ -31,6 +26,7 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 imap <silent> <CR> <Plug>(completion_trigger)
+
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 

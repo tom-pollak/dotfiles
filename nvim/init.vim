@@ -6,6 +6,8 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'steelsojka/completion-buffers'
+Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+Plug 'nvim-treesitter/completion-treesitter'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -68,6 +70,7 @@ filetype plugin indent on
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 let g:completion_matching_smart_case = 1
 let g:completion_enable_snippet = 'UltiSnips'
+autocmd BufEnter * lua require'completion'.on_attach()
 
 let g:UltiSnipsExpandTrigger="<CR>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -76,7 +79,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:completion_chain_complete_list = {
             \ 'default': {
             \   'default': [
-            \       { 'complete_items':  ['lsp', 'buffers', 'snippet'] },
+            \       { 'complete_items':  ['lsp', 'buffers', 'snippet', 'ts', 'tabnine'] },
             \       { 'mode': '<c-p>' },
             \       { 'mode': '<c-n>' }]
             \   }
