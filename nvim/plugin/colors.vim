@@ -10,9 +10,4 @@ colorscheme gruvbox
 set background=dark
 highlight link CocErrorSign GruvboxRed
 highlight Normal guibg=none
-" highlight LineNr guifg=#ff8659
-" highlight LineNr guifg=#aed75f
-highlight LineNr guifg=#5eacd3
-highlight netrwDir guifg=#5eacd3
-highlight qfFileName guifg=#aed75f
-hi TelescopeBorder guifg=#5eacd
+highlight LineNr guifg=#ff8659

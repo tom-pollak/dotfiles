@@ -2,9 +2,9 @@ lua require("lua-files")
 
 silent! !git rev-parse --is-inside-work-tree
 if v:shell_error == 0
-    nnoremap <C-p> :lua require('telescope.builtin').git_files({ sort_lastused = true, ignore_current_buffer = true })<CR>
+    nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 else
-    nnoremap <C-p> :lua require('telescope.builtin').find_files({ sort_lastused = true, ignore_current_buffer = true })<CR>
+    nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 endif
 
 nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>
