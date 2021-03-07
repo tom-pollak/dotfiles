@@ -40,6 +40,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'honza/vim-snippets'
 Plug 'lilydjwg/colorizer'
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'junegunn/vim-easy-align'
 
 Plug 'tpope/vim-surround'
 
@@ -109,6 +110,10 @@ imap jk <Plug>(PearTreeFinishExpansion)
 imap <expr><CR> neosnippet#expandable_or_jumpable() ?
             \ "\<Plug>(neosnippet_expand_or_jump)" : "\<Plug>(PearTreeExpand)"
 
+autocmd BufNewFile,Bufread *.py nnoremap <leader>rr :call RunPython()<CR>
+autocmd BufNewFile,Bufread *.py nnoremap <leader>rt :call TestPython()<CR>
+autocmd BufNewFile,Bufread *.java nnoremap <leader>rr :call RunJava()<cr>
+
 " nerdtree
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
             \ quit | endif
@@ -120,3 +125,32 @@ augroup fmt
     au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup END
 
+function RunPython()
+    execute 'update %'
+    execute '!python3 %'
+endfunction
+
+function TestPython()
+    execute 'update %'
+    execute "!python3 -m unittest discover -s . -p 'test_*.py'"
+endfunction
+
+function RunJava()
+    execute 'update %'
+    let b:filename_noextension = substitute(@%, ".java", "", "")
+    if filereadable(b:filename_noextension . ".class")
+        execute '!rm' b:filename_noextension . ".class"
+    endif
+    execute '!javac -g %'
+    let b:filename_noextension = substitute(@%, ".java", "", "")
+    execute '!java' b:filename_noextension
+endfunction
+
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# '<leader>y' | call system(s:clip, @0) | endif
+    augroup END
+endif
+filetype indent off " else double indents must be after call plug#end
