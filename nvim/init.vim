@@ -70,11 +70,6 @@ filetype plugin indent on
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB' ]
 let g:completion_matching_smart_case = 1
 let g:completion_enable_snippet = 'UltiSnips'
-autocmd BufEnter * lua require'completion'.on_attach()
-
-let g:UltiSnipsExpandTrigger="<CR>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 let g:completion_chain_complete_list = {
             \ 'default': {
@@ -85,6 +80,11 @@ let g:completion_chain_complete_list = {
             \   }
             \}
 
+autocmd BufEnter * lua require'completion'.on_attach()
+
+let g:UltiSnipsExpandTrigger="<CR>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 lua require'nvim-treesitter.configs'.setup {
             \ ensure_installed = "maintained",
@@ -102,12 +102,14 @@ let g:neoformat_basic_format_trim = 1
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
-let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_map_special_keys = 0
 
+imap <BS> <Plug>(PearTreeBackspace)
+imap jk <Plug>(PearTreeFinishExpansion)
+imap <expr><CR> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<Plug>(PearTreeExpand)"
 
 " nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
             \ quit | endif
 
@@ -117,3 +119,4 @@ augroup fmt
     autocmd!
     au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup END
+

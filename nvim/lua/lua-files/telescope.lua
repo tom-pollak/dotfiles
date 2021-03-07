@@ -13,7 +13,6 @@ require('telescope').setup {
         mappings = {
             i = {
                 ["<C-q>"] = actions.send_to_qflist,
-                ["<CR>"] = actions.select_default + actions.center,
             },
         }
     },
