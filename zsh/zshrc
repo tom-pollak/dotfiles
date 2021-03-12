@@ -19,3 +19,9 @@ cd
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 export LIBGL_ALWAYS_INDIRECT=1
+
+export JAR=/usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
+export GRADLE_HOME=/usr/share/gradle
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JDTLS_CONFIG=/usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
+export WORKSPACE=$HOME/projects

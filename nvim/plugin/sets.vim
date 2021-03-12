@@ -1,5 +1,4 @@
 set relativenumber nu
-set shortmess+=c
 set hidden
 set noerrorbells
 set tabstop=4 softtabstop=4 shiftwidth=4
@@ -18,7 +17,8 @@ set signcolumn=yes
 set isfname+=@-@
 " set ls=0
 set ignorecase smartcase
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert
+" set completeopt=noinsert,noselect
 
 set dir=~/.swp
 set backupdir=~/.tmp
@@ -36,9 +36,10 @@ set updatetime=50
 " set shortmess+=c
 
 set colorcolumn=80
+autocmd FileType python setlocal colorcolumn=88
 augroup filetype_indent
-    autocmd!
-    autocmd FileType python setlocal colorcolumn=88
-    autocmd FileType javascript,html,json,htmldjango,javascriptreact,typescript,typesciptreact,vue setlocal ts=2 sts=2 sw=2
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd!
+autocmd FileType python setlocal ts=4 sts=4 sw=4
+autocmd FileType javascript,html,json,htmldjango,javascriptreact,typescript,typesciptreact,vue setlocal ts=2 sts=2 sw=2
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 augroup END
