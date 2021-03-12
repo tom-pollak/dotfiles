@@ -34,6 +34,6 @@ nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 
-" easy align
-xmap ga <Plug>(EasyAlign)
+    " easy align
+    xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
