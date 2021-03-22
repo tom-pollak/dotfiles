@@ -6,6 +6,7 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'ncm2/float-preview.nvim'
+Plug 'nvim-lua/lsp-status.nvim'
 
 Plug 'steelsojka/completion-buffers'
 Plug 'aca/completion-tabnine', { 'do': './install.sh' }

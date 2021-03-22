@@ -1,4 +1,5 @@
 local on_attach = require'completion'.on_attach
+
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 
 require'lspconfig'.clangd.setup {
@@ -6,24 +7,19 @@ require'lspconfig'.clangd.setup {
     root_dir = function() return vim.loop.cwd() end
 }
 
-require'lspconfig'.pyls_ms.setup{
-    on_attach=on_attach,
-    cmd = {"dotnet", "exec", "/opt/python-language-server/output/bin/Debug/Microsoft.Python.LanguageServer.dll"},
-    -- settings = {
-        -- pyls = {
-        --     plugins = {
-        --         pycodestyle = {
-        --             maxLineLength = 88
-        --         },
-        --         yapf = {
-        --             enabled = false
-        --             }
-        --     }
-        -- }
-    -- },
-}
+require'lspconfig'.jedi_language_server.setup{}
 
--- require'lspconfig'.jedi_language_server.setup{}
+require "lspconfig".efm.setup {
+    init_options = {documentFormatting = true},
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            lua = {
+                {formatCommand = "lua-format -i", formatStdin = true}
+            }
+        }
+    }
+}
 
 require'lspconfig'.jdtls.setup{}
 
