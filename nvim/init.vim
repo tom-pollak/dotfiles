@@ -14,7 +14,10 @@ Plug 'nvim-treesitter/completion-treesitter'
 Plug 'kristijanhusak/completion-tags'
 
 " snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'kitagry/vs-snippets'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
