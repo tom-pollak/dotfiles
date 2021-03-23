@@ -18,7 +18,6 @@ set isfname+=@-@
 " set ls=0
 set ignorecase smartcase
 set completeopt=menuone,noinsert
-" set completeopt=noinsert,noselect
 
 set dir=~/.swp
 set backupdir=~/.tmp
