@@ -45,12 +45,11 @@ let g:neoformat_enabled_java  = ['prettier']
 let g:neoformat_enabled_css  = ['prettier']
 let g:neoformat_enabled_scss  = ['prettier']
 
-let g:neoformat_basic_format_align = 1
 let g:neoformat_basic_format_trim = 1
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre *.py *.js *.html *.java *.css *.scss undojoin | Neoformat
+  autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 let g:pear_tree_smart_openers = 1
