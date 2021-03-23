@@ -29,6 +29,7 @@ Plug 'szw/vim-maximizer'
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'mbbill/undotree'
