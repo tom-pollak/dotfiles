@@ -48,8 +48,8 @@ let g:neoformat_enabled_scss  = ['prettier']
 let g:neoformat_basic_format_trim = 1
 
 augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+    autocmd!
+    au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup END
 
 let g:pear_tree_smart_openers = 1
