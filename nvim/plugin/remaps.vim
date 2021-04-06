@@ -12,7 +12,6 @@ nnoremap <leader>o :set nohlsearch!<CR>
 " quick fix list
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprev<CR>
-nnoremap <leader>' :copen<CR>
 
 " no cut
 vnoremap <leader>p "_dP
@@ -24,8 +23,8 @@ nnoremap <leader>s "_d
 vnoremap <leader>s "_d
 
 " completion
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " navigate panes
 nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
@@ -37,3 +36,24 @@ nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 " easy align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+imap <expr> <CR>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<CR>'
+smap <expr> <CR>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<CR>'
+
+" Jump forward or backward
+imap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
+smap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
+imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
+smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
+
+nnoremap Y y$
+
+let g:lexima_no_default_rules = v:true
+call lexima#set_default_rules()
+
+" completion
+inoremap <silent><expr> <CR> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <Tab>     compe#scroll({delta': +4 })
+inoremap <silent><expr> <S-Tab>     compe#scroll({delta': -4 })

@@ -1,17 +1,11 @@
-# [line_break]
-# disabled = true
-
 [cmd_duration]
-disabled = true # Disabled cmd_duration
-min_time = 500
-show_milliseconds = false
-format = "[$duration](bold red)"
+disabled = true
 
 [character]
 use_symbol_for_status = true
 success_symbol = "[λ](bold #FC0FC0)"
-error_symbol = "[✗](bold red)"
-vicmd_symbol = "[V](bold green) "
+error_symbol = "[✘](red)"
+vicmd_symbol = "[V](bold green)"
 
 [username]
 style_user = "purple"
@@ -28,18 +22,8 @@ disabled = false
 [package]
 display_private = true
 
-[custom.docker]
-description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.{yml,yaml} files"
-command = "echo 🐳"
-files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
-when = """ command -v docker &> /dev/null; exit (echo $?); """
-format = "in [$output]($style)"
-
 [python]
 python_binary = ["python3"]
-
-[git_branch]
-symbol = ""
 
 [battery]
 disabled = true
