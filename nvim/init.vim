@@ -2,19 +2,14 @@ call plug#begin('~/.vim/plugged')
 
 " Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
-Plug 'ncm2/float-preview.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 
-Plug 'steelsojka/completion-buffers'
-Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-Plug 'nvim-treesitter/completion-treesitter'
-Plug 'kristijanhusak/completion-tags'
+Plug 'tzachar/compe-tabnine', {'do': './install.sh' }
 
 " snippets
-" Plug 'SirVer/ultisnips'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'kitagry/vs-snippets'
@@ -60,14 +55,14 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-" prettier
 Plug 'sbdchd/neoformat'
-Plug 'tmsvg/pear-tree'
+Plug 'cohama/lexima.vim'
 
 "status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'sunaku/tmux-navigate'
-
+Plug 'milkypostman/vim-togglelist'
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()

@@ -7,7 +7,7 @@ else
     nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 endif
 
-nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR>
+nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true, ignore_current_buffer = true })<CR><CR>
 
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <leader>pd :lua require('lua-files.telescope').search_dotfiles()<CR>
