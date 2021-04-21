@@ -18,6 +18,7 @@ lua require'nvim-treesitter.configs'.setup {
     \ ensure_installed = "maintained",
     \ highlight = { enable = true},
     \ rainbow = { enable = true },
+    \ indent = { enable = true }
     \ }
 
 let g:airline#extensions#tabline#enabled = 1
@@ -86,6 +87,8 @@ endfunction
 
 let s:clip = '/mnt/c/Windows/System32/clip.exe'
 " filetype indent off " else double indents must be after call plug#end
+"
+let g:gitgutter_max_signs = 0
 
 highlight link CompeDocumentation NormalFloat
 let g:compe = {}
