@@ -3,7 +3,7 @@ set hidden
 set noerrorbells
 set tabstop=4 softtabstop=4 shiftwidth=4
 set expandtab
-set smartindent
+" set smartindent
 set nowrap
 set noswapfile
 set nobackup
@@ -38,9 +38,9 @@ augroup column
     autocmd FileType python setlocal colorcolumn=88
 augroup end
 
-" augroup filetype_indent
-"     autocmd!
-"     autocmd FileType python setlocal ts=4 sts=4 sw=4
-"     autocmd FileType javascript,html,json,htmldjango,javascriptreact,typescript,typesciptreact,vue setlocal ts=2 sts=2 sw=2
-"     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-" augroup END
+augroup filetype_indent
+    autocmd!
+    autocmd FileType python setlocal ts=4 sts=4 sw=4
+    autocmd FileType javascript,html,json,htmldjango,javascriptreact,typescript,typesciptreact,vue setlocal ts=2 sts=2 sw=2
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+augroup END
