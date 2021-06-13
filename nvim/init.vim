@@ -8,6 +8,7 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 
 Plug 'tzachar/compe-tabnine', {'do': './install.sh' }
+Plug 'ray-x/lsp_signature.nvim'
 
 " snippets
 Plug 'hrsh7th/vim-vsnip'

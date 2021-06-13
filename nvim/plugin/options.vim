@@ -18,7 +18,6 @@ lua require'nvim-treesitter.configs'.setup {
     \ ensure_installed = "maintained",
     \ highlight = { enable = true},
     \ rainbow = { enable = true },
-    \ indent = { enable = true }
     \ }
 
 let g:airline#extensions#tabline#enabled = 1
@@ -52,6 +51,7 @@ augroup run_file
     autocmd BufNewFile,Bufread *.py nnoremap <leader>rr :call RunPython()<CR>
     autocmd BufNewFile,Bufread *.py nnoremap <leader>rt :call TestPython()<CR>
     autocmd BufNewFile,Bufread *.java nnoremap <leader>rr :call RunJava()<cr>
+    autocmd BufNewFile,Bufread *.c nnoremap <leader>rr :call RunC()<cr>
 augroup end
 
     " nerdtree
@@ -83,6 +83,11 @@ function RunJava()
     execute '!javac -g %'
     let b:filename_noextension = substitute(@%, ".java", "", "")
     execute '!java' b:filename_noextension
+endfunction
+
+function RunC()
+    execute 'update %'
+    execute '!gcc % && ./a.out'
 endfunction
 
 let s:clip = '/mnt/c/Windows/System32/clip.exe'
