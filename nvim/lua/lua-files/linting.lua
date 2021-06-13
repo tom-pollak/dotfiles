@@ -25,6 +25,8 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+require'lsp_signature'.on_attach()
+
 require'lspconfig'.tsserver.setup{
     -- on_attach=on_attach
 }
@@ -34,9 +36,13 @@ require'lspconfig'.clangd.setup {
     root_dir = function() return vim.loop.cwd() end
 }
 
-require'lspconfig'.jedi_language_server.setup{
-    -- on_attach=on_attach,
-    capabilities = capabilities
+-- require'lspconfig'.jedi_language_server.setup{
+--     -- on_attach=on_attach,
+--     capabilities = capabilities
+-- }
+--
+require'lspconfig'.pylsp.setup{
+    capabilities=capabilities
 }
 
 require "lspconfig".efm.setup {
