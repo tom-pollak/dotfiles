@@ -13,7 +13,7 @@ Plug 'ray-x/lsp_signature.nvim'
 " snippets
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'kitagry/vs-snippets'
+Plug 'rafamadriz/friendly-snippets'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -24,6 +24,7 @@ Plug 'szw/vim-maximizer'
 
 " Plug 'rust-lang/rust.vim'
 " Plug 'tweekmonster/gofmt.vim'
+Plug 'vhyrro/neorg'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -50,7 +51,7 @@ Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" telescope requirements...
+" telescope requirements
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
