@@ -20,6 +20,26 @@ lua require'nvim-treesitter.configs'.setup {
     \ rainbow = { enable = true },
     \ }
 
+" lua require'vhyrro/neorg.configs'.setup {
+"         \ load = {
+"                 \ ["core.defaults"] = {},
+"                 \ ["core.keybinds"] = {
+"                     \ config = {
+"                         \ default_keybinds = true,
+"                         \ neorg_leader = "<Leader>n"
+"                     \ }
+"                 \ },
+"             \ ["core.norg.concealer"] = {},
+"             \ ["core.norg.dirman"] = {
+"                 \ config = {
+"                     \ workspaces = {
+"                         \ my_workspace = "~/neorg"
+"                     \ }
+"                 \ }
+"             \ }
+"         \ },
+"         \ }
+
 let g:airline#extensions#tabline#enabled = 1
 
 let g:neoformat_enabled_python = ['black']

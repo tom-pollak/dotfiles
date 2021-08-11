@@ -12,4 +12,5 @@ nnoremap <C-b> :lua require('telescope.builtin').buffers({ sort_lastused = true,
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <leader>pd :lua require('lua-files.telescope').search_dotfiles()<CR>
 nnoremap <leader>ph :lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>pf :lua require('telescope.builtin').find_files()<CR>
 nnoremap <leader>gc :lua require('lua-files.telescope').git_branches()<CR>
