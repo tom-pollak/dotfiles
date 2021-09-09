@@ -1,4 +1,4 @@
-alias cat=batcat
+alias cat=bat
 alias v=nvim
 alias fd=fdfind
 alias untar='tar -zxvf '
@@ -20,5 +20,4 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias chrome="/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe"
 alias exp="explorer.exe"
