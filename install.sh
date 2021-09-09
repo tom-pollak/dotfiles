@@ -4,5 +4,6 @@ for dictionary in `ls`; do
     if [$dictionary -ne "nvim-old"]
 	chmod +x $dictionary/install.sh
 	$dictionary/install.sh
+    fi
 done
 tmux source-file .tmux.conf

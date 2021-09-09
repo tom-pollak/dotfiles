@@ -1,0 +1,7 @@
+# im-config(8) generated on Sat, 04 Sep 2021 12:37:13 +0100
+run_im none
+# im-config signature: 2ec9ddee2b1606332a451b40832c81f4  -
+
+xrdb -merge ~/.Xresources
+exec i3
+
