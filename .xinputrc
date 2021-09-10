@@ -1,7 +1,14 @@
 # im-config(8) generated on Sat, 04 Sep 2021 12:37:13 +0100
 run_im none
 # im-config signature: 2ec9ddee2b1606332a451b40832c81f4  -
-
+#!/bin/bash
 xrdb -merge ~/.Xresources
+
+if [[ $(xrandr --query) =~ "DP-2 connected" ]]; then
+    xrandr --output eDP-1 --off --output DP-1 --off --output DP-2 --primary --mode 3840x2160 --pos 0x0 --rotate normal
+    xrdb -merge ~/.Xexternal
+    nitrogen --restore
+fi
+
 exec i3
 
