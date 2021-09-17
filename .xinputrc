@@ -10,5 +10,5 @@ if [[ $(xrandr --query) =~ "DP-2 connected" ]]; then
     nitrogen --restore
 fi
 
-exec i3
+exec xmonad
 
