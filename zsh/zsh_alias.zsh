@@ -1,6 +1,6 @@
 alias cat=bat
 alias v=nvim
-alias fd=fdfind
+# alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
