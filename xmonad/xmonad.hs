@@ -261,7 +261,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  -- ||| tallAccordion
                                  -- ||| wideAccordion
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
-myWorkspaces = [" dev1 ", " dev2 ", " www ", " cs1 ", " cs2 ", " casual ", " tunes ", " vid ", " steam "]
+myWorkspaces = [" home ", " dev1 ", " dev2 ", " www ", " cs1 ", " cs2 ", " casual ", " tunes ", " steam "]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -305,7 +305,8 @@ myKeys =
         , ("M-S-/", spawn "~/.xmonad/xmonad_keys.sh")
 
     -- KB_GROUP Run Prompt
-        , ("M-d", spawn "dmenu_run -i -p \"Run: \"") -- Dmenu
+        , ("M-d", spawn "rofi -show drun") -- Applicatons
+        , ("M-r", spawn "rofi -show run") -- Executables
 
     -- KB_GROUP Other Dmenu Prompts
     -- In Xmonad and many tiling window managers, M-p is the default keybinding to

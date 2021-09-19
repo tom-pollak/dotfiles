@@ -5,9 +5,11 @@ alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
 
-bindkey -s '^o' 'nvim $(fzf)^M'
+bindkey -s '^o' 'v $(fzf)^M'
 bindkey '^q' beginning-of-line
 bindkey '^j' autosuggest-accept
+
+bindkey -s ^f "tmux-sessionizer^M"
 
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
