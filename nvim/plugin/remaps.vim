@@ -31,6 +31,9 @@ nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
 
+" search and replace
+:nnoremap <Leader>t :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 " easy align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
