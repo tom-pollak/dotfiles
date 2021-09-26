@@ -5,6 +5,6 @@ zplugin ice as "program" pick "bin/git-dsf"
 zplugin light zdharma/zsh-diff-so-fancy
 
 
-plugins=(git virtualenv zsh_reload alias-tips docker vi-mode tmux taskwarrior django transfer)
+plugins=(git virtualenv zsh_reload alias-tips docker vi-mode tmux taskwarrior transfer)
 source ~/.oh-my-zsh/oh-my-zsh.sh
 autoload -U compinit && compinit
