@@ -67,6 +67,8 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
+import Graphics.X11.ExtraTypes.XF86
+
 myFont :: String
 myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
 
@@ -87,7 +89,7 @@ myEditor = "emacsclient -c -a 'emacs' "  -- Sets emacs as editor
 -- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor
 
 myBorderWidth :: Dimension
-myBorderWidth = 2           -- Sets border width for windows
+myBorderWidth = 6           -- Sets border width for windows
 
 myNormColor :: String
 myNormColor   = "#282c34"   -- Border color of normal windows
@@ -116,8 +118,6 @@ myStartupHook = do
     -- spawnOnce "feh --randomize --bg-fill ~/wallpapers/*"  -- feh set random wallpaper
     spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
     setWMName "LG3D"
-    spawnOn " tunes " "blueberry"
-    spawnOn " tunes " "spotify"
 
 myColorizer :: Window -> Bool -> X (String, String)
 myColorizer = colorRangeFromClassName
@@ -434,6 +434,8 @@ myKeys =
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+        , ("<XF86MonBrightnessUp>", spawn "lux -a 10%")
+        , ("<XF86MonBrightnessDown>", spawn "lux -s 10%")
         , ("<XF86HomePage>", spawn "qutebrowser https://www.youtube.com/c/DistroTube")
         , ("<XF86Search>", spawn "dm-websearch")
         , ("<XF86Mail>", runOrRaise "thunderbird" (resource =? "thunderbird"))

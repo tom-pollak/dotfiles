@@ -3,3 +3,15 @@ setxkbmap -option ctrl:nocaps
 
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
+
+# ~/.xinputrc
+xrdb -merge ~/.Xresources
+
+if [[ $(xrandr --query) =~ "DP-2 connected" ]]; then
+    xrandr --output eDP-1 --off --output DP-1 --off --output DP-2 --primary --mode 3840x2160 --pos 0x0 --rotate normal
+    # xrdb -merge ~/.Xexternal
+    xrandr --dpi 110
+    nitrogen --restore
+fi
+
+exec xmonad
