@@ -21,5 +21,4 @@ alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-alias exp="explorer.exe"
+alias .....="cd ../../../.."
