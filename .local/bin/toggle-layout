@@ -1,0 +1,5 @@
+if [[ $(setxkbmap -query | grep layout | awk '{print $2}')  -eq us ]]; then
+    setxkbmap uk
+else
+    setxkbmap us
+fi

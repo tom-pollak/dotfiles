@@ -1,6 +1,8 @@
 # make CapsLock behave like Ctrl:
 setxkbmap -option ctrl:nocaps
 
+setxkbmap -option grp:alt_shift_toggle uk,us
+
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
 
@@ -15,3 +17,4 @@ if [[ $(xrandr --query) =~ "DP-2 connected" ]]; then
 fi
 
 exec xmonad
+
