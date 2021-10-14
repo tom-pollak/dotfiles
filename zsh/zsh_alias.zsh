@@ -1,4 +1,4 @@
-alias cat=bat
+alias cat=batcat
 alias v=nvim
 # alias fd=fdfind
 alias untar='tar -zxvf '

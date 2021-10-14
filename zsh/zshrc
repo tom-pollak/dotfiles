@@ -5,7 +5,7 @@ source $HOME/.zsh/zsh_alias.zsh
 eval "$(starship init zsh)"
 
 export PATH=$PATH:$HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin 
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 export PAGER=less
 export EDITOR=nvim
 export VIMRC=$HOME/.config/nvim/init.vim
