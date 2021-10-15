@@ -1,9 +1,10 @@
 alias cat=batcat
 alias v=nvim
-# alias fd=fdfind
+alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
+alias c="clear"
 
 bindkey -s '^o' 'v $(fzf)^M'
 bindkey '^q' beginning-of-line
