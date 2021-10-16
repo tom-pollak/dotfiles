@@ -24,5 +24,3 @@ export GRADLE_HOME=/usr/share/gradle
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export JDTLS_CONFIG=/usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 export WORKSPACE=$HOME/projects
-
-cd

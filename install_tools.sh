@@ -1,0 +1,20 @@
+#!/bin/bash
+
+sudo add-apt-repository ppa:neovim-ppa/unstable
+apt update -y && apt upgrade
+apt install neovim
+
+apt install -y bat fd-find python3-pip build-essential curl file git tmux python3-nvim fuse zsh procps
+done
+
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
+$(brew --prefix)/opt/fzf/install  
+
+brew install exa fzf efm-langserver pipx
+pipx install black 'python-lsp-server[all]'
