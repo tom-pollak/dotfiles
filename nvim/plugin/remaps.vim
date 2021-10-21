@@ -53,11 +53,11 @@ let g:lexima_no_default_rules = v:true
 call lexima#set_default_rules()
 
 " completion
-inoremap <silent><expr> <CR> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <Tab>     compe#scroll({delta': +4 })
-inoremap <silent><expr> <S-Tab>     compe#scroll({delta': -4 })
+" inoremap <silent><expr> <CR> compe#complete()
+" inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<LT>CR>', 'i'))
+" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <Tab>     compe#scroll({delta': +4 })
+" inoremap <silent><expr> <S-Tab>     compe#scroll({delta': -4 })
 
 " Keep cursor centered
 nnoremap n nzzzv
