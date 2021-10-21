@@ -17,7 +17,7 @@ set signcolumn=yes
 set isfname+=@-@
 " set ls=0
 set ignorecase smartcase
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noinsert,noselect
 
 set dir=~/.swp
 set backupdir=~/.tmp

@@ -12,6 +12,19 @@ Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 
+"cmp
+"
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'rafamadriz/friendly-snippets'
+
+"
+
 " Plug 'tzachar/compe-tabnine', {'do': './install.sh' }
 Plug 'ray-x/lsp_signature.nvim'
 

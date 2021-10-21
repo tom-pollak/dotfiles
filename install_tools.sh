@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update -y && sudo apt upgrade
 sudo apt install neovim
 
-sudo apt install -y bat fd-find python3-pip build-essential curl file git tmux python3-nvim fuse zsh procps
+sudo apt install -y bat fd-find python3-pip build-essential curl file git tmux python3-nvim fuse zsh procps ripgrep
 
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
