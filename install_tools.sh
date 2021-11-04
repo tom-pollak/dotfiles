@@ -4,8 +4,9 @@ mkdir $HOME/.config
 
 sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update -y && sudo apt upgrade
-sudo apt install neovim
+sudo apt install neovim emacs27
 
 sudo apt install -y bat fd-find python3-pip build-essential curl file git tmux python3-nvim fuse zsh procps ripgrep
 
