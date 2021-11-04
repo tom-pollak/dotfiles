@@ -1,48 +1,14 @@
--- require'compe'.setup {
---     enabled = true;
---     autocomplete = true;
---     debug = false;
---     min_length = 1;
---     preselect ='enable';
---     throttle_time = 80;
---     source_timeout = 200;
---     incomplete_delay = 400;
---     max_abbr_width = 100;
---     max_kind_width = 100;
---     max_menu_width = 100;
---     documentation = true;
---     source = {
---         path = true;
---         buffer = true;
---         calc = true;
---         nvim_lsp = true;
---         nvim_lua = true;
---         vsnip = true;
---         tabnine = true;
---     };
--- }
-
--- local on_attach = require'completion'.on_attach
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require'lsp_signature'.setup()
 
 require'lspconfig'.tsserver.setup{
-    -- on_attach=on_attach
 }
 
 require'lspconfig'.clangd.setup {
-    -- on_attach = on_attach,
     root_dir = function() return vim.loop.cwd() end
 }
 
--- require'lspconfig'.jedi_language_server.setup{
---     -- on_attach=on_attach,
---     capabilities = capabilities
--- }
---
 require'lspconfig'.pylsp.setup{
     capabilities=capabilities
 }
@@ -89,32 +55,6 @@ local check_back_space = function()
         return false
     end
 end
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
--- _G.tab_complete = function()
---   if vim.fn.pumvisible() == 1 then
---     return t "<C-n>"
---   elseif check_back_space() then
---     return t "<Tab>"
---   else
---     return vim.fn['compe#complete']()
---   end
--- end
--- _G.s_tab_complete = function()
---   if vim.fn.pumvisible() == 1 then
---     return t "<C-p>"
---   else
---     return t "<S-Tab>"
---   end
--- end
---
-
-
--- vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
@@ -122,7 +62,6 @@ local cmp = require'cmp'
 cmp.setup({
 snippet = {
   expand = function(args)
-    -- For `vsnip` user.
     vim.fn["vsnip#anonymous"](args.body)
   end,
 },

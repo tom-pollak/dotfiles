@@ -23,7 +23,8 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 
-"
+" github copilot
+Plug 'github/copilot.vim'
 
 " Plug 'tzachar/compe-tabnine', {'do': './install.sh' }
 Plug 'ray-x/lsp_signature.nvim'
