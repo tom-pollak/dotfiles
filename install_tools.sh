@@ -8,7 +8,7 @@ sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update -y && sudo apt upgrade
 sudo apt install neovim emacs27
 
-sudo apt install -y bat fd-find python3-pip build-essential curl file git tmux python3-nvim fuse zsh procps ripgrep
+sudo apt install -y bat fd-find python3-pip build-essential curl file git tmux fuse zsh procps ripgrep
 
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
