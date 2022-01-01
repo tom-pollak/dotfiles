@@ -1,5 +1,5 @@
 [include]
-	path = /home/box/.gitconfig.local
+	path = /home/tom/.gitconfig.local
 [merge]
 	tool = vscode
 [mergetool "vscode"]
@@ -10,3 +10,5 @@
 [user]
 	email = tompollak1000@gmail.com
 	name = Tom Pollak
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
