@@ -19,6 +19,6 @@ test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/bre
 echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
 $(brew --prefix)/opt/fzf/install  
 
-brew install exa fzf efm-langserver pipx
+brew install exa fzf efm-langserver pipx diff-so-fancy
 pipx install black
 pipx install 'python-lsp-server[all]'
