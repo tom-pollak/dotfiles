@@ -9,7 +9,7 @@ set -gx EDITOR nvim
 set -gx VIMRC $HOME/.config/nvim/init.vim
 set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 set -gx LIBGL_ALWAYS_INDIRECT 1
 
 set -gx JAR /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
@@ -17,10 +17,12 @@ set -gx GRADLE_HOME /usr/share/gradle
 set -gx JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 set -gx JDTLS_CONFIG /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 set -gx WORKSPACE $HOME/projects
+
 set fish_greeting
 
 alias cat=batcat
 alias v=nvim
+alias em='emacs27 &'
 alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
