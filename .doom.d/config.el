@@ -19,7 +19,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-vibrant)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -29,11 +29,16 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+(setq doom-fallback-buffer-name "► Doom"
+      +doom-dashboard-name "► Doom")
+
 ;; Default settings
 (setq-default
  delete-by-moving-to-trash t
  window-combination-resize t ; take new window space from all other windows (not just current)
  x-stretch-cursor t)         ; stretch cursor to glyph width
+
+(setq max-lisp-eval-depth 10000)
 
 (setq undo-limit 80000000
       evil-want-fine-undo t  ; by defualt while in insert all changes are one big blob. Be more granular
@@ -46,8 +51,8 @@
 (global-subword-mode 1) ; Iterate through CamelCase words
 
 ;; Defualt frame sizing
-(add-to-list 'default-frame-alist '(height . 96))
-(add-to-list 'default-frame-alist '(width . 320))
+(add-to-list 'default-frame-alist '(height . 35))
+(add-to-list 'default-frame-alist '(width . 110))
 
 ;; Ask what buffer to show after a split
 (setq evil-vsplit-window-right t
@@ -139,3 +144,34 @@
 (setq eros-eval-result-prefix "⟹ ")
 
 (setq yas-triggers-in-field t)
+
+;; set autocomplete in text & markdown
+(set-company-backend!
+  '(text-mode
+    markdown-mode
+    gfm-mode)
+  '(:seperate
+    company-ispell
+    company-files
+    company-yasnippet))
+
+;; Twitter emojis 😀
+(setq emojify-emoji-set "twemoji-v2")
+
+;; %s/.../.../g
+(after! evil (setq evil-ex-substitute-global t))
+
+;; Nested snippets
+(setq yas-triggers-in-field t)
+
+;; Manual pages look nice
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+
+(use-package! aas
+  :commands aas-mode)
+
+;; Lazy load vlf for quick startup
+(use-package! vlf-setup :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)

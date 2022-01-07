@@ -22,7 +22,6 @@ set fish_greeting
 
 alias cat=batcat
 alias v=nvim
-alias em='emacs27 &'
 alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"

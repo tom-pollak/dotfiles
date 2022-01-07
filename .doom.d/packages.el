@@ -51,18 +51,13 @@
 
 (package! tree-sitter)
 (package! tree-sitter-langs)
-
 (package! python-black)
-
-(package! vlf :disable t)
-
-(use-package! vlf-setup :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
+  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
 
 (package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets")
   :pin "1699bec4d244a1f62af29fe4eb8b79b6d2fccf7d")
 
-(use-package! aas
-  :commands aas-mode)
-
-
 (package! sly)
+(package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
+(package! xkcd :pin "66e928706fd660cfdab204c98a347b49c4267bdf")
