@@ -48,3 +48,21 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+(package! tree-sitter)
+(package! tree-sitter-langs)
+
+(package! python-black)
+
+(package! vlf :disable t)
+
+(use-package! vlf-setup :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+
+(package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets")
+  :pin "1699bec4d244a1f62af29fe4eb8b79b6d2fccf7d")
+
+(use-package! aas
+  :commands aas-mode)
+
+
+(package! sly)
