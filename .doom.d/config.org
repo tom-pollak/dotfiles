@@ -12,7 +12,6 @@
 
 All based off of [[https://github.com/tecosaur/emacs-config][tecosaurs]] fab config.
 
-
 * Basic config
 Runs faster with lexical binding (see [[https://nullprogram.com/blog/2016/12/22/][this blog post]]
 for more info).
@@ -25,14 +24,12 @@ for more info).
 #!/usr/bin/env bash
 #+end_src
 
-
 * Personal Information
 
 #+begin_src emacs-lisp
 (setq user-full-name "Tom Pollak"
       user-mail-address "tompollak1000@gmail.com")
 #+end_src
-
 
 
 * Better defaults
@@ -71,9 +68,9 @@ Default window size
 By default changes made are added to =init.el=. We can use a separate file =config.el=
 
 #+begin_src emacs-lisp
-(setq-default custom-file (expand-file-name "config.el" doom-private-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
+;; (setq-default custom-file (expand-file-name "config.el" doom-private-dir))
+;; (when (file-exists-p custom-file)
+;;   (load custom-file))
 #+end_src
 
 ** Splitting the window
@@ -154,14 +151,13 @@ Make sure Org dosen't try to confirm that I want evaluation in =doom sync=
 (advice-add 'org-babel-execute-src-block :around #'doom-shut-up-a)
 #+end_src
 
-
 * Doom configuration
-** Doom theme
+** Theme
 #+begin_src emacs-lisp
 (setq doom-theme 'doom-vibrant)
 #+end_src
 
-** Doom modeline
+** Modeline
 *** Theme
 Change non-saved file to orange
 
@@ -223,7 +219,11 @@ icon. Then we'll redefine two functions used to generate the modeline.
     '(misc-info matches major-mode process vcs)))
 #+end_src
 
+** Dashboard
+#+begin_src emacs-lisp
+(setq +doom-dashboard-banner-file (expand-file-name "banner.png" doom-private-dir))
 
+#+end_src
 * Visual settings
 ** Font face
 Uses JetBrains Mono need to try out some other font soon
@@ -283,7 +283,6 @@ Add a check to make sure we're told if the system dosen't have any of those font
       +doom-dashboard-name "► Doom")
 
 #+end_src
-
 
 
 * Packages
@@ -347,18 +346,18 @@ Sometimes pressing =tab= is just too much.
 Loads large files in chunks, allowing one to open ridiculously large files
 
 #+begin_src emacs-lisp :tangle packages.el
-(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
-  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
+;; (package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
+;;   :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
 #+end_src
 
 To make VLF available without delaying startup, we'll just load it in quiet moments.
 #+begin_src emacs-lisp
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; (use-package! vlf-setup
+;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 #+end_src
 
-
-** Ispell**** Downloading dictionaries
+** Ispell
+*** Downloading dictionaries
 Let's get a nice big dictionary from [[http://app.aspell.net/create][SCOWL Custom List/Dictionary Creator]] with
 the following configuration
 - size :: 80 (huge)
@@ -367,7 +366,7 @@ the following configuration
 - diacritics :: keep
 - extra lists :: hacker, roman numerals
 
-***** Hunspell
+**** Hunspell
 #+begin_src shell :tangle (if (file-exists-p "/usr/share/myspell/en-custom.dic") "no" "setup.sh")
 cd /tmp
 curl -o "hunspell-en-custom.zip" 'http://app.aspell.net/create?max_size=80&spelling=GBs&spelling=AU&max_variant=0&diacritic=keep&special=hacker&special=roman-numerals&encoding=utf-8&format=inline&download=hunspell'
@@ -376,7 +375,7 @@ unzip "hunspell-en-custom.zip"
 sudo chown root:root en-custom.*
 sudo mv en-custom.{aff,dic} /usr/share/myspell/
 #+end_src
-***** Aspell
+**** Aspell
 #+begin_src shell :tangle (if (file-expand-wildcards "/usr/lib64/aspell*/en-custom.multi") "no" "setup.sh")
 cd /tmp
 curl -o "aspell6-en-custom.tar.bz2" 'http://app.aspell.net/create?max_size=80&spelling=GBs&spelling=AU&max_variant=0&diacritic=keep&special=hacker&special=roman-numerals&encoding=utf-8&format=inline&download=aspell'
@@ -385,7 +384,7 @@ tar -xjf "aspell6-en-custom.tar.bz2"
 cd aspell6-en-custom
 ./configure && make && sudo make install
 #+end_src
-**** Configuration
+*** Configuration
 #+begin_src emacs-lisp
 (setq ispell-dictionary "en-custom")
 #+end_src
