@@ -1,11 +1,11 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-;; [[file:~/.doom.d/config.org::*Personal Information][Personal Information:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Personal Information][Personal Information:1]]
 (setq user-full-name "Tom Pollak"
       user-mail-address "tompollak1000@gmail.com")
 ;; Personal Information:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Simple settings][Simple settings:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Simple settings][Simple settings:1]]
 (setq-default
  delete-by-moving-to-trash t
  window-combination-resize t ; take new window space from all other windows (not just current)
@@ -25,44 +25,44 @@
 (global-subword-mode 1) ; Iterate through CamelCase words
 ;; Simple settings:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Frame sizing][Frame sizing:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Frame sizing][Frame sizing:1]]
 (add-to-list 'default-frame-alist '(height . 35))
 (add-to-list 'default-frame-alist '(width . 110))
 ;; Frame sizing:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Auto-customisations][Auto-customisations:1]]
-(setq-default custom-file (expand-file-name "config.el" doom-private-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Auto-customisations][Auto-customisations:1]]
+;; (setq-default custom-file (expand-file-name "config.el" doom-private-dir))
+;; (when (file-exists-p custom-file)
+;;   (load custom-file))
 ;; Auto-customisations:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Splitting the window][Splitting the window:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Splitting the window][Splitting the window:1]]
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
 ;; Splitting the window:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Splitting the window][Splitting the window:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Splitting the window][Splitting the window:2]]
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (consult-buffer))
 ;; Splitting the window:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Better mouse support][Better mouse support:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Better mouse support][Better mouse support:1]]
 ;; Mouse buttons
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward)
 ;; Better mouse support:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Set command complete shorter][Set command complete shorter:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Set command complete shorter][Set command complete shorter:1]]
 ;; Python black formatting
 (setq which-key-idle-delay 0.4)
 ;; Set command complete shorter:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Set command complete shorter][Set command complete shorter:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Set command complete shorter][Set command complete shorter:2]]
 (setq eros-eval-result-prefix "⟹ ")
 ;; Set command complete shorter:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Set autocomplete in text & markdown][Set autocomplete in text & markdown:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Set autocomplete in text & markdown][Set autocomplete in text & markdown:1]]
 ;; set autocomplete in text & markdown
 (set-company-backend!
   '(text-mode
@@ -74,26 +74,26 @@
     company-yasnippet))
 ;; Set autocomplete in text & markdown:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Twitter emojis][Twitter emojis:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Twitter emojis][Twitter emojis:1]]
 ;; Twitter emojis 😀
 (setq emojify-emoji-set "twemoji-v2")
 ;; Twitter emojis:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Twitter emojis][Twitter emojis:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Twitter emojis][Twitter emojis:2]]
 ;; %s/.../.../g
 (after! evil (setq evil-ex-substitute-global t))
 ;; Twitter emojis:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Twitter emojis][Twitter emojis:3]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Twitter emojis][Twitter emojis:3]]
 ;; Nested snippets
 (setq yas-triggers-in-field t)
 ;; Twitter emojis:3 ends here
 
-;; [[file:~/.doom.d/config.org::*Doom theme][Doom theme:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Theme][Theme:1]]
 (setq doom-theme 'doom-vibrant)
-;; Doom theme:1 ends here
+;; Theme:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Theme][Theme:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Theme][Theme:1]]
 (remove-hook 'window-setup-hook #'doom-init-theme-h)
 (add-hook 'after-init-hook #'doom-init-theme-h 'append)
 (delq! t custom-theme-load-path)
@@ -103,7 +103,7 @@
   '(doom-modeline-buffer-modified :foreground "orange"))
 ;; Theme:1 ends here
 
-;; [[file:~/.doom.d/config.org::*PDF Modeline][PDF Modeline:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*PDF Modeline][PDF Modeline:1]]
 (after! doom-modeline
   (doom-modeline-def-segment buffer-name
     "Display the current buffer's name, without any other information."
@@ -143,7 +143,11 @@
     '(misc-info matches major-mode process vcs)))
 ;; PDF Modeline:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Font face][Font face:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Dashboard][Dashboard:1]]
+(setq +doom-dashboard-banner-file (expand-file-name "banner.png" doom-private-dir))
+;; Dashboard:1 ends here
+
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Font face][Font face:1]]
 (setq doom-font (font-spec :family "JetBrains Mono" :size 14)
       doom-big-font (font-spec :family "JetBrains Mono" :size 18)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 14)
@@ -151,29 +155,29 @@
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 ;; Font face:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Font face][Font face:3]]
-(unless noninteractive
-  (add-hook! 'doom-init-ui-hook
-    (run-at-time nil nil
-		 (lambda nil
-		   (message "%s missing the following fonts: %s"
-			    (propertize "Warning!" 'face
-					'(bold warning))
-			    (mapconcat
-			     (lambda
-			       (font)
-			       (propertize font 'face 'font-lock-variable-name-face))
-			     '("JetBrainsMono.*" "JuliaMono" "Merriweather" "Alegreya")
-			     ", "))
-		   (sleep-for 0.5)))))
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Font face][Font face:3]]
+  (unless noninteractive
+    (add-hook! 'doom-init-ui-hook
+      (run-at-time nil nil
+                   (lambda nil
+                     (message "%s missing the following fonts: %s"
+                              (propertize "Warning!" 'face
+                                          '(bold warning))
+                              (mapconcat
+                               (lambda
+                                 (font)
+                                 (propertize font 'face 'font-lock-variable-name-face))
+                               '("JetBrainsMono.*" "JuliaMono" "Merriweather" "Alegreya")
+                               ", "))
+                     (sleep-for 0.5)))))
 ;; Font face:3 ends here
 
-;; [[file:~/.doom.d/config.org::*Window default name][Window default name:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Window default name][Window default name:1]]
 (setq doom-fallback-buffer-name "► Doom"
       +doom-dashboard-name "► Doom")
 ;; Window default name:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Treesitter][Treesitter:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Treesitter][Treesitter:2]]
 (use-package! tree-sitter
   :config
   (require 'tree-sitter-langs)
@@ -181,7 +185,7 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 ;; Treesitter:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Python formatting][Python formatting:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Python formatting][Python formatting:2]]
 (use-package! python-black
   :demand t
   :after python)
@@ -193,27 +197,27 @@
 (setq +python-jupyter-repl-args '("--simple-prompt"))
 ;; Python formatting:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Make manual pages look nice][Make manual pages look nice:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Make manual pages look nice][Make manual pages look nice:2]]
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
 ;; Make manual pages look nice:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Auto activating snippets][Auto activating snippets:2]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Auto activating snippets][Auto activating snippets:2]]
 (use-package! aas
   :commands aas-mode)
 ;; Auto activating snippets:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Very large files][Very large files:2]]
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Very large files][Very large files:2]]
+;; (use-package! vlf-setup
+;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 ;; Very large files:2 ends here
 
-;; [[file:~/.doom.d/config.org::*Configuration][Configuration:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Configuration][Configuration:1]]
 (setq ispell-dictionary "en-custom")
 ;; Configuration:1 ends here
 
-;; [[file:~/.doom.d/config.org::*Org][Org:1]]
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Org][Org:1]]
 (setq org-directory "~/org/") ; let's put files here
 ;; Org:1 ends here
