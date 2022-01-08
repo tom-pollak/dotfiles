@@ -1,38 +1,11 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*-
 
+;; [[file:~/.doom.d/config.org::*Personal Information][Personal Information:1]]
 (setq user-full-name "Tom Pollak"
       user-mail-address "tompollak1000@gmail.com")
+;; Personal Information:1 ends here
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-vibrant)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
-
-(setq doom-fallback-buffer-name "► Doom"
-      +doom-dashboard-name "► Doom")
-
-;; Default settings
+;; [[file:~/.doom.d/config.org::*Simple settings][Simple settings:1]]
 (setq-default
  delete-by-moving-to-trash t
  window-combination-resize t ; take new window space from all other windows (not just current)
@@ -41,110 +14,55 @@
 (setq max-lisp-eval-depth 10000)
 
 (setq undo-limit 80000000
-      evil-want-fine-undo t  ; by defualt while in insert all changes are one big blob. Be more granular
+      evil-want-fine-undo t  ; by default while in insert all changes are one big blob. Be more granular
       auto-save-default t
       truncate-string-ellipsis "…"
       password-cache-expiry nil
       ;; scroll-preserve-screen-position 'always
-      scroll-margin 2)
+      scroll-margin 2
+      display-line-numbers-type 'relative)
 
 (global-subword-mode 1) ; Iterate through CamelCase words
+;; Simple settings:1 ends here
 
-;; Defualt frame sizing
+;; [[file:~/.doom.d/config.org::*Frame sizing][Frame sizing:1]]
 (add-to-list 'default-frame-alist '(height . 35))
 (add-to-list 'default-frame-alist '(width . 110))
+;; Frame sizing:1 ends here
 
-;; Ask what buffer to show after a split
+;; [[file:~/.doom.d/config.org::*Auto-customisations][Auto-customisations:1]]
+(setq-default custom-file (expand-file-name "config.el" doom-private-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
+;; Auto-customisations:1 ends here
+
+;; [[file:~/.doom.d/config.org::*Splitting the window][Splitting the window:1]]
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
+;; Splitting the window:1 ends here
 
+;; [[file:~/.doom.d/config.org::*Splitting the window][Splitting the window:2]]
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (consult-buffer))
+;; Splitting the window:2 ends here
 
-;; Fonts
-(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 18)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 14)
-      doom-unicode-font (font-spec :family "JuliaMono")
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
-
-;; Font checking
-(defvar required-fonts '("JetBrainsMono.*" "Overpass" "JuliaMono" "IBM Plex Mono" "Merriweather" "Alegreya"))
-
-(defvar available-fonts
-  (delete-dups (or (font-family-list)
-                   (split-string (shell-command-to-string "fc-list : family")
-                                 "[,\n]"))))
-
-(defvar missing-fonts
-  (delq nil (mapcar
-             (lambda (font)
-               (unless (delq nil (mapcar (lambda (f)
-                                           (string-match-p (format "^%s$" font) f))
-                                         available-fonts))
-                 font))
-             required-fonts)))
-
-(if missing-fonts
-    (pp-to-string
-     `(unless noninteractive
-        (add-hook! 'doom-init-ui-hook
-          (run-at-time nil nil
-                       (lambda ()
-                         (message "%s missing the following fonts: %s"
-                                  (propertize "Warning!" 'face '(bold warning))
-                                  (mapconcat (lambda (font)
-                                               (propertize font 'face 'font-lock-variable-name-face))
-                                             ',missing-fonts
-                                             ", "))
-                         (sleep-for 0.5))))))
-  ";; No missing fonts detected")
-
-;; Modeline
-(setq doom-theme 'doom-vibrant)
-(remove-hook 'window-setup-hook #'doom-init-theme-h)
-(add-hook 'after-init-hook #'doom-init-theme-h 'append)
-(delq! t custom-theme-load-path)
-
-;; Set red text to orange
-(custom-set-faces!
-  '(doom-modeline-buffer-modified :foreground "orange"))
-
-
-;; Default buffer names
-(setq doom-fallback-buffer-name "► Doom"
-      +doom-dashboard-name "► Doom")
-
-
+;; [[file:~/.doom.d/config.org::*Better mouse support][Better mouse support:1]]
 ;; Mouse buttons
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward)
+;; Better mouse support:1 ends here
 
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
+;; [[file:~/.doom.d/config.org::*Set command complete shorter][Set command complete shorter:1]]
 ;; Python black formatting
-
-(use-package! python-black
-  :demand t
-  :after python)
-(add-hook! 'python-mode-hook #'python-black-on-save-mode)
-
-(map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
-
-(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
-(setq +python-jupyter-repl-args '("--simple-prompt"))
-
 (setq which-key-idle-delay 0.4)
+;; Set command complete shorter:1 ends here
 
+;; [[file:~/.doom.d/config.org::*Set command complete shorter][Set command complete shorter:2]]
 (setq eros-eval-result-prefix "⟹ ")
+;; Set command complete shorter:2 ends here
 
-(setq yas-triggers-in-field t)
-
+;; [[file:~/.doom.d/config.org::*Set autocomplete in text & markdown][Set autocomplete in text & markdown:1]]
 ;; set autocomplete in text & markdown
 (set-company-backend!
   '(text-mode
@@ -154,24 +72,148 @@
     company-ispell
     company-files
     company-yasnippet))
+;; Set autocomplete in text & markdown:1 ends here
 
+;; [[file:~/.doom.d/config.org::*Twitter emojis][Twitter emojis:1]]
 ;; Twitter emojis 😀
 (setq emojify-emoji-set "twemoji-v2")
+;; Twitter emojis:1 ends here
 
+;; [[file:~/.doom.d/config.org::*Twitter emojis][Twitter emojis:2]]
 ;; %s/.../.../g
 (after! evil (setq evil-ex-substitute-global t))
+;; Twitter emojis:2 ends here
 
+;; [[file:~/.doom.d/config.org::*Twitter emojis][Twitter emojis:3]]
 ;; Nested snippets
 (setq yas-triggers-in-field t)
+;; Twitter emojis:3 ends here
 
-;; Manual pages look nice
+;; [[file:~/.doom.d/config.org::*Doom theme][Doom theme:1]]
+(setq doom-theme 'doom-vibrant)
+;; Doom theme:1 ends here
+
+;; [[file:~/.doom.d/config.org::*Theme][Theme:1]]
+(remove-hook 'window-setup-hook #'doom-init-theme-h)
+(add-hook 'after-init-hook #'doom-init-theme-h 'append)
+(delq! t custom-theme-load-path)
+
+;; Set red text to orange
+(custom-set-faces!
+  '(doom-modeline-buffer-modified :foreground "orange"))
+;; Theme:1 ends here
+
+;; [[file:~/.doom.d/config.org::*PDF Modeline][PDF Modeline:1]]
+(after! doom-modeline
+  (doom-modeline-def-segment buffer-name
+    "Display the current buffer's name, without any other information."
+    (concat
+     (doom-modeline-spc)
+     (doom-modeline--buffer-name)))
+
+  (doom-modeline-def-segment pdf-icon
+    "PDF icon from all-the-icons."
+    (concat
+     (doom-modeline-spc)
+     (doom-modeline-icon 'octicon "file-pdf" nil nil
+                         :face (if (doom-modeline--active)
+                                   'all-the-icons-red
+                                 'mode-line-inactive)
+                         :v-adjust 0.02)))
+
+  (defun doom-modeline-update-pdf-pages ()
+    "Update PDF pages."
+    (setq doom-modeline--pdf-pages
+          (let ((current-page-str (number-to-string (eval `(pdf-view-current-page))))
+                (total-page-str (number-to-string (pdf-cache-number-of-pages))))
+            (concat
+             (propertize
+              (concat (make-string (- (length total-page-str) (length current-page-str)) ? )
+                      " P" current-page-str)
+              'face 'mode-line)
+             (propertize (concat "/" total-page-str) 'face 'doom-modeline-buffer-minor-mode)))))
+
+  (doom-modeline-def-segment pdf-pages
+    "Display PDF pages."
+    (if (doom-modeline--active) doom-modeline--pdf-pages
+      (propertize doom-modeline--pdf-pages 'face 'mode-line-inactive)))
+
+  (doom-modeline-def-modeline 'pdf
+    '(bar window-number pdf-pages pdf-icon buffer-name)
+    '(misc-info matches major-mode process vcs)))
+;; PDF Modeline:1 ends here
+
+;; [[file:~/.doom.d/config.org::*Font face][Font face:1]]
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 18)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 14)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+;; Font face:1 ends here
+
+;; [[file:~/.doom.d/config.org::*Font face][Font face:3]]
+(unless noninteractive
+  (add-hook! 'doom-init-ui-hook
+    (run-at-time nil nil
+		 (lambda nil
+		   (message "%s missing the following fonts: %s"
+			    (propertize "Warning!" 'face
+					'(bold warning))
+			    (mapconcat
+			     (lambda
+			       (font)
+			       (propertize font 'face 'font-lock-variable-name-face))
+			     '("JetBrainsMono.*" "JuliaMono" "Merriweather" "Alegreya")
+			     ", "))
+		   (sleep-for 0.5)))))
+;; Font face:3 ends here
+
+;; [[file:~/.doom.d/config.org::*Window default name][Window default name:1]]
+(setq doom-fallback-buffer-name "► Doom"
+      +doom-dashboard-name "► Doom")
+;; Window default name:1 ends here
+
+;; [[file:~/.doom.d/config.org::*Treesitter][Treesitter:2]]
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; Treesitter:2 ends here
+
+;; [[file:~/.doom.d/config.org::*Python formatting][Python formatting:2]]
+(use-package! python-black
+  :demand t
+  :after python)
+(add-hook! 'python-mode-hook #'python-black-on-save-mode)
+
+(map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
+
+(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
+(setq +python-jupyter-repl-args '("--simple-prompt"))
+;; Python formatting:2 ends here
+
+;; [[file:~/.doom.d/config.org::*Make manual pages look nice][Make manual pages look nice:2]]
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
+;; Make manual pages look nice:2 ends here
 
+;; [[file:~/.doom.d/config.org::*Auto activating snippets][Auto activating snippets:2]]
 (use-package! aas
   :commands aas-mode)
+;; Auto activating snippets:2 ends here
 
-;; Lazy load vlf for quick startup
-(use-package! vlf-setup :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; [[file:~/.doom.d/config.org::*Very large files][Very large files:2]]
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+;; Very large files:2 ends here
+
+;; [[file:~/.doom.d/config.org::*Configuration][Configuration:1]]
+(setq ispell-dictionary "en-custom")
+;; Configuration:1 ends here
+
+;; [[file:~/.doom.d/config.org::*Org][Org:1]]
+(setq org-directory "~/org/") ; let's put files here
+;; Org:1 ends here
