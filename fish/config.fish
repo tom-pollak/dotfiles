@@ -2,8 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set -gx PATH $HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin $PATH
-set -gx MANPAGER "sh -c 'col -bx | batcat -l man -p'"
+set -gx PATH $HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin $PATH
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx PAGER less
 set -gx EDITOR nvim
 set -gx VIMRC $HOME/.config/nvim/init.vim
@@ -20,9 +20,9 @@ set -gx WORKSPACE $HOME/projects
 
 set fish_greeting
 
-alias cat=batcat
+alias cat=bat
 alias v=nvim
-alias fd=fdfind
+# alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
@@ -45,3 +45,5 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 starship init fish | source
+
+
