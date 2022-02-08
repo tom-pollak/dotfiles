@@ -86,4 +86,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sunaku/tmux-navigate'
 Plug 'milkypostman/vim-togglelist'
 Plug 'lewis6991/gitsigns.nvim'
+
+
+" haskell
+Plug 'hasufell/ghcup.vim'
 call plug#end()

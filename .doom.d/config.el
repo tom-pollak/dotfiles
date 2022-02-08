@@ -89,6 +89,10 @@
 (setq yas-triggers-in-field t)
 ;; Twitter emojis:3 ends here
 
+;; [[file:../projects/dotfiles/.doom.d/config.org::*Mix in snippets with LSP completions][Mix in snippets with LSP completions:1]]
+(setq +lsp-company-backends '(:separate company-yasnippet company-capf))
+;; Mix in snippets with LSP completions:1 ends here
+
 ;; [[file:../projects/dotfiles/.doom.d/config.org::*Theme][Theme:1]]
 (setq doom-theme 'doom-vibrant)
 ;; Theme:1 ends here
@@ -167,7 +171,7 @@
                                (lambda
                                  (font)
                                  (propertize font 'face 'font-lock-variable-name-face))
-                               '("JetBrainsMono.*" "JuliaMono" "Merriweather" "Alegreya")
+                               '("JetBrainsMono.*" "Alegreya")
                                ", "))
                      (sleep-for 0.5)))))
 ;; Font face:3 ends here
