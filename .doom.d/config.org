@@ -1,6 +1,6 @@
 #+title: Doom Emacs Configuration
 #+author: Tom Pollak
-#+property: header-args:emacs-lisp :tangle yes :comments link
+#+property: header-Art's:emacs-lisp :tangle yes :comments link
 #+property: header-args:elisp :exports code
 #+property: header-args:shell :tangle "setup.sh"
 #+property: header-args :tangle no :results silent :eval no-export
@@ -151,6 +151,12 @@ Make sure Org dosen't try to confirm that I want evaluation in =doom sync=
 (advice-add 'org-babel-execute-src-block :around #'doom-shut-up-a)
 #+end_src
 
+** Mix in snippets with LSP completions
+With LSP enabled, snippets are moved to the bottom of the completion mode, mixes em up
+
+#+begin_src emacs-lisp
+(setq +lsp-company-backends '(:separate company-yasnippet company-capf))
+#+end_src
 * Doom configuration
 ** Theme
 #+begin_src emacs-lisp
@@ -300,7 +306,22 @@ Add a check to make sure we're told if the system dosen't have any of those font
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+end_src
 
-** Python formatting
+** Python
+*** Linting
+#+begin_src emacs-lisp :tangle packages.el
+(package! lsp-pyright)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq flycheck-python-pylint-executable "pylint")
+(use-package! lsp-pyright
+  :config
+  (setq lsp-clients-python-command "pyright")
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
+#+end_src
+*** Formatting
 #+begin_src emacs-lisp :tangle packages.el
 (package! python-black)
 #+end_src
@@ -315,6 +336,18 @@ Add a check to make sure we're told if the system dosen't have any of those font
 
 (setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
 (setq +python-jupyter-repl-args '("--simple-prompt"))
+#+end_src
+
+*** Elpy
+#+begin_src emacs-lisp :tangle packages.el
+(package! elpy)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
 #+end_src
 
 ** Make manual pages look nice
@@ -396,6 +429,11 @@ the above.
 It seems reasonable to want to keep an eye on my personal dict, let's have it
 nearby (also means that if I change the 'main' dictionary I keep my addition).
 
+** Haskell
+*** Stylish
+#+begin_src emacs-lisp
+(setq haskell-stylish-on-save t)
+#+end_src
 * Org
 #+begin_src emacs-lisp
 (setq org-directory "~/org/") ; let's put files here
