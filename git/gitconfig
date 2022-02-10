@@ -10,3 +10,9 @@
 [user]
 	email = tompollak1000@gmail.com
 	name = Tom Pollak
+	github = tom-pollak
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
