@@ -7,6 +7,7 @@
 [core]
 	editor = nvim
 	pager = diff-so-fancy | less -FXRi
+	autocrlf = input
 [user]
 	email = tompollak1000@gmail.com
 	name = Tom Pollak

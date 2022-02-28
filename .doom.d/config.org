@@ -31,7 +31,6 @@ for more info).
       user-mail-address "tompollak1000@gmail.com")
 #+end_src
 
-
 * Better defaults
 ** Simple settings
 Some basic setting based off of [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org#use-better-defaults][angrybacon/dotemacs]]
@@ -157,10 +156,17 @@ With LSP enabled, snippets are moved to the bottom of the completion mode, mixes
 #+begin_src emacs-lisp
 (setq +lsp-company-backends '(:separate company-yasnippet company-capf))
 #+end_src
+** High contrast line number
+#+begin_src emacs-lisp
+(custom-set-faces
+    '(line-number-current-line ((t (:inherit line-number :background "white" :foreground "color-16"))))
+)
+
+#+end_src
 * Doom configuration
 ** Theme
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-vibrant)
+(setq doom-theme 'doom-molokai)
 #+end_src
 
 ** Modeline
@@ -230,13 +236,21 @@ icon. Then we'll redefine two functions used to generate the modeline.
 (setq +doom-dashboard-banner-file (expand-file-name "banner.png" doom-private-dir))
 
 #+end_src
+** LSP mode
+#+begin_src emacs-lisp
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.Desktop\\'")
+  ;; or
+  (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'"))
+
+#+end_src
 * Visual settings
 ** Font face
 Uses JetBrains Mono need to try out some other font soon
 
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 18)
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 18)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 14)
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
@@ -246,7 +260,7 @@ Add a check to make sure we're told if the system dosen't have any of those font
 
 #+name: detect-missing-fonts
 #+begin_src emacs-lisp :tangle no
-(defvar required-fonts '("JetBrainsMono.*" "Overpass" "JuliaMono" "IBM Plex Mono" "Merriweather" "Alegreya"))
+(defvar required-fonts '("FiraCode Nerd Font Mono" "Overpass" "JuliaMono" "IBM Plex Mono" "Merriweather" "Alegreya"))
 
 (defvar available-fonts
   (delete-dups (or (font-family-list)
@@ -289,7 +303,6 @@ Add a check to make sure we're told if the system dosen't have any of those font
       +doom-dashboard-name "► Doom")
 
 #+end_src
-
 
 * Packages
 ** Treesitter
@@ -433,6 +446,23 @@ nearby (also means that if I change the 'main' dictionary I keep my addition).
 *** Stylish
 #+begin_src emacs-lisp
 (setq haskell-stylish-on-save t)
+#+end_src
+
+** Parinfer
+#+begin_src emacs-lisp
+(use-package parinfer-rust-mode
+  :hook emacs-lisp-mode)
+(setq parinfer-rust-auto-download t)
+#+end_src
+** Key-chord
+#+begin_src emacs-lisp :tangle packages.el
+(package! key-chord)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! key-chord)
+(key-chord t)
+(key-chord-define-global "jk" 'evil-normal-state)
 #+end_src
 * Org
 #+begin_src emacs-lisp
