@@ -78,7 +78,7 @@ nnoremap gi :action GotoImplementation<CR>
 nnoremap gp :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTypeDeclaration<CR>
 nnoremap ga :action GotoAction<CR>
-nnoremap gt :action GotoTest<CR>
+" nnoremap gt :action GotoTest<CR>
 
 
 " Folding

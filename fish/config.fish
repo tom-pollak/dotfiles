@@ -2,7 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set -gx PATH $HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin $PATH
+set -gx PATH $HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin:/usr/local/bin $PATH
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx PAGER less
 set -gx EDITOR nvim
@@ -14,9 +14,14 @@ set -gx LIBGL_ALWAYS_INDIRECT 1
 
 set -gx JAR /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
 set -gx GRADLE_HOME /usr/share/gradle
-set -gx JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
 set -gx JDTLS_CONFIG /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 set -gx WORKSPACE $HOME/projects
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin /Users/tom/.ghcup/bin $PATH # ghcup-env
+set -gx DYLD_LIBRARY_PATH /usr/local/lib
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin /Users/tom/.ghcup/bin $PATH # ghcup-env
 
 set fish_greeting
 
@@ -46,4 +51,21 @@ alias .....="cd ../../../.."
 
 starship init fish | source
 
+set -gx NVM_DIR $HOME/.nvm
 
+set fish_greeting
+fish_vi_key_bindings
+
+fish_add_path /opt/homebrew/sbin
+fish_add_path /opt/homebrew/opt/llvm/bin
+fish_add_path /opt/homebrew/opt/openjdk/bin
+set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
+set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
+
+set _CONDA_ROOT "/Users/tom/opt/anaconda3"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
