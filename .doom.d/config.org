@@ -1,6 +1,6 @@
 #+title: Doom Emacs Configuration
 #+author: Tom Pollak
-#+property: header-Art's:emacs-lisp :tangle yes :comments link
+#+property: header-args:emacs-lisp :tangle yes :comments link
 #+property: header-args:elisp :exports code
 #+property: header-args:shell :tangle "setup.sh"
 #+property: header-args :tangle no :results silent :eval no-export
@@ -159,7 +159,7 @@ With LSP enabled, snippets are moved to the bottom of the completion mode, mixes
 ** High contrast line number
 #+begin_src emacs-lisp
 (custom-set-faces
-    '(line-number-current-line ((t (:inherit line-number :background "white" :foreground "color-16"))))
+    '(line-number ((t (:foreground "orange"))))
 )
 
 #+end_src
@@ -451,7 +451,8 @@ nearby (also means that if I change the 'main' dictionary I keep my addition).
 ** Parinfer
 #+begin_src emacs-lisp
 (use-package parinfer-rust-mode
-  :hook emacs-lisp-mode)
+  :hook emacs-lisp-mode
+  :init)
 (setq parinfer-rust-auto-download t)
 #+end_src
 ** Key-chord
@@ -459,11 +460,11 @@ nearby (also means that if I change the 'main' dictionary I keep my addition).
 (package! key-chord)
 #+end_src
 
-#+begin_src emacs-lisp
-(use-package! key-chord)
-(key-chord t)
-(key-chord-define-global "jk" 'evil-normal-state)
-#+end_src
+# #+begin_src emacs-lisp
+# (use-package! key-chord)
+# (key-chord t)
+# (key-chord-define-global "jk" 'evil-normal-state)
+# #+end_src
 * Org
 #+begin_src emacs-lisp
 (setq org-directory "~/org/") ; let's put files here
