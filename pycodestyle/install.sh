@@ -1,8 +1,4 @@
 #!/bin/bash
 
-DOTFILES=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../" && pwd -P)
-
-echo "[ LINKING ] :: pycodestyle >> config"
-
-ln -sf "$DOTFILES/pycodestyle/pycodestyle" $HOME/.config/pycodestyle
-
+source ../install_module.sh
+install_module "pycodestyle" "pycodestyle/pycodestyle" "$HOME/.config/pycodestyle"

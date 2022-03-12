@@ -1,14 +1,8 @@
 #!/bin/bash
 
-DOTFILES=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../" && pwd -P)
-
-echo "[ LINKING ] :: Git >> config"
-
-rm $HOME/.gitconfig
-rm $HOME/.gitconfig.local
-
-ln -sf "$DOTFILES/git/gitconfig.local" $HOME/.gitconfig.local
-ln -sf "$DOTFILES/git/gitconfig" $HOME/.gitconfig
+source ../install_module.sh
+install_module "git" "git/gitconfig" "$HOME/.gitconfig"
+install_module "git" "git/gitconfig.local" "$HOME/.gitconfig.local"
 
 git config --global include.path $HOME/.gitconfig.local
 
