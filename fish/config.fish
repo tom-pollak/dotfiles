@@ -22,6 +22,8 @@ set -gx PATH $HOME/.cabal/bin /Users/tom/.ghcup/bin $PATH # ghcup-env
 set -gx DYLD_LIBRARY_PATH /usr/local/lib
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 set -gx PATH $HOME/.cabal/bin /Users/tom/.ghcup/bin $PATH # ghcup-env
+set -gx NVM_DIR $HOME/.nvm
+set -gx fisher_path /Users/tom/.config/fish/
 
 set fish_greeting
 
@@ -33,9 +35,12 @@ alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
 alias c="clear"
 
-bind \co 'nvim $(fzf)'
-bind \cj forward-char
-bind \cf tmux-sessionizer
+bind -M insert \co 'nvim $(fzf)'
+bind -M insert \cj forward-char
+bind -M insert \cf tmux-sessionizer
+bind -M insert \ch beginning-of-line
+bind -M insert \cp history-token-search-backward
+bind -M insert \cn history-token-search-forward
 
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
@@ -51,7 +56,6 @@ alias .....="cd ../../../.."
 
 starship init fish | source
 
-set -gx NVM_DIR $HOME/.nvm
 
 set fish_greeting
 fish_vi_key_bindings
