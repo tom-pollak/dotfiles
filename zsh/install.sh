@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DOTFILES=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../" && pwd -P)
-
 [ ! -d "~/.zsh/" ] && mkdir ~/.zsh
 if [ ! -d "~/.oh-my-zsh/" ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && rm -v ~/.zshrc
@@ -9,22 +7,11 @@ fi
 
 [ ! -d ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/alias-tips ] && git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/alias-tips
 
-if command -v zsh >/dev/null 2>&1; then
-    MODULE='zsh'
-    echo "[ LINKING ] :: $MODULE >> .zshrc"
+source ../install_module.sh
+install_module "zsh" "zsh/zshrc" "$HOME/.zshrc"
+install_module "zsh" "zsh/fzf.zsh" "$HOME/.zsh/fzf.zsh"
+install_module "zsh" "zsh/zsh_alias.zsh" "$HOME/.zsh/zsh_alias.zsh"
+install_module "zsh" "zsh/zinit.zsh" "$HOME/.zsh/zinit.zsh"
+install_module "zsh" "zsh/plugins.zsh" "$HOME/.zsh/plugins.zsh"
 
-	rm $HOME/.zshrc
-	rm $HOME/.zsh/fzf.zsh
-	rm $HOME/.zsh/zsh_alias.zsh
-	rm $HOME/.zsh/zinit.zsh
-	rm $HOME/.zsh/plugins.zsh
-
-	ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
-	ln -sf $DOTFILES/zsh/fzf.zsh $HOME/.zsh/fzf.zsh
-	ln -sf $DOTFILES/zsh/zsh_alias.zsh $HOME/.zsh/zsh_alias.zsh
-	ln -sf $DOTFILES/zsh/zinit.zsh $HOME/.zsh/zinit.zsh
-	ln -sf $DOTFILES/zsh/plugins.zsh $HOME/.zsh/plugins.zsh
-else
-    echo "[ NOTFOUND ] :: $MODULE"
-fi
 zsh
