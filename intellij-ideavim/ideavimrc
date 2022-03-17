@@ -2,6 +2,8 @@ set relativenumber number
 set timeoutlen=1000
 set visualbell
 set noerrorbells
+set scrolloff=5
+
 
 """ Editing and Reloading the Config
 set clipboard+=unnamed
@@ -24,6 +26,11 @@ nmap <C-i> <Action>(Forward)
 
 let mapleader = " "
 
+" Window movement
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+
+
 " Remaps
 imap jk <Esc>
 nnoremap Y y$
@@ -32,6 +39,9 @@ nmap <CR> o<Esc>
 nmap <leader>w :action SaveDocument<CR>
 nnoremap <TAB> :action NextTab<CR>
 nnoremap <S-TAB> :action PreviousTab<CR>
+
+" Formatting
+map Q gq
 
 vnoremap < <gv
 vnoremap > >gv
