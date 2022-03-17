@@ -97,6 +97,10 @@
 )
 ;; High contrast line number:1 ends here
 
+;; [[file:config.org::*Default project paths][Default project paths:1]]
+(setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))
+;; Default project paths:1 ends here
+
 ;; [[file:config.org::*Theme][Theme:1]]
 (setq doom-theme 'doom-molokai)
 ;; Theme:1 ends here

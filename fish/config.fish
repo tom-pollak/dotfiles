@@ -39,8 +39,8 @@ bind -M insert \co 'nvim $(fzf)'
 bind -M insert \cj forward-char
 bind -M insert \cf tmux-sessionizer
 bind -M insert \ch beginning-of-line
-bind -M insert \cp history-token-search-backward
-bind -M insert \cn history-token-search-forward
+bind -M insert \cp history-prefix-search-backward
+bind -M insert \cn history-prefix-search-forward
 
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
@@ -71,5 +71,5 @@ set _CONDA_ROOT "/Users/tom/opt/anaconda3"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
+# eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
