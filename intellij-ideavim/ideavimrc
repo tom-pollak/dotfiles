@@ -3,6 +3,7 @@ set timeoutlen=1000
 set visualbell
 set noerrorbells
 set scrolloff=5
+nnoremap <esc> :noh<cr><esc>
 
 
 """ Editing and Reloading the Config
@@ -61,8 +62,8 @@ nnoremap <c-b> :action Switcher<CR>
 """ Splits
 nnoremap <c-w>v :action SplitVertically<CR>
 nnoremap <c-w>s :action SplitHorizontally<CR>
-nnoremap <c-=> :action Unsplit<CR>
-nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <c-w>= :action Unsplit<CR>
+nnoremap <c-w>m :action MoveEditorToOppositeTabGroup<CR>
 
 
 """ Editing source code

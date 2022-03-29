@@ -1,6 +1,7 @@
 .DEFAULT_GOAL:=help
 SHELL:=/bin/bash
-modules := $(ls -d */)
+## Dosen't work
+modules:=$(ls -d */)
 
 ##@ Dependencies
 
@@ -9,6 +10,7 @@ modules := $(ls -d */)
 deps: ## Check dependancies
 	$(info Check dependancies)
 	echo ${modules}
+	echo "Not implemented"
 
 
 ##@ Install
@@ -17,6 +19,7 @@ deps: ## Check dependancies
 
 install: deps ## Installs modules
 	$(info Installs given modules)
+	echo "Not implemented"
 
 
 ##@ Build
@@ -25,6 +28,7 @@ install: deps ## Installs modules
 
 build: deps ## Loads modules
 	$(info Loads config files for all installed modules)
+	echo "Not implemented"
 
 ##@ Cleanup
 
@@ -32,12 +36,14 @@ build: deps ## Loads modules
 
 clean: ## Uninstall modules
 	$(info Removes all modules)
+	echo "Not implemented"
 
 ##@ Helpers
 
 .PHONY: list
 list: ## List all modules
 	$(info Lists all installed modules)
+	echo ${modules}
 
 
 .PHONY: help
