@@ -12,9 +12,8 @@ set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 
 set -gx LIBGL_ALWAYS_INDIRECT 1
 
-set -gx JAR /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
 set -gx GRADLE_HOME /usr/share/gradle
-set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
+set -gx JAVA_HOME /opt/homebrew/Cellar/openjdk/17.0.2/libexec/openjdk.jdk/Contents/Home
 set -gx JDTLS_CONFIG /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 set -gx WORKSPACE $HOME/projects
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
