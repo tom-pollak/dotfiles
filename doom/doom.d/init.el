@@ -1,6 +1,6 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; [[file:config.org::*Doom modules][Doom modules:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Doom modules][Doom modules:1]]
 ;; This file controls what Doom modules are enabled and what order they load in.
 ;; Press 'K' on a module to view its documentation, and 'gd' to browse its directory.
 
@@ -124,7 +124,7 @@
        ;;hy                            ; readability of scheme w/ speed of python
        ;;idris                         ; a language you can depend on
        json                            ; At least it ain't XML
-       (java +meghanada)               ; the poster child for carpal tunnel syndrome
+       (java +lsp +meghanada)               ; the poster child for carpal tunnel syndrome
        (javascript +lsp)               ; all(hope(abandon(ye(who(enter(here))))))
        julia                           ; a better, faster MATLAB
        ;;kotlin                        ; a better, slicker Java(Script)
@@ -134,7 +134,7 @@
         +fold)
        ;;lean                          ; for folks with too much to prove
        ;;ledger                        ; be audit you can be
-       lua                             ; one-based indices? one-based indices
+       ;; lua                             ; one-based indices? one-based indices
        markdown                        ; writing docs for people to ignore
        ;; nim                          ; python + lisp at the speed of c
        ;;nix                           ; I hereby declare "nix geht mehr!"

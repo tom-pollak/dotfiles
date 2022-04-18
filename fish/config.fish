@@ -27,7 +27,7 @@ set -gx fisher_path /Users/tom/.config/fish/
 set fish_greeting
 
 alias cat=bat
-alias v=nvim
+alias v=lvim
 # alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
@@ -70,5 +70,5 @@ set _CONDA_ROOT "/Users/tom/opt/anaconda3"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
+eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
