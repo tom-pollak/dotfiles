@@ -1,11 +1,11 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-;; [[file:config.org::*General config][General config:3]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*General config][General config:3]]
 (setq user-full-name "Tom Pollak"
       user-mail-address "tompollak1000@gmail.com")
 ;; General config:3 ends here
 
-;; [[file:config.org::*Simple settings][Simple settings:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Simple settings][Simple settings:1]]
 (setq-default
  delete-by-moving-to-trash t
  window-combination-resize t ; take new window space from all other windows (not just current)
@@ -24,43 +24,43 @@
       display-line-numbers-type 'relative)
 ;; Simple settings:1 ends here
 
-;; [[file:config.org::*Auth sources][Auth sources:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Auth sources][Auth sources:1]]
 (after! auth-source
   (setq auth-sources (nreverse auth-sources)))
 ;; Auth sources:1 ends here
 
-;; [[file:config.org::*Frame sizing][Frame sizing:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Frame sizing][Frame sizing:1]]
 (add-to-list 'default-frame-alist '(height . 35))
 (add-to-list 'default-frame-alist '(width . 110))
 ;; Frame sizing:1 ends here
 
-;; [[file:config.org::*Splitting the window][Splitting the window:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Splitting the window][Splitting the window:1]]
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
 ;; Splitting the window:1 ends here
 
-;; [[file:config.org::*Splitting the window][Splitting the window:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Splitting the window][Splitting the window:2]]
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (consult-buffer))
 ;; Splitting the window:2 ends here
 
-;; [[file:config.org::*Better mouse support][Better mouse support:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Better mouse support][Better mouse support:1]]
 ;; Mouse buttons
 (map! :n [mouse-8] #'better-jumper-jump-backward
       :n [mouse-9] #'better-jumper-jump-forward)
 ;; Better mouse support:1 ends here
 
-;; [[file:config.org::*Set command complete shorter][Set command complete shorter:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Set command complete shorter][Set command complete shorter:1]]
 ;; Python black formatting
 (setq which-key-idle-delay 0.4)
 ;; Set command complete shorter:1 ends here
 
-;; [[file:config.org::*Set command complete shorter][Set command complete shorter:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Set command complete shorter][Set command complete shorter:2]]
 (setq eros-eval-result-prefix "⟹ ")
 ;; Set command complete shorter:2 ends here
 
-;; [[file:config.org::*Set autocomplete in text & markdown][Set autocomplete in text & markdown:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Set autocomplete in text & markdown][Set autocomplete in text & markdown:1]]
 ;; set autocomplete in text & markdown
 (set-company-backend!
   '(text-mode
@@ -72,40 +72,40 @@
     company-yasnippet))
 ;; Set autocomplete in text & markdown:1 ends here
 
-;; [[file:config.org::*Twitter emojis][Twitter emojis:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Twitter emojis][Twitter emojis:1]]
 ;; Twitter emojis 😀
 (setq emojify-emoji-set "twemoji-v2")
 ;; Twitter emojis:1 ends here
 
-;; [[file:config.org::*Twitter emojis][Twitter emojis:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Twitter emojis][Twitter emojis:2]]
 ;; %s/.../.../g
 (after! evil (setq evil-ex-substitute-global t))
 ;; Twitter emojis:2 ends here
 
-;; [[file:config.org::*Twitter emojis][Twitter emojis:3]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Twitter emojis][Twitter emojis:3]]
 ;; Nested snippets
 (setq yas-triggers-in-field t)
 ;; Twitter emojis:3 ends here
 
-;; [[file:config.org::*Mix in snippets with LSP completions][Mix in snippets with LSP completions:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Mix in snippets with LSP completions][Mix in snippets with LSP completions:1]]
 (setq +lsp-company-backends '(:separate company-yasnippet company-capf))
 ;; Mix in snippets with LSP completions:1 ends here
 
-;; [[file:config.org::*High contrast line number][High contrast line number:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*High contrast line number][High contrast line number:1]]
 (custom-set-faces
     '(line-number ((t (:foreground "orange"))))
 )
 ;; High contrast line number:1 ends here
 
-;; [[file:config.org::*Default project paths][Default project paths:1]]
-(setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Default project paths][Default project paths:1]]
+(setq projectile-project-search-path '("~/projects/"))
 ;; Default project paths:1 ends here
 
-;; [[file:config.org::*Theme][Theme:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Theme][Theme:1]]
 (setq doom-theme 'doom-molokai)
 ;; Theme:1 ends here
 
-;; [[file:config.org::*Theme][Theme:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Theme][Theme:1]]
 (remove-hook 'window-setup-hook #'doom-init-theme-h)
 (add-hook 'after-init-hook #'doom-init-theme-h 'append)
 (delq! t custom-theme-load-path)
@@ -115,7 +115,7 @@
   '(doom-modeline-buffer-modified :foreground "orange"))
 ;; Theme:1 ends here
 
-;; [[file:config.org::*PDF Modeline][PDF Modeline:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*PDF Modeline][PDF Modeline:1]]
 (after! doom-modeline
   (doom-modeline-def-segment buffer-name
     "Display the current buffer's name, without any other information."
@@ -155,43 +155,43 @@
     '(misc-info matches major-mode process vcs)))
 ;; PDF Modeline:1 ends here
 
-;; [[file:config.org::*Dashboard][Dashboard:1]]
-(let ((alternatives '(
-                     "banner.png"
-                     "cute-demon.png"
-                     "emacs-logo-vim.png"
-                     "i-am-doom.png"
-                     "trancendent-gnu.png")))
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Dashboard][Dashboard:1]]
+ (let ((alternatives '(
+                      "banner.png"
+                      "cute-demon.png"
+                      "emacs-logo-vim.png"
+                      "i-am-doom.png"
+                      "trancendent-gnu.png")))
 
-   (setq fancy-splash-image (concat doom-private-dir "splash/"
-                                   (nth (random (length alternatives)) alternatives))))
+    (setq fancy-splash-image (concat doom-private-dir "splash/"
+                                    (nth (random (length alternatives)) alternatives))))
 ;; Dashboard:1 ends here
 
-;; [[file:config.org::*LSP mode][LSP mode:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*LSP mode][LSP mode:1]]
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "/Users/tom/Desktop/'")
   ;; or
   (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\.my-files\\'"))
 ;; LSP mode:1 ends here
 
-;; [[file:config.org::*Font face][Font face:1]]
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 18)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 14)
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Font face][Font face:1]]
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 12)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 14)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 12)
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 ;; Font face:1 ends here
 
-;; [[file:config.org::*Font face][Font face:3]]
-;; No missing fonts detected
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Font face][Font face:3]]
+  ;; No missing fonts detected
 ;; Font face:3 ends here
 
-;; [[file:config.org::*Window default name][Window default name:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Window default name][Window default name:1]]
 (setq doom-fallback-buffer-name "► Doom"
       +doom-dashboard-name "► Doom")
 ;; Window default name:1 ends here
 
-;; [[file:config.org::*Disabling some ligatures][Disabling some ligatures:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Disabling some ligatures][Disabling some ligatures:1]]
 (plist-put! +ligatures-extra-symbols
   :and           nil
   :or            nil
@@ -211,11 +211,7 @@
     (plist-put! +ligatures-extra-symbols sym nil)))
 ;; Disabling some ligatures:1 ends here
 
-;; [[file:config.org::*Matching paren][Matching paren:1]]
-
-;; Matching paren:1 ends here
-
-;; [[file:config.org::*Treesitter][Treesitter:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Treesitter][Treesitter:2]]
 (use-package! tree-sitter
   :config
   (require 'tree-sitter-langs)
@@ -223,7 +219,7 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 ;; Treesitter:2 ends here
 
-;; [[file:config.org::*Formatting][Formatting:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Formatting][Formatting:2]]
 (use-package! python-black
   :demand t
   :after python)
@@ -235,33 +231,32 @@
 (setq +python-jupyter-repl-args '("--simple-prompt"))
 ;; Formatting:2 ends here
 
-;; [[file:config.org::*Make manual pages look nice][Make manual pages look nice:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Melpa][Melpa:1]]
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+(package-initialize)
+;; Melpa:1 ends here
+
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Make manual pages look nice][Make manual pages look nice:2]]
 (use-package! info-colors
   :commands (info-colors-fontify-node))
 
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
 ;; Make manual pages look nice:2 ends here
 
-;; [[file:config.org::*Auto activating snippets][Auto activating snippets:2]]
-(use-package! aas
-  :commands aas-mode)
-;; Auto activating snippets:2 ends here
-
-;; [[file:config.org::*Very large files][Very large files:2]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Very large files][Very large files:2]]
 ;; (use-package! vlf-setup
 ;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 ;; Very large files:2 ends here
 
-;; [[file:config.org::*Configuration][Configuration:1]]
-(setq ispell-dictionary "en-custom")
-;; Configuration:1 ends here
-
-;; [[file:config.org::*Stylish][Stylish:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Stylish][Stylish:1]]
 (setq haskell-stylish-on-save t)
 (setq haskell-mode-stylish-haskell-path "brittany")
 ;; Stylish:1 ends here
 
-;; [[file:config.org::*Undo tree][Undo tree:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Undo tree][Undo tree:1]]
 (use-package! undo-tree
   :init
   (setq undo-tree-visualizer-timestamps t
@@ -276,40 +271,7 @@
   (global-undo-tree-mode 1))
 ;; Undo tree:1 ends here
 
-;; [[file:config.org::*Jupyter][Jupyter:1]]
-(use-package! jupyter
-  :init
-  (setq jupyter-eval-use-overlays t)
-
-  (map!
-   :map org-mode-map
-   :localleader
-   (:desc "Jupyter Org Hydra"       "j" #'jupyter-org-hydra/body))
-
-  (defun my/insert-python-src-block ()
-    (interactive)
-    (jupyter-org-insert-src-block t current-prefix-arg))
-
-  (setq my/jupyter-enable-completions nil)
-
-  ;; (key-chord-define-global "jq" #'my/insert-python-src-block)
-  (map!
-   :map python-mode-map
-   :localleader
-   (:prefix ("j" . "jupyter")
-    :desc "Run REPL"         "o" #'jupyter-run-repl
-    :desc "Eval function"    "f" #'jupyter-eval-defun
-    :desc "Eval buffer"      "b" #'jupyter-eval-buffer
-    :desc "Eval region"      "r" #'jupyter-eval-region
-    :desc "Restart REPL"     "R" #'jupyter-repl-restart-kernel
-    :desc "Interrupt REPL"   "i" #'jupyter-repl-interrup-kernel
-    :desc "Scratch buffer"   "s" #'jupyter-repl-scratch-buffer
-    :desc "Remove overlays"  "O" #'jupyter-eval-remove-overlays
-    :desc "Eval string"      "w" #'jupyter-eval-string
-    :desc "Inspect at point" "d" #'jupyter-inspect-at-point)))
-;; Jupyter:1 ends here
-
-;; [[file:config.org::*Flycheck][Flycheck:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Flycheck][Flycheck:1]]
 ;; (setq flycheck-standard-error-navigation nil)
 (defun flycheck-or-norm-next-error (&optional n reset)
   (interactive "P")
@@ -363,6 +325,12 @@
   (require 'flycheck))
 ;; Flycheck:1 ends here
 
-;; [[file:config.org::*Org][Org:1]]
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Esup][Esup:1]]
+(use-package esup
+  :ensure t
+  :pin melpa-stable)
+;; Esup:1 ends here
+
+;; [[file:../projects/dotfiles/doom/doom.d/config.org::*Org][Org:1]]
 (setq org-directory "~/org/") ; let's put files here
 ;; Org:1 ends here

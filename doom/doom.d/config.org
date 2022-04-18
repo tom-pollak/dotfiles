@@ -153,7 +153,7 @@ With LSP enabled, snippets are moved to the bottom of the completion mode, mixes
 #+end_src
 ** Default project paths
 #+begin_src emacs-lisp
-(setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))
+(setq projectile-project-search-path '("~/projects/"))
 #+end_src
 * Doom configuration
 ** Doom modules
@@ -281,7 +281,7 @@ With LSP enabled, snippets are moved to the bottom of the completion mode, mixes
        ;;hy                            ; readability of scheme w/ speed of python
        ;;idris                         ; a language you can depend on
        json                            ; At least it ain't XML
-       (java +meghanada)               ; the poster child for carpal tunnel syndrome
+       (java +lsp +meghanada)               ; the poster child for carpal tunnel syndrome
        (javascript +lsp)               ; all(hope(abandon(ye(who(enter(here))))))
        julia                           ; a better, faster MATLAB
        ;;kotlin                        ; a better, slicker Java(Script)
@@ -291,7 +291,7 @@ With LSP enabled, snippets are moved to the bottom of the completion mode, mixes
         +fold)
        ;;lean                          ; for folks with too much to prove
        ;;ledger                        ; be audit you can be
-       lua                             ; one-based indices? one-based indices
+       ;; lua                             ; one-based indices? one-based indices
        markdown                        ; writing docs for people to ignore
        ;; nim                          ; python + lisp at the speed of c
        ;;nix                           ; I hereby declare "nix geht mehr!"
@@ -441,9 +441,9 @@ Don't watch my Desktop folder by default
 * Visual settings
 ** Font face
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 18)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 14)
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 12)
+      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 14)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 12)
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 #+end_src
@@ -515,11 +515,6 @@ Add a check to make sure we're told if the system dosen't have any of those font
   (dolist (sym ligatures-to-disable)
     (plist-put! +ligatures-extra-symbols sym nil)))
 #+end_src
-** Matching paren
-#+begin_src emacs-lisp
-
-
-#+end_src
 * Packages
 ** Treesitter
 #+begin_src emacs-lisp :tangle packages.el
@@ -553,6 +548,15 @@ Add a check to make sure we're told if the system dosen't have any of those font
 (setq +python-jupyter-repl-args '("--simple-prompt"))
 #+end_src
 
+** Melpa
+#+begin_src emacs-lisp
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+(package-initialize)
+
+#+end_src
 ** Make manual pages look nice
 #+begin_src emacs-lisp :tangle packages.el
 (package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
@@ -563,19 +567,6 @@ Add a check to make sure we're told if the system dosen't have any of those font
   :commands (info-colors-fontify-node))
 
 (add-hook 'Info-selection-hook 'info-colors-fontify-node)
-#+end_src
-
-** Auto activating snippets
-Sometimes pressing =tab= is just too much.
-
-#+begin_src emacs-lisp :tangle packages.el
-(package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets")
-  :pin "1699bec4d244a1f62af29fe4eb8b79b6d2fccf7d")
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package! aas
-  :commands aas-mode)
 #+end_src
 
 ** Very large files
@@ -591,47 +582,6 @@ To make VLF available without delaying startup, we'll just load it in quiet mome
 ;; (use-package! vlf-setup
 ;;   :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
 #+end_src
-
-** Ispell
-*** Downloading dictionaries
-Let's get a nice big dictionary from [[http://app.aspell.net/create][SCOWL Custom List/Dictionary Creator]] with
-the following configuration
-- size :: 80 (huge)
-- spellings :: British(-ise) and Australian
-- spelling variants level :: 0
-- diacritics :: keep
-- extra lists :: hacker, roman numerals
-
-**** Hunspell
-#+begin_src shell :tangle (if (file-exists-p "/usr/share/myspell/en-custom.dic") "no" "setup.sh")
-cd /tmp
-curl -o "hunspell-en-custom.zip" 'http://app.aspell.net/create?max_size=80&spelling=GBs&spelling=AU&max_variant=0&diacritic=keep&special=hacker&special=roman-numerals&encoding=utf-8&format=inline&download=hunspell'
-unzip "hunspell-en-custom.zip"
-
-sudo chown root:root en-custom.*
-sudo mv en-custom.{aff,dic} /usr/share/myspell/
-#+end_src
-**** Aspell
-#+begin_src shell :tangle (if (file-expand-wildcards "/usr/lib64/aspell*/en-custom.multi") "no" "setup.sh")
-cd /tmp
-curl -o "aspell6-en-custom.tar.bz2" 'http://app.aspell.net/create?max_size=80&spelling=GBs&spelling=AU&max_variant=0&diacritic=keep&special=hacker&special=roman-numerals&encoding=utf-8&format=inline&download=aspell'
-tar -xjf "aspell6-en-custom.tar.bz2"
-
-cd aspell6-en-custom
-./configure && make && sudo make install
-#+end_src
-*** Configuration
-#+begin_src emacs-lisp
-(setq ispell-dictionary "en-custom")
-#+end_src
-Oh, and by the way, if ~company-ispell-dictionary~ is ~nil~, then
-~ispell-complete-word-dict~ is used instead, which once again when ~nil~ is
-~ispell-alternate-dictionary~, which at the moment maps to a plaintext version of
-the above.
-
-It seems reasonable to want to keep an eye on my personal dict, let's have it
-nearby (also means that if I change the 'main' dictionary I keep my addition).
-
 ** Haskell
 *** Stylish
 #+begin_src emacs-lisp
@@ -658,43 +608,6 @@ nearby (also means that if I change the 'main' dictionary I keep my addition).
 
 #+begin_src emacs-lisp :tangle packages.el
 (package! undo-tree)
-#+end_src
-** Jupyter
-#+begin_src emacs-lisp
-(use-package! jupyter
-  :init
-  (setq jupyter-eval-use-overlays t)
-
-  (map!
-   :map org-mode-map
-   :localleader
-   (:desc "Jupyter Org Hydra"       "j" #'jupyter-org-hydra/body))
-
-  (defun my/insert-python-src-block ()
-    (interactive)
-    (jupyter-org-insert-src-block t current-prefix-arg))
-
-  (setq my/jupyter-enable-completions nil)
-
-  ;; (key-chord-define-global "jq" #'my/insert-python-src-block)
-  (map!
-   :map python-mode-map
-   :localleader
-   (:prefix ("j" . "jupyter")
-    :desc "Run REPL"         "o" #'jupyter-run-repl
-    :desc "Eval function"    "f" #'jupyter-eval-defun
-    :desc "Eval buffer"      "b" #'jupyter-eval-buffer
-    :desc "Eval region"      "r" #'jupyter-eval-region
-    :desc "Restart REPL"     "R" #'jupyter-repl-restart-kernel
-    :desc "Interrupt REPL"   "i" #'jupyter-repl-interrup-kernel
-    :desc "Scratch buffer"   "s" #'jupyter-repl-scratch-buffer
-    :desc "Remove overlays"  "O" #'jupyter-eval-remove-overlays
-    :desc "Eval string"      "w" #'jupyter-eval-string
-    :desc "Inspect at point" "d" #'jupyter-inspect-at-point)))
-#+end_src
-
-#+begin_src emacs-lisp :tangle packages.el
-(package! jupyter)
 #+end_src
 ** Flycheck
 #+begin_src emacs-lisp
@@ -751,6 +664,13 @@ nearby (also means that if I change the 'main' dictionary I keep my addition).
   (require 'flycheck))
 
 
+#+end_src
+** Esup
+
+#+begin_src emacs-lisp
+(use-package esup
+  :ensure t
+  :pin melpa-stable)
 #+end_src
 * Org
 #+begin_src emacs-lisp
