@@ -1,0 +1,64 @@
+<keymap version="1" name="IDEA Keymap 2022-05-05 (2)" parent="Mac OS X">
+  <action id="ActivateTerminalToolWindow">
+    <keyboard-shortcut first-keystroke="ctrl t" />
+  </action>
+  <action id="Debugger.ShowTypes">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl t" />
+  </action>
+  <action id="EditorDown">
+    <keyboard-shortcut first-keystroke="down" />
+    <keyboard-shortcut first-keystroke="ctrl j" />
+  </action>
+  <action id="EditorUp">
+    <keyboard-shortcut first-keystroke="up" />
+    <keyboard-shortcut first-keystroke="ctrl k" />
+  </action>
+  <action id="FocusEditor">
+    <keyboard-shortcut first-keystroke="escape" />
+    <keyboard-shortcut first-keystroke="meta g" />
+  </action>
+  <action id="GotoBookmark0" />
+  <action id="GotoLine" />
+  <action id="GotoRow" />
+  <action id="GuiDesigner.QuickJavadoc">
+    <mouse-shortcut keystroke="control button2" />
+  </action>
+  <action id="Haskell.Ghci.LoadModule">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl l" />
+  </action>
+  <action id="Haskell.Ghci.ReloadModules">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl r" />
+  </action>
+  <action id="Haskell.Hoogle.Navigation">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl h" />
+  </action>
+  <action id="Haskell.SendToGhci">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl s" />
+  </action>
+  <action id="Haskell.ShowInfo">
+    <keyboard-shortcut first-keystroke="shift ctrl p" />
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl i" />
+  </action>
+  <action id="Haskell.ShowType">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl t" />
+  </action>
+  <action id="HideAllWindows">
+    <keyboard-shortcut first-keystroke="shift meta f12" />
+    <keyboard-shortcut first-keystroke="meta j" />
+  </action>
+  <action id="InsertLiveTemplate" />
+  <action id="JumpToLastWindow">
+    <keyboard-shortcut first-keystroke="f12" />
+    <keyboard-shortcut first-keystroke="meta j" />
+  </action>
+  <action id="QuickJavaDoc">
+    <mouse-shortcut keystroke="control button2" />
+  </action>
+  <action id="SelectNextOccurrence" />
+  <action id="ServiceView.GroupByContributor" />
+  <action id="Terminal.SwitchFocusToEditor" />
+  <action id="UsageGrouping.UsageType" />
+  <action id="Vcs.Log.ShowTooltip">
+    <mouse-shortcut keystroke="control button2" />
+  </action>
+</keymap>

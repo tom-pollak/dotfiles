@@ -1,0 +1,86 @@
+<keymap version="1" name="IDEA Keymap 2022-06-25" parent="Mac OS X">
+  <action id="ActivateDebugToolWindow">
+    <keyboard-shortcut first-keystroke="meta 5" />
+    <keyboard-shortcut first-keystroke="meta d" />
+  </action>
+  <action id="ActivateProjectToolWindow">
+    <keyboard-shortcut first-keystroke="meta 1" />
+    <keyboard-shortcut first-keystroke="meta e" />
+  </action>
+  <action id="ActivateTerminalToolWindow">
+    <keyboard-shortcut first-keystroke="meta quote" />
+  </action>
+  <action id="CompareTwoFiles" />
+  <action id="Debugger.ShowTypes">
+    <keyboard-shortcut first-keystroke="ctrl c" second-keystroke="ctrl t" />
+  </action>
+  <action id="Diff.ShowDiff" />
+  <action id="EditorAddOrRemoveCaret" />
+  <action id="EditorAddRectangularSelectionOnMouseDrag" />
+  <action id="EditorCreateRectangularSelection" />
+  <action id="EditorCreateRectangularSelectionOnMouseDrag" />
+  <action id="EditorDeleteLine" />
+  <action id="EditorDown">
+    <keyboard-shortcut first-keystroke="down" />
+    <keyboard-shortcut first-keystroke="ctrl j" />
+  </action>
+  <action id="EditorDuplicate" />
+  <action id="EditorJoinLines" />
+  <action id="EditorScrollDown" />
+  <action id="EditorScrollUp" />
+  <action id="EditorUp">
+    <keyboard-shortcut first-keystroke="up" />
+    <keyboard-shortcut first-keystroke="ctrl k" />
+  </action>
+  <action id="FileChooser.GotoDesktop" />
+  <action id="Find">
+    <keyboard-shortcut first-keystroke="alt f3" />
+  </action>
+  <action id="FindInPath">
+    <keyboard-shortcut first-keystroke="shift ctrl f" />
+    <keyboard-shortcut first-keystroke="meta f" />
+  </action>
+  <action id="FocusEditor">
+    <keyboard-shortcut first-keystroke="escape" />
+  </action>
+  <action id="GotoBookmark0" />
+  <action id="GotoLine" />
+  <action id="GotoRow" />
+  <action id="GotoSuperMethod" />
+  <action id="GuiDesigner.QuickJavadoc">
+    <mouse-shortcut keystroke="control button2" />
+  </action>
+  <action id="HideAllWindows">
+    <keyboard-shortcut first-keystroke="shift meta f12" />
+    <keyboard-shortcut first-keystroke="meta j" />
+  </action>
+  <action id="Images.Editor.ToggleGrid" />
+  <action id="InsertLiveTemplate" />
+  <action id="JumpToLastWindow">
+    <keyboard-shortcut first-keystroke="f12" />
+    <keyboard-shortcut first-keystroke="meta j" />
+  </action>
+  <action id="QuickImplementations">
+    <keyboard-shortcut first-keystroke="shift meta i" />
+    <keyboard-shortcut first-keystroke="meta u" />
+  </action>
+  <action id="QuickJavaDoc">
+    <mouse-shortcut keystroke="control button2" />
+    <keyboard-shortcut first-keystroke="meta y" />
+  </action>
+  <action id="RecentFiles" />
+  <action id="RunDashboard.CopyConfiguration" />
+  <action id="SelectNextOccurrence" />
+  <action id="SendEOF" />
+  <action id="ServiceView.GroupByContributor" />
+  <action id="SwitcherIterateItems" />
+  <action id="SwitcherRecentEditedChangedToggleCheckBox" />
+  <action id="Terminal.SwitchFocusToEditor" />
+  <action id="UsageGrouping.UsageType" />
+  <action id="Vcs.Log.ShowTooltip">
+    <mouse-shortcut keystroke="control button2" />
+  </action>
+  <action id="XDebugger.CopyWatch" />
+  <action id="openAssertEqualsDiff" />
+  <action id="org.intellij.plugins.markdown.ui.actions.styling.InsertImageAction" />
+</keymap>

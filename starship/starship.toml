@@ -27,3 +27,5 @@ python_binary = ["python3"]
 
 [battery]
 disabled = true
+
+
