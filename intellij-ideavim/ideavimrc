@@ -3,19 +3,21 @@ set timeoutlen=1000
 set visualbell
 set noerrorbells
 set scrolloff=5
-nnoremap <esc> :noh<cr><esc>
+set smartcase
+set clipboard+=unnamed
+set clipboard+=ideaput
 
 
 """ Editing and Reloading the Config
-set clipboard+=unnamed
-set clipboard+=ideaput
 set incsearch
 set idearefactormode=keep
 set ideajoin
 set surround
 set commentary
+set ideamarks
 
 " Esc working correctly
+nnoremap <esc> :noh<cr><esc>
 noremap <Esc> <nop>
 vmap <Esc> <C-[>
 vmap <C-c> <C-[>
@@ -38,8 +40,8 @@ nnoremap Y y$
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 nmap <leader>w :action SaveDocument<CR>
-nnoremap <TAB> :action NextTab<CR>
-nnoremap <S-TAB> :action PreviousTab<CR>
+" nnoremap <TAB> :action NextTab<CR>
+" nnoremap <S-TAB> :action PreviousTab<CR>
 
 " Formatting
 map Q gq
@@ -79,7 +81,7 @@ nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <leader>i :action FindImplementations<CR>
 " nnoremap <leader>i :action ShowIntentionActions<CR>
 nnoremap <leader>l  :action RecentLocations<CR>
-nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
+nnoremap <leader>y  :action LocalHistory.ShowHistory<CR>
 nnoremap <leader>t  :action QuickTypeDefinition<CR>
 nnoremap K :action QuickJavaDoc<CR>
 
@@ -104,11 +106,22 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " debugging
-nnoremap \d :action Debug<CR>
-nnoremap \b :action ToggleLineBreakpoint<CR>
-nnoremap \m :action MuteBreakpoints<CR>
-nnoremap \l :action ShowBreakpoints<CR>
-nnoremap \r :action RunToCursor<CR>
-nnoremap \s :action StepOver<CR>
-nnoremap \t :action StepInto<CR>
-nnoremap \u :action StepOut<CR>
+nnoremap <leader>dd :action ChooseDebugConfiguration<CR>
+nnoremap <leader>df :action ChooseRunConfiguration<CR>
+
+nnoremap <leader>n :action Resume<CR>
+nnoremap <leader>c :action ForceRunToCursor<CR>
+
+nnoremap <leader>dl :action ViewBreakpoints<CR>
+nnoremap <leader>a :action XDebugger.Actions<CR>
+nnoremap <leader>o :action ShowExecutionPoint<CR>
+
+
+" Can also use <alt-{b, j, h, k}>
+nnoremap <leader>b :action ToggleLineBreakpoint<CR>
+nnoremap <leader>j :action ForceStepOver<CR>
+nnoremap <leader>h :action SmartStepInto<CR>
+nnoremap <leader>k :action ForceStepOut<CR>
+
+nnoremap <leader>m :action ToggleBookmark<CR>
+nnoremap <leader>' :action ShowBookmarks<CR>
