@@ -17,8 +17,8 @@ set commentary
 set ideamarks
 
 " Esc working correctly
-nnoremap <esc> :noh<cr><esc>
-noremap <Esc> <nop>
+nnoremap <Esc> :noh<cr><esc>
+"noremap <Esc> <nop>
 vmap <Esc> <C-[>
 vmap <C-c> <C-[>
 map <C-c> <Esc>
@@ -46,6 +46,8 @@ nmap <leader>w :action SaveDocument<CR>
 " Formatting
 map Q gq
 
+
+
 vnoremap < <gv
 vnoremap > >gv
 
@@ -54,6 +56,19 @@ vmap <leader>c :action Copy<CR>
 nmap <leader>s :action QuickChangeScheme<CR>
 nmap <leader>e :action ShowErrorDescription<CR>
 nmap <leader>g :action Git.Menu<CR>
+nmap <leader>q :action QuickActions<CR>
+" nmap <leader>f :action CompareActions<CR>
+
+""" Searching and Source Code Navigation
+nnoremap <leader>u :action FindUsages<CR>
+nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+nnoremap <leader>i :action FindImplementations<CR>
+" nnoremap <leader>i :action ShowIntentionActions<CR>
+nnoremap <leader>l  :action RecentLocations<CR>
+nnoremap <leader>y  :action LocalHistory.ShowHistory<CR>
+nnoremap <leader>t  :action QuickTypeDefinition<CR>
+nnoremap K :action QuickJavaDoc<CR>
+
 
 " Search
 nnoremap <c-f> :action GotoFile<CR>
@@ -75,17 +90,9 @@ nnoremap ge :action GotoNextError<CR>
 nnoremap gE :action GotoPreviousError<CR>
 
 
-""" Searching and Source Code Navigation
-nnoremap <leader>u :action FindUsages<CR>
-nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
-nnoremap <leader>i :action FindImplementations<CR>
-" nnoremap <leader>i :action ShowIntentionActions<CR>
-nnoremap <leader>l  :action RecentLocations<CR>
-nnoremap <leader>y  :action LocalHistory.ShowHistory<CR>
-nnoremap <leader>t  :action QuickTypeDefinition<CR>
-nnoremap K :action QuickJavaDoc<CR>
 
-
+nnoremap g; :action JumpToLastChange<CR>
+nnoremap g, :action JumpToNextChange<CR>
 nnoremap gu :action FindUsages<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
@@ -98,8 +105,6 @@ nnoremap gh :action ShowErrorDescription<CR>
 " Folding
 nnoremap zc :action CollapseRegion<CR>
 nnoremap zo :action ExpandRegion<CR>
-nnoremap <leader>zc :action CollapseAllRegions<CR>
-nnoremap <leader>zo :action ExpandAllRegions<CR>
 
 " Keep cursor centered
 nnoremap n nzzzv
