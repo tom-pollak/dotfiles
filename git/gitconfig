@@ -1,5 +1,5 @@
 [include]
-	path = /Users/tom/.gitconfig.local
+	path = /Users/Thomas.Pollak/.gitconfig.local
 [merge]
 	tool = vscode
 [mergetool "vscode"]
