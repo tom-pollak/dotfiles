@@ -143,7 +143,7 @@ lvim.builtin.terminal.shading_factor = 1
 -- Nvimtree
 -- *
 lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
+-- lvim.builtin.nvimtree.show_icons.git = 1
 
 
 -- *
@@ -456,8 +456,25 @@ lvim.plugins = {
 -- vim.opt.hightlight = "LineNr guifg=orange"
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-lvim.autocommands.custom_groups = {
-    -- { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
-    { "BufWinEnter", "*", "setlocal ts=4 sw=4" },
-    { "BufWinEnter", "*", "highlight LineNr guifg=orange" }
+-- lvim.autocommands.custom_groups = {
+--     -- { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+--     { "BufWinEnter", "*", "setlocal ts=4 sw=4" },
+--     { "BufWinEnter", "*", "highlight LineNr guifg=orange" }
+-- }
+
+lvim.autocmds = {
+    {
+        "BufWinEnter",
+        {
+            pattern = { "*" },
+            command = "setlocal ts=4 sw=4"
+        }
+    },
+    {
+        "BufWinEnter",
+        {
+            pattern = { "*" },
+            command = "highlight LineNr guifg=orange"
+        }
+    }
 }

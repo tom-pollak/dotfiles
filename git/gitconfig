@@ -9,8 +9,8 @@
 	pager = diff-so-fancy | less -FXRi
 	autocrlf = input
 [user]
-	email = tompollak1000@gmail.com
-	name = Tom Pollak
+	email = tpollak@meraki.com
+	name = Thomas Pollak
 	github = tom-pollak
 [filter "lfs"]
 	clean = git-lfs clean -- %f
