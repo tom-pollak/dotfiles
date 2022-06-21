@@ -5,9 +5,9 @@ end
 set -gx PATH $HOME/.cargo/bin:$HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin:/usr/local/bin $PATH
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx PAGER less
-set -gx EDITOR lvim
-set -gx GIT_EDITOR lvim
-set -gx VIMRC $HOME/.config/nvim/init.vim
+set -gx EDITOR nvim
+set -gx GIT_EDITOR nvim
+set -gx VIMRC $HOME/.config/nvim/init.lua
 set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 
@@ -30,7 +30,7 @@ set -gx fisher_path /Users/tom/.config/fish/
 set fish_greeting
 
 alias cat=bat
-alias v=lvim
+alias v=nvim
 # alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
