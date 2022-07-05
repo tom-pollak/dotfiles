@@ -4,4 +4,4 @@ if not ok then
 end
 
 vim.o.background = 'dark'
-vim.cmd[[highlight LineNr ctermfg=magenta]]
+vim.cmd[[highlight LineNr ctermfg=darkyellow]]
