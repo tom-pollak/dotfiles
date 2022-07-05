@@ -21,15 +21,47 @@ M.project_files = function()
 end
 
 M.buffers = function()
-    require"telescope.builtin".buffers()
+    require"telescope.builtin".buffers({
+    sort_lastused = true,
+    ignore_current_buffer = true
+})
 end
 
 M.live_grep = function()
     require"telescope.builtin".live_grep()
 end
 
-M.config_files = function()
-    require"telescope.builtin".find_files()
+M.help_tags = function()
+    require"telescope.builtin".help_tags()
 end
+
+M.dotfiles = function()
+    require("telescope.builtin").find_files({
+        prompt_title = "< VimRC >",
+        cwd = "$HOME/projects/dotfiles"
+    })
+end
+
+M.find_files = function()
+  require"telescope.builtin".find_files()
+end
+
+M.git_branches = function()
+    require("telescope.builtin").git_branches({
+        attach_mappings = function(_, map)
+            map('i', '<c-d>', actions.git_delete_branch)
+            map('n', '<c-d>', actions.git_delete_branch)
+            return true
+        end
+    })
+end
+
+M.vim_config = function()
+    require("telescope.builtin").find_files({
+        prompt_title = "< VimRC >",
+        cwd = "$HOME/.config/nvim"
+    })
+end
+
 
 return M

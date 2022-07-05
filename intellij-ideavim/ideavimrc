@@ -2,8 +2,9 @@ set relativenumber number
 set timeoutlen=1000
 set visualbell
 set noerrorbells
-set scrolloff=5
-set smartcase
+" set scrolloff=5
+set smartcase ignorecase
+
 set clipboard+=unnamed
 set clipboard+=ideaput
 
@@ -15,6 +16,9 @@ set ideajoin
 set surround
 set commentary
 set ideamarks
+set NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>
+"nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 
 " Esc working correctly
 nnoremap <Esc> :noh<cr><esc>
@@ -32,6 +36,8 @@ let mapleader = " "
 " Window movement
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
+
+
 
 
 " Remaps
@@ -62,8 +68,8 @@ nmap <leader>q :action QuickActions<CR>
 """ Searching and Source Code Navigation
 nnoremap <leader>u :action FindUsages<CR>
 nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
-nnoremap <leader>i :action FindImplementations<CR>
-" nnoremap <leader>i :action ShowIntentionActions<CR>
+" nnoremap <leader>i :action FindImplementations<CR>
+nnoremap <leader>i :action ShowIntentionActions<CR>
 nnoremap <leader>l  :action RecentLocations<CR>
 nnoremap <leader>y  :action LocalHistory.ShowHistory<CR>
 nnoremap <leader>t  :action QuickTypeDefinition<CR>
