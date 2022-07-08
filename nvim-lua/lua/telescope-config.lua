@@ -8,6 +8,8 @@ require("telescope").setup{
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
       },
+      n = {
+      }
     }
   }
 }
@@ -46,15 +48,15 @@ M.find_files = function()
   require"telescope.builtin".find_files()
 end
 
-M.git_branches = function()
-    require("telescope.builtin").git_branches({
-        attach_mappings = function(_, map)
-            map('i', '<c-d>', actions.git_delete_branch)
-            map('n', '<c-d>', actions.git_delete_branch)
-            return true
-        end
-    })
-end
+-- M.git_branches = function()
+--     require("telescope.builtin").git_branches({
+--         attach_mappings = function(_, map)
+--             map('i', '<c-d>', actions.git_delete_branch)
+--             map('n', '<c-d>', actions.git_delete_branch)
+--             return true
+--         end
+--     })
+-- end
 
 M.vim_config = function()
     require("telescope.builtin").find_files({
