@@ -81,3 +81,5 @@ set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/ruby/lib/pkgconfig"
 # <<< conda initialize <<<
 
 # source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+bash $HOME/.config/fish/startup.sh

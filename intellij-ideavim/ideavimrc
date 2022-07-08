@@ -2,7 +2,7 @@ set relativenumber number
 set timeoutlen=1000
 set visualbell
 set noerrorbells
-" set scrolloff=5
+set scrolloff=3
 set smartcase ignorecase
 
 set clipboard+=unnamed
@@ -16,16 +16,16 @@ set ideajoin
 set surround
 set commentary
 set ideamarks
-set NERDTree
-nnoremap <C-n> :NERDTreeToggle<CR>
+" set NERDTree
+" nnoremap <C-n> :NERDTreeToggle<CR>
 "nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 
 " Esc working correctly
 nnoremap <Esc> :noh<cr><esc>
 "noremap <Esc> <nop>
 vmap <Esc> <C-[>
-vmap <C-c> <C-[>
-map <C-c> <Esc>
+" vmap <C-c> <C-[>
+" map <C-c> <Esc>
 
 " Set C-o for mouse movements
 nmap <C-o> <Action>(Back)
@@ -52,8 +52,6 @@ nmap <leader>w :action SaveDocument<CR>
 " Formatting
 map Q gq
 
-
-
 vnoremap < <gv
 vnoremap > >gv
 
@@ -77,9 +75,12 @@ nnoremap K :action QuickJavaDoc<CR>
 
 
 " Search
-nnoremap <c-f> :action GotoFile<CR>
-nnoremap <c-p> :action GotoClass<CR>
+" nnoremap <c-f> :action GotoFile<CR> Path
+nnoremap <c-p> :action GotoFile<CR>
+nnoremap <c-m> :action GotoClass<CR>
 nnoremap <c-g> :action GotoSymbol<CR>
+" nnoremap <c-f> :action GotoChangedFile<CR>
+" nnoremap <c-t> :action GotoTest<CR>
 nnoremap <c-b> :action Switcher<CR>
 
 """ Splits
@@ -92,8 +93,8 @@ nnoremap <c-w>m :action MoveEditorToOppositeTabGroup<CR>
 """ Editing source code
 nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
-nnoremap ge :action GotoNextError<CR>
-nnoremap gE :action GotoPreviousError<CR>
+nnoremap gj :action GotoNextError<CR>
+nnoremap gk :action GotoPreviousError<CR>
 
 
 
@@ -103,9 +104,10 @@ nnoremap gu :action FindUsages<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gp :action GotoSuperMethod<CR>
-nnoremap gt :action GotoTypeDeclaration<CR>
+nnoremap gT :action GotoTypeDeclaration<CR>
 nnoremap ga :action GotoAction<CR>
-" nnoremap gt :action GotoTest<CR>
+nnoremap gr :action GotoRelated<CR>
+ nnoremap gt :action GotoTest<CR>
 nnoremap gh :action ShowErrorDescription<CR>
 
 " Folding
@@ -134,5 +136,5 @@ nnoremap <leader>j :action ForceStepOver<CR>
 nnoremap <leader>h :action SmartStepInto<CR>
 nnoremap <leader>k :action ForceStepOut<CR>
 
-nnoremap <leader>m :action ToggleBookmark<CR>
-nnoremap <leader>' :action ShowBookmarks<CR>
+nnoremap m :action ToggleBookmark<CR>
+nnoremap ' :action ShowBookmarks<CR>

@@ -1,7 +1,8 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    PACKER_BOOTSTRAP = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+        install_path })
 end
 
 vim.cmd [[packadd packer.nvim]]
@@ -9,6 +10,7 @@ vim.cmd [[packadd packer.nvim]]
 require('packer').startup(function()
 
     use 'wbthomason/packer.nvim'
+
 
     use {
         'williamboman/nvim-lsp-installer',
@@ -20,21 +22,118 @@ require('packer').startup(function()
     }
 
     use {
-            'neovim/nvim-lspconfig',
-            config = function()
-                require("nvim-lsp-installer").setup {
-                    automatic_installation = true
-                }
+        'neovim/nvim-lspconfig',
+        config = function()
+            require("nvim-lsp-installer").setup {
+                automatic_installation = true
+            }
+        end
+    }
+
+
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            -- 'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path',
+            'saadparwaiz1/cmp_luasnip',
+            'L3MON4D3/LuaSnip'
+            -- 'hrsh7th/cmp-cmdline',
+        },
+        config = function()
+            local cmp = require 'cmp'
+            local luasnip = require 'luasnip'
+            local has_words_before = function()
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
             end
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        require 'luasnip'.lsp_expand(args.body)
+                    end
+                },
+                window = {
+                    -- completion = cmp.config.window.bordered(),
+                    -- documentation = cmp.config.window.bordered(),
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-n>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-p>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-space>'] = cmp.mapping.complete(),
+                    ['<C-e>'] = cmp.mapping.abort(),
+                    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                    ["<C-j>"] = cmp.mapping.select_next_item(),
+                    ["<C-k>"] = cmp.mapping.select_prev_item(),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        elseif has_words_before() then
+                            cmp.complete()
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
 
-        }
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                }),
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    -- { name = 'vsnip' }, -- For vsnip users.
+                    { name = 'luasnip' }, -- For luasnip users.
+                    -- { name = 'ultisnips' }, -- For ultisnips users.
+                    -- { name = 'snippy' }, -- For snippy users.
+                }, {
+                    { name = 'buffer' },
+                }),
+                -- filetype = ('gitcommit', {
+                --     sources = cmp.config.sources({
+                --         { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+                --     }, {
+                --         { name = 'buffer' },
+                --     })
+                -- })
+            })
 
-    use  'NLKNguyen/papercolor-theme'
+            -- Set configuration for specific filetype.
+        end
+    }
+
+    -- use {
+    --     'tpope/vim-vinegar'
+    -- }
+
+
+
+    -- use {
+    --     'folke/trouble.nvim',
+    --     requires = 'kyazdani42/nvim-web-devicons',
+    --     config = function()
+    --         require("trouble").setup {
+    --             -- mode = "loclist"
+    --             mode = "quickfix"
+    --         }
+    --     end
+    -- }
+
+    use 'NLKNguyen/papercolor-theme'
 
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
-            {'nvim-lua/plenary.nvim'},
+            { 'nvim-lua/plenary.nvim' },
             { 'kyazdani42/nvim-web-devicons', opt = true }
         }
     }
@@ -46,12 +145,12 @@ require('packer').startup(function()
 
     use {
         'TimUntersberger/neogit',
-        requires ={
+        requires = {
             'nvim-lua/plenary.nvim',
             'sindrets/diffview.nvim'
         },
         config = function()
-            require('neogit').setup{
+            require('neogit').setup {
                 intergrations = {
                     diffview = true
                 }
@@ -76,7 +175,7 @@ require('packer').startup(function()
         requires = { { 'JoosepAlviste/nvim-ts-context-commentstring' } }
     }
 
-    use  'tmsvg/pear-tree'
+    use 'tmsvg/pear-tree'
 
     use 'tpope/vim-surround'
 
@@ -84,15 +183,15 @@ require('packer').startup(function()
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
-            require('lualine').setup{
-                options = {theme = 'PaperColor'}
+            require('lualine').setup {
+                options = { theme = 'PaperColor' }
             }
         end
     }
 
     use {
         'francoiscabrol/ranger.vim',
-        requires = {'rbgrouleff/bclose.vim'},
+        requires = { 'rbgrouleff/bclose.vim' },
         -- config = function()
         --     require"ranger.vim".setup {
         --         ranger_replace_netrw = 1
@@ -127,33 +226,33 @@ require('packer').startup(function()
     use {
         'stevearc/qf_helper.nvim',
         config = function()
-            require'qf_helper'.setup({
-                  prefer_loclist = true,       -- Used for QNext/QPrev (see Commands below)
-                  sort_lsp_diagnostics = true, -- Sort LSP diagnostic results
-                  quickfix = {
-                    autoclose = true,          -- Autoclose qf if it's the only open window
-                    default_bindings = true,   -- Set up recommended bindings in qf window
-                    default_options = true,    -- Set recommended buffer and window options
-                    max_height = 20,           -- Max qf height when using open() or toggle()
-                    min_height = 6,            -- Min qf height when using open() or toggle()
+            require 'qf_helper'.setup({
+                prefer_loclist = true, -- Used for QNext/QPrev (see Commands below)
+                sort_lsp_diagnostics = true, -- Sort LSP diagnostic results
+                quickfix = {
+                    autoclose = true, -- Autoclose qf if it's the only open window
+                    default_bindings = true, -- Set up recommended bindings in qf window
+                    default_options = true, -- Set recommended buffer and window options
+                    max_height = 20, -- Max qf height when using open() or toggle()
+                    min_height = 6, -- Min qf height when using open() or toggle()
                     track_location = 'cursor', -- Keep qf updated with your current location
-                                               -- Use `true` to update position as well
-                  },
-                  loclist = {                  -- The same options, but for the loclist
+                    -- Use `true` to update position as well
+                },
+                loclist = { -- The same options, but for the loclist
                     autoclose = true,
                     default_bindings = true,
                     default_options = true,
                     max_height = 20,
                     min_height = 6,
                     track_location = 'cursor',
-                  },
+                },
             })
         end
     }
 
     use 'p00f/clangd_extensions.nvim'
 
-    if packer_bootstrap then
+    if PACKER_BOOTSTRAP then
         require('packer').sync()
     end
 end)
