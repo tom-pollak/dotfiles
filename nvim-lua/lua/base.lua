@@ -19,6 +19,8 @@ set.undofile = true
 set.smartcase = true
 set.ignorecase = true
 set.completeopt = 'menu,menuone,noselect'
+set.hidden = true
+set.shell = "fish"
 
 vim.cmd("set guicursor=n-v-c-i:block")
 
