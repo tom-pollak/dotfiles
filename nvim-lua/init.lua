@@ -68,9 +68,9 @@ require('packer').startup(function()
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
                     ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
+                        -- if cmp.visible() then
+                        --     cmp.select_next_item()
+                        if luasnip.expand_or_jumpable() then
                             luasnip.expand_or_jump()
                         elseif has_words_before() then
                             cmp.complete()
@@ -140,7 +140,25 @@ require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+        run = ':TSUpdate',
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                ensure_installed = "all",
+
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
+                },
+                rainbow = { -- dosen't work
+                    enable = true,
+                    extended_mode = true,
+                    max_file_lines = nil,
+                },
+                context_commentstring = {
+                    enable = true
+                }
+            }
+        end
     }
 
     use {
@@ -175,7 +193,13 @@ require('packer').startup(function()
         requires = { { 'JoosepAlviste/nvim-ts-context-commentstring' } }
     }
 
-    use 'tmsvg/pear-tree'
+    use { 'tmsvg/pear-tree',
+        config = function()
+            vim.g.pear_tree_repeatable_expand = 0
+            vim.g.pear_tree_map_special_keys = 0
+
+        end
+    }
 
     use 'tpope/vim-surround'
 
@@ -192,11 +216,9 @@ require('packer').startup(function()
     use {
         'francoiscabrol/ranger.vim',
         requires = { 'rbgrouleff/bclose.vim' },
-        -- config = function()
-        --     require"ranger.vim".setup {
-        --         ranger_replace_netrw = 1
-        --     }
-        -- end
+        config = function()
+            vim.g.ranger_replace_netrw = 1
+        end
     }
 
     -- use {
@@ -250,7 +272,32 @@ require('packer').startup(function()
         end
     }
 
+    use { 'mbbill/undotree',
+        config = function()
+            if vim.fn.has("persistent_undo") then
+                local target_path = vim.fn.expand('~/.undodir')
+
+                if not vim.fn.isdirectory(target_path) ~= 0 then
+                    vim.fn.mkdir(target_path, "p", 0700)
+                end
+                vim.opt.undodir = target_path
+            end
+
+        end
+    }
+
+    use 'christoomey/vim-tmux-navigator'
+
     use 'p00f/clangd_extensions.nvim'
+
+    use {
+        "akinsho/toggleterm.nvim",
+        config = function()
+            require("toggleterm").setup({
+                open_mapping = [[<c-t>]],
+                size = 50,
+            })
+        end }
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()
