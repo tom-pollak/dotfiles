@@ -2,7 +2,6 @@
 
 vim.wo.relativenumber = true
 vim.wo.number = true
-vim.wo.colorcolumn = '80'
 vim.g.mapleader = ' '
 
 local set = vim.opt
@@ -21,6 +20,9 @@ set.ignorecase = true
 set.completeopt = 'menu,menuone,noselect'
 set.hidden = true
 set.shell = "fish"
+set.autoindent = false
+set.smartindent = false
+set.cursorline = true
 
 vim.cmd("set guicursor=n-v-c-i:block")
 
@@ -29,6 +31,10 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 
 
 vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
+
+vim.cmd "highlight CursorLineNr cterm=underline ctermfg=Yellow guifg=Yellow"
+-- vim.wo.colorcolumn = '80'
+-- vim.highlight.create('ColorColumn', {ctermbg=238, guibg="grey"}, false)
 
 -- vim.cmd [[
 --   augroup numbertoggle

@@ -8,10 +8,12 @@
 	editor = nvim
 	pager = diff-so-fancy | less -FXRi
 	autocrlf = input
+	excludesfile = /Users/Thomas.Pollak/.gitignore_global
 [user]
 	email = tpollak@meraki.com
 	name = Thomas Pollak
 	github = tom-pollak
+	signingKey = ""
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -19,3 +21,12 @@
 	required = true
 [pull]
 	rebase = true
+[gitreview]
+	username = tpollak
+	remote = origin
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false

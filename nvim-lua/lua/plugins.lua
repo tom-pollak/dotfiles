@@ -6,6 +6,9 @@ vim.api.nvim_set_keymap("n", "<leader>h", "<CMD>lua require'telescope-config'.he
 vim.api.nvim_set_keymap("n", "<c-e>", "<CMD>lua require'telescope-config'.find_files()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<c-b>", "<CMD>lua require'telescope-config'.buffers()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<c-c>", "<CMD>lua require'telescope-config'.live_grep()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>g", "<CMD>lua require'telescope-config'.tags()<CR>", opts)
+
+vim.api.nvim_set_keymap("n", "<leader>f", "<CMD>lua require'telescope-config'.current_buffer_tags()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>cd", "<CMD>lua require'telescope-config'.dotfiles()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>cc", "<CMD>lua require'telescope-config'.vim_config()<CR>", opts)
 
@@ -35,6 +38,8 @@ vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>TmuxNavigateRight<CR>", opts)
 vim.api.nvim_set_keymap("n", "<A-k>", "<CMD>TmuxNavigateUp<CR>", opts)
 vim.api.nvim_set_keymap("n", "<A-j>", "<CMD>TmuxNavigateDown<CR>", opts)
 
+-- vim.opt.foldmethod="expr"
+-- vim.opt.foldexpr= require'treesitter'nvim_treesitter#foldexpr()
 -------------------------------------------------------------------------------
 -- LSP
 -------------------------------------------------------------------------------
@@ -48,11 +53,12 @@ local on_attach = function(client, bufnr)
 
     -- Mappings. (vim.lsp.*)
 
+    require'nvim-navic'.attach(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gj', vim.diagnostic.goto_prev, bufnr)
-    vim.keymap.set('n', 'gk', vim.diagnostic.goto_next, bufnr)
+    vim.keymap.set('n', 'gk', vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set('n', 'gj', vim.diagnostic.goto_next, bufopts)
 
-    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, bufnr)
+    vim.keymap.set('n', 'gh', vim.diagnostic.open_float, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     -- vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, bufopts)
 
@@ -61,6 +67,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<leader>t', vim.lsp.buf.signature_help, bufopts)
 
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
