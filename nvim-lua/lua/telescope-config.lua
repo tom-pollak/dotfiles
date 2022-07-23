@@ -1,4 +1,5 @@
 local actions = require("telescope.actions")
+local builtin = require("telescope.builtin")
 
 require("telescope").setup{
   defaults = {
@@ -23,31 +24,38 @@ M.project_files = function()
 end
 
 M.buffers = function()
-    require"telescope.builtin".buffers({
+    builtin.buffers({
     sort_lastused = true,
     ignore_current_buffer = true
 })
 end
 
 M.live_grep = function()
-    require"telescope.builtin".live_grep()
+    builtin.live_grep()
 end
 
 M.help_tags = function()
-    require"telescope.builtin".help_tags()
+    builtin.help_tags()
 end
 
 M.dotfiles = function()
-    require("telescope.builtin").find_files({
+    builtin.find_files({
         prompt_title = "< VimRC >",
         cwd = "$HOME/projects/dotfiles"
     })
 end
 
 M.find_files = function()
-  require"telescope.builtin".find_files()
+  builtin.find_files()
 end
 
+M.current_buffer_tags = function ()
+    builtin.current_buffer_tags()
+end
+
+M.tags = function ()
+    builtin.tags()
+end
 -- M.git_branches = function()
 --     require("telescope.builtin").git_branches({
 --         attach_mappings = function(_, map)

@@ -30,7 +30,6 @@ require('packer').startup(function()
         end
     }
 
-
     use {
         'hrsh7th/nvim-cmp',
         requires = {
@@ -60,10 +59,10 @@ require('packer').startup(function()
                     -- documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ['<C-n>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-p>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-;>'] = cmp.mapping.scroll_docs(4),
+                    ["<C-'>"] = cmp.mapping.scroll_docs(-4),
                     ['<C-space>'] = cmp.mapping.complete(),
-                    ['<C-e>'] = cmp.mapping.abort(),
+                    ['<C-g>'] = cmp.mapping.abort(),
                     ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -88,15 +87,21 @@ require('packer').startup(function()
                             fallback()
                         end
                     end, { "i", "s" }),
+                    ["<C-e>"] = cmp.mapping(function(fallback)
+                        cmp.mapping.abort()
+                        local copilot_keys = vim.fn["copilot#Accept"]()
+                        if copilot_keys ~= "" then
+                            vim.api.nvim_feedkeys(copilot_keys, "i", true)
+                        else
+                            fallback()
+                        end
+                    end, {"i", "s"})
                 }),
                 sources = cmp.config.sources({
-                    { name = 'nvim_lsp' },
-                    -- { name = 'vsnip' }, -- For vsnip users.
-                    { name = 'luasnip' }, -- For luasnip users.
-                    -- { name = 'ultisnips' }, -- For ultisnips users.
-                    -- { name = 'snippy' }, -- For snippy users.
-                }, {
-                    { name = 'buffer' },
+                    { name = 'nvim_lsp', max_item_count = 15 },
+                    { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
+                    { name = "nvim_lsp_signature_help" },
+                    -- { name = 'buffer' },
                 }),
                 -- filetype = ('gitcommit', {
                 --     sources = cmp.config.sources({
@@ -111,24 +116,11 @@ require('packer').startup(function()
         end
     }
 
-    -- use {
-    --     'tpope/vim-vinegar'
-    -- }
+    use {
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig"
 
-
-
-    -- use {
-    --     'folke/trouble.nvim',
-    --     requires = 'kyazdani42/nvim-web-devicons',
-    --     config = function()
-    --         require("trouble").setup {
-    --             -- mode = "loclist"
-    --             mode = "quickfix"
-    --         }
-    --     end
-    -- }
-
-    use 'NLKNguyen/papercolor-theme'
+    }
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -142,12 +134,16 @@ require('packer').startup(function()
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function()
+            -- vim.opt.foldmethod="expr"
+            -- vim.opt.foldexpr=nvim_treesitter#foldexpr()
             require 'nvim-treesitter.configs'.setup {
                 ensure_installed = "all",
-
+                sync_install = false,
+                indent = {
+                    enable = true,
+                },
                 highlight = {
                     enable = true,
-                    additional_vim_regex_highlighting = false,
                 },
                 rainbow = { -- dosen't work
                     enable = true,
@@ -205,10 +201,21 @@ require('packer').startup(function()
 
     use {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        requires = { { 'kyazdani42/nvim-web-devicons', opt = true }, { "nvim-navic" } },
         config = function()
+            local navic = require "nvim-navic"
+
             require('lualine').setup {
-                options = { theme = 'PaperColor' }
+                options = { theme = 'auto' },
+                sections = {
+                    lualine_c = {
+                        { 'filename', path = 1 },
+                    },
+                    lualine_y = { 'filetype' },
+                    lualine_x = {
+                        { navic.get_location, cond = navic.is_available },
+                    }
+                }
             }
         end
     }
@@ -218,33 +225,9 @@ require('packer').startup(function()
         requires = { 'rbgrouleff/bclose.vim' },
         config = function()
             vim.g.ranger_replace_netrw = 1
+            vim.g.ranger_map_keys = 0
         end
     }
-
-    -- use {
-    --     'kyazdani42/nvim-tree.lua',
-    --     requires = {
-    --         'kyazdani42/nvim-web-devicons', -- optional, for file icons
-    --     },
-    --     config = function()
-    --         require"nvim-tree".setup ({
-    --             hijack_netrw = true,
-    --             hijack_cursor = true,
-    --             open_on_setup = true,
-    --             hijack_unnamed_buffer_when_opening = true,
-    --             view = {
-    --                 mappings = {
-    --                     list = {
-    --                         { key = "<CR>", action = "edit_in_place" },
-    --                         { key = "l", action = "edit_in_place" },
-    --                         { key = "h", action = "dir_up" }
-    --                     }
-    --                 }
-    --             },
-    --         })
-    --     end
-    -- }
-
     use {
         'stevearc/qf_helper.nvim',
         config = function()
@@ -286,6 +269,14 @@ require('packer').startup(function()
         end
     }
 
+    use {
+        'github/copilot.vim',
+        config = function ()
+            vim.g.copilot_no_tab_map = true
+            vim.g.copilot_assume_mapped = true
+        end
+    }
+
     use 'christoomey/vim-tmux-navigator'
 
     use 'p00f/clangd_extensions.nvim'
@@ -299,11 +290,27 @@ require('packer').startup(function()
             })
         end }
 
+    -- use {
+    --     'ishan9299/modus-theme-vim',
+    --     requires = {
+    --         'tjdevries/colorbuddy.nvim'
+    --     }
+    -- }
+    -- Or with configuration
+    use({
+        'projekt0n/github-nvim-theme',
+        config = function()
+            require('github-theme').setup({
+                theme_style = "dark_default",
+                sidebars = { "qf", "packer", "terminal" }
+            })
+        end
+    })
+
     if PACKER_BOOTSTRAP then
         require('packer').sync()
     end
 end)
-
 require('colors')
 require('base')
 require('mappings')
