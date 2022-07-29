@@ -19,7 +19,6 @@ set.smartcase = true
 set.ignorecase = true
 set.completeopt = 'menu,menuone,noselect'
 set.hidden = true
-set.shell = "fish"
 set.autoindent = false
 set.smartindent = false
 set.cursorline = true
@@ -30,11 +29,21 @@ set.showmode = false
 set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*' }
 
 
-vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
+-- vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
+--
+-- set.listchars="tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 
-vim.cmd "highlight CursorLineNr cterm=underline ctermfg=Yellow guifg=Yellow"
--- vim.wo.colorcolumn = '80'
 -- vim.highlight.create('ColorColumn', {ctermbg=238, guibg="grey"}, false)
+
+vim.o.background = 'dark'
+vim.wo.colorcolumn = '80'
+
+vim.cmd [[
+    augroup highlight_yank
+        autocmd!
+        au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=200})
+    augroup END
+]]
 
 -- vim.cmd [[
 --   augroup numbertoggle

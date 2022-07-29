@@ -11,7 +11,7 @@ require('packer').startup(function()
 
     use 'wbthomason/packer.nvim'
 
-
+    -- LSP
     use {
         'williamboman/nvim-lsp-installer',
         config = function()
@@ -30,6 +30,34 @@ require('packer').startup(function()
         end
     }
 
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        config = function()
+            local saga = require("lspsaga")
+
+            saga.init_lsp_saga({
+                rename_action_quit = "<esc>",
+                code_action_keys = {
+                    quit = "<esc>",
+                    exec = "<cr>"
+                },
+                finder_action_keys = {
+                    quit = "<esc>",
+                    open = "<cr>",
+                    vsplit = "<c-v>",
+                    split = "<c-s>"
+                }
+            })
+        end,
+    })
+
+    -- Not that good
+    use {
+        'jubnzv/virtual-types.nvim',
+    }
+
+    -- Completion
     use {
         'hrsh7th/nvim-cmp',
         requires = {
@@ -95,7 +123,7 @@ require('packer').startup(function()
                         else
                             fallback()
                         end
-                    end, {"i", "s"})
+                    end, { "i", "s" })
                 }),
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp', max_item_count = 15 },
@@ -116,11 +144,6 @@ require('packer').startup(function()
         end
     }
 
-    use {
-        "SmiteshP/nvim-navic",
-        requires = "neovim/nvim-lspconfig"
-
-    }
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -133,6 +156,10 @@ require('packer').startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
+        requires = {
+            { 'p00f/nvim-ts-rainbow' },
+            { 'JoosepAlviste/nvim-ts-context-commentstring' }
+        },
         config = function()
             -- vim.opt.foldmethod="expr"
             -- vim.opt.foldexpr=nvim_treesitter#foldexpr()
@@ -151,31 +178,24 @@ require('packer').startup(function()
                     max_file_lines = nil,
                 },
                 context_commentstring = {
-                    enable = true
+                    enable = true,
+                    enable_autocmd = false
                 }
             }
         end
     }
 
-    use {
-        'TimUntersberger/neogit',
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'sindrets/diffview.nvim'
-        },
-        config = function()
-            require('neogit').setup {
-                intergrations = {
-                    diffview = true
-                }
-            }
-        end
-    }
-
+    -- Git
     use {
         'lewis6991/gitsigns.nvim',
         config = function()
             require('gitsigns').setup()
+        end
+    }
+
+    use {
+        'kdheepak/lazygit.nvim',
+        config = function()
         end
     }
 
@@ -184,7 +204,24 @@ require('packer').startup(function()
     use {
         'numToStr/Comment.nvim',
         config = function()
-            require('Comment').setup()
+            require('Comment').setup {
+                -- Treesitter comment context setup
+                pre_hook = function(ctx)
+                    local U = require 'Comment.utils'
+
+                    local location = nil
+                    if ctx.ctype == U.ctype.block then
+                        location = require('ts_context_commentstring.utils').get_cursor_location()
+                    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+                        location = require('ts_context_commentstring.utils').get_visual_start_location()
+                    end
+
+                    return require('ts_context_commentstring.internal').calculate_commentstring {
+                        key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
+                        location = location,
+                    }
+                end,
+            }
         end,
         requires = { { 'JoosepAlviste/nvim-ts-context-commentstring' } }
     }
@@ -201,12 +238,13 @@ require('packer').startup(function()
 
     use {
         'nvim-lualine/lualine.nvim',
-        requires = { { 'kyazdani42/nvim-web-devicons', opt = true }, { "nvim-navic" } },
+        requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
+            { "SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" } } },
         config = function()
             local navic = require "nvim-navic"
 
             require('lualine').setup {
-                options = { theme = 'auto' },
+                options = { theme = 'github_dark_default' },
                 sections = {
                     lualine_c = {
                         { 'filename', path = 1 },
@@ -228,6 +266,8 @@ require('packer').startup(function()
             vim.g.ranger_map_keys = 0
         end
     }
+
+    -- Perhaps use trouble?
     use {
         'stevearc/qf_helper.nvim',
         config = function()
@@ -271,7 +311,7 @@ require('packer').startup(function()
 
     use {
         'github/copilot.vim',
-        config = function ()
+        config = function()
             vim.g.copilot_no_tab_map = true
             vim.g.copilot_assume_mapped = true
         end
@@ -279,16 +319,17 @@ require('packer').startup(function()
 
     use 'christoomey/vim-tmux-navigator'
 
-    use 'p00f/clangd_extensions.nvim'
-
     use {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
                 open_mapping = [[<c-t>]],
                 size = 50,
+                shell = "fish"
             })
-        end }
+        end
+    }
+
 
     -- use {
     --     'ishan9299/modus-theme-vim',
@@ -297,12 +338,26 @@ require('packer').startup(function()
     --     }
     -- }
     -- Or with configuration
+
     use({
         'projekt0n/github-nvim-theme',
         config = function()
             require('github-theme').setup({
                 theme_style = "dark_default",
-                sidebars = { "qf", "packer", "terminal" }
+                sidebars = { "qf", "packer", "terminal" },
+                colors = {
+                    bg_search = "#75723d",
+                    -- bg_highlight = "orange",
+                    cursor_line_nr = "#FFEA00"
+                },
+                overrides = function(c)
+                    return {
+                        ColorColumn = { bg = "#2a2a2a" },
+                        -- Whitespace = { fg = util.lighten(c.syntax.comment, 0.4) },
+                        Whitespace = { fg = "red" },
+                    }
+                end
+                -- dark_float = true,
             })
         end
     })
@@ -311,7 +366,7 @@ require('packer').startup(function()
         require('packer').sync()
     end
 end)
-require('colors')
+-- require('colors')
 require('base')
 require('mappings')
 require('plugins')
