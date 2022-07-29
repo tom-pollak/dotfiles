@@ -56,6 +56,10 @@ end
 M.tags = function ()
     builtin.tags()
 end
+
+M.marks = function ()
+    builtin.marks()
+end
 -- M.git_branches = function()
 --     require("telescope.builtin").git_branches({
 --         attach_mappings = function(_, map)
