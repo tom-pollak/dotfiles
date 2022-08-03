@@ -1,10 +1,12 @@
 -- Base config, independant of plugins
 
-vim.wo.relativenumber = true
-vim.wo.number = true
-vim.g.mapleader = ' '
-
 local set = vim.opt
+local g = vim.g
+local wo = vim.wo
+
+wo.relativenumber = true
+wo.number = true
+g.mapleader = ' '
 
 set.shell = "bash"
 set.tabstop = 4
@@ -23,12 +25,15 @@ set.autoindent = true
 set.smartindent = true
 set.cursorline = true
 set.termguicolors = true
+set.lazyredraw = true
 
 vim.cmd("set guicursor=n-v-c-i:block")
 
 set.showmode = false
 set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*' }
 
+set.background = 'dark'
+wo.colorcolumn = '80'
 
 -- vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
 --
@@ -36,21 +41,12 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 
 -- vim.highlight.create('ColorColumn', {ctermbg=238, guibg="grey"}, false)
 
-vim.o.background = 'dark'
-vim.wo.colorcolumn = '80'
-
--- vim.cmd [[
---     augroup highlight_yank
---         autocmd!
---         au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=200})
---     augroup END
--- ]]
 
 local augroup = vim.api.nvim_create_augroup('user_cmds', {clear = true})
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = augroup,
     desc = 'Highlight on yank',
-    callback = function(event)
+    callback = function(_)
         vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
     end
 })
