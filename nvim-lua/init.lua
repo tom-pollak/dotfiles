@@ -46,7 +46,9 @@ require('packer').startup(function()
                     quit = "<esc>",
                     open = "<cr>",
                     vsplit = "<c-v>",
-                    split = "<c-s>"
+                    split = "<c-s>",
+                    scroll_down = "<c-.>",
+                    scroll_up = "<c-,>"
                 }
             })
         end,
@@ -55,6 +57,13 @@ require('packer').startup(function()
     -- Not that good
     use {
         'jubnzv/virtual-types.nvim',
+    }
+
+    use {
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            require "lsp_signature".setup {}
+        end
     }
 
     -- Completion
@@ -144,18 +153,35 @@ require('packer').startup(function()
         end
     }
 
+    use { 'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
             { 'nvim-lua/plenary.nvim' },
             { 'kyazdani42/nvim-web-devicons', opt = true }
-        }
+        },
+        config = function()
+            local actions = require("telescope.actions")
+            require("telescope").setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<esc>"] = actions.close,
+                            ["<C-j>"] = actions.move_selection_next,
+                            ["<C-k>"] = actions.move_selection_previous,
+                        },
+                        n = {
+                        }
+                    }
+                }
+            }
+        end
     }
 
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
         requires = {
             { 'p00f/nvim-ts-rainbow' },
             { 'JoosepAlviste/nvim-ts-context-commentstring' }
@@ -166,9 +192,9 @@ require('packer').startup(function()
             require 'nvim-treesitter.configs'.setup {
                 ensure_installed = "all",
                 sync_install = false,
-                indent = {
-                    enable = true,
-                },
+                -- indent = {
+                --     enable = true,
+                -- },
                 highlight = {
                     enable = true,
                 },
@@ -239,13 +265,35 @@ require('packer').startup(function()
     use {
         'nvim-lualine/lualine.nvim',
         requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
-            { "SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" } } },
+            {
+                "SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" },
+                config = function()
+                    vim.g.navic_silence = true
+                end
+            }, { 'projekt0n/github-nvim-theme' } },
         config = function()
             local navic = require "nvim-navic"
 
             require('lualine').setup {
                 options = { theme = 'github_dark_default' },
+                -- options = { theme = 'tokyonight' },
                 sections = {
+                    -- lualine_b = {
+                        -- 'diff',
+                        -- colored = true,
+                        -- diff_color = {
+                            -- added = 'DiffAdd',
+                            -- modified = 'DiffChange',
+                        --     removed = '#ff0000',
+                        -- },
+                        -- symbols = {
+                        --     added = '+',
+                        --     modified = '~',
+                        --     removed = '-',
+                        -- },
+                        -- source = nil
+                        --
+                    -- },
                     lualine_c = {
                         { 'filename', path = 1 },
                     },
@@ -262,8 +310,9 @@ require('packer').startup(function()
         'francoiscabrol/ranger.vim',
         requires = { 'rbgrouleff/bclose.vim' },
         config = function()
+            -- Ranger triggered with <leader>r
             vim.g.ranger_replace_netrw = 1
-            vim.g.ranger_map_keys = 0
+            vim.g.ranger_map_keys = 0 --
         end
     }
 
@@ -346,7 +395,7 @@ require('packer').startup(function()
                 theme_style = "dark_default",
                 sidebars = { "qf", "packer", "terminal" },
                 colors = {
-                    bg_search = "#75723d",
+                    bg_search = "#163356",
                     -- bg_highlight = "orange",
                     cursor_line_nr = "#FFEA00"
                 },
@@ -362,11 +411,37 @@ require('packer').startup(function()
         end
     })
 
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require 'colorizer'.setup()
+        end
+    }
+
+    -- use {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     config = function ()
+    --         require 'indent-blankline'.setup{
+    --         }
+    --     end
+    -- }
+
+    -- use {
+    --     'folke/tokyonight.nvim',
+    --     config = function()
+    --         vim.o.background = "dark"
+    --         vim.g.tokyonight_style = "night"
+    --         vim.cmd [[colorscheme tokyonight]]
+    --     end
+    -- }
+
     if PACKER_BOOTSTRAP then
         require('packer').sync()
     end
 end)
--- require('colors')
-require('base')
-require('mappings')
-require('plugins')
+
+require('core/base')
+require('core/mappings')
+require('plugins/plugins')
+require('plugins/telescope')
+require('plugins/lsp')

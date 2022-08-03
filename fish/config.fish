@@ -2,28 +2,25 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set -gx PATH $HOME/.cargo/bin:$HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin:/usr/local/bin $PATH
+set -gx PATH $HOME/.cargo/bin:$HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin:/usr/local/bin:$HOME/.cabal/bin:/Users/tom/.ghcup/bin $PATH
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx PAGER less
 set -gx EDITOR nvim
 set -gx GIT_EDITOR nvim
 set -gx VIMRC $HOME/.config/nvim/init.lua
-set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 
 set -gx LIBGL_ALWAYS_INDIRECT 1
 
 set -gx PROJECT_PATHS ~/projects
-set -gx RUBY_CONFIGURE_OPTS "--with-openssl-dir=$(brew --prefix openssl@1.1)"
 set -gx GRADLE_HOME /usr/share/gradle
 set -gx JAVA_HOME /Users/tom/Library/Java/JavaVirtualMachines/temurin-17.0.2/Contents/Home
 set -gx JDTLS_CONFIG /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 set -gx WORKSPACE $HOME/projects
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin /Users/tom/.ghcup/bin $PATH # ghcup-env
 set -gx DYLD_LIBRARY_PATH /usr/local/lib
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin /Users/tom/.ghcup/bin $PATH # ghcup-env
 set -gx NVM_DIR $HOME/.nvm
 set -gx fisher_path /Users/tom/.config/fish/
 
@@ -72,9 +69,9 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 set _CONDA_ROOT "/Users/tom/opt/anaconda3"
 
-set -gx LDFLAGS "-L/opt/homebrew/opt/ruby/lib"
-set -gx CPPFLAGS "-I/opt/homebrew/opt/ruby/include"
-set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/ruby/lib/pkgconfig"
+# set -gx LDFLAGS "-L/opt/homebrew/opt/ruby/lib"
+# set -gx CPPFLAGS "-I/opt/homebrew/opt/ruby/include"
+# set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -83,4 +80,4 @@ set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 # source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
-bash $HOME/.config/fish/startup.sh
+# bash $HOME/.config/fish/startup.sh
