@@ -1,51 +1,3 @@
-local telescope_config = require 'telescope-config'
-local opts = { noremap = true, silent = true }
-
--- Telescope
-vim.keymap.set('n', '<c-p>', telescope_config.project_files, opts)
-vim.keymap.set('n', '<leader>h', telescope_config.help_tags, opts)
-vim.keymap.set('n', '<c-e>', telescope_config.find_files, opts)
-vim.keymap.set('n', '<c-b>', telescope_config.buffers, opts)
-vim.keymap.set('n', '<c-c>', telescope_config.live_grep, opts)
-
-vim.keymap.set('n', '<leader>g', telescope_config.tags, opts)
-vim.keymap.set('n', '<leader>f', telescope_config.current_buffer_tags, opts)
-
-vim.keymap.set('n', '<leader>cd', telescope_config.dotfiles, opts)
-vim.keymap.set('n', '<leader>cc', telescope_config.vim_config, opts)
-
-vim.keymap.set('n', '<leader>m', telescope_config.marks, opts)
-
--- QF Helper
-vim.api.nvim_set_keymap("n", "<leader>;", "<CMD>QNext<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>,", "<CMD>QPrev<CR>", opts)
-
-vim.api.nvim_set_keymap("n", "<leader>k", "<CMD>QFToggle!<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>l", "<CMD>LLToggle!<CR>", opts)
-
--- Undotree
-vim.api.nvim_set_keymap("n", "<leader>u", "<CMD>UndotreeToggle<CR>", opts)
-
-
--- Ranger
-vim.api.nvim_set_keymap("n", "<c-n>", "<CMD>Ranger<CR>", opts)
-
--- LazyGit
-vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
-
-
--- TMUX Navigator
-vim.api.nvim_set_keymap("n", "<A-h>", "<CMD>TmuxNavigateLeft<CR>", opts)
-vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>TmuxNavigateRight<CR>", opts)
-vim.api.nvim_set_keymap("n", "<A-k>", "<CMD>TmuxNavigateUp<CR>", opts)
-vim.api.nvim_set_keymap("n", "<A-j>", "<CMD>TmuxNavigateDown<CR>", opts)
-
--- vim.opt.foldmethod="expr"
--- vim.opt.foldexpr= require'treesitter'nvim_treesitter#foldexpr()
--------------------------------------------------------------------------------
--- LSP
--------------------------------------------------------------------------------
-
 -- Keymaps
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -55,8 +7,12 @@ local on_attach = function(client, bufnr)
 
     -- Mappings. (vim.lsp.*)
 
+    client.offset_encoding = "utf-8"
     require 'nvim-navic'.attach(client, bufnr)
     require 'virtualtypes'.on_attach(client, bufnr)
+    require 'lsp_signature'.on_attach({
+        bind = true
+    })
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set("n", "gk", function()
         require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ANY })
@@ -104,7 +60,7 @@ local on_attach = function(client, bufnr)
     -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set("n", "<leader>rn", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
 
-    vim.keymap.set("n", "ga", require("lspsaga.codeaction").code_action, { silent = true,noremap = true })
+    vim.keymap.set("n", "ga", require("lspsaga.codeaction").code_action, { silent = true, noremap = true })
     -- vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
     -- vim.keymap.set("n", "ga", action.code_action, { silent = true, noremap = true })
     -- vim.keymap.set("v", "ga", function()
@@ -123,7 +79,10 @@ local on_attach = function(client, bufnr)
     end, bufopts)
 end
 
+--------------------------------------------------------------------------------
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local root_dir = require 'nvim_lsp'.util.root_pattern('.git')
 
 -- LSP servers
 local lspconfig = require('lspconfig')
@@ -137,10 +96,12 @@ lspconfig.sumneko_lua.setup {
             },
         },
     },
+    -- root_dir = root_dir,
     capabilities = capabilities
 }
 lspconfig.rust_analyzer.setup {
     on_attach = on_attach,
+    -- root_dir = root_dir,
     capabilities = capabilities
 }
 
@@ -149,19 +110,28 @@ lspconfig.pylsp.setup {
     settings = {
         pylsp = {
             plugins = {
-                pycodestyle = {
+                -- pycodestyle = {
+                --     enabled = true,
+                --     ignore = "warnings"
+                -- },
+                -- pyflakes = { enabled = true },
+                pylint = { enabled = true },
+                flake8 = {
                     enabled = true,
-                    ignore = "warnings"
-                }
-                -- pyflakes = {enabled = false},
-                -- pylint = {enabled = false},
+                    maxLineLength = 88
+                },
+            },
+            yapf = {
+                enabled = false,
             },
         },
     },
-    capabilities = capabilities
+    -- root_dir = root_dir,
+    capabilities = capabilities,
 }
 
 lspconfig.clangd.setup {
     on_attach = on_attach,
+    -- root_dir = root_dir,
     capabilities = capabilities
 }

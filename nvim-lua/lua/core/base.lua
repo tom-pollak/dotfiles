@@ -9,19 +9,20 @@ local set = vim.opt
 set.shell = "bash"
 set.tabstop = 4
 set.shiftwidth = 4
-set.softtabstop = 4
+-- set.softtabstop = 4
 set.expandtab = true
-set.encoding="utf-8"
+set.encoding = "utf-8"
 set.wrap = false
-set.scrolloff = 8
+set.scrolloff = 4
 set.undofile = true
 set.smartcase = true
 set.ignorecase = true
 set.completeopt = 'menu,menuone,noselect'
 set.hidden = true
-set.autoindent = false
-set.smartindent = false
+set.autoindent = true
+set.smartindent = true
 set.cursorline = true
+set.termguicolors = true
 
 vim.cmd("set guicursor=n-v-c-i:block")
 
@@ -38,12 +39,21 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 vim.o.background = 'dark'
 vim.wo.colorcolumn = '80'
 
-vim.cmd [[
-    augroup highlight_yank
-        autocmd!
-        au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=200})
-    augroup END
-]]
+-- vim.cmd [[
+--     augroup highlight_yank
+--         autocmd!
+--         au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=200})
+--     augroup END
+-- ]]
+
+local augroup = vim.api.nvim_create_augroup('user_cmds', {clear = true})
+vim.api.nvim_create_autocmd('TextYankPost', {
+    group = augroup,
+    desc = 'Highlight on yank',
+    callback = function(event)
+        vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
+    end
+})
 
 -- vim.cmd [[
 --   augroup numbertoggle
