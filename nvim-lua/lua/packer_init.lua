@@ -38,6 +38,7 @@ require('packer').startup(function()
 
             saga.init_lsp_saga({
                 rename_action_quit = "<esc>",
+                code_action_num_shortcut = false,
                 code_action_keys = {
                     quit = "<esc>",
                     exec = "<cr>"
@@ -54,16 +55,23 @@ require('packer').startup(function()
         end,
     })
 
-    -- Not that good
-    use {
-        'jubnzv/virtual-types.nvim',
-    }
+    -- -- Not that good
+    -- use {
+    --     'jubnzv/virtual-types.nvim',
+    -- }
 
     use {
         "ray-x/lsp_signature.nvim",
         config = function()
             require "lsp_signature".setup {}
         end
+    }
+
+    use {
+        'onsails/lspkind.nvim',
+        -- config = function ()
+        --     require "lspkind".setup {}
+        -- end
     }
 
     -- Completion
@@ -74,7 +82,8 @@ require('packer').startup(function()
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'saadparwaiz1/cmp_luasnip',
-            'L3MON4D3/LuaSnip'
+            'L3MON4D3/LuaSnip',
+            'onsails/lspkind.nvim'
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
@@ -85,7 +94,22 @@ require('packer').startup(function()
                 return col ~= 0 and
                     vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
             end
+            local lspkind = require('lspkind')
             cmp.setup({
+                formatting = {
+                    formatting = {
+                        format = lspkind.cmp_format({
+                            mode = 'symbol', -- show only symbol annotations
+                            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+                            -- The function below will be called before any actual modifications from lspkind
+                            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+                            -- before = function(entry, vim_item)
+                            --     return vim_item
+                            -- end
+                        })
+                    }
+                },
                 snippet = {
                     expand = function(args)
                         require 'luasnip'.lsp_expand(args.body)
@@ -104,9 +128,9 @@ require('packer').startup(function()
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-k>"] = cmp.mapping.select_prev_item(),
                     ["<Tab>"] = cmp.mapping(function(fallback)
-                        -- if cmp.visible() then
-                        --     cmp.select_next_item()
-                        if luasnip.expand_or_jumpable() then
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.expand_or_jumpable() then
                             luasnip.expand_or_jump()
                         elseif has_words_before() then
                             cmp.complete()
@@ -138,6 +162,7 @@ require('packer').startup(function()
                     { name = 'nvim_lsp', max_item_count = 15 },
                     { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
                     { name = "nvim_lsp_signature_help" },
+                    { name = 'path' }
                     -- { name = 'buffer' },
                 }),
                 -- filetype = ('gitcommit', {
@@ -153,19 +178,39 @@ require('packer').startup(function()
         end
     }
 
-    use { 'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    use {
+        'kyazdani42/nvim-web-devicons',
+        config = function()
+            require 'nvim-web-devicons'.setup {
+                default = true;
+            }
+        end
+    }
 
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
             { 'nvim-lua/plenary.nvim' },
-            { 'kyazdani42/nvim-web-devicons', opt = true }
+            { 'kyazdani42/nvim-web-devicons' },
+            { 'nvim-telescope/telescope-fzf-native.nvim' },
+            {
+                'nvim-telescope/telescope-frecency.nvim',
+                requires = { "tami5/sqlite.lua" }
+            },
+            { "nvim-telescope/telescope-file-browser.nvim" },
+            { "nvim-telescope/telescope-project.nvim" },
+            { 'nvim-telescope/telescope-ui-select.nvim' }
         },
         config = function()
             local actions = require("telescope.actions")
             require("telescope").setup {
                 defaults = {
+                    shorten_path = true,
+                    layout_strategy = "vertical",
+                    layout_config = {
+                        height = 0.9,
+                        width = 0.8
+                    },
                     mappings = {
                         i = {
                             ["<esc>"] = actions.close,
@@ -175,8 +220,45 @@ require('packer').startup(function()
                         n = {
                         }
                     }
+                },
+                pickers = {
+                    buffers = { theme = "dropdown" },
+                },
+                extensions = {
+                    fzy_native = {
+                        override_generic_sorter = false,
+                        override_file_sorter = true,
+                    },
+                    file_browser = {
+                        theme = "ivy",
+                        -- disables netrw and use telescope-file-browser in its place
+                        hijack_netrw = true,
+                        mappings = {
+                            ["i"] = {
+                                ["<C-d>"] = require "telescope".extensions.file_browser.actions.goto_parent_dir
+                                -- your custom insert mode mappings
+                            },
+                            ["n"] = {
+                                -- your custom normal mode mappings
+                            },
+                        },
+                    },
+                    project = {
+                        theme = "dropdown",
+                        base_dirs = {
+                            "~/projects",
+                            "~/co/spyglass/applications"
+                        }
+                    },
+                    ["ui-select"] = {
+                        require "telescope.themes".get_cursor()
+                    }
                 }
             }
+            -- require('telescope').load_extension('fzy_native')
+            require("telescope").load_extension "file_browser"
+            require("telescope").load_extension "project"
+            require("telescope").load_extension "ui-select"
         end
     }
 
@@ -192,9 +274,9 @@ require('packer').startup(function()
             require 'nvim-treesitter.configs'.setup {
                 ensure_installed = "all",
                 sync_install = false,
-                -- indent = {
-                --     enable = true,
-                -- },
+                indent = {
+                    enable = true,
+                },
                 highlight = {
                     enable = true,
                 },
@@ -220,11 +302,11 @@ require('packer').startup(function()
     }
 
     -- Use kitty overlay
-    -- use {
-    --     'kdheepak/lazygit.nvim',
-    --     config = function()
-    --     end
-    -- }
+    use {
+        'kdheepak/lazygit.nvim',
+        config = function()
+        end
+    }
 
     use 'dstein64/vim-startuptime'
 
@@ -263,15 +345,50 @@ require('packer').startup(function()
 
     use 'tpope/vim-surround'
 
+    use { "SmiteshP/nvim-navic",
+        requires = { "neovim/nvim-lspconfig" },
+        config = function()
+            vim.g.navic_silence = true
+            require 'nvim-navic'.setup {
+                -- highlight = true
+                icons = {
+                    File = ' ',
+                    Module = ' ',
+                    Namespace = ' ',
+                    Package = ' ',
+                    Class = ' ',
+                    Method = ' ',
+                    Property = ' ',
+                    Field = ' ',
+                    Constructor = ' ',
+                    Enum = ' ',
+                    Interface = ' ',
+                    Function = ' ',
+                    Variable = ' ',
+                    Constant = ' ',
+                    String = ' ',
+                    Number = ' ',
+                    Boolean = ' ',
+                    Array = ' ',
+                    Object = ' ',
+                    Key = ' ',
+                    Null = ' ',
+                    EnumMember = ' ',
+                    Struct = ' ',
+                    Event = ' ',
+                    Operator = ' ',
+                    TypeParameter = ' '
+                }
+            }
+        end
+    }
+
     use {
         'nvim-lualine/lualine.nvim',
         requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
-            {
-                "SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" },
-                config = function()
-                    vim.g.navic_silence = true
-                end
-            }, { 'projekt0n/github-nvim-theme' } },
+            { 'projekt0n/github-nvim-theme' },
+            { 'SmiteshP/nvim-navic' }
+        },
         config = function()
             local navic = require "nvim-navic"
 
@@ -279,6 +396,23 @@ require('packer').startup(function()
                 options = { theme = 'github_dark_default' },
                 -- options = { theme = 'tokyonight' },
                 sections = {
+                    lualine_b = {
+                        {
+                            'diff',
+                            colored = true, -- Displays a colored diff status if set to true
+                            -- diff_color = {
+                            --     -- Same color values as the general color option can be used here.
+                            --     added    = 'DiffAdd', -- Changes the diff's added color
+                            --     modified = 'DiffChange', -- Changes the diff's modified color
+                            --     removed  = 'DiffDelete', -- Changes the diff's removed color you
+                            -- },
+                            symbols = { added = '+', modified = '~', removed = '-' }, -- Changes the symbols used by the diff.
+                            source = nil, -- A function that works as a data source for diff.
+                            -- It must return a table as such:
+                            --   { added = add_count, modified = modified_count, removed = removed_count }
+                            -- or nil on failure. count <= 0 won't be displayed.
+                        }
+                    },
                     lualine_c = {
                         { 'filename', path = 1 },
                     },
@@ -291,14 +425,14 @@ require('packer').startup(function()
         end
     }
 
-    use {
-        'francoiscabrol/ranger.vim',
-        requires = { 'rbgrouleff/bclose.vim' },
-        config = function()
-            vim.g.ranger_replace_netrw = 1
-            vim.g.ranger_map_keys = 0
-        end
-    }
+    -- use {
+    --     'francoiscabrol/ranger.vim',
+    --     requires = { 'rbgrouleff/bclose.vim' },
+    --     config = function()
+    --         vim.g.ranger_replace_netrw = 1
+    --         vim.g.ranger_map_keys = 0
+    --     end
+    -- }
 
     -- Perhaps use trouble?
     use {
@@ -357,12 +491,53 @@ require('packer').startup(function()
         config = function()
             require("toggleterm").setup({
                 open_mapping = [[<c-t>]],
-                size = 50,
+                size = 40,
                 shell = "fish"
             })
         end
     }
 
+
+
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require 'colorizer'.setup()
+        end
+    }
+
+    use {
+        'lewis6991/impatient.nvim',
+        config = function()
+            require 'impatient'.enable_profile()
+        end
+    }
+
+    -- use {
+    --     'simrat39/rust-tools.nvim',
+    --     config = function()
+    --         require 'rust-tools'.setup()
+    --     end
+    -- }
+
+
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            vim.cmd [[ highlight IndentBlanklineChar guifg=#292929 gui=nocombine ]]
+            vim.cmd [[ highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine ]]
+            require 'indent_blankline'.setup {
+                show_trailing_blankline_indent = true,
+                space_char_blankline = " ",
+                show_current_context = true,
+                -- show_current_context_start = true,
+            }
+        end
+    }
+
+    ---------------------------------------------------------------------------
+    -- COLOR SCHEME
+    ---------------------------------------------------------------------------
 
     -- use {
     --     'ishan9299/modus-theme-vim',
@@ -371,6 +546,14 @@ require('packer').startup(function()
     --     }
     -- }
     -- Or with configuration
+
+    -- use {
+    --     'shaunsingh/oxocarbon.nvim',
+    --     run = './install.sh',
+    --     config = function()
+    --         vim.cmd [[ colorscheme oxocarbon ]]
+    --     end
+    -- }
 
     use({
         'projekt0n/github-nvim-theme',
@@ -388,6 +571,8 @@ require('packer').startup(function()
                         ColorColumn = { bg = "#2a2a2a" },
                         -- Whitespace = { fg = util.lighten(c.syntax.comment, 0.4) },
                         Whitespace = { fg = "red" },
+                        -- IndentBlanklineContextChar = { fg = "grey" },
+                        -- IndentBlanklineContextStart = { sp = "grey" },
                     }
                 end
                 -- dark_float = true,
@@ -395,37 +580,37 @@ require('packer').startup(function()
         end
     })
 
-    use {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            require 'colorizer'.setup()
-        end
-    }
-
-    use {
-        'lewis6991/impatient.nvim',
-        config = function ()
-            require'impatient'.enable_profile()
-        end
-    }
-
-
     -- use {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     config = function ()
-    --         require 'indent-blankline'.setup{
-    --         }
-    --     end
-    -- }
-
-    -- use {
-    --     'folke/tokyonight.nvim',
+    --     "catppuccin/nvim",
+    --     as = "catppuccin",
     --     config = function()
-    --         vim.o.background = "dark"
-    --         vim.g.tokyonight_style = "night"
-    --         vim.cmd [[colorscheme tokyonight]]
+    --         vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+    --         require 'catppuccin'.setup({
+    --             integrations = {
+    --                 navic = true,
+    --                 indent_blankline = {
+    --                     enabled = true,
+    --                     colored_indent_levels = true,
+    --                 },
+    --                 ts_rainbow = true,
+    --                 lsp_saga = true,
+    --                 nvimtree = {
+    --                     enabled = false
+    --                 },
+    --                 dashboard = false,
+    --                 bufferline = false,
+    --                 notify = false,
+    --                 telekasten = false,
+    --                 symbols_outline = false,
+    --                 vimwiki = false,
+    --                 beacon = false,
+    --             }
+    --         })
+    --         vim.cmd [[ colorscheme catppuccin ]]
     --     end
     -- }
+
+
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()

@@ -28,6 +28,8 @@ vim.keymap.set('n', 'S', '"_D', { noremap = true })
 vim.keymap.set('n', 'c', '"_c', { noremap = true })
 vim.keymap.set('n', 'C', '"_C', { noremap = true })
 
+vim.keymap.set('n', 'x', '"_x', { noremap = true })
+
 vim.keymap.set('v', 'd', '"_d', { noremap = true })
 vim.keymap.set('v', 'c', '"_c', { noremap = true })
 vim.keymap.set('v', 's', 'd', { noremap = true })
