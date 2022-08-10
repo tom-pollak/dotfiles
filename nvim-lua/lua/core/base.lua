@@ -4,6 +4,7 @@ local set = vim.opt
 local g = vim.g
 local wo = vim.wo
 
+set.clipboard='unnamedplus'
 wo.relativenumber = true
 wo.number = true
 g.mapleader = ' '
@@ -34,6 +35,7 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 
 set.background = 'dark'
 wo.colorcolumn = '80'
+
 
 -- vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
 --

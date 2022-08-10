@@ -1,3 +1,4 @@
+
 local opts = { noremap = true, silent = true }
 
 -- QF Helper
@@ -15,10 +16,10 @@ vim.api.nvim_set_keymap("n", "<leader>u", "<CMD>UndotreeToggle<CR>", opts)
 
 
 -- Ranger
-vim.api.nvim_set_keymap("n", "<leader>r", "<CMD>Ranger<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>r", "<CMD>Ranger<CR>", opts)
 
 -- LazyGit
--- vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
+vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 
 -- TMUX Navigator
