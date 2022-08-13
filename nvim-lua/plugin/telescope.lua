@@ -1,6 +1,11 @@
 local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 
+local root_dir = function()
+    return vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+        or vim.fn.getcwd()
+end
+
 local git_files = function()
     builtin.git_files({
         sort_lastused = true,
@@ -29,6 +34,12 @@ local vim_config = function()
     })
 end
 
+local live_grep = function()
+    builtin.live_grep({
+        cwd = root_dir()
+    })
+end
+
 local dotfiles = function()
     builtin.find_files({
         prompt_title = "< Dotfiles >",
@@ -42,7 +53,7 @@ vim.keymap.set('n', '<c-p>', project_files, opts)
 vim.keymap.set('n', '<leader>h', builtin.help_tags, opts)
 vim.keymap.set('n', '<c-e>', builtin.find_files, opts)
 vim.keymap.set('n', '<c-b>', buffers, opts)
-vim.keymap.set('n', '<c-c>', builtin.live_grep, opts)
+vim.keymap.set('n', '<c-c>', live_grep, opts)
 
 vim.keymap.set('n', '<leader>a', builtin.resume, opts)
 
