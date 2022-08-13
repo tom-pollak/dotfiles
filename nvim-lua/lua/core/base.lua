@@ -8,11 +8,12 @@ set.clipboard='unnamedplus'
 wo.relativenumber = true
 wo.number = true
 g.mapleader = ' '
+g.updatetime = 100
 
 set.shell = "bash"
 set.tabstop = 4
 set.shiftwidth = 4
--- set.softtabstop = 4
+set.softtabstop = 4
 set.expandtab = true
 set.encoding = "utf-8"
 set.wrap = false

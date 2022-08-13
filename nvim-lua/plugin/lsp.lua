@@ -36,15 +36,22 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set("n", "gk", function()
         vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
+        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
     end, { silent = true, noremap = true })
+
     vim.keymap.set("n", "gj", function()
         vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN } })
+        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
     end, { silent = true, noremap = true })
+
     vim.keymap.set("n", "gK", function()
         vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ANY })
+        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
     end, { silent = true, noremap = true })
+
     vim.keymap.set("n", "gJ", function()
         vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ANY })
+        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
     end, { silent = true, noremap = true })
 
     vim.keymap.set("n", "gh", vim.diagnostic.open_float, { silent = true, noremap = true })

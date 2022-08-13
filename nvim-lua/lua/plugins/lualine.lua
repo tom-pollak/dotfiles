@@ -1,23 +1,4 @@
--- Eviline config for lualine
--- Author: shadmansaleh
--- Credit: glepnir
 local lualine = require('lualine')
-
--- Color table for highlights
--- stylua: ignore
-local colors = {
-    bg       = '#202328',
-    fg       = '#bbc2cf',
-    yellow   = '#ECBE7B',
-    cyan     = '#008080',
-    darkblue = '#081633',
-    green    = '#98be65',
-    orange   = '#FF8800',
-    violet   = '#a9a1e1',
-    magenta  = '#c678dd',
-    blue     = '#51afef',
-    red      = '#ec5f67',
-}
 
 local github_dark_colors = {
     bg        = '#0d1117',
@@ -91,6 +72,7 @@ local config = {
             normal = { c = { fg = github_dark_colors.fg, bg = github_dark_colors.bg } },
             inactive = { c = { fg = github_dark_colors.fg, bg = github_dark_colors.bg } },
         },
+        globalstatus = true
     },
     sections = {
         -- these are to remove the defaults
