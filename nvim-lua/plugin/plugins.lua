@@ -1,9 +1,6 @@
 
 local opts = { noremap = true, silent = true }
 
-vim.g.cursorhold_updatetime = 50
-vim.g.updatetime = 50
-
 vim.keymap.set('c', '!!', function () return "AsyncRun " end, {expr = true})
 
 -- QF Helper
@@ -45,4 +42,9 @@ vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
 )
 vim.api.nvim_set_keymap("n", "<leader>xk", "<cmd>Trouble quickfix<cr>",
   {silent = true, noremap = true}
+)
+
+-- Gitmessenger
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>GitMessenger<cr>",
+  {noremap = true}
 )

@@ -35,6 +35,7 @@ require('packer').startup(function()
         'kosayoda/nvim-lightbulb',
         requires = 'antoinemadec/FixCursorHold.nvim',
         config = function()
+            vim.g.cursorhold_updatetime = 100
             -- require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
             require('nvim-lightbulb').setup({
                 autocmd = {
@@ -131,6 +132,14 @@ require('packer').startup(function()
         'lewis6991/gitsigns.nvim',
         config = function()
             require('gitsigns').setup()
+        end
+    }
+
+    use {
+        'rhysd/git-messenger.vim',
+        config = function ()
+            vim.g.git_messenger_always_into_popup = 1
+            vim.g.git_messenger_no_default_mappings = 1
         end
     }
 
