@@ -11,49 +11,45 @@ require('packer').startup(function()
 
     use 'wbthomason/packer.nvim'
 
-    -- LSP
-    use {
-        'williamboman/nvim-lsp-installer',
-        config = function()
-            require('nvim-lsp-installer').setup({
-                automatic_installation = true
-            })
-        end
-    }
-
     use {
         'neovim/nvim-lspconfig',
+        requires = { 'williamboman/nvim-lsp-installer' },
         config = function()
-            require("nvim-lsp-installer").setup {
-                automatic_installation = true
-            }
+            require('nvim-lsp-installer').setup({
+                automatic_installation = true,
+                ensure_installed = {
+                    "rust_analyzer",
+                    "sumneko_lua",
+                    "clangd",
+                    "pyright"
+                }
+            })
         end
     }
 
-    use({
-        "glepnir/lspsaga.nvim",
-        branch = "main",
-        config = function()
-            local saga = require("lspsaga")
+    use {
+        'averms/black-nvim',
+    }
 
-            saga.init_lsp_saga({
-                rename_action_quit = "<esc>",
-                code_action_num_shortcut = false,
-                code_action_keys = {
-                    quit = "<esc>",
-                    exec = "<cr>"
+    use {
+        'kosayoda/nvim-lightbulb',
+        requires = 'antoinemadec/FixCursorHold.nvim',
+        config = function()
+            -- require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+            require('nvim-lightbulb').setup({
+                autocmd = {
+                    enabled = true,
                 },
-                finder_action_keys = {
-                    quit = "<esc>",
-                    open = "<cr>",
-                    vsplit = "<c-v>",
-                    split = "<c-s>",
-                    scroll_down = "<c-.>",
-                    scroll_up = "<c-,>"
+                status_text = {
+                    enabled = true,
+                    -- text = "💡",
+                    -- -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
+                    -- hl_mode = "combine",
+
                 }
             })
-        end,
-    })
+        end
+    }
 
     -- -- Not that good
     -- use {
@@ -87,94 +83,7 @@ require('packer').startup(function()
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
-            local cmp = require 'cmp'
-            local luasnip = require 'luasnip'
-            local has_words_before = function()
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and
-                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
-            local lspkind = require('lspkind')
-            cmp.setup({
-                formatting = {
-                    formatting = {
-                        format = lspkind.cmp_format({
-                            mode = 'symbol', -- show only symbol annotations
-                            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-
-                            -- The function below will be called before any actual modifications from lspkind
-                            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-                            -- before = function(entry, vim_item)
-                            --     return vim_item
-                            -- end
-                        })
-                    }
-                },
-                snippet = {
-                    expand = function(args)
-                        require 'luasnip'.lsp_expand(args.body)
-                    end
-                },
-                window = {
-                    -- completion = cmp.config.window.bordered(),
-                    -- documentation = cmp.config.window.bordered(),
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ['<C-;>'] = cmp.mapping.scroll_docs(4),
-                    ["<C-'>"] = cmp.mapping.scroll_docs(-4),
-                    ['<C-space>'] = cmp.mapping.complete(),
-                    ['<C-g>'] = cmp.mapping.abort(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                    ["<C-j>"] = cmp.mapping.select_next_item(),
-                    ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<C-e>"] = cmp.mapping(function(fallback)
-                        cmp.mapping.abort()
-                        local copilot_keys = vim.fn["copilot#Accept"]()
-                        if copilot_keys ~= "" then
-                            vim.api.nvim_feedkeys(copilot_keys, "i", true)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" })
-                }),
-                sources = cmp.config.sources({
-                    { name = 'nvim_lsp', max_item_count = 15 },
-                    { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
-                    { name = "nvim_lsp_signature_help" },
-                    { name = 'path' }
-                    -- { name = 'buffer' },
-                }),
-                -- filetype = ('gitcommit', {
-                --     sources = cmp.config.sources({
-                --         { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-                --     }, {
-                --         { name = 'buffer' },
-                --     })
-                -- })
-            })
-
-            -- Set configuration for specific filetype.
+            require 'plugins.cmp-setup'
         end
     }
 
@@ -202,63 +111,7 @@ require('packer').startup(function()
             { 'nvim-telescope/telescope-ui-select.nvim' }
         },
         config = function()
-            local actions = require("telescope.actions")
-            require("telescope").setup {
-                defaults = {
-                    shorten_path = true,
-                    layout_strategy = "vertical",
-                    layout_config = {
-                        height = 0.9,
-                        width = 0.8
-                    },
-                    mappings = {
-                        i = {
-                            ["<esc>"] = actions.close,
-                            ["<C-j>"] = actions.move_selection_next,
-                            ["<C-k>"] = actions.move_selection_previous,
-                        },
-                        n = {
-                        }
-                    }
-                },
-                pickers = {
-                    buffers = { theme = "dropdown" },
-                },
-                extensions = {
-                    fzy_native = {
-                        override_generic_sorter = false,
-                        override_file_sorter = true,
-                    },
-                    file_browser = {
-                        theme = "ivy",
-                        -- disables netrw and use telescope-file-browser in its place
-                        hijack_netrw = true,
-                        mappings = {
-                            ["i"] = {
-                                ["<C-d>"] = require "telescope".extensions.file_browser.actions.goto_parent_dir
-                                -- your custom insert mode mappings
-                            },
-                            ["n"] = {
-                                -- your custom normal mode mappings
-                            },
-                        },
-                    },
-                    project = {
-                        theme = "dropdown",
-                        base_dirs = {
-                            "~/projects",
-                            "~/co/spyglass/applications"
-                        }
-                    },
-                    ["ui-select"] = {
-                        require "telescope.themes".get_cursor()
-                    }
-                }
-            }
-            -- require('telescope').load_extension('fzy_native')
-            require("telescope").load_extension "file_browser"
-            require("telescope").load_extension "project"
-            require("telescope").load_extension "ui-select"
+            require 'plugins.telescope-setup'
         end
     }
 
@@ -269,27 +122,7 @@ require('packer').startup(function()
             { 'JoosepAlviste/nvim-ts-context-commentstring' }
         },
         config = function()
-            -- vim.opt.foldmethod="expr"
-            -- vim.opt.foldexpr=nvim_treesitter#foldexpr()
-            require 'nvim-treesitter.configs'.setup {
-                ensure_installed = "all",
-                sync_install = false,
-                indent = {
-                    enable = true,
-                },
-                highlight = {
-                    enable = true,
-                },
-                rainbow = { -- dosen't work
-                    enable = true,
-                    extended_mode = true,
-                    max_file_lines = nil,
-                },
-                context_commentstring = {
-                    enable = true,
-                    enable_autocmd = false
-                }
-            }
+            require 'plugins.treesitter-setup'
         end
     }
 
@@ -339,11 +172,19 @@ require('packer').startup(function()
         config = function()
             vim.g.pear_tree_repeatable_expand = 0
             vim.g.pear_tree_map_special_keys = 0
-
         end
     }
 
+    use {
+        'zegervdv/nrpattern.nvim',
+        config = function()
+            require "nrpattern".setup()
+        end,
+    }
+
     use 'tpope/vim-surround'
+
+    use 'tpope/vim-repeat'
 
     use { "SmiteshP/nvim-navic",
         requires = { "neovim/nvim-lspconfig" },
@@ -390,75 +231,38 @@ require('packer').startup(function()
             { 'SmiteshP/nvim-navic' }
         },
         config = function()
-            local navic = require "nvim-navic"
-
-            require('lualine').setup {
-                options = { theme = 'github_dark_default' },
-                -- options = { theme = 'tokyonight' },
-                sections = {
-                    lualine_b = {
-                        {
-                            'diff',
-                            colored = true, -- Displays a colored diff status if set to true
-                            -- diff_color = {
-                            --     -- Same color values as the general color option can be used here.
-                            --     added    = 'DiffAdd', -- Changes the diff's added color
-                            --     modified = 'DiffChange', -- Changes the diff's modified color
-                            --     removed  = 'DiffDelete', -- Changes the diff's removed color you
-                            -- },
-                            symbols = { added = '+', modified = '~', removed = '-' }, -- Changes the symbols used by the diff.
-                            source = nil, -- A function that works as a data source for diff.
-                            -- It must return a table as such:
-                            --   { added = add_count, modified = modified_count, removed = removed_count }
-                            -- or nil on failure. count <= 0 won't be displayed.
-                        }
-                    },
-                    lualine_c = {
-                        { 'filename', path = 1 },
-                    },
-                    lualine_y = { 'filetype' },
-                    lualine_x = {
-                        { navic.get_location, cond = navic.is_available },
-                    }
-                }
-            }
+            require 'plugins.lualine'
         end
+        -- config = function()
+        --     local navic = require "nvim-navic"
+        --
+        --     require('lualine').setup {
+        --         options = { theme = 'github_dark_default' },
+        --         sections = {
+        --             lualine_c = {
+        --                 { 'filename', path = 1 },
+        --             },
+        --             lualine_y = { 'filetype' },
+        --             lualine_x = {
+        --                 { navic.get_location, cond = navic.is_available },
+        --             }
+        --         }
+        --     }
+        -- end
     }
 
-    -- use {
-    --     'francoiscabrol/ranger.vim',
-    --     requires = { 'rbgrouleff/bclose.vim' },
-    --     config = function()
-    --         vim.g.ranger_replace_netrw = 1
-    --         vim.g.ranger_map_keys = 0
-    --     end
-    -- }
-
-    -- Perhaps use trouble?
     use {
-        'stevearc/qf_helper.nvim',
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require 'qf_helper'.setup({
-                prefer_loclist = true, -- Used for QNext/QPrev (see Commands below)
-                sort_lsp_diagnostics = true, -- Sort LSP diagnostic results
-                quickfix = {
-                    autoclose = true, -- Autoclose qf if it's the only open window
-                    default_bindings = true, -- Set up recommended bindings in qf window
-                    default_options = true, -- Set recommended buffer and window options
-                    max_height = 20, -- Max qf height when using open() or toggle()
-                    min_height = 6, -- Min qf height when using open() or toggle()
-                    track_location = 'cursor', -- Keep qf updated with your current location
-                    -- Use `true` to update position as well
-                },
-                loclist = { -- The same options, but for the loclist
-                    autoclose = true,
-                    default_bindings = true,
-                    default_options = true,
-                    max_height = 20,
-                    min_height = 6,
-                    track_location = 'cursor',
-                },
-            })
+            local trouble = require("trouble")
+            trouble.setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+            trouble.next({ skip_groups = true, jump = true })
+            trouble.previous({ skip_groups = true, jump = true })
         end
     }
 
@@ -513,6 +317,8 @@ require('packer').startup(function()
         end
     }
 
+    use 'skywind3000/asyncrun.vim'
+
     -- use {
     --     'simrat39/rust-tools.nvim',
     --     config = function()
@@ -534,6 +340,12 @@ require('packer').startup(function()
             }
         end
     }
+
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
 
     ---------------------------------------------------------------------------
     -- COLOR SCHEME
@@ -560,7 +372,7 @@ require('packer').startup(function()
         config = function()
             require('github-theme').setup({
                 theme_style = "dark_default",
-                sidebars = { "qf", "packer", "terminal" },
+                sidebars = { "qf", "packer", "terminal", "trouble" },
                 colors = {
                     bg_search = "#163356",
                     -- bg_highlight = "orange",
@@ -574,8 +386,9 @@ require('packer').startup(function()
                         -- IndentBlanklineContextChar = { fg = "grey" },
                         -- IndentBlanklineContextStart = { sp = "grey" },
                     }
-                end
-                -- dark_float = true,
+                end,
+                dark_float = true,
+                dark_sidebar = true,
             })
         end
     })

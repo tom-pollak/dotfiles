@@ -1,12 +1,17 @@
 
 local opts = { noremap = true, silent = true }
 
--- QF Helper
-vim.api.nvim_set_keymap("n", "<leader>;", "<CMD>QNext<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>,", "<CMD>QPrev<CR>", opts)
+vim.g.cursorhold_updatetime = 50
+vim.g.updatetime = 50
 
-vim.api.nvim_set_keymap("n", "<leader>k", "<CMD>QFToggle!<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>l", "<CMD>LLToggle!<CR>", opts)
+vim.keymap.set('c', '!!', function () return "AsyncRun " end, {expr = true})
+
+-- QF Helper
+-- vim.api.nvim_set_keymap("n", "<leader>;", "<CMD>QNext<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>,", "<CMD>QPrev<CR>", opts)
+
+-- vim.api.nvim_set_keymap("n", "<leader>k", "<CMD>QFToggle!<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>l", "<CMD>LLToggle!<CR>", opts)
 
 vim.api.nvim_set_keymap("n", "<leader>n", "<CMD>Gitsigns next_hunk<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>p", "<CMD>Gitsigns prev_hunk<CR>", opts)
@@ -30,3 +35,14 @@ vim.api.nvim_set_keymap("n", "<A-j>", "<CMD>TmuxNavigateDown<CR>", opts)
 
 -- vim.opt.foldmethod="expr"
 -- vim.opt.foldexpr= require'treesitter'nvim_treesitter#foldexpr()
+
+-- Trouble
+vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xk", "<cmd>Trouble quickfix<cr>",
+  {silent = true, noremap = true}
+)
