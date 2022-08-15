@@ -6,6 +6,9 @@ require 'nvim-treesitter.configs'.setup {
     indent = {
         enable = true,
     },
+    --[[ matchup {
+        enable = true
+    }, ]]
     highlight = {
         enable = true,
     },
@@ -18,4 +21,8 @@ require 'nvim-treesitter.configs'.setup {
         enable = true,
         enable_autocmd = false
     }
+}
+
+require 'treesitter-context'.setup {
+    enable = false
 }
