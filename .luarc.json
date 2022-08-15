@@ -3,6 +3,7 @@
     "Lua.diagnostics.globals": [
         "vim",
         "use",
-        "telescope_config"
+        "telescope_config",
+        "root_dir"
     ]
 }

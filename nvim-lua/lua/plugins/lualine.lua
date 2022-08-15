@@ -3,6 +3,7 @@ local lualine = require('lualine')
 local github_dark_colors = {
     bg        = '#0d1117',
     bg2       = '#090c10',
+    bg3       = '#202328',
     fg_dark   = '#4d5566',
     fg_gutter = '#c5c5c5',
     fg_light  = '#b3b1ad',
@@ -69,8 +70,8 @@ local config = {
             -- We are going to use lualine_c an lualine_x as left and
             -- right section. Both are highlighted by c theme .  So we
             -- are just setting default looks o statusline
-            normal = { c = { fg = github_dark_colors.fg, bg = github_dark_colors.bg } },
-            inactive = { c = { fg = github_dark_colors.fg, bg = github_dark_colors.bg } },
+            normal = { c = { fg = github_dark_colors.fg_dark, bg = github_dark_colors.bg3 } },
+            inactive = { c = { fg = github_dark_colors.fg_dark, bg = github_dark_colors.bg3 } },
         },
         globalstatus = true
     },
@@ -178,26 +179,6 @@ ins_left {
 }
 
 ins_right {
-    function()
-        local navic = require "nvim-navic"
-        if navic.is_available() then
-            return navic.get_location()
-        end
-        return ""
-    end,
-    cond = conditions.hide_in_width,
-}
-
-
-
-ins_right {
-    'branch',
-    icon = '',
-    color = { fg = github_dark_colors.violet, gui = 'bold' },
-    conditions = conditions.check_git_workspace
-}
-
-ins_right {
     'diff',
     -- Is it me or the symbol for modified us really weird
     symbols = { added = ' ', modified = '柳', removed = ' ' },
@@ -209,6 +190,13 @@ ins_right {
     conditions = conditions.check_git_workspace
     -- cond = conditions.hide_in_width,
 }
+ins_right {
+    'branch',
+    icon = '',
+    color = { fg = github_dark_colors.violet, gui = 'bold' },
+    conditions = conditions.check_git_workspace
+}
+
 ins_right {
     function()
         return '▊'

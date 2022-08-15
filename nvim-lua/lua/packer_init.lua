@@ -36,7 +36,6 @@ require('packer').startup(function()
         requires = 'antoinemadec/FixCursorHold.nvim',
         config = function()
             vim.g.cursorhold_updatetime = 100
-            -- require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
             require('nvim-lightbulb').setup({
                 autocmd = {
                     enabled = true,
@@ -49,6 +48,23 @@ require('packer').startup(function()
 
                 }
             })
+        end
+    }
+
+    use {
+        'chentoast/marks.nvim',
+        config = function()
+            require 'marks'.setup {
+                default_mappings = false,
+                bookmark_0 = {
+                    sign = "⚑",
+                },
+                mappings = {
+                    set_bookmark0 = "m",
+                    delete_bookmark = "dm",
+                    delete_bookmark0 = "cm"
+                }
+            }
         end
     }
 
@@ -109,7 +125,8 @@ require('packer').startup(function()
             },
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
-            { 'nvim-telescope/telescope-ui-select.nvim' }
+            { 'nvim-telescope/telescope-ui-select.nvim' },
+            --[[ { "tom-anders/telescope-vim-bookmarks.nvim" } ]]
         },
         config = function()
             require 'plugins.telescope-setup'
@@ -117,13 +134,29 @@ require('packer').startup(function()
     }
 
     use {
+        'andymass/vim-matchup',
+        config = function()
+            vim.g.loaded_matchit = 1
+        end
+    }
+
+    use {
         'nvim-treesitter/nvim-treesitter',
         requires = {
             { 'p00f/nvim-ts-rainbow' },
-            { 'JoosepAlviste/nvim-ts-context-commentstring' }
+            { 'JoosepAlviste/nvim-ts-context-commentstring' },
+            { 'nvim-treesitter/nvim-treesitter-context' },
+            { 'andymass/vim-matchup' }
         },
         config = function()
             require 'plugins.treesitter-setup'
+        end
+    }
+
+    use {
+        'lewis6991/spaceless.nvim',
+        config = function()
+            require 'spaceless'.setup()
         end
     }
 
@@ -131,13 +164,33 @@ require('packer').startup(function()
     use {
         'lewis6991/gitsigns.nvim',
         config = function()
-            require('gitsigns').setup()
+            local function gitsigns_visual_op(op)
+                return function()
+                    return require('gitsigns')[op]({ vim.fn.line("."), vim.fn.line("v") })
+                end
+            end
+
+            require('gitsigns').setup {
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+                    local opts = { buffer = bufnr }
+                    vim.keymap.set('n', '<leader>o', gs.diffthis, opts)
+                    vim.keymap.set("n", "<leader>n", gs.next_hunk, opts)
+                    vim.keymap.set("n", "<leader>p", gs.prev_hunk, opts)
+                    vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
+                    vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>lr', gs.reset_hunk, opts)
+                    vim.keymap.set('n', '<leader>lu', gs.undo_stage_hunk, opts)
+                    vim.keymap.set({'n', 'v'}, '<leader>ll', gitsigns_visual_op"stage_hunk", opts)
+                end
+            }
         end
     }
 
     use {
         'rhysd/git-messenger.vim',
-        config = function ()
+        config = function()
             vim.g.git_messenger_always_into_popup = 1
             vim.g.git_messenger_no_default_mappings = 1
         end
@@ -151,6 +204,15 @@ require('packer').startup(function()
     }
 
     use 'dstein64/vim-startuptime'
+
+    use {
+        'ggandor/leap.nvim',
+        requires = { 'ggandor/leap-ast.nvim' },
+        config = function()
+            require 'leap'.setup {
+            }
+        end
+    }
 
     use {
         'numToStr/Comment.nvim',
@@ -195,69 +257,13 @@ require('packer').startup(function()
 
     use 'tpope/vim-repeat'
 
-    use { "SmiteshP/nvim-navic",
-        requires = { "neovim/nvim-lspconfig" },
-        config = function()
-            vim.g.navic_silence = true
-            require 'nvim-navic'.setup {
-                -- highlight = true
-                icons = {
-                    File = ' ',
-                    Module = ' ',
-                    Namespace = ' ',
-                    Package = ' ',
-                    Class = ' ',
-                    Method = ' ',
-                    Property = ' ',
-                    Field = ' ',
-                    Constructor = ' ',
-                    Enum = ' ',
-                    Interface = ' ',
-                    Function = ' ',
-                    Variable = ' ',
-                    Constant = ' ',
-                    String = ' ',
-                    Number = ' ',
-                    Boolean = ' ',
-                    Array = ' ',
-                    Object = ' ',
-                    Key = ' ',
-                    Null = ' ',
-                    EnumMember = ' ',
-                    Struct = ' ',
-                    Event = ' ',
-                    Operator = ' ',
-                    TypeParameter = ' '
-                }
-            }
-        end
-    }
-
     use {
         'nvim-lualine/lualine.nvim',
         requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
-            { 'projekt0n/github-nvim-theme' },
-            { 'SmiteshP/nvim-navic' }
         },
         config = function()
             require 'plugins.lualine'
         end
-        -- config = function()
-        --     local navic = require "nvim-navic"
-        --
-        --     require('lualine').setup {
-        --         options = { theme = 'github_dark_default' },
-        --         sections = {
-        --             lualine_c = {
-        --                 { 'filename', path = 1 },
-        --             },
-        --             lualine_y = { 'filetype' },
-        --             lualine_x = {
-        --                 { navic.get_location, cond = navic.is_available },
-        --             }
-        --         }
-        --     }
-        -- end
     }
 
     use {
@@ -355,6 +361,18 @@ require('packer').startup(function()
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
+    use {
+        'renerocksai/telekasten.nvim',
+        --[[ cmd = "Telekasten", ]]
+        config = function()
+            local home = vim.fn.expand("~/notes/notes/drafts")
+            require 'telekasten'.setup {
+                home = home,
+                take_over_my_home = true
+            }
+        end
+    }
+
 
     ---------------------------------------------------------------------------
     -- COLOR SCHEME
@@ -383,7 +401,8 @@ require('packer').startup(function()
                 theme_style = "dark_default",
                 sidebars = { "qf", "packer", "terminal", "trouble" },
                 colors = {
-                    bg_search = "#163356",
+                    bg_search      = "#163356",
+                    bg             = '#0d1117',
                     -- bg_highlight = "orange",
                     cursor_line_nr = "#FFEA00"
                 },
@@ -392,8 +411,7 @@ require('packer').startup(function()
                         ColorColumn = { bg = "#2a2a2a" },
                         -- Whitespace = { fg = util.lighten(c.syntax.comment, 0.4) },
                         Whitespace = { fg = "red" },
-                        -- IndentBlanklineContextChar = { fg = "grey" },
-                        -- IndentBlanklineContextStart = { sp = "grey" },
+                        TreesitterContext = { bg = '#212e3f' }
                     }
                 end,
                 dark_float = true,

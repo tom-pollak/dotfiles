@@ -10,7 +10,6 @@ require('nvim-lsp-installer')
 local on_attach = function(client, bufnr)
     -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb({ ignore = {"null-ls"} })]]
     -- client.offset_encoding = "utf-8"
-    require 'nvim-navic'.attach(client, bufnr)
     -- require 'virtualtypes'.on_attach(client, bufnr)
     require 'lsp_signature'.on_attach({
         bind = true
@@ -31,8 +30,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, bufopts)
     vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, bufopts)
     vim.keymap.set('n', 'gt', telescope_builtin.lsp_type_definitions, bufopts)
-
-    vim.keymap.set("n", "<leader>t", vim.lsp.diagnostic.set_loclist, bufopts)
 
     vim.keymap.set("n", "gk", function()
         vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })

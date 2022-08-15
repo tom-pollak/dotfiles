@@ -47,6 +47,13 @@ local dotfiles = function()
     })
 end
 
+local bookmarks_all = function ()
+    vim.cmd [[BookmarksQFListAll]]
+    builtin.quickfix ({
+        prompt_title = "< Bookmarks >"
+    })
+    vim.cmd [[cclose]]
+end
 
 -- Telescope
 vim.keymap.set('n', '<c-p>', project_files, opts)
@@ -60,7 +67,12 @@ vim.keymap.set('n', '<leader>a', builtin.resume, opts)
 vim.keymap.set('n', '<leader>cd', dotfiles, opts)
 vim.keymap.set('n', '<leader>cc', vim_config, opts)
 
-vim.keymap.set('n', '<leader>m', builtin.marks, opts)
+vim.keymap.set('n', "'", bookmarks_all, opts)
+
+--[[ vim.keymap.set('n', '\'', require('telescope').extensions.vim_bookmarks.all(), opts) ]]
+
 
 vim.keymap.set('n', '<leader>rr', "<CMD>Telescope file_browser<CR>", opts)
 vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project, opts)
+
+
