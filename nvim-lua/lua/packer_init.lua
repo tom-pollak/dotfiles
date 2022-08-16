@@ -11,6 +11,10 @@ require('packer').startup(function()
 
     use 'wbthomason/packer.nvim'
 
+    ---------------------------------------------------------------------------
+    -- LSP
+    ---------------------------------------------------------------------------
+
     use {
         'neovim/nvim-lspconfig',
         requires = { 'williamboman/nvim-lsp-installer' },
@@ -28,7 +32,10 @@ require('packer').startup(function()
     }
 
     use {
-        'averms/black-nvim',
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            require "lsp_signature".setup {}
+        end
     }
 
     use {
@@ -51,43 +58,10 @@ require('packer').startup(function()
         end
     }
 
-    use {
-        'chentoast/marks.nvim',
-        config = function()
-            require 'marks'.setup {
-                default_mappings = false,
-                bookmark_0 = {
-                    sign = "⚑",
-                },
-                mappings = {
-                    set_bookmark0 = "m",
-                    delete_bookmark = "dm",
-                    delete_bookmark0 = "cm"
-                }
-            }
-        end
-    }
+    ---------------------------------------------------------------------------
+    -- CODE
+    ---------------------------------------------------------------------------
 
-    -- -- Not that good
-    -- use {
-    --     'jubnzv/virtual-types.nvim',
-    -- }
-
-    use {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-            require "lsp_signature".setup {}
-        end
-    }
-
-    use {
-        'onsails/lspkind.nvim',
-        -- config = function ()
-        --     require "lspkind".setup {}
-        -- end
-    }
-
-    -- Completion
     use {
         'hrsh7th/nvim-cmp',
         requires = {
@@ -105,42 +79,6 @@ require('packer').startup(function()
     }
 
     use {
-        'kyazdani42/nvim-web-devicons',
-        config = function()
-            require 'nvim-web-devicons'.setup {
-                default = true;
-            }
-        end
-    }
-
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {
-            { 'nvim-lua/plenary.nvim' },
-            { 'kyazdani42/nvim-web-devicons' },
-            { 'nvim-telescope/telescope-fzf-native.nvim' },
-            {
-                'nvim-telescope/telescope-frecency.nvim',
-                requires = { "tami5/sqlite.lua" }
-            },
-            { "nvim-telescope/telescope-file-browser.nvim" },
-            { "nvim-telescope/telescope-project.nvim" },
-            { 'nvim-telescope/telescope-ui-select.nvim' },
-            --[[ { "tom-anders/telescope-vim-bookmarks.nvim" } ]]
-        },
-        config = function()
-            require 'plugins.telescope-setup'
-        end
-    }
-
-    use {
-        'andymass/vim-matchup',
-        config = function()
-            vim.g.loaded_matchit = 1
-        end
-    }
-
-    use {
         'nvim-treesitter/nvim-treesitter',
         requires = {
             { 'p00f/nvim-ts-rainbow' },
@@ -150,67 +88,6 @@ require('packer').startup(function()
         },
         config = function()
             require 'plugins.treesitter-setup'
-        end
-    }
-
-    use {
-        'lewis6991/spaceless.nvim',
-        config = function()
-            require 'spaceless'.setup()
-        end
-    }
-
-    -- Git
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            local function gitsigns_visual_op(op)
-                return function()
-                    return require('gitsigns')[op]({ vim.fn.line("."), vim.fn.line("v") })
-                end
-            end
-
-            require('gitsigns').setup {
-                on_attach = function(bufnr)
-                    local gs = package.loaded.gitsigns
-                    local opts = { buffer = bufnr }
-                    vim.keymap.set('n', '<leader>o', gs.diffthis, opts)
-                    vim.keymap.set("n", "<leader>n", gs.next_hunk, opts)
-                    vim.keymap.set("n", "<leader>p", gs.prev_hunk, opts)
-                    vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
-                    vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>lr', gs.reset_hunk, opts)
-                    vim.keymap.set('n', '<leader>lu', gs.undo_stage_hunk, opts)
-                    vim.keymap.set({'n', 'v'}, '<leader>ll', gitsigns_visual_op"stage_hunk", opts)
-                end
-            }
-        end
-    }
-
-    use {
-        'rhysd/git-messenger.vim',
-        config = function()
-            vim.g.git_messenger_always_into_popup = 1
-            vim.g.git_messenger_no_default_mappings = 1
-        end
-    }
-
-    -- Use kitty overlay
-    use {
-        'kdheepak/lazygit.nvim',
-        config = function()
-        end
-    }
-
-    use 'dstein64/vim-startuptime'
-
-    use {
-        'ggandor/leap.nvim',
-        requires = { 'ggandor/leap-ast.nvim' },
-        config = function()
-            require 'leap'.setup {
-            }
         end
     }
 
@@ -247,22 +124,96 @@ require('packer').startup(function()
     }
 
     use {
-        'zegervdv/nrpattern.nvim',
+        'github/copilot.vim',
         config = function()
-            require "nrpattern".setup()
-        end,
+            vim.g.copilot_no_tab_map = true
+            vim.g.copilot_assume_mapped = true
+        end
     }
 
-    use 'tpope/vim-surround'
+    use {
+        'averms/black-nvim',
+    }
 
-    use 'tpope/vim-repeat'
+    -- use {
+    --     'simrat39/rust-tools.nvim',
+    --     config = function()
+    --         require 'rust-tools'.setup()
+    --     end
+    -- }
+
+    -- -- Not that good
+    -- use {
+    --     'jubnzv/virtual-types.nvim',
+    -- }
+
+    ---------------------------------------------------------------------------
+    -- GIT
+    ---------------------------------------------------------------------------
 
     use {
-        'nvim-lualine/lualine.nvim',
-        requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            local function gitsigns_visual_op(op)
+                return function()
+                    return require('gitsigns')[op]({ vim.fn.line("."), vim.fn.line("v") })
+                end
+            end
+
+            require('gitsigns').setup {
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+                    local opts = { buffer = bufnr }
+                    vim.keymap.set('n', '<leader>o', gs.diffthis, opts)
+                    vim.keymap.set("n", "<leader>n", gs.next_hunk, opts)
+                    vim.keymap.set("n", "<leader>p", gs.prev_hunk, opts)
+                    vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
+                    vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>lr', gs.reset_hunk, opts)
+                    vim.keymap.set('n', '<leader>lu', gs.undo_stage_hunk, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>ll', gitsigns_visual_op "stage_hunk", opts)
+                end
+            }
+        end
+    }
+
+    use {
+        'rhysd/git-messenger.vim',
+        config = function()
+            vim.g.git_messenger_always_into_popup = 1
+            vim.g.git_messenger_no_default_mappings = 1
+        end
+    }
+
+    use {
+        'kdheepak/lazygit.nvim',
+        config = function()
+        end
+    }
+
+
+    ---------------------------------------------------------------------------
+    -- NAVIGATION
+    ---------------------------------------------------------------------------
+
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { 'kyazdani42/nvim-web-devicons' },
+            { 'nvim-telescope/telescope-fzf-native.nvim' },
+            {
+                'nvim-telescope/telescope-frecency.nvim',
+                requires = { "tami5/sqlite.lua" }
+            },
+            { "nvim-telescope/telescope-file-browser.nvim" },
+            { "nvim-telescope/telescope-project.nvim" },
+            { 'nvim-telescope/telescope-ui-select.nvim' },
+            --[[ { "tom-anders/telescope-vim-bookmarks.nvim" } ]]
         },
         config = function()
-            require 'plugins.lualine'
+            require 'plugins.telescope-setup'
         end
     }
 
@@ -281,6 +232,56 @@ require('packer').startup(function()
         end
     }
 
+    use {
+        'chentoast/marks.nvim',
+        config = function()
+            require 'marks'.setup {
+                default_mappings = false,
+                bookmark_0 = {
+                    sign = "⚑",
+                },
+                mappings = {
+                    set_bookmark0 = "m",
+                    delete_bookmark = "dm",
+                    delete_bookmark0 = "cm"
+                }
+            }
+        end
+    }
+
+    use {
+        'ggandor/leap.nvim',
+        requires = { 'ggandor/leap-ast.nvim' },
+        config = function()
+            require 'leap'.setup {
+            }
+        end
+    }
+
+    ---------------------------------------------------------------------------
+    -- UTILS
+    ---------------------------------------------------------------------------
+
+    use 'dstein64/vim-startuptime'
+
+    use {
+        'zegervdv/nrpattern.nvim',
+        config = function()
+            require "nrpattern".setup()
+        end,
+    }
+
+    use {
+        'lewis6991/spaceless.nvim',
+        config = function()
+            require 'spaceless'.setup()
+        end
+    }
+
+    use 'tpope/vim-surround'
+
+    use 'tpope/vim-repeat'
+
     use { 'mbbill/undotree',
         config = function()
             if vim.fn.has("persistent_undo") then
@@ -292,14 +293,6 @@ require('packer').startup(function()
                 vim.opt.undodir = target_path
             end
 
-        end
-    }
-
-    use {
-        'github/copilot.vim',
-        config = function()
-            vim.g.copilot_no_tab_map = true
-            vim.g.copilot_assume_mapped = true
         end
     }
 
@@ -316,12 +309,10 @@ require('packer').startup(function()
         end
     }
 
-
-
     use {
-        'norcalli/nvim-colorizer.lua',
+        'andymass/vim-matchup',
         config = function()
-            require 'colorizer'.setup()
+            vim.g.loaded_matchit = 1
         end
     }
 
@@ -334,27 +325,9 @@ require('packer').startup(function()
 
     use 'skywind3000/asyncrun.vim'
 
-    -- use {
-    --     'simrat39/rust-tools.nvim',
-    --     config = function()
-    --         require 'rust-tools'.setup()
-    --     end
-    -- }
-
-
-    use {
-        "lukas-reineke/indent-blankline.nvim",
-        config = function()
-            vim.cmd [[ highlight IndentBlanklineChar guifg=#292929 gui=nocombine ]]
-            vim.cmd [[ highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine ]]
-            require 'indent_blankline'.setup {
-                show_trailing_blankline_indent = true,
-                space_char_blankline = " ",
-                show_current_context = true,
-                -- show_current_context_start = true,
-            }
-        end
-    }
+    ---------------------------------------------------------------------------
+    -- NOTES
+    ---------------------------------------------------------------------------
 
     use({
         "iamcco/markdown-preview.nvim",
@@ -373,26 +346,9 @@ require('packer').startup(function()
         end
     }
 
-
     ---------------------------------------------------------------------------
-    -- COLOR SCHEME
+    -- PRETTY
     ---------------------------------------------------------------------------
-
-    -- use {
-    --     'ishan9299/modus-theme-vim',
-    --     requires = {
-    --         'tjdevries/colorbuddy.nvim'
-    --     }
-    -- }
-    -- Or with configuration
-
-    -- use {
-    --     'shaunsingh/oxocarbon.nvim',
-    --     run = './install.sh',
-    --     config = function()
-    --         vim.cmd [[ colorscheme oxocarbon ]]
-    --     end
-    -- }
 
     use({
         'projekt0n/github-nvim-theme',
@@ -408,8 +364,8 @@ require('packer').startup(function()
                 },
                 overrides = function(c)
                     return {
-                        ColorColumn = { bg = "#2a2a2a" },
-                        -- Whitespace = { fg = util.lighten(c.syntax.comment, 0.4) },
+                        ColorColumn = { bg = "#292929" },
+                        -- Whitespace = { fg = util.lighten(c.syntax.comment, #292929 0.4) },
                         Whitespace = { fg = "red" },
                         TreesitterContext = { bg = '#212e3f' }
                     }
@@ -420,36 +376,62 @@ require('packer').startup(function()
         end
     })
 
-    -- use {
-    --     "catppuccin/nvim",
-    --     as = "catppuccin",
-    --     config = function()
-    --         vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-    --         require 'catppuccin'.setup({
-    --             integrations = {
-    --                 navic = true,
-    --                 indent_blankline = {
-    --                     enabled = true,
-    --                     colored_indent_levels = true,
-    --                 },
-    --                 ts_rainbow = true,
-    --                 lsp_saga = true,
-    --                 nvimtree = {
-    --                     enabled = false
-    --                 },
-    --                 dashboard = false,
-    --                 bufferline = false,
-    --                 notify = false,
-    --                 telekasten = false,
-    --                 symbols_outline = false,
-    --                 vimwiki = false,
-    --                 beacon = false,
-    --             }
-    --         })
-    --         vim.cmd [[ colorscheme catppuccin ]]
-    --     end
-    -- }
 
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
+        },
+        config = function()
+            require 'plugins.lualine'
+        end
+    }
+
+    use {
+        'kyazdani42/nvim-web-devicons',
+        config = function()
+            require 'nvim-web-devicons'.setup {
+                default = true;
+            }
+        end
+    }
+
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            vim.cmd [[ highlight IndentBlanklineChar guifg=#292929 gui=nocombine ]]
+            vim.cmd [[ highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine ]]
+            require 'indent_blankline'.setup {
+                show_trailing_blankline_indent = false,
+                space_char_blankline = " ",
+                show_current_context = true,
+                -- show_current_context_start = true,
+            }
+        end
+    }
+
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require 'colorizer'.setup()
+        end
+    }
+
+    ---------------------------------------------------------------------------
+    -- DAP
+    ---------------------------------------------------------------------------
+
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'mfussenegger/nvim-dap-python',
+        },
+        config = function()
+            local dap_python = require('dap-python')
+            dap_python.setup('/usr/local/bin/python3')
+            dap_python.test_runner = 'pytest'
+
+        end
+    }
 
 
     if PACKER_BOOTSTRAP then

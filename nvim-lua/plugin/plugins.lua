@@ -50,11 +50,11 @@ vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>GitMessenger<cr>",
 --[[ vim.cmd "unmap \[%"
 vim.cmd "unmap \]%" ]]
 local leap = require 'leap'
-vim.keymap.set({ 'n', 'x', 'o' }, ']', function()
+vim.keymap.set({ 'n', 'x', 'o' }, '<Tab>', function()
     leap.leap {}
 end, { noremap = true })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '[', function()
+vim.keymap.set({ 'n', 'x', 'o' }, '<S-Tab>', function()
     leap.leap { backward = true }
 end, { noremap = true })
 
