@@ -34,9 +34,9 @@ local vim_config = function()
     })
 end
 
-local live_grep = function()
+local live_grep = function(cwd)
     builtin.live_grep({
-        cwd = root_dir()
+        cwd = cwd
     })
 end
 
@@ -60,7 +60,7 @@ vim.keymap.set('n', '<c-p>', project_files, opts)
 vim.keymap.set('n', '<leader>h', builtin.help_tags, opts)
 vim.keymap.set('n', '<c-e>', builtin.find_files, opts)
 vim.keymap.set('n', '<c-b>', buffers, opts)
-vim.keymap.set('n', '<c-c>', live_grep, opts)
+vim.keymap.set('n', '<c-c>', function() live_grep(root_dir()) end, opts)
 
 vim.keymap.set('n', '<leader>a', builtin.resume, opts)
 
@@ -75,4 +75,6 @@ vim.keymap.set('n', "'", bookmarks_all, opts)
 vim.keymap.set('n', '<leader>rr', "<CMD>Telescope file_browser<CR>", opts)
 vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project, opts)
 
-
+-- Telekasten
+vim.keymap.set('n', '<leader>mc', function() live_grep('~/notes/') end, opts)
+vim.keymap.set('n', '<leader>md', function() live_grep('~/zettelkasten/') end, opts)

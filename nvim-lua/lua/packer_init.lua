@@ -70,7 +70,8 @@ require('packer').startup(function()
             'hrsh7th/cmp-path',
             'saadparwaiz1/cmp_luasnip',
             'L3MON4D3/LuaSnip',
-            'onsails/lspkind.nvim'
+            'onsails/lspkind.nvim',
+            'rcarriga/cmp-dap'
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
@@ -80,6 +81,7 @@ require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
+        tag = 'b245c44ce1ae741955cf782f8f88cb36d0de94bc',
         requires = {
             { 'p00f/nvim-ts-rainbow' },
             { 'JoosepAlviste/nvim-ts-context-commentstring' },
@@ -131,9 +133,9 @@ require('packer').startup(function()
         end
     }
 
-    use {
-        'averms/black-nvim',
-    }
+    use 'averms/black-nvim'
+
+    use 'stsewd/isort.nvim'
 
     -- use {
     --     'simrat39/rust-tools.nvim',
@@ -192,7 +194,6 @@ require('packer').startup(function()
         end
     }
 
-
     ---------------------------------------------------------------------------
     -- NAVIGATION
     ---------------------------------------------------------------------------
@@ -210,6 +211,7 @@ require('packer').startup(function()
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
+            { 'nvim-telescope/telescope-dap.nvim' }
             --[[ { "tom-anders/telescope-vim-bookmarks.nvim" } ]]
         },
         config = function()
@@ -424,8 +426,15 @@ require('packer').startup(function()
         'mfussenegger/nvim-dap',
         requires = {
             'mfussenegger/nvim-dap-python',
+            'theHamsta/nvim-dap-virtual-text',
+            "rcarriga/nvim-dap-ui"
         },
         config = function()
+            vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
+            vim.fn.sign_define('DapBreakpointRejected', { text = '🟦', texthl = '', linehl = '', numhl = '' })
+            vim.fn.sign_define('DapStopped', { text = '⭐️', texthl = '', linehl = '', numhl = '' })
+            require('plugins.dap-ui-setup')
+            require("nvim-dap-virtual-text").setup()
             local dap_python = require('dap-python')
             dap_python.setup('/usr/local/bin/python3')
             dap_python.test_runner = 'pytest'

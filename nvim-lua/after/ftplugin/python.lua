@@ -1,2 +1,6 @@
+local format = function()
+    vim.cmd [[ call Black() ]]
+    vim.cmd [[ Isort ]]
+end
 
-vim.keymap.set('n', '<leader>q','<cmd>call Black()<CR>', {silent = true})
+vim.keymap.set('n', '<leader>q', format, { silent = true })
