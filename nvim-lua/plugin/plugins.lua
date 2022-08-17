@@ -19,10 +19,10 @@ vim.api.nvim_set_keymap("n", "<leader>u", "<CMD>UndotreeToggle<CR>", opts)
 
 
 -- TMUX Navigator
-vim.api.nvim_set_keymap("n", "<A-h>", "<CMD>TmuxNavigateLeft<CR>", opts)
-vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>TmuxNavigateRight<CR>", opts)
-vim.api.nvim_set_keymap("n", "<A-k>", "<CMD>TmuxNavigateUp<CR>", opts)
-vim.api.nvim_set_keymap("n", "<A-j>", "<CMD>TmuxNavigateDown<CR>", opts)
+vim.api.nvim_set_keymap("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", opts)
+vim.api.nvim_set_keymap("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", opts)
+vim.api.nvim_set_keymap("n", "<C-k>", "<CMD>TmuxNavigateUp<CR>", opts)
+vim.api.nvim_set_keymap("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", opts)
 
 -- vim.opt.foldmethod="expr"
 -- vim.opt.foldexpr= require'treesitter'nvim_treesitter#foldexpr()

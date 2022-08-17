@@ -68,7 +68,7 @@ cmp.setup({
         { name = 'nvim_lsp', max_item_count = 15 },
         { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
         { name = "nvim_lsp_signature_help" },
-        { name = 'path' }
+        { name = 'path' },
         -- { name = 'buffer' },
     }),
     -- filetype = ('gitcommit', {
@@ -78,6 +78,12 @@ cmp.setup({
     --         { name = 'buffer' },
     --     })
     -- })
+})
+
+require("cmp").setup.filetype({ "dap-repl", "dapui_watches" }, {
+    sources = {
+        { name = "dap" },
+    },
 })
 
 -- Set configuration for specific filetype.
