@@ -4,7 +4,6 @@ local dapui = require 'dapui'
 
 vim.keymap.set('n', '<leader>dh', dap.toggle_breakpoint)
 vim.keymap.set('n', '<leader>dH', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
-vim.keymap.set('n', '<leader>dR', dap.clear_breakpoints)
 vim.keymap.set('n', '<leader>de', function() dap.set_exception_breakpoints({ "all" }) end)
 
 
@@ -13,11 +12,16 @@ vim.keymap.set('n', '<M-k>', dap.step_out)
 vim.keymap.set('n', '<M-l>', dap.step_into)
 vim.keymap.set('n', '<M-h>', dap.step_back)
 
-vim.keymap.set('n', '<leader>c', dap.continue)
+vim.keymap.set('n', '<leader>dg', dap.continue)
 vim.keymap.set('n', '<leader>dp', dap.pause)
 
 vim.keymap.set('n', '<leader>dn', dap.run_to_cursor)
-vim.keymap.set('n', '<leader>dt', dap.terminate)
+vim.keymap.set('n', '<leader>dt', function()
+    print "Session closed"
+    dap.terminate()
+    dap.repl.close()
+    dapui.close({"scopes"})
+end)
 
 
 
@@ -41,8 +45,12 @@ vim.keymap.set('n', '<leader>ds', telescope_dap.frames)
 vim.keymap.set('n', '<leader>db', telescope_dap.list_breakpoints)
 
 vim.keymap.set('n', '<leader>dr', function()
-    dap.repl.toggle({ width = 70 }, "bo vsplit")
+    dap.repl.toggle({ width = 80 }, "bo vsplit")
     vim.cmd [[ wincmd l ]]
+    vim.cmd [[ startinsert ]]
 end)
-vim.keymap.set('n', '<leader>du', function() dapui.toggle { "console", "scopes" } end)
+vim.keymap.set('n', '<leader>du', function() dapui.toggle {  "scopes" } end)
 vim.keymap.set({ 'n', 'v' }, '<leader>dv', dapui.eval)
+
+vim.keymap.set('n', '<leader>df', function() require("neotest").run.run({strategy = "dap"}) end)
+

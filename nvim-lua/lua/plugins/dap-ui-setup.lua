@@ -21,14 +21,6 @@ require("dapui").setup({
             size = 40, -- 40 columns
             position = "left",
         },
-        --[[ { ]]
-        --[[     elements = { ]]
-        --[[         { id = "repl", size = 0.25 }, ]]
-        --[[         "repl", ]]
-        --[[     }, ]]
-        --[[     size = 40, ]]
-        --[[     position = "right", ]]
-        --[[ }, ]]
         {
             elements = {
                 { id = "console", size = 0.25 },

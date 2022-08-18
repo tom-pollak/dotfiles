@@ -191,6 +191,9 @@ require('packer').startup(function()
     use {
         'kdheepak/lazygit.nvim',
         config = function()
+            if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
+                vim.env.GIT_EDITOR = [[nvr -cc split --remote-wait +'set bufhidden=wipe']]
+            end
         end
     }
 
@@ -419,7 +422,7 @@ require('packer').startup(function()
     }
 
     ---------------------------------------------------------------------------
-    -- DAP
+    -- DEBUG
     ---------------------------------------------------------------------------
 
     use {
@@ -439,6 +442,33 @@ require('packer').startup(function()
             dap_python.setup('/usr/local/bin/python3')
             dap_python.test_runner = 'pytest'
 
+        end
+    }
+
+    use {
+        "nvim-neotest/neotest",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim",
+            { "nvim-neotest/neotest-vim-test", requires = 'vim-test/vim-test' },
+            "nvim-neotest/neotest-python",
+            "rouge8/neotest-rust",
+            "nvim-neotest/neotest-plenary"
+        },
+        config = function()
+            require("neotest").setup({
+                adapters = {
+                    require("neotest-python")({
+                        dap = { justMyCode = false },
+                    }),
+                    require("neotest-plenary"),
+                    require("neotest-rust"),
+                    require("neotest-vim-test")({
+                        ignore_file_types = { "python", "lua", "rust" },
+                    }),
+                },
+            })
         end
     }
 
