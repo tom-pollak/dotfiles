@@ -10,7 +10,7 @@ vim.keymap.set('v', '>', '> gv', { silent = true }) ]]
 vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
 vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
 
-vim.keymap.set('i', 'jk', '<esc>', { silent = true, })
+--[[ vim.keymap.set('i', 'jk', '<esc>', { silent = true, }) ]]
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true })

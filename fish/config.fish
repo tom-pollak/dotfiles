@@ -5,11 +5,21 @@ end
 set -gx PATH $HOME/.cargo/bin:$HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin:/usr/local/bin:$HOME/.cabal/bin:/Users/tom/.ghcup/bin $PATH
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx PAGER less
-set -gx EDITOR nvim
-set -gx GIT_EDITOR nvim
 set -gx VIMRC $HOME/.config/nvim/init.lua
 # set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
+
+if set -q NVIM
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+    alias v=nvr -cc split --remote-wait +'set bufhidden=wipe'
+    set -gx EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    set -gx VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+end
+
+set -gx GIT_EDITOR nvim
 
 set -gx LIBGL_ALWAYS_INDIRECT 1
 

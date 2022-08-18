@@ -45,10 +45,6 @@ vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>GitMessenger<cr>",
 
 
 -- Leap
---[[ vim.keymap.set({'n'}, '[%', "<Nop>", {silent = true}) ]]
---[[ vim.keymap.set({'n'}, ']%', "<Nop>", {silent = true}) ]]
---[[ vim.cmd "unmap \[%"
-vim.cmd "unmap \]%" ]]
 local leap = require 'leap'
 vim.keymap.set({ 'n', 'x', 'o' }, '<Tab>', function()
     leap.leap {}
@@ -61,12 +57,10 @@ end, { noremap = true })
 vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'leap-ast'.leap() end, {})
 
 -- Context
-vim.keymap.set({'n'}, '<leader>i', "<CMD>TSContextToggle<CR>", {silent = true})
-
--- Marks
+vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
 
 -- LazyGit
 vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 -- Telekasten
-vim.keymap.set('n', '<leader>m', require'telekasten'.panel, opts)
+vim.keymap.set('n', '<leader>m', require 'telekasten'.panel, opts)
