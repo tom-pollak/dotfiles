@@ -28,6 +28,7 @@ set.smartindent = true
 set.cursorline = true
 set.termguicolors = true
 set.lazyredraw = true
+set.autochdir = true
 
 vim.cmd("set guicursor=n-v-c-i:block")
 
@@ -45,14 +46,32 @@ wo.colorcolumn = '80'
 -- vim.highlight.create('ColorColumn', {ctermbg=238, guibg="grey"}, false)
 
 
-local augroup = vim.api.nvim_create_augroup('user_cmds', {clear = true})
+local yank_augroup = vim.api.nvim_create_augroup('user_cmds', {clear = true})
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = augroup,
+    group = yank_augroup,
     desc = 'Highlight on yank',
     callback = function(_)
         vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
     end
 })
+
+-- Fix mouse
+--[[ local mouse_augroup = vim.api.nvim_create_augroup('mouse', {clear = true})
+vim.api.nvim_create_autocmd('FocusGained', {
+    group = mouse_augroup,
+    desc = 'Fix mouse',
+    callback = function(_)
+        set.mouse = "a"
+    end
+})
+
+vim.api.nvim_create_autocmd('FocusLost', {
+    group = mouse_augroup,
+    desc = 'Fix mouse',
+    callback = function(_)
+        set.mouse = ""
+    end
+}) ]]
 
 -- vim.cmd [[
 --   augroup numbertoggle

@@ -39,9 +39,12 @@ vim.api.nvim_set_keymap("n", "<leader>xk", "<cmd>Trouble quickfix<cr>",
 )
 
 -- Gitmessenger
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>GitMessenger<cr>",
+vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>GitMessenger<cr>",
     { noremap = true }
 )
+
+-- Copilot
+vim.keymap.set("n", "<leader>gp", "<cmd>Copilot split<cr>")
 
 
 -- Leap
@@ -54,7 +57,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<S-Tab>', function()
     leap.leap { backward = true }
 end, { noremap = true })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'leap-ast'.leap() end, {})
+vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'plugins.leap-ast'.leap() end, {})
 
 -- Context
 vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
@@ -64,3 +67,4 @@ vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 -- Telekasten
 vim.keymap.set('n', '<leader>m', require 'telekasten'.panel, opts)
+

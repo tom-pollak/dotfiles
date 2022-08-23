@@ -34,7 +34,10 @@ require('packer').startup(function()
     use {
         "ray-x/lsp_signature.nvim",
         config = function()
-            require "lsp_signature".setup {}
+            require "lsp_signature".setup {
+                toggle_key = "<C-y>",
+                hint_prefix = ""
+            }
         end
     }
 
@@ -70,8 +73,8 @@ require('packer').startup(function()
             'hrsh7th/cmp-path',
             'saadparwaiz1/cmp_luasnip',
             'L3MON4D3/LuaSnip',
-            'onsails/lspkind.nvim',
             'rcarriga/cmp-dap'
+
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
@@ -130,6 +133,8 @@ require('packer').startup(function()
         config = function()
             vim.g.copilot_no_tab_map = true
             vim.g.copilot_assume_mapped = true
+            vim.g.copilot_enabled = false
+            vim.g.copilot_filetypes = { "python", "lua", "cc", "rust" }
         end
     }
 
@@ -137,12 +142,37 @@ require('packer').startup(function()
 
     use 'stsewd/isort.nvim'
 
-    -- use {
-    --     'simrat39/rust-tools.nvim',
-    --     config = function()
-    --         require 'rust-tools'.setup()
-    --     end
-    -- }
+    use {
+        'simrat39/rust-tools.nvim',
+        config = function()
+            local rt = require 'rust-tools'
+            -- Update this path
+            local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.7.4/'
+            local codelldb_path = extension_path .. 'adapter/codelldb'
+            local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+
+            local opts = {
+                dap = {
+                    adapter = require('rust-tools.dap').get_codelldb_adapter(
+                        codelldb_path, liblldb_path)
+                },
+                server = {
+                    on_attach = function(client, bufnr)
+                        require 'plugins.lsp-attach'.on_attach(client, bufnr)
+                        -- Hover actions
+                        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+                        -- Code action groups
+                        vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        -- Gives errors
+                        --[[ vim.keymap.set("n", "J", rt.join_lines.join_lines, { buffer = bufnr }) ]]
+
+                    end,
+                }
+            }
+            rt.setup(opts)
+        end
+    }
 
     -- -- Not that good
     -- use {
@@ -207,15 +237,10 @@ require('packer').startup(function()
             { 'nvim-lua/plenary.nvim' },
             { 'kyazdani42/nvim-web-devicons' },
             { 'nvim-telescope/telescope-fzf-native.nvim' },
-            {
-                'nvim-telescope/telescope-frecency.nvim',
-                requires = { "tami5/sqlite.lua" }
-            },
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-dap.nvim' }
-            --[[ { "tom-anders/telescope-vim-bookmarks.nvim" } ]]
         },
         config = function()
             require 'plugins.telescope-setup'
@@ -256,8 +281,8 @@ require('packer').startup(function()
 
     use {
         'ggandor/leap.nvim',
-        requires = { 'ggandor/leap-ast.nvim' },
         config = function()
+            require 'plugins.leap-ast'
             require 'leap'.setup {
             }
         end
@@ -276,16 +301,18 @@ require('packer').startup(function()
         end,
     }
 
-    use {
-        'lewis6991/spaceless.nvim',
+    --[[ use {
+        'thirtythreeforty/lessspace.vim',
         config = function()
-            require 'spaceless'.setup()
+            vim.g.lessspace_blacklist = { 'diff', 'markdown', 'telescope' }
         end
-    }
+    } ]]
 
     use 'tpope/vim-surround'
 
     use 'tpope/vim-repeat'
+
+    use 'tpope/vim-dispatch'
 
     use { 'mbbill/undotree',
         config = function()
@@ -307,7 +334,7 @@ require('packer').startup(function()
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
-                open_mapping = [[<c-t>]],
+                open_mapping = [[<C-t>]],
                 size = 40,
                 shell = "fish"
             })
@@ -367,7 +394,7 @@ require('packer').startup(function()
                     -- bg_highlight = "orange",
                     cursor_line_nr = "#FFEA00"
                 },
-                overrides = function(c)
+                overrides = function(_)
                     return {
                         ColorColumn = { bg = "#292929" },
                         -- Whitespace = { fg = util.lighten(c.syntax.comment, #292929 0.4) },

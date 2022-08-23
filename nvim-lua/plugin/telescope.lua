@@ -1,21 +1,43 @@
 local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
+local sorters = require("telescope.sorters")
+
+local check_git_workspace = function()
+    local filepath = vim.fn.expand('%:p:h')
+    local gitdir = vim.fn.finddir('.git', filepath .. ';')
+    return gitdir and #gitdir > 0 and #gitdir < #filepath
+end
 
 local root_dir = function()
-    return vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-        or vim.fn.getcwd()
+    if check_git_workspace() then
+        local filepath = vim.fn.expand('%:p:h')
+        local gitdir = vim.fn.finddir('.git', filepath .. ';')
+        return gitdir:sub(1,-5)
+    else
+        return vim.fn.getcwd()
+    end
 end
 
 local git_files = function()
     builtin.git_files({
+        --[[ sort_lastused = true, ]]
+        --[[ ignore_current_buffer = true ]]
+    })
+end
+
+local find_files = function()
+    builtin.find_files({
         sort_lastused = true,
         ignore_current_buffer = true
     })
 end
 
 local project_files = function()
-    local ok = pcall(git_files, {})
-    if not ok then builtin.find_files({}) end
+    if check_git_workspace() then
+        return git_files()
+    else
+        return find_files()
+    end
 end
 
 
@@ -47,20 +69,43 @@ local dotfiles = function()
     })
 end
 
-local bookmarks_all = function ()
+local bookmarks_all = function()
     vim.cmd [[BookmarksQFListAll]]
-    builtin.quickfix ({
+    builtin.quickfix({
         prompt_title = "< Bookmarks >"
     })
     vim.cmd [[cclose]]
 end
 
+local command_history = function()
+    builtin.command_history({
+        prompt_title = "< Command History >",
+        sorter = sorters.fuzzy_with_index_bias()
+
+    })
+end
+
+local run_history = function()
+    builtin.command_history({
+        prompt_title = "< Run History >",
+        default_text = [[!]],
+        sorter = sorters.fuzzy_with_index_bias()
+
+
+    })
+end
+
 -- Telescope
-vim.keymap.set('n', '<c-p>', project_files, opts)
+--[[ vim.keymap.set('n', '<c-p>', project_files, opts) ]]
+vim.keymap.set('n', '<c-p>', git_files, opts)
 vim.keymap.set('n', '<leader>h', builtin.help_tags, opts)
-vim.keymap.set('n', '<c-e>', builtin.find_files, opts)
+vim.keymap.set('n', '<c-e>', find_files, opts)
 vim.keymap.set('n', '<c-b>', buffers, opts)
 vim.keymap.set('n', '<c-c>', function() live_grep(root_dir()) end, opts)
+
+
+vim.keymap.set('c', '<c-f>', command_history, opts)
+vim.keymap.set('c', '<c-r>', run_history, opts)
 
 vim.keymap.set('n', '<leader>a', builtin.resume, opts)
 
@@ -73,7 +118,7 @@ vim.keymap.set('n', "'", bookmarks_all, opts)
 
 
 vim.keymap.set('n', '<leader>rr', "<CMD>Telescope file_browser<CR>", opts)
-vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project, opts)
+--[[ vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project, opts) ]]
 
 -- Telekasten
 vim.keymap.set('n', '<leader>mc', function() live_grep('~/notes/') end, opts)
