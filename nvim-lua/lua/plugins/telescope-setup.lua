@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
+local fb_actions = require "telescope".extensions.file_browser.actions
 
 require("telescope").setup {
     defaults = {
@@ -14,14 +15,24 @@ require("telescope").setup {
                 ["<esc>"] = actions.close,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<c-t>"] = trouble.open_with_trouble
+                ["<c-t>"] = trouble.open_with_trouble,
+                ["<C-l>"] = function() vim.cmd "stopinsert" end,
+                ["<c-q>"] = trouble.open_with_trouble,
+
             },
             n = {
+                ["<esc>"] = actions.close,
+                ["<c-t>"] = trouble.open_with_trouble,
+                ["<c-q>"] = trouble.open_with_trouble,
+                --[[ ["i"] = function() vim.cmd "startinsert" end, ]]
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
             }
         }
     },
     pickers = {
         buffers = { theme = "dropdown" },
+        command_history = { theme = "dropdown" },
     },
     extensions = {
         fzy_native = {
@@ -30,17 +41,28 @@ require("telescope").setup {
         },
         file_browser = {
             theme = "ivy",
+            initial_moe="normal",
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
             mappings = {
                 ["i"] = {
-                    ["<C-d>"] = require "telescope".extensions.file_browser.actions.goto_parent_dir
-                    -- your custom insert mode mappings
+                    ["<C-i>"] = fb_actions.goto_parent_dir,
                 },
                 ["n"] = {
-                    -- your custom normal mode mappings
+                    ["h"] = fb_actions.goto_parent_dir,
+                    ["l"] = "select_default",
+                    ["<C-i>"] = fb_actions.goto_parent_dir,
+                    ["<C-e>"] = fb_actions.goto_home_dir,
+                    ["<C-w>"] = fb_actions.goto_cwd,
+                    ["<C-t>"] = fb_actions.change_cwd,
+                    ["<A-r>"] = fb_actions.rename,
+                    ["<A-m>"] = fb_actions.move,
+                    ["<A-d>"] = fb_actions.remove,
                 },
             },
+        },
+        dap = {
+            theme = "dropdown"
         },
         project = {
             theme = "dropdown",

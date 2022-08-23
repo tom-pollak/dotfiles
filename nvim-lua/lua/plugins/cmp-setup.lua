@@ -5,16 +5,40 @@ local has_words_before = function()
     return col ~= 0 and
         vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-local lspkind = require('lspkind')
+local cmp_kinds = {
+    Text = '  ',
+    Method = '  ',
+    Function = '  ',
+    Constructor = '  ',
+    Field = '  ',
+    Variable = '  ',
+    Class = '  ',
+    Interface = '  ',
+    Module = '  ',
+    Property = '  ',
+    Unit = '  ',
+    Value = '  ',
+    Enum = '  ',
+    Keyword = '  ',
+    Snippet = '  ',
+    Color = '  ',
+    File = '  ',
+    Reference = '  ',
+    Folder = '  ',
+    EnumMember = '  ',
+    Constant = '  ',
+    Struct = '  ',
+    Event = '  ',
+    Operator = '  ',
+    TypeParameter = '  ',
+}
 
 cmp.setup({
     formatting = {
-        formatting = {
-            format = lspkind.cmp_format({
-                mode = 'symbol',
-                maxwidth = 50,
-            })
-        }
+        format = function(_, vim_item)
+            vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
+            return vim_item
+        end,
     },
     snippet = {
         expand = function(args)
@@ -54,7 +78,7 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ["<C-e>"] = cmp.mapping(function(fallback)
+        ["<C-l>"] = cmp.mapping(function(fallback)
             cmp.mapping.abort()
             local copilot_keys = vim.fn["copilot#Accept"]()
             if copilot_keys ~= "" then
@@ -69,6 +93,7 @@ cmp.setup({
         { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
         { name = "nvim_lsp_signature_help" },
         { name = 'path' },
+        { name = 'dap' },
         -- { name = 'buffer' },
     }),
     -- filetype = ('gitcommit', {

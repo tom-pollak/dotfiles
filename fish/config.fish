@@ -10,8 +10,8 @@ set -gx VIMRC $HOME/.config/nvim/init.lua
 
 
 if set -q NVIM
-    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
-    alias v=nvr -cc split --remote-wait +'set bufhidden=wipe'
+    alias nvim="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    alias v="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     set -gx EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
     set -gx VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 else
@@ -74,6 +74,7 @@ fish_vi_key_bindings
 fish_add_path /opt/homebrew/sbin
 fish_add_path /opt/homebrew/opt/llvm/bin
 fish_add_path /opt/homebrew/opt/openjdk/bin
+fish_add_path /usr/local/opt/node@16/bin
 set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
 set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 

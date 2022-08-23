@@ -24,6 +24,8 @@ vim.cmd[[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']]
 
 vim.keymap.set('n', '<c-f>', function() return ':e ' .. vim.fn.expand '%:p:h' .. '/' end, { expr = true })
 
+vim.keymap.set('n', '<leader>y', function() return ':!' end, { expr = true })
+
 vim.keymap.set('n', 'd', '"_d', {})
 vim.keymap.set('n', 'D', '"_D', {})
 
@@ -39,6 +41,11 @@ vim.keymap.set('n', 'x', '"_x', {})
 vim.keymap.set('v', 'd', '"_d', {})
 vim.keymap.set('v', 'c', '"_c', {})
 vim.keymap.set('v', 's', 'd', {})
+
+vim.keymap.set('n', '+', "<CMD>res +5<CR>")
+vim.keymap.set('n', '_', "<CMD>res -5<CR>")
+vim.keymap.set('n', '=', "<CMD>vertical res +5<CR>")
+vim.keymap.set('n', '-', "<CMD>vertical res -5<CR>")
 
 -- vim.keymap.set('n', '<leader>c', function() return ':! ' end,
 --     { expr = true })
