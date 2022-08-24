@@ -149,7 +149,7 @@ require('packer').startup(function()
             -- Update this path
             local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.7.4/'
             local codelldb_path = extension_path .. 'adapter/codelldb'
-            local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
 
             local opts = {
                 dap = {
@@ -271,7 +271,7 @@ require('packer').startup(function()
                     sign = "⚑",
                 },
                 mappings = {
-                    set_bookmark0 = "m",
+                    set_bookmark0 = "mm",
                     delete_bookmark = "dm",
                     delete_bookmark0 = "cm"
                 }
@@ -307,6 +307,15 @@ require('packer').startup(function()
             vim.g.lessspace_blacklist = { 'diff', 'markdown', 'telescope' }
         end
     } ]]
+
+    use {
+        'rhysd/clever-f.vim',
+        config = function()
+            vim.g.clever_f_smart_case = 1
+            vim.g.clever_f_across_no_line = 1
+            vim.g.clever_f_chars_match_any_signs = ';'
+        end
+    }
 
     use 'tpope/vim-surround'
 

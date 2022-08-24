@@ -37,6 +37,7 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 
 set.background = 'dark'
 wo.colorcolumn = '80'
+set.mouse = 'a'
 
 
 -- vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
@@ -56,7 +57,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Fix mouse
---[[ local mouse_augroup = vim.api.nvim_create_augroup('mouse', {clear = true})
+local mouse_augroup = vim.api.nvim_create_augroup('mouse', {clear = true})
 vim.api.nvim_create_autocmd('FocusGained', {
     group = mouse_augroup,
     desc = 'Fix mouse',
@@ -71,7 +72,7 @@ vim.api.nvim_create_autocmd('FocusLost', {
     callback = function(_)
         set.mouse = ""
     end
-}) ]]
+})
 
 -- vim.cmd [[
 --   augroup numbertoggle

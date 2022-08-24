@@ -1,6 +1,7 @@
 local M = {}
 
 local on_attach = function(client, bufnr)
+    require'plugins.dap'
     -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb({ ignore = {"null-ls"} })]]
     -- client.offset_encoding = "utf-8"
     -- require 'virtualtypes'.on_attach(client, bufnr)

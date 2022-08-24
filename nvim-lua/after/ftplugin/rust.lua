@@ -7,6 +7,7 @@ local format = function()
 end
 
 vim.keymap.set('n', '<leader>q', format, { silent = true })
+vim.opt.makeprg = "cargo check"
 --[[ vim.opt.makeprg = function(args)
     if args == "test" then
         return "cargo test"
