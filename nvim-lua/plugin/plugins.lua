@@ -2,14 +2,6 @@ local opts = { noremap = true, silent = true }
 
 vim.keymap.set('c', '!!', function() return "AsyncRun " end, { expr = true })
 
--- QF Helper
--- vim.api.nvim_set_keymap("n", "<leader>;", "<CMD>QNext<CR>", opts)
--- vim.api.nvim_set_keymap("n", "<leader>,", "<CMD>QPrev<CR>", opts)
-
--- vim.api.nvim_set_keymap("n", "<leader>k", "<CMD>QFToggle!<CR>", opts)
--- vim.api.nvim_set_keymap("n", "<leader>l", "<CMD>LLToggle!<CR>", opts)
-
-
 -- Undotree
 vim.api.nvim_set_keymap("n", "<leader>u", "<CMD>UndotreeToggle<CR>", opts)
 
@@ -66,5 +58,6 @@ vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true
 vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 -- Telekasten
-vim.keymap.set('n', '<leader>m', require 'telekasten'.panel, opts)
+vim.keymap.set('n', '<leader>mm', "<CMD>Telekasten panel<CR>", opts)
 
+vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc><CMD>call clever_f#reset()<CR>', { silent = true })

@@ -1,4 +1,3 @@
-local opts = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local sorters = require("telescope.sorters")
 
@@ -96,30 +95,26 @@ local run_history = function()
 end
 
 -- Telescope
---[[ vim.keymap.set('n', '<c-p>', project_files, opts) ]]
-vim.keymap.set('n', '<c-p>', git_files, opts)
-vim.keymap.set('n', '<leader>h', builtin.help_tags, opts)
-vim.keymap.set('n', '<c-e>', find_files, opts)
-vim.keymap.set('n', '<c-b>', buffers, opts)
-vim.keymap.set('n', '<c-c>', function() live_grep(root_dir()) end, opts)
+--[[ vim.keymap.set('n', '<c-p>', project_files) ]]
+vim.keymap.set('n', '<c-p>', git_files)
+vim.keymap.set('n', '<leader>h', builtin.help_tags)
+vim.keymap.set('n', '<c-e>', find_files)
+vim.keymap.set('n', '<c-b>', buffers)
+vim.keymap.set('n', '<c-c>', function() live_grep(root_dir()) end)
 
 
-vim.keymap.set('c', '<c-f>', command_history, opts)
-vim.keymap.set('c', '<c-r>', run_history, opts)
+vim.keymap.set('c', '<c-f>', command_history)
+vim.keymap.set('c', '<c-r>', run_history)
 
-vim.keymap.set('n', '<leader>a', builtin.resume, opts)
+vim.keymap.set('n', '<leader>a', builtin.resume)
 
-vim.keymap.set('n', '<leader>cd', dotfiles, opts)
-vim.keymap.set('n', '<leader>cc', vim_config, opts)
+vim.keymap.set('n', '<leader>cd', dotfiles)
+vim.keymap.set('n', '<leader>cc', vim_config)
 
-vim.keymap.set('n', "'", bookmarks_all, opts)
+vim.keymap.set('n', "'", bookmarks_all)
 
---[[ vim.keymap.set('n', '\'', require('telescope').extensions.vim_bookmarks.all(), opts) ]]
-
-
-vim.keymap.set('n', '<leader>rr', "<CMD>Telescope file_browser<CR>", opts)
---[[ vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project, opts) ]]
+vim.keymap.set('n', '<leader>rr', "<CMD>Telescope file_browser<CR>")
+vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project)
 
 -- Telekasten
-vim.keymap.set('n', '<leader>mc', function() live_grep('~/notes/') end, opts)
-vim.keymap.set('n', '<leader>md', function() live_grep('~/zettelkasten/') end, opts)
+vim.keymap.set('n', '<leader>mc', function() live_grep('~/notes/') end)

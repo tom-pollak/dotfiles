@@ -41,7 +41,7 @@ require("telescope").setup {
         },
         file_browser = {
             theme = "ivy",
-            initial_moe="normal",
+            initial_mode="normal",
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
             mappings = {

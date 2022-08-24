@@ -19,8 +19,7 @@ vim.keymap.set('n', '<leader>dn', dap.run_to_cursor)
 vim.keymap.set('n', '<leader>dt', function()
     print "Session closed"
     dap.terminate()
-    dap.repl.close()
-    dapui.close({"scopes"})
+    dapui.close()
 end)
 
 
@@ -31,12 +30,10 @@ vim.keymap.set('n', '<leader>d?',
 
 vim.keymap.set('n', '<leader>dk', function()
     require "dap".up()
-    vim.cmd [[zz]]
 end)
 
 vim.keymap.set('n', '<leader>dj', function()
     require "dap".down()
-    vim.cmd [[zz]]
 end)
 
 vim.keymap.set('n', '<leader>dc', telescope_dap.commands)
@@ -44,13 +41,22 @@ vim.keymap.set('n', '<leader>dd', telescope_dap.configurations)
 vim.keymap.set('n', '<leader>ds', telescope_dap.frames)
 vim.keymap.set('n', '<leader>db', telescope_dap.list_breakpoints)
 
-vim.keymap.set('n', '<leader>dr', function()
-    dap.repl.toggle({ width = 80 }, "bo vsplit")
-    vim.cmd [[ wincmd l ]]
-    vim.cmd [[ startinsert ]]
+vim.keymap.set('n', '<leader>du', function()
+    dapui.toggle(1)
+    dapui.toggle(2)
 end)
-vim.keymap.set('n', '<leader>du', function() dapui.toggle {  "scopes" } end)
-vim.keymap.set({ 'n', 'v' }, '<leader>dv', dapui.eval)
+vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval)
 
-vim.keymap.set('n', '<leader>df', function() require("neotest").run.run({strategy = "dap"}) end)
+vim.keymap.set('n', '<leader>df', function() require("neotest").run.run({ strategy = "dap" }) end)
 
+vim.keymap.set('n', '<leader>dr', function()
+    dapui.toggle(3)
+end)
+
+--[[ local is_dap_window = function () ]]
+--[[     local api = vim.api ]]
+--[[     local win_id = api.nvim_get_current_win() ]]
+--[[     local buf_id = api.nvim_win_get_buf(win_id) ]]
+--[[     local buf_name = api.nvim_buf_get_name(buf_id) ]]
+--[[     return buf_name:lower():find("dap") ]]
+--[[ end ]]
