@@ -28,16 +28,16 @@ set.smartindent = true
 set.cursorline = true
 set.termguicolors = true
 set.lazyredraw = true
-set.autochdir = true
+--[[ set.autochdir = true ]]
 
-vim.cmd("set guicursor=n-v-c-i:block")
+--[[ vim.cmd("set guicursor=n-v-c-i:block") ]]
 
 set.showmode = false
 set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*' }
 
 set.background = 'dark'
 wo.colorcolumn = '80'
-set.mouse = 'a'
+--[[ set.mouse = 'a' ]]
 
 
 -- vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red
@@ -56,23 +56,32 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end
 })
 
--- Fix mouse
-local mouse_augroup = vim.api.nvim_create_augroup('mouse', {clear = true})
-vim.api.nvim_create_autocmd('FocusGained', {
-    group = mouse_augroup,
-    desc = 'Fix mouse',
-    callback = function(_)
-        set.mouse = "a"
-    end
-})
+vim.cmd[[
+match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+]]
 
-vim.api.nvim_create_autocmd('FocusLost', {
-    group = mouse_augroup,
-    desc = 'Fix mouse',
-    callback = function(_)
-        set.mouse = ""
-    end
-})
+vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
+vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
+
+-- Fix mouse
+--[[ local mouse_augroup = vim.api.nvim_create_augroup('mouse', {clear = true}) ]]
+--[[ vim.api.nvim_create_autocmd('FocusGained', { ]]
+--[[     group = mouse_augroup, ]]
+--[[     desc = 'Fix mouse', ]]
+--[[     callback = function(_) ]]
+--[[         set.mouse = "a" ]]
+--[[     end ]]
+--[[ }) ]]
+--[[]]
+--[[ vim.api.nvim_create_autocmd('FocusLost', { ]]
+--[[     group = mouse_augroup, ]]
+--[[     desc = 'Fix mouse', ]]
+--[[     callback = function(_) ]]
+--[[         set.mouse = "" ]]
+--[[     end ]]
+--[[ }) ]]
 
 -- vim.cmd [[
 --   augroup numbertoggle

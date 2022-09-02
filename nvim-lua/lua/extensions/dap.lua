@@ -42,6 +42,7 @@ vim.keymap.set('n', '<leader>ds', telescope_dap.frames)
 vim.keymap.set('n', '<leader>db', telescope_dap.list_breakpoints)
 
 vim.keymap.set('n', '<leader>du', function()
+    dapui.close(3)
     dapui.toggle(1)
     dapui.toggle(2)
 end)
@@ -50,6 +51,8 @@ vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval)
 vim.keymap.set('n', '<leader>df', function() require("neotest").run.run({ strategy = "dap" }) end)
 
 vim.keymap.set('n', '<leader>dr', function()
+    dapui.close(1)
+    dapui.close(2)
     dapui.toggle(3)
 end)
 

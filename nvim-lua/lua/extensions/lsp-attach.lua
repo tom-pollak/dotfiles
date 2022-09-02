@@ -1,7 +1,7 @@
 local M = {}
 
 local on_attach = function(client, bufnr)
-    require'plugins.dap'
+    require'extensions.dap'
     -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb({ ignore = {"null-ls"} })]]
     -- client.offset_encoding = "utf-8"
     -- require 'virtualtypes'.on_attach(client, bufnr)
@@ -27,22 +27,22 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set("n", "gk", function()
         vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
-        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
+        vim.cmd [[source ~/.config/nvim/lua/extensions/lualine.lua]]
     end, { silent = true, noremap = true })
 
     vim.keymap.set("n", "gj", function()
         vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN } })
-        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
+        vim.cmd [[source ~/.config/nvim/lua/extensions/lualine.lua]]
     end, { silent = true, noremap = true })
 
     vim.keymap.set("n", "gK", function()
         vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ANY })
-        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
+        vim.cmd [[source ~/.config/nvim/lua/extensions/lualine.lua]]
     end, { silent = true, noremap = true })
 
     vim.keymap.set("n", "gJ", function()
         vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ANY })
-        vim.cmd [[source ~/.config/nvim/lua/plugins/lualine.lua]]
+        vim.cmd [[source ~/.config/nvim/lua/extensions/lualine.lua]]
     end, { silent = true, noremap = true })
 
     vim.keymap.set("n", "gh", vim.diagnostic.open_float, { silent = true, noremap = true })

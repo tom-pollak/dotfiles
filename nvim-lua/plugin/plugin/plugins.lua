@@ -49,7 +49,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<S-Tab>', function()
     leap.leap { backward = true }
 end, { noremap = true })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'plugins.leap-ast'.leap() end, {})
+vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'extensions.leap-ast'.leap() end, {})
 
 -- Context
 vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
