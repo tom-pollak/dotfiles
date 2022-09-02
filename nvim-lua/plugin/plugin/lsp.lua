@@ -1,10 +1,10 @@
 vim.diagnostic.config({
     virtual_text = {
-        severity = { min = vim.diagnostic.severity.WARN }
+        severity = { min = vim.diagnostic.severity.ERROR }
     }
 })
 
-local on_attach = require'plugins.lsp-attach'.on_attach
+local on_attach = require'extensions.lsp-attach'.on_attach
 
 local capabilities = {
     require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),

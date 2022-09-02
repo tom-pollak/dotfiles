@@ -1,4 +1,5 @@
 local fn = vim.fn
+local util = require'packer.util'
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
@@ -7,7 +8,7 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-require('packer').startup(function()
+require('packer').startup({function()
 
     use 'wbthomason/packer.nvim'
 
@@ -78,7 +79,7 @@ require('packer').startup(function()
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
-            require 'plugins.cmp-setup'
+            require 'extensions.cmp-setup'
         end
     }
 
@@ -92,7 +93,7 @@ require('packer').startup(function()
             { 'andymass/vim-matchup' }
         },
         config = function()
-            require 'plugins.treesitter-setup'
+            require 'extensions.treesitter-setup'
         end
     }
 
@@ -152,13 +153,15 @@ require('packer').startup(function()
             local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
 
             local opts = {
+                parameter_hints_prefix = "<- ",
+                other_hints_prefix = "=> ",
                 dap = {
                     adapter = require('rust-tools.dap').get_codelldb_adapter(
                         codelldb_path, liblldb_path)
                 },
                 server = {
                     on_attach = function(client, bufnr)
-                        require 'plugins.lsp-attach'.on_attach(client, bufnr)
+                        require 'extensions.lsp-attach'.on_attach(client, bufnr)
                         -- Hover actions
                         vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
                         -- Code action groups
@@ -243,7 +246,7 @@ require('packer').startup(function()
             { 'nvim-telescope/telescope-dap.nvim' }
         },
         config = function()
-            require 'plugins.telescope-setup'
+            require 'extensions.telescope-setup'
         end
     }
 
@@ -282,7 +285,7 @@ require('packer').startup(function()
     use {
         'ggandor/leap.nvim',
         config = function()
-            require 'plugins.leap-ast'
+            require 'extensions.leap-ast'
             require 'leap'.setup {
             }
         end
@@ -423,7 +426,7 @@ require('packer').startup(function()
         requires = { { 'kyazdani42/nvim-web-devicons', opt = true },
         },
         config = function()
-            require 'plugins.lualine'
+            require 'extensions.lualine'
         end
     }
 
@@ -472,7 +475,7 @@ require('packer').startup(function()
             vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
             vim.fn.sign_define('DapBreakpointRejected', { text = '🟦', texthl = '', linehl = '', numhl = '' })
             vim.fn.sign_define('DapStopped', { text = '⭐️', texthl = '', linehl = '', numhl = '' })
-            require('plugins.dap-ui-setup')
+            require('extensions.dap-ui').setup()
             require("nvim-dap-virtual-text").setup()
             local dap_python = require('dap-python')
             dap_python.setup('/usr/local/bin/python3')
@@ -512,4 +515,7 @@ require('packer').startup(function()
     if PACKER_BOOTSTRAP then
         require('packer').sync()
     end
-end)
+end,
+config = {
+    compile_path = util.join_paths(vim.fn.stdpath('config'), 'plugin', 'plugin', 'packer_compiled.lua')
+}})

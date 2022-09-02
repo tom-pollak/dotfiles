@@ -11,6 +11,7 @@ local root_dir = function()
     if check_git_workspace() then
         local filepath = vim.fn.expand('%:p:h')
         local gitdir = vim.fn.finddir('.git', filepath .. ';')
+        --[[ return './' .. gitdir:sub(1,-5) ]]
         return gitdir:sub(1,-5)
     else
         return vim.fn.getcwd()

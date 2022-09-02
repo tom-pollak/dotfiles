@@ -6,9 +6,6 @@ vim.keymap.set('n', '<Leader><CR>', '<CMD>update<CR><CMD>so %<CR>', { silent = t
 --[[ vim.keymap.set('v', '<', '< gv', { silent = true })
 vim.keymap.set('v', '>', '> gv', { silent = true }) ]]
 
-vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
-vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
-
 --[[ vim.keymap.set('i', 'jk', '<esc>', { silent = true, }) ]]
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true })
@@ -24,6 +21,20 @@ vim.cmd[[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']]
 vim.keymap.set('n', '<c-f>', function() return ':e ' .. vim.fn.expand '%:p:h' .. '/' end, { expr = true })
 
 vim.keymap.set('n', '<leader>y', function() return ':!' end, { expr = true })
+
+local t = function (s)
+    return vim.api.nvim_replace_termcodes(s, true, true, true)
+end
+
+vim.keymap.set('n', '<c-;>', function() vim.cmd (t('normal <c-6>')) end)
+
+vim.keymap.set('i', '<c-n>', '<c-o>e<c-o>a')
+vim.keymap.set('i', '<c-m>', '<c-o>b<c-o>i')
+vim.keymap.set('n', '<c-n>', 'e')
+vim.keymap.set('n', '<c-m>', 'b')
+
+-- Forward delete, (BS is C-h)
+vim.keymap.set('i', '<C-d>', '<Del>')
 
 vim.keymap.set('n', 'd', '"_d', {})
 vim.keymap.set('n', 'D', '"_D', {})
@@ -45,6 +56,3 @@ vim.keymap.set('n', '+', "<CMD>res +5<CR>")
 vim.keymap.set('n', '_', "<CMD>res -5<CR>")
 vim.keymap.set('n', '=', "<CMD>vertical res +5<CR>")
 vim.keymap.set('n', '-', "<CMD>vertical res -5<CR>")
-
--- vim.keymap.set('n', '<leader>c', function() return ':! ' end,
---     { expr = true })

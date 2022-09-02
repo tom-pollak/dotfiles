@@ -1,4 +1,6 @@
 require('core/base')
 require('core/mappings')
-require('packer_init')
--- require'minimal-telescope'
+if vim.g.vscode then
+else
+    require('packer_init')
+end
