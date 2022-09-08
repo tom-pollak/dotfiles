@@ -31,7 +31,7 @@ vim.api.nvim_set_keymap("n", "<leader>xk", "<cmd>Trouble quickfix<cr>",
 )
 
 -- Gitmessenger
-vim.api.nvim_set_keymap("n", "<leader>gh", "<cmd>GitMessenger<cr>",
+vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
     { noremap = true }
 )
 
@@ -40,7 +40,7 @@ vim.keymap.set("n", "<leader>gp", "<cmd>Copilot split<cr>")
 
 
 -- Leap
-local leap = require 'leap'
+--[[ local leap = require 'leap'
 vim.keymap.set({ 'n', 'x', 'o' }, '<Tab>', function()
     leap.leap {}
 end, { noremap = true })
@@ -49,7 +49,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<S-Tab>', function()
     leap.leap { backward = true }
 end, { noremap = true })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'extensions.leap-ast'.leap() end, {})
+vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'extensions.leap-ast'.leap() end, {}) ]]
 
 -- Context
 vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
@@ -61,3 +61,10 @@ vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 vim.keymap.set('n', '<leader>mm', "<CMD>Telekasten panel<CR>", opts)
 
 vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc><CMD>call clever_f#reset()<CR>', { silent = true })
+
+vim.cmd [[
+    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+    match ExtraWhitespace /\s\+\%#\@<!$/
+    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    au InsertLeave * match ExtraWhitespace /\s\+$/
+]]

@@ -4,7 +4,7 @@ local set = vim.opt
 local g = vim.g
 local wo = vim.wo
 
-set.clipboard='unnamedplus'
+set.clipboard = 'unnamedplus'
 wo.relativenumber = true
 wo.number = true
 g.mapleader = ' '
@@ -30,7 +30,7 @@ set.termguicolors = true
 set.lazyredraw = true
 --[[ set.autochdir = true ]]
 
---[[ vim.cmd("set guicursor=n-v-c-i:block") ]]
+vim.cmd("set guicursor=n-v-c-i:block")
 
 set.showmode = false
 set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*' }
@@ -47,22 +47,16 @@ wo.colorcolumn = '80'
 -- vim.highlight.create('ColorColumn', {ctermbg=238, guibg="grey"}, false)
 
 
-local yank_augroup = vim.api.nvim_create_augroup('user_cmds', {clear = true})
+local yank_augroup = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = yank_augroup,
-    desc = 'Highlight on yank',
-    callback = function(_)
-        vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
-    end
+  group = yank_augroup,
+  desc = 'Highlight on yank',
+  callback = function(_)
+    vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
+  end
 })
 
-vim.cmd[[
-match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
-]]
-
-vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
+vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })  
 vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
 
 -- Fix mouse
