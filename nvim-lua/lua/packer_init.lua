@@ -1,5 +1,5 @@
 local fn = vim.fn
-local util = require'packer.util'
+local util = require 'packer.util'
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
@@ -8,7 +8,7 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-require('packer').startup({function()
+require('packer').startup({ function()
 
     use 'wbthomason/packer.nvim'
 
@@ -89,8 +89,9 @@ require('packer').startup({function()
         requires = {
             { 'p00f/nvim-ts-rainbow' },
             { 'JoosepAlviste/nvim-ts-context-commentstring' },
-            { 'nvim-treesitter/nvim-treesitter-context' },
-            { 'andymass/vim-matchup' }
+            { 'nvim-treesitter/nvim-treesitter-context', bang = true },
+            { 'andymass/vim-matchup' },
+            { 'nvim-treesitter/nvim-treesitter-textobjects', bang = true }
         },
         config = function()
             require 'extensions.treesitter-setup'
@@ -282,14 +283,14 @@ require('packer').startup({function()
         end
     }
 
-    use {
-        'ggandor/leap.nvim',
-        config = function()
-            require 'extensions.leap-ast'
-            require 'leap'.setup {
-            }
-        end
-    }
+    --[[ use { ]]
+    --[[     'ggandor/leap.nvim', ]]
+    --[[     config = function() ]]
+    --[[         require 'extensions.leap-ast' ]]
+    --[[         require 'leap'.setup { ]]
+    --[[         } ]]
+    --[[     end ]]
+    --[[ } ]]
 
     ---------------------------------------------------------------------------
     -- UTILS
@@ -324,7 +325,10 @@ require('packer').startup({function()
 
     use 'tpope/vim-repeat'
 
-    use 'tpope/vim-dispatch'
+    use {
+        'tpope/vim-dispatch',
+        cond = not vim.g.vscode
+    }
 
     use { 'mbbill/undotree',
         config = function()
@@ -411,6 +415,7 @@ require('packer').startup({function()
                         ColorColumn = { bg = "#292929" },
                         -- Whitespace = { fg = util.lighten(c.syntax.comment, #292929 0.4) },
                         Whitespace = { fg = "red" },
+                        ExtraWhitespace = { ctermbg = "red", guibg = "red" },  
                         TreesitterContext = { bg = '#212e3f' }
                     }
                 end,
@@ -444,6 +449,7 @@ require('packer').startup({function()
         config = function()
             vim.cmd [[ highlight IndentBlanklineChar guifg=#292929 gui=nocombine ]]
             vim.cmd [[ highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine ]]
+            vim.cmd [[ highlight ExtraWhitespace guifg=#C678DD gui=nocombine ]]
             require 'indent_blankline'.setup {
                 show_trailing_blankline_indent = false,
                 space_char_blankline = " ",
@@ -516,6 +522,6 @@ require('packer').startup({function()
         require('packer').sync()
     end
 end,
-config = {
-    compile_path = util.join_paths(vim.fn.stdpath('config'), 'plugin', 'plugin', 'packer_compiled.lua')
-}})
+    config = {
+        compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'plugin', 'packer_compiled.lua')
+    } })

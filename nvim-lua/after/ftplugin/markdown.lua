@@ -14,4 +14,6 @@ local format = function()
     vim.cmd [[ ! prettier --write % ]]
 end
 
-vim.keymap.set('n', '<leader>q', format, { silent = true })
+if not vim.g.vscode then
+    vim.keymap.set('n', '<leader>q', format, { silent = true })
+end

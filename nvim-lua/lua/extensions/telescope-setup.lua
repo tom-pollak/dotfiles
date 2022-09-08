@@ -4,11 +4,14 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 
 require("telescope").setup {
     defaults = {
+        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
         shorten_path = true,
         layout_strategy = "vertical",
         layout_config = {
-            height = 0.9,
-            width = 0.8
+            height = vim.o.lines,
+            width = vim.o.columns,
+            --[[ height = 0.9, ]]
+            --[[ width = 0.9 ]]
         },
         mappings = {
             i = {
@@ -40,8 +43,13 @@ require("telescope").setup {
             override_file_sorter = true,
         },
         file_browser = {
-            theme = "ivy",
-            initial_mode="normal",
+            grouped = true,
+            initial_mode = "normal",
+            layout_strategy = "vertical",
+            layout_config = {
+                prompt_position = "bottom",
+                preview_height = 0.6,
+            },
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
             mappings = {

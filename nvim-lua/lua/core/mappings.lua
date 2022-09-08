@@ -12,6 +12,9 @@ vim.keymap.set('n', 'n', 'nzz', { silent = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true })
 vim.keymap.set('n', '*', '*zz', { silent = true })
 
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
+
 vim.keymap.set({'n'}, '<CR>', function () vim.cmd [[call append(line("."),   repeat([""], v:count1))]] end)
 vim.keymap.set({'n'}, '<S-CR>', function () vim.cmd [[call append(line(".")-1,   repeat([""], v:count1))]] end)
 
@@ -56,3 +59,6 @@ vim.keymap.set('n', '+', "<CMD>res +5<CR>")
 vim.keymap.set('n', '_', "<CMD>res -5<CR>")
 vim.keymap.set('n', '=', "<CMD>vertical res +5<CR>")
 vim.keymap.set('n', '-', "<CMD>vertical res -5<CR>")
+
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
