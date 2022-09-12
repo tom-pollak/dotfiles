@@ -30,3 +30,11 @@
 	gpgSign = false
 [tag]
 	forceSignAnnotated = false
+    [core]
+  editor = code --wait
+[diff]
+  tool = vscode
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
