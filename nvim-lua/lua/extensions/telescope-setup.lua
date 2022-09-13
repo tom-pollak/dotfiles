@@ -76,7 +76,7 @@ require("telescope").setup {
             theme = "dropdown",
             base_dirs = {
                 "~/projects",
-                "~/co/spyglass/applications"
+                --[[ "~/co/spyglass/applications" ]]
             }
         },
         ["ui-select"] = {
