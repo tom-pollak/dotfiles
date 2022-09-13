@@ -4,6 +4,7 @@ local in_vim = not vim.g.vscode
 
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = "all",
+    ignore_install = { "phpdoc" },
     sync_install = false,
     indent = {
         enable = true,
