@@ -9,7 +9,6 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup({ function()
-
     use 'wbthomason/packer.nvim'
 
     ---------------------------------------------------------------------------
@@ -19,6 +18,7 @@ require('packer').startup({ function()
     use {
         'neovim/nvim-lspconfig',
         requires = { 'williamboman/nvim-lsp-installer' },
+        cond = not vim.g.minimal,
         config = function()
             require('nvim-lsp-installer').setup({
                 automatic_installation = true,
@@ -34,6 +34,7 @@ require('packer').startup({ function()
 
     use {
         "ray-x/lsp_signature.nvim",
+        cond = not vim.g.minimal,
         config = function()
             require "lsp_signature".setup {
                 toggle_key = "<C-y>",
@@ -44,6 +45,7 @@ require('packer').startup({ function()
 
     use {
         'kosayoda/nvim-lightbulb',
+        cond = not vim.g.minimal,
         requires = 'antoinemadec/FixCursorHold.nvim',
         config = function()
             vim.g.cursorhold_updatetime = 100
@@ -68,6 +70,7 @@ require('packer').startup({ function()
 
     use {
         'hrsh7th/nvim-cmp',
+        cond = not vim.g.minimal,
         requires = {
             -- 'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-nvim-lsp',
@@ -123,6 +126,7 @@ require('packer').startup({ function()
     }
 
     use { 'tmsvg/pear-tree',
+        cond = not vim.g.minimal,
         config = function()
             vim.g.pear_tree_repeatable_expand = 0
             vim.g.pear_tree_map_special_keys = 0
@@ -139,12 +143,19 @@ require('packer').startup({ function()
         end
     }
 
-    use 'averms/black-nvim'
+    use {
+        'averms/black-nvim',
+        cond = not vim.g.minimal,
+    }
 
-    use 'stsewd/isort.nvim'
+    use {
+        'stsewd/isort.nvim',
+        cond = not vim.g.minimal,
+    }
 
     use {
         'simrat39/rust-tools.nvim',
+        cond = not vim.g.minimal,
         config = function()
             local rt = require 'rust-tools'
             -- Update this path
@@ -188,6 +199,7 @@ require('packer').startup({ function()
 
     use {
         'lewis6991/gitsigns.nvim',
+        cond = not vim.g.minimal,
         config = function()
             local function gitsigns_visual_op(op)
                 return function()
@@ -215,6 +227,7 @@ require('packer').startup({ function()
 
     use {
         'rhysd/git-messenger.vim',
+        cond = not vim.g.minimal,
         config = function()
             vim.g.git_messenger_always_into_popup = 1
             vim.g.git_messenger_no_default_mappings = 1
@@ -223,6 +236,7 @@ require('packer').startup({ function()
 
     use {
         'kdheepak/lazygit.nvim',
+        cond = not vim.g.minimal,
         config = function()
             if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
                 vim.env.GIT_EDITOR = [[nvr -cc split --remote-wait +'set bufhidden=wipe']]
@@ -252,6 +266,7 @@ require('packer').startup({ function()
 
     use {
         "folke/trouble.nvim",
+        cond = not vim.g.minimal,
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
             local trouble = require("trouble")
@@ -267,6 +282,7 @@ require('packer').startup({ function()
 
     use {
         'chentoast/marks.nvim',
+        cond = not vim.g.minimal,
         config = function()
             require 'marks'.setup {
                 default_mappings = false,
@@ -326,10 +342,11 @@ require('packer').startup({ function()
 
     use {
         'tpope/vim-dispatch',
-        cond = not vim.g.vscode
+        cond = not vim.g.vscode and not vim.g.minimal
     }
 
     use { 'mbbill/undotree',
+        cond = not vim.g.minimal,
         config = function()
             if vim.fn.has("persistent_undo") then
                 local target_path = vim.fn.expand('~/.undodir')
@@ -370,7 +387,10 @@ require('packer').startup({ function()
         end
     }
 
-    use 'skywind3000/asyncrun.vim'
+    use {
+        'skywind3000/asyncrun.vim',
+        cond = not vim.g.minimal,
+    }
 
     ---------------------------------------------------------------------------
     -- NOTES
@@ -460,6 +480,7 @@ require('packer').startup({ function()
 
     use {
         'norcalli/nvim-colorizer.lua',
+        cond = not vim.g.minimal,
         config = function()
             require 'colorizer'.setup()
         end
@@ -471,6 +492,7 @@ require('packer').startup({ function()
 
     use {
         'mfussenegger/nvim-dap',
+        cond = not vim.g.minimal and vim.g.ide,
         requires = {
             'mfussenegger/nvim-dap-python',
             'theHamsta/nvim-dap-virtual-text',
@@ -491,6 +513,7 @@ require('packer').startup({ function()
 
     use {
         "nvim-neotest/neotest",
+        cond = not vim.g.minimal and vim.g.ide,
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
