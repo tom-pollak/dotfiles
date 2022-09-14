@@ -49,6 +49,8 @@ require("telescope").setup {
             layout_config = {
                 prompt_position = "bottom",
                 preview_height = 0.6,
+                height = vim.o.lines,
+                width = vim.o.columns,
             },
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
