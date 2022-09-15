@@ -8,14 +8,9 @@ local check_git_workspace = function()
 end
 
 local root_dir = function()
-    if check_git_workspace() then
-        local filepath = vim.fn.expand('%:p:h')
-        local gitdir = vim.fn.finddir('.git', filepath .. ';')
-        --[[ return './' .. gitdir:sub(1,-5) ]]
-        return gitdir:sub(1,-5)
-    else
-        return vim.fn.getcwd()
-    end
+    return require("plenary.job"):new(
+        { command = "git", args = { "rev-parse", "--show-toplevel" } }
+    ):sync()[1]
 end
 
 local git_files = function()
