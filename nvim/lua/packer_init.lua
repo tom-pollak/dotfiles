@@ -401,9 +401,8 @@ require('packer').startup({ function()
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
-    use {
+    --[[ use {
         'renerocksai/telekasten.nvim',
-        --[[ cmd = "Telekasten", ]]
         config = function()
             local home = vim.fn.expand("~/notes/notes/drafts")
             require 'telekasten'.setup {
@@ -411,7 +410,18 @@ require('packer').startup({ function()
                 take_over_my_home = true
             }
         end
-    }
+    } ]]
+
+    use({ 'jakewvincent/mkdnflow.nvim',
+        --[[ rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed ]]
+        config = function()
+            require('mkdnflow').setup({
+                mappings = {
+                    MkdnEnter = {{'i', 'n', 'v'}, '<CR>'}
+                }
+            })
+        end
+    })
 
     ---------------------------------------------------------------------------
     -- PRETTY
@@ -434,7 +444,7 @@ require('packer').startup({ function()
                         ColorColumn = { bg = "#292929" },
                         -- Whitespace = { fg = util.lighten(c.syntax.comment, #292929 0.4) },
                         Whitespace = { fg = "red" },
-                        ExtraWhitespace = { ctermbg = "red", guibg = "red" },  
+                        ExtraWhitespace = { ctermbg = "red", guibg = "red" },
                         TreesitterContext = { bg = '#212e3f' }
                     }
                 end,

@@ -38,6 +38,7 @@ set fish_greeting
 
 alias cat=bat
 alias v=nvim
+alias vv='nvim -u ~/.config/nvim/minimal_init.lua'
 # alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"

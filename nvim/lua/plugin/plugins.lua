@@ -58,27 +58,27 @@ vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true
 vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 -- Telekasten
-vim.keymap.set('n', '<leader>mm', "<CMD>Telekasten panel<CR>", opts)
+--[[ vim.keymap.set('n', '<leader>mm', "<CMD>Telekasten panel<CR>", opts) ]]
 
 vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc><CMD>call clever_f#reset()<CR>', { silent = true })
 
-vim.api.nvim_create_user_command('Load', function()
-    vim.g.ide = false
-    vim.g.minimal = false
-    require 'startup'
-end, { nargs = 0 })
-
-vim.api.nvim_create_user_command('LoadIde', function()
-    vim.g.ide = true
-    vim.g.minimal = false
-    require 'startup'
-end, { nargs = 0 })
-
-vim.api.nvim_create_user_command('LoadMinimal', function()
-    vim.g.ide = false
-    vim.g.minimal = true
-    require 'startup'
-end, { nargs = 0 })
+--[[ vim.api.nvim_create_user_command('Load', function() ]]
+--[[     vim.g.ide = false ]]
+--[[     vim.g.minimal = false ]]
+--[[     require 'startup' ]]
+--[[ end, { nargs = 0 }) ]]
+--[[]]
+--[[ vim.api.nvim_create_user_command('LoadIde', function() ]]
+--[[     vim.g.ide = true ]]
+--[[     vim.g.minimal = false ]]
+--[[     require 'startup' ]]
+--[[ end, { nargs = 0 }) ]]
+--[[]]
+--[[ vim.api.nvim_create_user_command('LoadMinimal', function() ]]
+--[[     vim.g.ide = false ]]
+--[[     vim.g.minimal = true ]]
+--[[     require 'startup' ]]
+--[[ end, { nargs = 0 }) ]]
 
 vim.cmd [[
     highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
