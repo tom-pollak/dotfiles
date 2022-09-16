@@ -1,0 +1,20 @@
+gui:
+  editCommand: 'nvim'
+  editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'
+  showFileTree: true
+  showIcons: true
+  theme:
+    selectedLineByColor:
+      - underline
+    selectedRangeByColor:
+      - underline
+
+keybinding:
+  universal:
+    prevPage: '<c-u>' # go to next page in list
+    nextPage: '<c-d>' # go to previous page in list
+
+git:
+  paging:
+    colorArg: never
+    pager: delta --dark --paging=never
