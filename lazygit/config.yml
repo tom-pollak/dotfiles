@@ -16,5 +16,5 @@ keybinding:
 
 git:
   paging:
-    colorArg: never
+    colorArg: always
     pager: delta --dark --paging=never
