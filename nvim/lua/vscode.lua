@@ -1,7 +1,10 @@
 local M = {}
 
+
 local augroup = vim.api.nvim_create_augroup
 local keymap = vim.keymap.set
+
+vim.opt.ei = 'all'
 
 M.my_vscode = augroup('MyVSCode', {})
 
@@ -20,6 +23,9 @@ end
 local function v_notify(cmd)
     return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
 end
+
+keymap('v', '<', '< gv', { silent = true })
+keymap('v', '>', '> gv', { silent = true })
 
 keymap('n', '<Leader>rn', notify 'editor.action.rename', { silent = true })
 keymap('n', '<Leader>rg', notify 'workbench.action.findInFiles', { silent = true })
@@ -64,12 +70,12 @@ keymap('n', '<leader>s', notify 'workbench.action.gotoSymbol', { silent = true }
 keymap('n', '<leader>f', notify 'workbench.action.showAllSymbols', { silent = true })
 
 -- Diagnostics
-keymap('n', '<Leader>tw', notify 'workbench.actions.view.problems', { silent = true })
+--[[ keymap('n', '<Leader>tw', notify 'workbench.actions.view.problems', { silent = true }) ]]
 
 -- Toggle sidebar
-keymap('n', '<Leader>ts', notify 'workbench.action.toggleSidebarVisibility', { silent = true })
-keymap('n', '<Leader>th', notify 'workbench.action.toggleAuxiliaryBar', { silent = true })
-keymap('n', '<Leader>tp', notify 'workbench.action.togglePanel', { silent = true })
+keymap('n', '<Leader>ys', notify 'workbench.action.toggleSidebarVisibility', { silent = true })
+keymap('n', '<Leader>yh', notify 'workbench.action.toggleAuxiliaryBar', { silent = true })
+keymap('n', '<Leader>yp', notify 'workbench.action.togglePanel', { silent = true })
 
 --[[ keymap('n', '<Leader>ff', notify 'workbench.action.quickOpen', { silent = true }) -- find files ]]
 
@@ -115,12 +121,15 @@ keymap('n', '<leader>lu', notify 'git.unstageSelectedRanges', { silent = true })
 keymap('v', '<leader>lr', v_notify 'git.revertSelectedRanges', { silent = true })
 
 -- REAL SCROLLING
+--[[ keymap('n', '<c-d>', '<c-d>zz') ]]
+--[[ keymap('n', '<c-u>', '<c-u>zz') ]]
 --[[ keymap('n', '<c-u>', notify 'germanScroll.bertholdUp', { silent = true }) ]]
 --[[ keymap('n', '<c-d>', notify 'germanScroll.bertholdDown', { silent = true }) ]]
 --[[ keymap('n', '<c-y>', notify 'germanScroll.arminUp', { silent = true }) ]]
 --[[ keymap('n', '<c-e>', notify 'germanScroll.arminDown', { silent = true }) ]]
 
 keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', { silent = true })
+keymap('n', '<leader>df', notify 'workbench.action.debug.run', { silent = true })
 
 keymap('n', '<leader>dm', notify 'workbench.debug.viewlet.action.toggleBreakpointsActivatedAction', { silent = true })
 keymap('n', '<leader>dM', notify 'workbench.debug.viewlet.action.removeAllBreakpoints', { silent = true })
@@ -131,11 +140,10 @@ keymap('n', '<leader>dg', notify 'editor.debug.action.conditionalBreakpoint', { 
 
 keymap('n', '<leader>dc', notify 'workbench.action.debug.continue', { silent = true })
 keymap('n', '<leader>dp', notify 'workbench.action.debug.pause', { silent = true })
-keymap('n', '<leader>dt', notify 'workbench.action.debug.stop', { silent = true })
+keymap('n', '<leader>dy', notify 'workbench.action.debug.stop', { silent = true })
 
 keymap('n', '<leader>dn', notify 'editor.debug.action.runToCursor', { silent = true })
 keymap('n', '<leader>dr', notify 'workbench.debug.action.toggleRepl', { silent = true })
-keymap('n', '<leader>di', notify 'editor.debug.action.showDebugHover', { silent = true })
 
 keymap('n', '<leader>de', notify 'editor.debug.action.selectionToRepl', { silent = true })
 keymap('v', '<leader>de', v_notify 'editor.debug.action.selectionToRepl', { silent = true })
@@ -148,6 +156,15 @@ keymap('n', '<leader>dK', notify 'workbench.action.debug.callStackTop', { silent
 keymap('n', '<leader>du', notify 'debug.jumpToCursor', { silent = true })
 
 keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', { silent = true })
+
+keymap('n', '<leader>di', notify 'editor.debug.action.showDebugHover', { silent = true })
+keymap('n', '<leader>di', notify 'editor.debug.action.showDebugHover', { silent = true })
+
+keymap('n', '<leader>tt', notify 'test-explorer.pick-and-run', { silent = true })
+keymap('n', '<leader>tr', notify 'test-explorer.reset', { silent = true })
+keymap('n', '<leader>td', notify 'test-explorer.redebug', { silent = true })
+keymap('n', '<leader>tl', notify 'test-explorer.show-log', { silent = true })
+keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', { silent = true })
 
 -- Navigate something
 --[[ keymap('n', 'H', notify '', { silent = true }) ]]

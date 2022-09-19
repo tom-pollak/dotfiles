@@ -62,6 +62,10 @@ vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc><CMD>call clever_f#reset()<CR>', { silent = true })
 
+vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
+vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
+
+
 --[[ vim.api.nvim_create_user_command('Load', function() ]]
 --[[     vim.g.ide = false ]]
 --[[     vim.g.minimal = false ]]

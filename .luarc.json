@@ -4,6 +4,7 @@
         "vim",
         "use",
         "telescope_config",
-        "root_dir"
+        "root_dir",
+        "trouble"
     ]
 }

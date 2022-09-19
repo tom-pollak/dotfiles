@@ -1,3 +1,3 @@
 if not vim.g.vscode then
-    require('plugin')
+    require('plugin_setup')
 end

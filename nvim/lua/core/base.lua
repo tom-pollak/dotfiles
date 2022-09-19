@@ -56,9 +56,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end
 })
 
-vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })  
-vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
-
 -- Fix mouse
 --[[ local mouse_augroup = vim.api.nvim_create_augroup('mouse', {clear = true}) ]]
 --[[ vim.api.nvim_create_autocmd('FocusGained', { ]]

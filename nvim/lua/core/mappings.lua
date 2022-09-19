@@ -3,9 +3,6 @@
 vim.keymap.set('n', '<Leader>w', '<CMD>update<CR>', { silent = true })
 vim.keymap.set('n', '<Leader><CR>', '<CMD>update<CR><CMD>so %<CR>', { silent = true })
 
---[[ vim.keymap.set('v', '<', '< gv', { silent = true })
-vim.keymap.set('v', '>', '> gv', { silent = true }) ]]
-
 --[[ vim.keymap.set('i', 'jk', '<esc>', { silent = true, }) ]]
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true })

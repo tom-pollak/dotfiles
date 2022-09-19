@@ -6,8 +6,10 @@ local format = function()
     print("File formatted.")
 end
 
-vim.keymap.set('n', '<leader>q', format, { silent = true })
-vim.opt.makeprg = "cargo check"
+if not vim.g.vscode then
+    vim.keymap.set('n', '<leader>q', format, { silent = true })
+    vim.opt.makeprg = "cargo check"
+end
 --[[ vim.opt.makeprg = function(args)
     if args == "test" then
         return "cargo test"
