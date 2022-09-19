@@ -32,9 +32,18 @@
 	forceSignAnnotated = false
     [core]
   editor = code --wait
+[pager]
+    difftool = true
 [diff]
   tool = vscode
+  external = difft
+[difftool]
+  prompt = false
 [difftool "vscode"]
   cmd = code --wait --diff $LOCAL $REMOTE
 [mergetool "vscode"]
   cmd = code --wait $MERGED
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+[alias]
+  dft = difftool
