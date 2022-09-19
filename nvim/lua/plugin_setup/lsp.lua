@@ -45,3 +45,8 @@ lspconfig.clangd.setup {
         return lspconfig.util.root_pattern('compile_commands.json') or root_dir(fname)
     end
 }
+
+lspconfig.solargraph.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}

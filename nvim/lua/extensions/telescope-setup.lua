@@ -1,5 +1,7 @@
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+
+trouble = require("trouble.providers.telescope")
+
 local fb_actions = require "telescope".extensions.file_browser.actions
 
 require("telescope").setup {
@@ -18,8 +20,8 @@ require("telescope").setup {
                 ["<esc>"] = actions.close,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<c-t>"] = trouble.open_with_trouble,
                 ["<C-l>"] = function() vim.cmd "stopinsert" end,
+                ["<c-t>"] = trouble.open_with_trouble,
                 ["<c-q>"] = trouble.open_with_trouble,
 
             },
