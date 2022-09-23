@@ -261,7 +261,8 @@ require('packer').startup({ function()
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
-            { 'nvim-telescope/telescope-dap.nvim' }
+            { 'nvim-telescope/telescope-dap.nvim' },
+            { 'folke/trouble.nvim'}
         },
         config = function()
             require 'extensions.telescope-setup'
@@ -401,7 +402,7 @@ require('packer').startup({ function()
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
-    --[[ use {
+    use {
         'renerocksai/telekasten.nvim',
         config = function()
             local home = vim.fn.expand("~/notes/notes/drafts")
@@ -410,18 +411,7 @@ require('packer').startup({ function()
                 take_over_my_home = true
             }
         end
-    } ]]
-
-    use({ 'jakewvincent/mkdnflow.nvim',
-        --[[ rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed ]]
-        config = function()
-            require('mkdnflow').setup({
-                mappings = {
-                    MkdnEnter = {{'i', 'n', 'v'}, '<CR>'}
-                }
-            })
-        end
-    })
+    }
 
     ---------------------------------------------------------------------------
     -- PRETTY
@@ -555,5 +545,5 @@ require('packer').startup({ function()
     end
 end,
     config = {
-        compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'plugin', 'packer_compiled.lua')
+        compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'plugin_setup', 'packer_compiled.lua')
     } })
