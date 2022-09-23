@@ -6,7 +6,6 @@
 	cmd = "code --wait "
 [core]
 	editor = nvim
-	pager = diff-so-fancy | less -FXRi
 	autocrlf = input
 	excludesfile = /Users/Thomas.Pollak/.gitignore_global
 [user]
@@ -30,12 +29,10 @@
 	gpgSign = false
 [tag]
 	forceSignAnnotated = false
-    [core]
-  editor = code --wait
 [pager]
     difftool = true
 [diff]
-  tool = vscode
+  tool = nvim
   external = difft
 [difftool]
   prompt = false
@@ -47,3 +44,5 @@
   cmd = difft "$LOCAL" "$REMOTE"
 [alias]
   dft = difftool
+[init]
+	defaultBranch = main
