@@ -48,8 +48,8 @@ keymap('n', 'gD', notify 'editor.action.showDefinitionPreviewHover', { silent = 
 keymap('n', 'gf', notify 'editor.action.revealDeclaration', { silent = true })
 keymap('n', 'gF', notify 'editor.action.peekDeclaration', { silent = true })
 
-keymap('n', 'gr', notify 'editor.action.goToReferences', { silent = true })
-keymap('n', 'gR', notify 'references-view.findReferences', { silent = true })
+keymap('n', 'ge', notify 'editor.action.goToReferences', { silent = true })
+keymap('n', 'gr', notify 'references-view.findReferences', { silent = true })
 
 keymap('n', 'gt', notify 'editor.action.goToTypeDefinition', { silent = true })
 keymap('n', 'gi', notify 'editor.action.goToImplementation', { silent = true })
@@ -165,6 +165,8 @@ keymap('n', '<leader>tr', notify 'test-explorer.reset', { silent = true })
 keymap('n', '<leader>td', notify 'test-explorer.redebug', { silent = true })
 keymap('n', '<leader>tl', notify 'test-explorer.show-log', { silent = true })
 keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', { silent = true })
+
+keymap('n', 'K', notify 'docsView.documentation.focus', { silent = true })
 
 -- Navigate something
 --[[ keymap('n', 'H', notify '', { silent = true }) ]]
