@@ -73,15 +73,14 @@ require('packer').startup({ function()
 
     use {
         'hrsh7th/nvim-cmp',
-        cond = not vim.g.minimal, -- Autocmd error if disabled vscode
+        cond = not vim.g.minimal and not vim.g.vscode, -- Autocmd error if disabled vscode
         requires = {
             -- 'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-path',
-            'saadparwaiz1/cmp_luasnip',
-            'L3MON4D3/LuaSnip',
-            'rcarriga/cmp-dap'
-
+            {'hrsh7th/cmp-nvim-lsp', cond = not vim.g.vscode},
+            { 'hrsh7th/cmp-path', cond = not vim.g.vscode},
+            { 'saadparwaiz1/cmp_luasnip', cond = not vim.g.vscode},
+            { 'L3MON4D3/LuaSnip'},
+            { 'rcarriga/cmp-dap', cond = not vim.g.vscode}
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
@@ -262,10 +261,10 @@ require('packer').startup({ function()
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-dap.nvim' },
-            { 'folke/trouble.nvim'}
+            { 'folke/trouble.nvim', cond = not vim.g.vscode } -- Must have cond like below
         },
         config = function()
-            require 'extensions.telescope-setup'
+            require 'extensions.telescope-setup'.setup()
         end
     }
 
@@ -404,8 +403,9 @@ require('packer').startup({ function()
 
     use {
         'renerocksai/telekasten.nvim',
+        keys = '<leader>m',
         config = function()
-            local home = vim.fn.expand("~/notes/notes/drafts")
+            local home = vim.fn.expand("~/projects/notes/notes/drafts")
             require 'telekasten'.setup {
                 home = home,
                 take_over_my_home = true
