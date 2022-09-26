@@ -74,11 +74,11 @@ vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
 --[[     require 'startup' ]]
 --[[ end, { nargs = 0 }) ]]
 --[[]]
---[[ vim.api.nvim_create_user_command('LoadIde', function() ]]
---[[     vim.g.ide = true ]]
---[[     vim.g.minimal = false ]]
---[[     require 'startup' ]]
---[[ end, { nargs = 0 }) ]]
+vim.api.nvim_create_user_command('LoadIde', function()
+    vim.g.ide = true
+    vim.g.minimal = false
+    require 'startup'
+end, { nargs = 0 })
 --[[]]
 --[[ vim.api.nvim_create_user_command('LoadMinimal', function() ]]
 --[[     vim.g.ide = false ]]

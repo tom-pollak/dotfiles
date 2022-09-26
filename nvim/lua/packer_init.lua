@@ -76,11 +76,11 @@ require('packer').startup({ function()
         cond = not vim.g.minimal and not vim.g.vscode, -- Autocmd error if disabled vscode
         requires = {
             -- 'hrsh7th/cmp-buffer',
-            {'hrsh7th/cmp-nvim-lsp', cond = not vim.g.vscode},
-            { 'hrsh7th/cmp-path', cond = not vim.g.vscode},
-            { 'saadparwaiz1/cmp_luasnip', cond = not vim.g.vscode},
-            { 'L3MON4D3/LuaSnip'},
-            { 'rcarriga/cmp-dap', cond = not vim.g.vscode}
+            { 'hrsh7th/cmp-nvim-lsp', cond = not vim.g.vscode },
+            { 'hrsh7th/cmp-path', cond = not vim.g.vscode },
+            { 'saadparwaiz1/cmp_luasnip', cond = not vim.g.vscode },
+            { 'L3MON4D3/LuaSnip' },
+            { 'rcarriga/cmp-dap', cond = not vim.g.vscode }
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
@@ -174,17 +174,26 @@ require('packer').startup({ function()
                         codelldb_path, liblldb_path)
                 },
                 server = {
+                    standalone = true,
                     on_attach = function(client, bufnr)
                         require 'extensions.lsp-attach'.on_attach(client, bufnr)
                         -- Hover actions
                         vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
                         -- Code action groups
                         vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        vim.keymap.set('n', '<leader>dd', rt.debuggables.debuggables, { buffer = bufnr })
+                        vim.keymap.set('n', '<leader>df', rt.runnables.runnables, { buffer = bufnr })
                         vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
                         -- Gives errors
                         --[[ vim.keymap.set("n", "J", rt.join_lines.join_lines, { buffer = bufnr }) ]]
 
                     end,
+                    settings = {
+                        checkOnSave = {
+                            -- default: `cargo check`
+                            command = "clippy"
+                        },
+                    }
                 }
             }
             rt.setup(opts)
@@ -433,7 +442,7 @@ require('packer').startup({ function()
                         -- Whitespace = { fg = util.lighten(c.syntax.comment, #292929 0.4) },
                         Whitespace = { fg = "red" },
                         ExtraWhitespace = { ctermbg = "red", guibg = "red" },
-                        TreesitterContext = { bg = '#212e3f' }
+                        TreesitterContext = { bg = '#090c10' }
                     }
                 end,
                 dark_float = true,
@@ -471,7 +480,7 @@ require('packer').startup({ function()
                 show_trailing_blankline_indent = false,
                 space_char_blankline = " ",
                 show_current_context = true,
-                -- show_current_context_start = true,
+                show_current_context_start = false,
             }
         end
     }
@@ -497,8 +506,9 @@ require('packer').startup({ function()
             "rcarriga/nvim-dap-ui"
         },
         config = function()
-            vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
+            vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
             vim.fn.sign_define('DapBreakpointRejected', { text = '🟦', texthl = '', linehl = '', numhl = '' })
+            vim.fn.sign_define('DapBreakpointCondition', { text = '🔵', texthl = '', linehl = '', numhl = '' })
             vim.fn.sign_define('DapStopped', { text = '⭐️', texthl = '', linehl = '', numhl = '' })
             require('extensions.dap-ui').setup()
             require("nvim-dap-virtual-text").setup()
@@ -518,7 +528,6 @@ require('packer').startup({ function()
             "antoinemadec/FixCursorHold.nvim",
             { "nvim-neotest/neotest-vim-test", requires = 'vim-test/vim-test' },
             "nvim-neotest/neotest-python",
-            "rouge8/neotest-rust",
             "nvim-neotest/neotest-plenary"
         },
         config = function()
@@ -528,9 +537,8 @@ require('packer').startup({ function()
                         dap = { justMyCode = false },
                     }),
                     require("neotest-plenary"),
-                    require("neotest-rust"),
                     require("neotest-vim-test")({
-                        ignore_file_types = { "python", "lua", "rust" },
+                        ignore_file_types = { "python", "lua" },
                     }),
                 },
             })

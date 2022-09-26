@@ -13,14 +13,16 @@ vim.keymap.set('n', '<M-l>', dap.step_into)
 vim.keymap.set('n', '<M-h>', dap.step_back)
 
 vim.keymap.set('n', '<leader>dg', dap.continue)
-vim.keymap.set('n', '<leader>dp', dap.pause)
-
 vim.keymap.set('n', '<leader>dn', dap.run_to_cursor)
+
+vim.keymap.set('n', '<leader>dp', dap.pause)
 vim.keymap.set('n', '<leader>dt', function()
     print "Session closed"
     dap.terminate()
     dapui.close()
 end)
+
+vim.keymap.set('n', '<leader>dm', dap.clear_breakpoints)
 
 
 
@@ -36,8 +38,12 @@ vim.keymap.set('n', '<leader>dj', function()
     require "dap".down()
 end)
 
+if vim.bo.filetype ~= 'rust' then
+    vim.keymap.set('n', '<leader>df', function() require("neotest").run.run({ strategy = "dap" }) end)
+    vim.keymap.set('n', '<leader>dd', telescope_dap.configurations)
+end
+
 vim.keymap.set('n', '<leader>dc', telescope_dap.commands)
-vim.keymap.set('n', '<leader>dd', telescope_dap.configurations)
 vim.keymap.set('n', '<leader>ds', telescope_dap.frames)
 vim.keymap.set('n', '<leader>db', telescope_dap.list_breakpoints)
 
@@ -48,7 +54,6 @@ vim.keymap.set('n', '<leader>du', function()
 end)
 vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval)
 
-vim.keymap.set('n', '<leader>df', function() require("neotest").run.run({ strategy = "dap" }) end)
 
 vim.keymap.set('n', '<leader>dr', function()
     dapui.close(1)
