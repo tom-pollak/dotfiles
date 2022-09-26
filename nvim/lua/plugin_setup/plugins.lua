@@ -58,7 +58,7 @@ vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true
 vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 -- Telekasten
-vim.keymap.set('n', '<leader>mm', function()
+vim.keymap.set('n', '<leader>m', function()
     vim.cmd(":Telekasten") -- I have no idea why I can't do <CMD>Telekasten<CR> but it don't work
 end)
 

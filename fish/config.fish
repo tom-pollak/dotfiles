@@ -33,6 +33,7 @@ set -gx DYLD_LIBRARY_PATH /usr/local/lib
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 set -gx NVM_DIR $HOME/.nvm
 set -gx fisher_path /Users/tom/.config/fish/
+set -gx DFT_DISPLAY inline
 
 set fish_greeting
 
