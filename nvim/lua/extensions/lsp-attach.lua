@@ -66,9 +66,9 @@ local on_attach = function(client, bufnr)
         vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
     end
 
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
+    vim.keymap.set('n', '<leader>ta', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<leader>tr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<leader>tl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
 end
