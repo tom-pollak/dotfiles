@@ -261,7 +261,6 @@ require('packer').startup({ function()
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
             { 'nvim-telescope/telescope-dap.nvim' },
-            { 'folke/trouble.nvim', cond = not vim.g.vscode } -- Must have cond like below
         },
         config = function()
             require 'extensions.telescope-setup'.setup()
@@ -270,7 +269,6 @@ require('packer').startup({ function()
 
     use {
         "folke/trouble.nvim",
-        cond = not vim.g.vscode,
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
             local trouble = require("trouble")
@@ -403,7 +401,7 @@ require('packer').startup({ function()
 
     use {
         'renerocksai/telekasten.nvim',
-        keys = '<leader>m',
+        cmd = "Telekasten",
         config = function()
             local home = vim.fn.expand("~/projects/notes/notes/drafts")
             require 'telekasten'.setup {
