@@ -88,10 +88,10 @@ local setup = function()
                 },
             },
             dap = {
-                theme = "dropdown"
+                theme = "cursor"
             },
             project = {
-                theme = "dropdown",
+                theme = "cursor",
                 base_dirs = {
                     "~/projects",
                 }

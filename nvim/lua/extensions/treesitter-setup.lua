@@ -16,15 +16,15 @@ require 'nvim-treesitter.configs'.setup {
     highlight = {
         enable = in_vim,
     },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = '<TAB>',
-            scope_incremental = '<CR>',
-            node_incremental = '<TAB>',
-            node_decremental = '<S-TAB>',
-        },
-    },
+    --[[ incremental_selection = { ]]
+    --[[     enable = true, ]]
+    --[[     keymaps = { ]]
+    --[[         init_selection = '<TAB>', ]]
+    --[[         scope_incremental = '<CR>', ]]
+    --[[         node_incremental = '<TAB>', ]]
+    --[[         node_decremental = '<S-TAB>', ]]
+    --[[     }, ]]
+    --[[ }, ]]
     rainbow = {
         enable = in_vim,
         extended_mode = true,
@@ -106,5 +106,15 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 require 'treesitter-context'.setup {
-    enable = false
+    enable = true,
+    patterns = {
+       rust = {
+            'impl_item',
+            'struct',
+            'enum',
+            'mod',
+            'match',
+            'loop',
+        },
+    }
 }
