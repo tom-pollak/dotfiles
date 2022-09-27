@@ -96,7 +96,7 @@ vim.keymap.set('n', '<c-p>', git_files)
 vim.keymap.set('n', '<leader>h', builtin.help_tags)
 vim.keymap.set('n', '<c-e>', find_files)
 vim.keymap.set('n', '<c-b>', buffers)
-vim.keymap.set('n', '<leader>rg', function() live_grep(root_dir()) end)
+vim.keymap.set('n', '<leader>f', function() live_grep(root_dir()) end)
 
 
 vim.keymap.set('c', '<c-f>', command_history)
