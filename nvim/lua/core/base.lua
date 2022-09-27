@@ -28,6 +28,7 @@ set.smartindent = true
 set.cursorline = true
 set.termguicolors = true
 set.lazyredraw = true
+set.pumheight = 12
 --[[ set.autochdir = true ]]
 
 vim.cmd("set guicursor=n-v-c-i:block")

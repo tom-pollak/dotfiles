@@ -343,7 +343,12 @@ require('packer').startup({ function()
         end
     }
 
-    use 'tpope/vim-surround'
+    use {
+        'tpope/vim-surround',
+        config = function ()
+            vim.g.surround_no_insert_mappings = 1
+        end
+    }
 
     use 'tpope/vim-repeat'
 
