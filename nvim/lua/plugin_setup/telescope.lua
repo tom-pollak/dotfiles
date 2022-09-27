@@ -23,7 +23,8 @@ end
 local find_files = function()
     builtin.find_files({
         sort_lastused = true,
-        ignore_current_buffer = true
+        ignore_current_buffer = true,
+        sort_mru = true
     })
 end
 
@@ -91,8 +92,8 @@ local run_history = function()
 end
 
 -- Telescope
---[[ vim.keymap.set('n', '<c-p>', project_files) ]]
-vim.keymap.set('n', '<c-p>', git_files)
+vim.keymap.set('n', '<c-p>', project_files)
+--[[ vim.keymap.set('n', '<c-p>', git_files) ]]
 vim.keymap.set('n', '<leader>h', builtin.help_tags)
 vim.keymap.set('n', '<c-e>', find_files)
 vim.keymap.set('n', '<c-b>', buffers)

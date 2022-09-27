@@ -7,12 +7,16 @@ local telescope = require("telescope")
 local setup = function()
     telescope.setup {
         defaults = {
-            borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+            borderchars = { "─", " ", " ", " ", " ", " ", " ", " " },
             shorten_path = true,
             layout_strategy = "vertical",
             layout_config = {
-                height = vim.o.lines,
-                width = vim.o.columns,
+                vertical = {
+                    height = function() return vim.o.lines end,
+                    width = function() return vim.o.columns end,
+                    preview_height = 0.65,
+                    prompt_position = "bottom"
+                }
             },
             mappings = {
                 i = {
