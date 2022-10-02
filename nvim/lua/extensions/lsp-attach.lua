@@ -62,7 +62,7 @@ local on_attach = function(client, bufnr)
     -- end, { silent = true, noremap = true })
 
     if client and client.supports_method("textDocument/formatting") then
-        vim.keymap.set('n', '<leader>q', vim.lsp.buf.format, bufopts)
+        vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
     end
 
     vim.keymap.set('n', '<leader>ta', vim.lsp.buf.add_workspace_folder, bufopts)
