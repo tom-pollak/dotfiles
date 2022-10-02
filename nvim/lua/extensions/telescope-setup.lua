@@ -12,9 +12,16 @@ local setup = function()
             layout_strategy = "vertical",
             layout_config = {
                 vertical = {
-                    height = function() return vim.o.lines end,
-                    width = function() return vim.o.columns end,
-                    preview_height = 0.65,
+                    height = function(_, _, lines) return lines end,
+                    width = function(_, cols, _) return cols end,
+                    preview_height = function(_, _, lines)
+                        local denom = 0.65
+                        if lines < 40 then
+                            denom = 0.33
+                        end
+                        return math.floor(lines * denom)
+                    end,
+                    preview_cutoff = 20,
                     prompt_position = "bottom"
                 }
             },
@@ -50,13 +57,6 @@ local setup = function()
             file_browser = {
                 grouped = true,
                 initial_mode = "normal",
-                layout_strategy = "vertical",
-                layout_config = {
-                    prompt_position = "bottom",
-                    preview_height = 0.5,
-                    height = vim.o.lines,
-                    width = vim.o.columns,
-                },
                 -- disables netrw and use telescope-file-browser in its place
                 hijack_netrw = true,
                 mappings = {

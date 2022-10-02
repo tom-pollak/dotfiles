@@ -17,7 +17,7 @@ set.softtabstop = 4
 set.expandtab = true
 set.encoding = "utf-8"
 set.wrap = false
-set.scrolloff = 4
+set.scrolloff = 6
 set.undofile = true
 set.smartcase = true
 set.ignorecase = true
@@ -29,6 +29,8 @@ set.cursorline = true
 set.termguicolors = true
 set.lazyredraw = true
 set.pumheight = 12
+--[[ set.ls = 0 ]]
+--[[ set.ch = 0 ]]
 --[[ set.autochdir = true ]]
 
 vim.cmd("set guicursor=n-v-c-i:block")

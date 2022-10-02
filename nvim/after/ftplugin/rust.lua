@@ -6,9 +6,9 @@ local format = function()
     print("File formatted.")
 end
 
-if not vim.g.vscode then
+--[[ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>q', format, { silent = true })
-end
+end ]]
 
 --[[ vim.opt.makeprg = function(args)
     if args == "test" then

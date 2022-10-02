@@ -110,8 +110,8 @@ vim.keymap.set('n', '<leader>cc', vim_config)
 
 vim.keymap.set('n', "'", bookmarks_all)
 
-vim.keymap.set('n', '<leader>rr', "<CMD>Telescope file_browser<CR>")
-vim.keymap.set('n', '<leader>e', require 'telescope'.extensions.project.project)
+vim.keymap.set('n', '<leader>e', "<CMD>Telescope file_browser<CR>")
+vim.keymap.set('n', '<leader>rr', require 'telescope'.extensions.project.project)
 
 -- Telekasten
 vim.keymap.set('n', '<leader>cm', function() live_grep('~/projects/notes/notes/') end)

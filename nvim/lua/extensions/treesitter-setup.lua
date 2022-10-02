@@ -63,7 +63,6 @@ require 'nvim-treesitter.configs'.setup {
             set_jumps = true,
             goto_next_start = {
                 [']f'] = '@function.outer',
-                [']<Leader>c'] = '@class.outer',
                 [']k'] = '@class.outer',
                 [']l'] = '@loop.outer',
                 [']c'] = '@conditional.outer',
@@ -73,7 +72,6 @@ require 'nvim-treesitter.configs'.setup {
 
             goto_next_end = {
                 [']F'] = '@function.outer',
-                [']<Leader>C'] = '@class.outer',
                 [']K'] = '@class.outer',
                 [']L'] = '@loop.outer',
                 [']C'] = '@conditional.outer',
@@ -108,7 +106,7 @@ require 'nvim-treesitter.configs'.setup {
 require 'treesitter-context'.setup {
     enable = true,
     patterns = {
-       rust = {
+        rust = {
             'impl_item',
             'struct',
             'enum',

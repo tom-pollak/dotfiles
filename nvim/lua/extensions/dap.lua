@@ -4,7 +4,7 @@ local dapui = require 'dapui'
 
 vim.keymap.set('n', '<leader>dh', dap.toggle_breakpoint)
 vim.keymap.set('n', '<leader>dH', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
-vim.keymap.set('n', '<leader>de', function() dap.set_exception_breakpoints({ "all" }) end)
+vim.keymap.set('n', '<leader>dE', function() dap.set_exception_breakpoints({ "all" }) end)
 
 
 vim.keymap.set('n', '<M-j>', dap.step_over)
@@ -23,7 +23,6 @@ vim.keymap.set('n', '<leader>dt', function()
 end)
 
 vim.keymap.set('n', '<leader>dm', dap.clear_breakpoints)
-
 
 
 vim.keymap.set('n', '<leader>di', require 'dap.ui.widgets'.hover)
@@ -46,25 +45,16 @@ end
 vim.keymap.set('n', '<leader>dc', telescope_dap.commands)
 vim.keymap.set('n', '<leader>ds', telescope_dap.frames)
 vim.keymap.set('n', '<leader>db', telescope_dap.list_breakpoints)
+vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval)
 
 vim.keymap.set('n', '<leader>du', function()
     dapui.close(3)
     dapui.toggle(1)
     dapui.toggle(2)
 end)
-vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval)
-
 
 vim.keymap.set('n', '<leader>dr', function()
     dapui.close(1)
     dapui.close(2)
     dapui.toggle(3)
 end)
-
---[[ local is_dap_window = function () ]]
---[[     local api = vim.api ]]
---[[     local win_id = api.nvim_get_current_win() ]]
---[[     local buf_id = api.nvim_win_get_buf(win_id) ]]
---[[     local buf_name = api.nvim_buf_get_name(buf_id) ]]
---[[     return buf_name:lower():find("dap") ]]
---[[ end ]]
