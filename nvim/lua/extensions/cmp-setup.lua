@@ -79,7 +79,26 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ['<C-space>'] = cmp.mapping.complete(),
         ['<C-g>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` only confirm explicitly selected items.
+        ['<CR>'] = function(fallback)
+            -- Don't block <CR> if signature help is active
+            -- https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/issues/13
+            if not cmp.visible() or not cmp.get_selected_entry() or
+                cmp.get_selected_entry().source.name == 'nvim_lsp_signature_help' then
+                -- HACK: This is stupid. For some reason <CR> is remapped to "b",
+                -- and I have no idea how
+                --[[ fallback() ]]
+                local enter = vim.api.nvim_replace_termcodes("<S-CR>", true, false, true)
+                vim.api.nvim_feedkeys(enter, "i", true)
+            else
+                cmp.confirm({
+                    -- Replace word if completing in the middle of a word
+                    -- https://github.com/hrsh7th/nvim-cmp/issues/664
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    -- Don't select first item on CR if nothing was selected
+                    select = false,
+                })
+            end
+        end,
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         --[[ ["<Tab>"] = cmp.mapping.select_next_item(),
@@ -115,8 +134,8 @@ cmp.setup({
         end, { "i", "s" })
     }),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
         { name = "nvim_lsp_signature_help" },
+        { name = 'nvim_lsp' },
         { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
         { name = 'path' },
         { name = 'dap' },

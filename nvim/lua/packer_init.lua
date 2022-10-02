@@ -159,6 +159,7 @@ require('packer').startup({ function()
     use {
         'simrat39/rust-tools.nvim',
         cond = not vim.g.minimal and not vim.g.vscode,
+        ft = { "rust", "rs" },
         config = function()
             local rt = require 'rust-tools'
             -- Update this path
@@ -189,10 +190,12 @@ require('packer').startup({ function()
 
                     end,
                     settings = {
-                        checkOnSave = {
-                            -- default: `cargo check`
-                            command = "clippy"
-                        },
+                        ["rust-analyzer"] = {
+                            checkOnSave = {
+                                -- default: `cargo check`
+                                command = "clippy"
+                            },
+                        }
                     }
                 }
             }
@@ -223,9 +226,9 @@ require('packer').startup({ function()
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
                     local opts = { buffer = bufnr }
-                    vim.keymap.set('n', '<leader>o', gs.diffthis, opts)
                     vim.keymap.set("n", "<leader>n", gs.next_hunk, opts)
                     vim.keymap.set("n", "<leader>p", gs.prev_hunk, opts)
+                    vim.keymap.set('n', '<leader>lo', gs.diffthis, opts)
                     vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
                     vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
                     vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
@@ -345,7 +348,7 @@ require('packer').startup({ function()
 
     use {
         'tpope/vim-surround',
-        config = function ()
+        config = function()
             vim.g.surround_no_insert_mappings = 1
         end
     }

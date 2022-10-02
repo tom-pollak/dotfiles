@@ -167,14 +167,14 @@ _G.packer_plugins = {
     url = "https://github.com/rhysd/git-messenger.vim"
   },
   ["github-nvim-theme"] = {
-    config = { "\27LJ\2\n™\1\0\1\3\0\t\0\n5\1\1\0005\2\0\0=\2\2\0015\2\3\0=\2\4\0015\2\5\0=\2\6\0015\2\a\0=\2\b\1L\1\2\0\22TreesitterContext\1\0\1\abg\f#090c10\20ExtraWhitespace\1\0\2\fctermbg\bred\nguibg\bred\15Whitespace\1\0\1\afg\bred\16ColorColumn\1\0\0\1\0\1\abg\f#292929˝\1\1\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0023\3\b\0=\3\t\2B\0\2\1K\0\1\0\14overrides\0\vcolors\1\0\3\14bg_search\f#163356\19cursor_line_nr\f#FFEA00\abg\f#0d1117\rsidebars\1\5\0\0\aqf\vpacker\rterminal\ftrouble\1\0\3\15dark_float\2\16theme_style\17dark_default\17dark_sidebar\2\nsetup\17github-theme\frequire\0" },
+    config = { "\27LJ\2\n™\1\0\1\3\0\t\0\n5\1\1\0005\2\0\0=\2\2\0015\2\3\0=\2\4\0015\2\5\0=\2\6\0015\2\a\0=\2\b\1L\1\2\0\22TreesitterContext\1\0\1\abg\f#090c10\20ExtraWhitespace\1\0\2\fctermbg\bred\nguibg\bred\15Whitespace\1\0\1\afg\bred\16ColorColumn\1\0\0\1\0\1\abg\f#292929˝\1\1\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0023\3\b\0=\3\t\2B\0\2\1K\0\1\0\14overrides\0\vcolors\1\0\3\abg\f#0d1117\14bg_search\f#163356\19cursor_line_nr\f#FFEA00\rsidebars\1\5\0\0\aqf\vpacker\rterminal\ftrouble\1\0\3\16theme_style\17dark_default\17dark_sidebar\2\15dark_float\2\nsetup\17github-theme\frequire\0" },
     loaded = true,
     path = "/Users/tom/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
     url = "https://github.com/projekt0n/github-nvim-theme"
   },
   ["gitsigns.nvim"] = {
     cond = { true },
-    config = { "\27LJ\2\n|\0\0\6\1\a\1\0196\0\0\0'\2\1\0B\0\2\2-\1\0\0008\0\1\0004\2\3\0006\3\2\0009\3\3\0039\3\4\3'\5\5\0B\3\2\2>\3\1\0026\3\2\0009\3\3\0039\3\4\3'\5\6\0B\3\2\0?\3\0\0D\0\2\0\0¿\6v\6.\tline\afn\bvim\rgitsigns\frequire\5ÄÄ¿ô\4\20\1\1\2\0\1\0\0033\1\0\0002\0\0ÄL\1\2\0\0‡\4\0\1\n\1\29\0P6\1\0\0009\1\1\0019\1\2\0015\2\3\0=\0\4\0026\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\t\0009\a\n\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\v\0009\a\f\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\r\0009\a\14\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\15\0009\a\16\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\17\0009\a\18\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\0035\5\19\0'\6\20\0009\a\21\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\0035\5\22\0'\6\23\0009\a\24\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\25\0009\a\26\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\0035\5\27\0'\6\28\0-\a\0\0'\t\21\0B\a\2\2\18\b\2\0B\3\5\1K\0\1\0\0¿\15<leader>ll\1\3\0\0\6n\6v\20undo_stage_hunk\15<leader>lu\15reset_hunk\15<leader>lr\1\3\0\0\6n\6v\15stage_hunk\15<leader>ls\1\3\0\0\6n\6v\19toggle_deleted\15<leader>ld\30toggle_current_line_blame\15<leader>lb\14prev_hunk\14<leader>p\14next_hunk\14<leader>n\rdiffthis\14<leader>o\6n\bset\vkeymap\bvim\vbuffer\1\0\0\rgitsigns\vloaded\fpackageY\1\0\5\0\a\0\v3\0\0\0006\1\1\0'\3\2\0B\1\2\0029\1\3\0015\3\5\0003\4\4\0=\4\6\3B\1\2\0012\0\0ÄK\0\1\0\14on_attach\1\0\0\0\nsetup\rgitsigns\frequire\0\0" },
+    config = { "\27LJ\2\n|\0\0\6\1\a\1\0196\0\0\0'\2\1\0B\0\2\2-\1\0\0008\0\1\0004\2\3\0006\3\2\0009\3\3\0039\3\4\3'\5\5\0B\3\2\2>\3\1\0026\3\2\0009\3\3\0039\3\4\3'\5\6\0B\3\2\0?\3\0\0D\0\2\0\0¿\6v\6.\tline\afn\bvim\rgitsigns\frequire\5ÄÄ¿ô\4\20\1\1\2\0\1\0\0033\1\0\0002\0\0ÄL\1\2\0\0·\4\0\1\n\1\29\0P6\1\0\0009\1\1\0019\1\2\0015\2\3\0=\0\4\0026\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\t\0009\a\n\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\v\0009\a\f\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\r\0009\a\14\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\15\0009\a\16\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\17\0009\a\18\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\0035\5\19\0'\6\20\0009\a\21\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\0035\5\22\0'\6\23\0009\a\24\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\3'\5\b\0'\6\25\0009\a\26\1\18\b\2\0B\3\5\0016\3\5\0009\3\6\0039\3\a\0035\5\27\0'\6\28\0-\a\0\0'\t\21\0B\a\2\2\18\b\2\0B\3\5\1K\0\1\0\0¿\15<leader>ll\1\3\0\0\6n\6v\20undo_stage_hunk\15<leader>lu\15reset_hunk\15<leader>lr\1\3\0\0\6n\6v\15stage_hunk\15<leader>ls\1\3\0\0\6n\6v\19toggle_deleted\15<leader>ld\30toggle_current_line_blame\15<leader>lb\rdiffthis\15<leader>lo\14prev_hunk\14<leader>p\14next_hunk\14<leader>n\6n\bset\vkeymap\bvim\vbuffer\1\0\0\rgitsigns\vloaded\fpackageY\1\0\5\0\a\0\v3\0\0\0006\1\1\0'\3\2\0B\1\2\0029\1\3\0015\3\5\0003\4\4\0=\4\6\3B\1\2\0012\0\0ÄK\0\1\0\14on_attach\1\0\0\0\nsetup\rgitsigns\frequire\0\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = true,
@@ -188,7 +188,7 @@ _G.packer_plugins = {
     url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["indent-blankline.nvim"] = {
-    config = { "\27LJ\2\nù\3\0\0\3\0\t\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\0\0009\0\1\0'\2\4\0B\0\2\0016\0\5\0'\2\6\0B\0\2\0029\0\a\0005\2\b\0B\0\2\1K\0\1\0\1\0\4\31show_current_context_start\1\25show_current_context\2\25space_char_blankline\6 #show_trailing_blankline_indent\1\nsetup\21indent_blankline\frequire< highlight ExtraWhitespace guifg=#C678DD gui=nocombine G highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine @ highlight IndentBlanklineChar guifg=#292929 gui=nocombine \bcmd\bvim\0" },
+    config = { "\27LJ\2\nù\3\0\0\3\0\t\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\0\0009\0\1\0'\2\4\0B\0\2\0016\0\5\0'\2\6\0B\0\2\0029\0\a\0005\2\b\0B\0\2\1K\0\1\0\1\0\4#show_trailing_blankline_indent\1\31show_current_context_start\1\25show_current_context\2\25space_char_blankline\6 \nsetup\21indent_blankline\frequire< highlight ExtraWhitespace guifg=#C678DD gui=nocombine G highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine @ highlight IndentBlanklineChar guifg=#292929 gui=nocombine \bcmd\bvim\0" },
     loaded = true,
     path = "/Users/tom/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
@@ -232,7 +232,7 @@ _G.packer_plugins = {
   },
   ["marks.nvim"] = {
     cond = { true },
-    config = { "\27LJ\2\n∑\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\rmappings\1\0\3\18set_bookmark0\amm\21delete_bookmark0\acm\20delete_bookmark\adm\15bookmark_0\1\0\1\tsign\b‚öë\1\0\1\21default_mappings\1\nsetup\nmarks\frequire\0" },
+    config = { "\27LJ\2\n∑\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\rmappings\1\0\3\21delete_bookmark0\acm\20delete_bookmark\adm\18set_bookmark0\amm\15bookmark_0\1\0\1\tsign\b‚öë\1\0\1\21default_mappings\1\nsetup\nmarks\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = true,
@@ -285,7 +285,7 @@ _G.packer_plugins = {
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-dap"] = {
-    config = { "\27LJ\2\nâ\4\0\0\4\0\19\0+6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\5\0005\3\6\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0005\3\b\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\t\0005\3\n\0B\0\3\0016\0\v\0'\2\f\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\14\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\15\0B\0\2\0029\1\r\0'\3\16\0B\1\2\1'\1\18\0=\1\17\0K\0\1\0\vpytest\16test_runner\27/usr/local/bin/python3\15dap-python\26nvim-dap-virtual-text\nsetup\22extensions.dap-ui\frequire\1\0\4\vtexthl\5\nnumhl\5\ttext\v‚≠êÔ∏è\vlinehl\5\15DapStopped\1\0\4\vtexthl\5\nnumhl\5\ttext\tüîµ\vlinehl\5\27DapBreakpointCondition\1\0\4\vtexthl\5\nnumhl\5\ttext\tüü¶\vlinehl\5\26DapBreakpointRejected\1\0\4\vtexthl\5\nnumhl\5\ttext\tüî¥\vlinehl\5\18DapBreakpoint\16sign_define\afn\bvim\0" },
+    config = { "\27LJ\2\nâ\4\0\0\4\0\19\0+6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\5\0005\3\6\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0005\3\b\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\t\0005\3\n\0B\0\3\0016\0\v\0'\2\f\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\14\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\15\0B\0\2\0029\1\r\0'\3\16\0B\1\2\1'\1\18\0=\1\17\0K\0\1\0\vpytest\16test_runner\27/usr/local/bin/python3\15dap-python\26nvim-dap-virtual-text\nsetup\22extensions.dap-ui\frequire\1\0\4\nnumhl\5\ttext\v‚≠êÔ∏è\vlinehl\5\vtexthl\5\15DapStopped\1\0\4\nnumhl\5\ttext\tüîµ\vlinehl\5\vtexthl\5\27DapBreakpointCondition\1\0\4\nnumhl\5\ttext\tüü¶\vlinehl\5\vtexthl\5\26DapBreakpointRejected\1\0\4\nnumhl\5\ttext\tüî¥\vlinehl\5\vtexthl\5\18DapBreakpoint\16sign_define\afn\bvim\0" },
     loaded = true,
     path = "/Users/tom/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
@@ -381,10 +381,10 @@ _G.packer_plugins = {
   },
   ["rust-tools.nvim"] = {
     cond = { true },
-    config = { "\27LJ\2\n•\3\0\2\b\1\21\0?6\2\0\0'\4\1\0B\2\2\0029\2\2\2\18\4\0\0\18\5\1\0B\2\3\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\a\0-\6\0\0009\6\b\0069\6\b\0065\a\t\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\v\0-\6\0\0009\6\f\0069\6\f\0065\a\r\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\14\0-\6\0\0009\6\15\0069\6\15\0065\a\16\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\17\0-\6\0\0009\6\18\0069\6\18\0065\a\19\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\v\0-\6\0\0009\6\f\0069\6\f\0065\a\20\0=\1\n\aB\2\5\1K\0\1\0\0¿\1\0\0\1\0\0\14runnables\15<leader>df\1\0\0\16debuggables\15<leader>dd\1\0\0\22code_action_group\aga\vbuffer\1\0\0\18hover_actions\6K\6n\bset\vkeymap\bvim\14on_attach\26extensions.lsp-attach\frequireœ\3\1\0\n\0\23\0&6\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0019\1\4\1'\2\5\0&\1\2\1\18\2\1\0'\3\6\0&\2\3\2\18\3\1\0'\4\a\0&\3\4\0035\4\b\0005\5\v\0006\6\0\0'\b\t\0B\6\2\0029\6\n\6\18\b\2\0\18\t\3\0B\6\3\2=\6\f\5=\5\r\0045\5\14\0003\6\15\0=\6\16\0055\6\18\0005\a\17\0=\a\19\6=\6\20\5=\5\21\0049\5\22\0\18\a\4\0B\5\2\0012\0\0ÄK\0\1\0\nsetup\vserver\rsettings\16checkOnSave\1\0\0\1\0\1\fcommand\vclippy\14on_attach\0\1\0\1\15standalone\2\bdap\fadapter\1\0\0\25get_codelldb_adapter\19rust-tools.dap\1\0\2\23other_hints_prefix\b=> \27parameter_hints_prefix\b<- \27lldb/lib/liblldb.dylib\21adapter/codelldb3/.vscode/extensions/vadimcn.vscode-lldb-1.7.4/\tHOME\benv\bvim\15rust-tools\frequire\0" },
+    config = { "\27LJ\2\n•\3\0\2\b\1\21\0?6\2\0\0'\4\1\0B\2\2\0029\2\2\2\18\4\0\0\18\5\1\0B\2\3\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\a\0-\6\0\0009\6\b\0069\6\b\0065\a\t\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\v\0-\6\0\0009\6\f\0069\6\f\0065\a\r\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\14\0-\6\0\0009\6\15\0069\6\15\0065\a\16\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\17\0-\6\0\0009\6\18\0069\6\18\0065\a\19\0=\1\n\aB\2\5\0016\2\3\0009\2\4\0029\2\5\2'\4\6\0'\5\v\0-\6\0\0009\6\f\0069\6\f\0065\a\20\0=\1\n\aB\2\5\1K\0\1\0\0¿\1\0\0\1\0\0\14runnables\15<leader>df\1\0\0\16debuggables\15<leader>dd\1\0\0\22code_action_group\aga\vbuffer\1\0\0\18hover_actions\6K\6n\bset\vkeymap\bvim\14on_attach\26extensions.lsp-attach\frequireË\3\1\0\n\0\25\0(6\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0019\1\4\1'\2\5\0&\1\2\1\18\2\1\0'\3\6\0&\2\3\2\18\3\1\0'\4\a\0&\3\4\0035\4\b\0005\5\v\0006\6\0\0'\b\t\0B\6\2\0029\6\n\6\18\b\2\0\18\t\3\0B\6\3\2=\6\f\5=\5\r\0045\5\14\0003\6\15\0=\6\16\0055\6\20\0005\a\18\0005\b\17\0=\b\19\a=\a\21\6=\6\22\5=\5\23\0049\5\24\0\18\a\4\0B\5\2\0012\0\0ÄK\0\1\0\nsetup\vserver\rsettings\18rust-analyzer\1\0\0\16checkOnSave\1\0\0\1\0\1\fcommand\vclippy\14on_attach\0\1\0\1\15standalone\2\bdap\fadapter\1\0\0\25get_codelldb_adapter\19rust-tools.dap\1\0\2\23other_hints_prefix\b=> \27parameter_hints_prefix\b<- \27lldb/lib/liblldb.dylib\21adapter/codelldb3/.vscode/extensions/vadimcn.vscode-lldb-1.7.4/\tHOME\benv\bvim\15rust-tools\frequire\0" },
     loaded = false,
     needs_bufread = true,
-    only_cond = true,
+    only_cond = false,
     path = "/Users/tom/.local/share/nvim/site/pack/packer/opt/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
   },
@@ -429,13 +429,13 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
-    config = { "\27LJ\2\nd\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\nshell\tfish\17open_mapping\n<C-t>\tsize\3(\nsetup\15toggleterm\frequire\0" },
+    config = { "\27LJ\2\nd\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\nshell\tfish\tsize\3(\17open_mapping\n<C-t>\nsetup\15toggleterm\frequire\0" },
     loaded = true,
     path = "/Users/tom/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["trouble.nvim"] = {
-    config = { "\27LJ\2\nã\1\0\0\4\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\0\0B\1\2\0019\1\3\0005\3\4\0B\1\2\0019\1\5\0005\3\6\0B\1\2\1K\0\1\0\1\0\2\16skip_groups\2\tjump\2\rprevious\1\0\2\16skip_groups\2\tjump\2\tnext\nsetup\ftrouble\frequire\0" },
+    config = { "\27LJ\2\nã\1\0\0\4\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\0\0B\1\2\0019\1\3\0005\3\4\0B\1\2\0019\1\5\0005\3\6\0B\1\2\1K\0\1\0\1\0\2\tjump\2\16skip_groups\2\rprevious\1\0\2\tjump\2\16skip_groups\2\tnext\nsetup\ftrouble\frequire\0" },
     loaded = true,
     path = "/Users/tom/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
@@ -492,131 +492,128 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: github-nvim-theme
-time([[Config for github-nvim-theme]], true)
-try_loadstring("\27LJ\2\n™\1\0\1\3\0\t\0\n5\1\1\0005\2\0\0=\2\2\0015\2\3\0=\2\4\0015\2\5\0=\2\6\0015\2\a\0=\2\b\1L\1\2\0\22TreesitterContext\1\0\1\abg\f#090c10\20ExtraWhitespace\1\0\2\fctermbg\bred\nguibg\bred\15Whitespace\1\0\1\afg\bred\16ColorColumn\1\0\0\1\0\1\abg\f#292929˝\1\1\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0023\3\b\0=\3\t\2B\0\2\1K\0\1\0\14overrides\0\vcolors\1\0\3\14bg_search\f#163356\19cursor_line_nr\f#FFEA00\abg\f#0d1117\rsidebars\1\5\0\0\aqf\vpacker\rterminal\ftrouble\1\0\3\15dark_float\2\16theme_style\17dark_default\17dark_sidebar\2\nsetup\17github-theme\frequire\0", "config", "github-nvim-theme")
-time([[Config for github-nvim-theme]], false)
+-- Config for: nvim-dap
+time([[Config for nvim-dap]], true)
+try_loadstring("\27LJ\2\nâ\4\0\0\4\0\19\0+6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\5\0005\3\6\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0005\3\b\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\t\0005\3\n\0B\0\3\0016\0\v\0'\2\f\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\14\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\15\0B\0\2\0029\1\r\0'\3\16\0B\1\2\1'\1\18\0=\1\17\0K\0\1\0\vpytest\16test_runner\27/usr/local/bin/python3\15dap-python\26nvim-dap-virtual-text\nsetup\22extensions.dap-ui\frequire\1\0\4\nnumhl\5\ttext\v‚≠êÔ∏è\vlinehl\5\vtexthl\5\15DapStopped\1\0\4\nnumhl\5\ttext\tüîµ\vlinehl\5\vtexthl\5\27DapBreakpointCondition\1\0\4\nnumhl\5\ttext\tüü¶\vlinehl\5\vtexthl\5\26DapBreakpointRejected\1\0\4\nnumhl\5\ttext\tüî¥\vlinehl\5\vtexthl\5\18DapBreakpoint\16sign_define\afn\bvim\0", "config", "nvim-dap")
+time([[Config for nvim-dap]], false)
+-- Config for: nrpattern.nvim
+time([[Config for nrpattern.nvim]], true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14nrpattern\frequire\0", "config", "nrpattern.nvim")
+time([[Config for nrpattern.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\nd\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\nshell\tfish\tsize\3(\17open_mapping\n<C-t>\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\nß\3\0\1\b\0\18\00006\1\0\0'\3\1\0B\1\2\2+\2\0\0009\3\2\0009\4\2\0019\4\3\4\5\3\4\0X\3\aÄ6\3\0\0'\5\4\0B\3\2\0029\3\5\3B\3\1\2\18\2\3\0X\3\16Ä9\3\6\0009\4\6\0019\4\a\4\4\3\4\0X\3\5Ä9\3\6\0009\4\6\0019\4\b\4\5\3\4\0X\3\6Ä6\3\0\0'\5\4\0B\3\2\0029\3\t\3B\3\1\2\18\2\3\0006\3\0\0'\5\n\0B\3\2\0029\3\v\0035\5\14\0009\6\2\0009\a\2\0019\a\f\a\5\6\a\0X\6\2Ä'\6\r\0X\a\1Ä'\6\15\0=\6\16\5=\2\17\5D\3\2\0\rlocation\bkey\16__multiline\1\0\0\14__default\tline\28calculate_commentstring&ts_context_commentstring.internal\30get_visual_start_location\6V\6v\fcmotion\24get_cursor_location#ts_context_commentstring.utils\nblock\nctype\18Comment.utils\frequireN\1\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\2B\0\2\1K\0\1\0\rpre_hook\1\0\0\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: vim-surround
+time([[Config for vim-surround]], true)
+try_loadstring("\27LJ\2\n=\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0 surround_no_insert_mappings\6g\bvim\0", "config", "vim-surround")
+time([[Config for vim-surround]], false)
 -- Config for: clever-f.vim
 time([[Config for clever-f.vim]], true)
 try_loadstring("\27LJ\2\né\1\0\0\2\0\6\0\r6\0\0\0009\0\1\0)\1\1\0=\1\2\0006\0\0\0009\0\1\0)\1\1\0=\1\3\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0K\0\1\0\6;#clever_f_chars_match_any_signs\28clever_f_across_no_line\24clever_f_smart_case\6g\bvim\0", "config", "clever-f.vim")
 time([[Config for clever-f.vim]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-try_loadstring("\27LJ\2\nù\3\0\0\3\0\t\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\0\0009\0\1\0'\2\4\0B\0\2\0016\0\5\0'\2\6\0B\0\2\0029\0\a\0005\2\b\0B\0\2\1K\0\1\0\1\0\4\31show_current_context_start\1\25show_current_context\2\25space_char_blankline\6 #show_trailing_blankline_indent\1\nsetup\21indent_blankline\frequire< highlight ExtraWhitespace guifg=#C678DD gui=nocombine G highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine @ highlight IndentBlanklineChar guifg=#292929 gui=nocombine \bcmd\bvim\0", "config", "indent-blankline.nvim")
-time([[Config for indent-blankline.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\nH\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\31extensions.telescope-setup\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
--- Config for: vim-matchup
-time([[Config for vim-matchup]], true)
-try_loadstring("\27LJ\2\n0\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0\19loaded_matchit\6g\bvim\0", "config", "vim-matchup")
-time([[Config for vim-matchup]], false)
--- Config for: neotest
-time([[Config for neotest]], true)
-try_loadstring("\27LJ\2\nç\2\0\0\b\0\14\1\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0004\3\4\0006\4\0\0'\6\3\0B\4\2\0025\6\5\0005\a\4\0=\a\6\6B\4\2\2>\4\1\0036\4\0\0'\6\a\0B\4\2\2>\4\2\0036\4\0\0'\6\b\0B\4\2\0025\6\n\0005\a\t\0=\a\v\6B\4\2\0?\4\0\0=\3\r\2B\0\2\1K\0\1\0\radapters\1\0\0\22ignore_file_types\1\0\0\1\3\0\0\vpython\blua\21neotest-vim-test\20neotest-plenary\bdap\1\0\0\1\0\1\15justMyCode\1\19neotest-python\nsetup\fneotest\frequire\aÄÄ¿ô\4\0", "config", "neotest")
-time([[Config for neotest]], false)
--- Config for: nvim-dap
-time([[Config for nvim-dap]], true)
-try_loadstring("\27LJ\2\nâ\4\0\0\4\0\19\0+6\0\0\0009\0\1\0009\0\2\0'\2\3\0005\3\4\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\5\0005\3\6\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0005\3\b\0B\0\3\0016\0\0\0009\0\1\0009\0\2\0'\2\t\0005\3\n\0B\0\3\0016\0\v\0'\2\f\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\14\0B\0\2\0029\0\r\0B\0\1\0016\0\v\0'\2\15\0B\0\2\0029\1\r\0'\3\16\0B\1\2\1'\1\18\0=\1\17\0K\0\1\0\vpytest\16test_runner\27/usr/local/bin/python3\15dap-python\26nvim-dap-virtual-text\nsetup\22extensions.dap-ui\frequire\1\0\4\vtexthl\5\nnumhl\5\ttext\v‚≠êÔ∏è\vlinehl\5\15DapStopped\1\0\4\vtexthl\5\nnumhl\5\ttext\tüîµ\vlinehl\5\27DapBreakpointCondition\1\0\4\vtexthl\5\nnumhl\5\ttext\tüü¶\vlinehl\5\26DapBreakpointRejected\1\0\4\vtexthl\5\nnumhl\5\ttext\tüî¥\vlinehl\5\18DapBreakpoint\16sign_define\afn\bvim\0", "config", "nvim-dap")
-time([[Config for nvim-dap]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\nd\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\nshell\tfish\17open_mapping\n<C-t>\tsize\3(\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23extensions.lualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\nã\1\0\0\4\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\0\0B\1\2\0019\1\3\0005\3\4\0B\1\2\0019\1\5\0005\3\6\0B\1\2\1K\0\1\0\1\0\2\16skip_groups\2\tjump\2\rprevious\1\0\2\16skip_groups\2\tjump\2\tnext\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+try_loadstring("\27LJ\2\nã\1\0\0\4\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\0\0B\1\2\0019\1\3\0005\3\4\0B\1\2\0019\1\5\0005\3\6\0B\1\2\1K\0\1\0\1\0\2\tjump\2\16skip_groups\2\rprevious\1\0\2\tjump\2\16skip_groups\2\tnext\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
 time([[Config for trouble.nvim]], false)
 -- Config for: nvim-web-devicons
 time([[Config for nvim-web-devicons]], true)
 try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\fdefault\2\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
 time([[Config for nvim-web-devicons]], false)
+-- Config for: github-nvim-theme
+time([[Config for github-nvim-theme]], true)
+try_loadstring("\27LJ\2\n™\1\0\1\3\0\t\0\n5\1\1\0005\2\0\0=\2\2\0015\2\3\0=\2\4\0015\2\5\0=\2\6\0015\2\a\0=\2\b\1L\1\2\0\22TreesitterContext\1\0\1\abg\f#090c10\20ExtraWhitespace\1\0\2\fctermbg\bred\nguibg\bred\15Whitespace\1\0\1\afg\bred\16ColorColumn\1\0\0\1\0\1\abg\f#292929˝\1\1\0\4\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0023\3\b\0=\3\t\2B\0\2\1K\0\1\0\14overrides\0\vcolors\1\0\3\abg\f#0d1117\14bg_search\f#163356\19cursor_line_nr\f#FFEA00\rsidebars\1\5\0\0\aqf\vpacker\rterminal\ftrouble\1\0\3\16theme_style\17dark_default\17dark_sidebar\2\15dark_float\2\nsetup\17github-theme\frequire\0", "config", "github-nvim-theme")
+time([[Config for github-nvim-theme]], false)
+-- Config for: neotest
+time([[Config for neotest]], true)
+try_loadstring("\27LJ\2\nç\2\0\0\b\0\14\1\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0004\3\4\0006\4\0\0'\6\3\0B\4\2\0025\6\5\0005\a\4\0=\a\6\6B\4\2\2>\4\1\0036\4\0\0'\6\a\0B\4\2\2>\4\2\0036\4\0\0'\6\b\0B\4\2\0025\6\n\0005\a\t\0=\a\v\6B\4\2\0?\4\0\0=\3\r\2B\0\2\1K\0\1\0\radapters\1\0\0\22ignore_file_types\1\0\0\1\3\0\0\vpython\blua\21neotest-vim-test\20neotest-plenary\bdap\1\0\0\1\0\1\15justMyCode\1\19neotest-python\nsetup\fneotest\frequire\aÄÄ¿ô\4\0", "config", "neotest")
+time([[Config for neotest]], false)
 -- Config for: impatient.nvim
 time([[Config for impatient.nvim]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\19enable_profile\14impatient\frequire\0", "config", "impatient.nvim")
 time([[Config for impatient.nvim]], false)
--- Config for: nrpattern.nvim
-time([[Config for nrpattern.nvim]], true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14nrpattern\frequire\0", "config", "nrpattern.nvim")
-time([[Config for nrpattern.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 extensions.treesitter-setup\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
--- Config for: vim-surround
-time([[Config for vim-surround]], true)
-try_loadstring("\27LJ\2\n=\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0 surround_no_insert_mappings\6g\bvim\0", "config", "vim-surround")
-time([[Config for vim-surround]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\nß\3\0\1\b\0\18\00006\1\0\0'\3\1\0B\1\2\2+\2\0\0009\3\2\0009\4\2\0019\4\3\4\5\3\4\0X\3\aÄ6\3\0\0'\5\4\0B\3\2\0029\3\5\3B\3\1\2\18\2\3\0X\3\16Ä9\3\6\0009\4\6\0019\4\a\4\4\3\4\0X\3\5Ä9\3\6\0009\4\6\0019\4\b\4\5\3\4\0X\3\6Ä6\3\0\0'\5\4\0B\3\2\0029\3\t\3B\3\1\2\18\2\3\0006\3\0\0'\5\n\0B\3\2\0029\3\v\0035\5\14\0009\6\2\0009\a\2\0019\a\f\a\5\6\a\0X\6\2Ä'\6\r\0X\a\1Ä'\6\15\0=\6\16\5=\2\17\5D\3\2\0\rlocation\bkey\16__multiline\1\0\0\14__default\tline\28calculate_commentstring&ts_context_commentstring.internal\30get_visual_start_location\6V\6v\fcmotion\24get_cursor_location#ts_context_commentstring.utils\nblock\nctype\18Comment.utils\frequireN\1\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\2B\0\2\1K\0\1\0\rpre_hook\1\0\0\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
+-- Config for: vim-matchup
+time([[Config for vim-matchup]], true)
+try_loadstring("\27LJ\2\n0\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0\19loaded_matchit\6g\bvim\0", "config", "vim-matchup")
+time([[Config for vim-matchup]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23extensions.lualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\nH\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\31extensions.telescope-setup\frequire\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\nù\3\0\0\3\0\t\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\0\0009\0\1\0'\2\4\0B\0\2\0016\0\5\0'\2\6\0B\0\2\0029\0\a\0005\2\b\0B\0\2\1K\0\1\0\1\0\4#show_trailing_blankline_indent\1\31show_current_context_start\1\25show_current_context\2\25space_char_blankline\6 \nsetup\21indent_blankline\frequire< highlight ExtraWhitespace guifg=#C678DD gui=nocombine G highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine @ highlight IndentBlanklineChar guifg=#292929 gui=nocombine \bcmd\bvim\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
 -- Conditional loads
-time([[Conditional loading of gitsigns.nvim]], true)
-  require("packer.load")({"gitsigns.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of gitsigns.nvim]], false)
-time([[Conditional loading of cmp_luasnip]], true)
-  require("packer.load")({"cmp_luasnip"}, {}, _G.packer_plugins)
-time([[Conditional loading of cmp_luasnip]], false)
-time([[Conditional loading of undotree]], true)
-  require("packer.load")({"undotree"}, {}, _G.packer_plugins)
-time([[Conditional loading of undotree]], false)
-time([[Conditional loading of isort.nvim]], true)
-  require("packer.load")({"isort.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of isort.nvim]], false)
-time([[Conditional loading of pear-tree]], true)
-  require("packer.load")({"pear-tree"}, {}, _G.packer_plugins)
-time([[Conditional loading of pear-tree]], false)
-time([[Conditional loading of lazygit.nvim]], true)
-  require("packer.load")({"lazygit.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of lazygit.nvim]], false)
-time([[Conditional loading of nvim-lightbulb]], true)
-  require("packer.load")({"nvim-lightbulb"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-lightbulb]], false)
-time([[Conditional loading of lsp_signature.nvim]], true)
-  require("packer.load")({"lsp_signature.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of lsp_signature.nvim]], false)
-time([[Conditional loading of nvim-lspconfig]], true)
-  require("packer.load")({"nvim-lspconfig"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-lspconfig]], false)
-time([[Conditional loading of rust-tools.nvim]], true)
-  require("packer.load")({"rust-tools.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of rust-tools.nvim]], false)
-time([[Conditional loading of git-messenger.vim]], true)
-  require("packer.load")({"git-messenger.vim"}, {}, _G.packer_plugins)
-time([[Conditional loading of git-messenger.vim]], false)
-time([[Conditional loading of black-nvim]], true)
-  require("packer.load")({"black-nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of black-nvim]], false)
-time([[Conditional loading of asyncrun.vim]], true)
-  require("packer.load")({"asyncrun.vim"}, {}, _G.packer_plugins)
-time([[Conditional loading of asyncrun.vim]], false)
-time([[Conditional loading of marks.nvim]], true)
-  require("packer.load")({"marks.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of marks.nvim]], false)
 time([[Conditional loading of cmp-path]], true)
   require("packer.load")({"cmp-path"}, {}, _G.packer_plugins)
 time([[Conditional loading of cmp-path]], false)
+time([[Conditional loading of pear-tree]], true)
+  require("packer.load")({"pear-tree"}, {}, _G.packer_plugins)
+time([[Conditional loading of pear-tree]], false)
 time([[Conditional loading of nvim-cmp]], true)
   require("packer.load")({"nvim-cmp"}, {}, _G.packer_plugins)
 time([[Conditional loading of nvim-cmp]], false)
+time([[Conditional loading of cmp_luasnip]], true)
+  require("packer.load")({"cmp_luasnip"}, {}, _G.packer_plugins)
+time([[Conditional loading of cmp_luasnip]], false)
+time([[Conditional loading of black-nvim]], true)
+  require("packer.load")({"black-nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of black-nvim]], false)
 time([[Conditional loading of copilot.vim]], true)
   require("packer.load")({"copilot.vim"}, {}, _G.packer_plugins)
 time([[Conditional loading of copilot.vim]], false)
-time([[Conditional loading of vim-dispatch]], true)
-  require("packer.load")({"vim-dispatch"}, {}, _G.packer_plugins)
-time([[Conditional loading of vim-dispatch]], false)
+time([[Conditional loading of nvim-lspconfig]], true)
+  require("packer.load")({"nvim-lspconfig"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-lspconfig]], false)
+time([[Conditional loading of git-messenger.vim]], true)
+  require("packer.load")({"git-messenger.vim"}, {}, _G.packer_plugins)
+time([[Conditional loading of git-messenger.vim]], false)
+time([[Conditional loading of marks.nvim]], true)
+  require("packer.load")({"marks.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of marks.nvim]], false)
+time([[Conditional loading of nvim-lightbulb]], true)
+  require("packer.load")({"nvim-lightbulb"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-lightbulb]], false)
+time([[Conditional loading of isort.nvim]], true)
+  require("packer.load")({"isort.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of isort.nvim]], false)
 time([[Conditional loading of nvim-colorizer.lua]], true)
   require("packer.load")({"nvim-colorizer.lua"}, {}, _G.packer_plugins)
 time([[Conditional loading of nvim-colorizer.lua]], false)
+time([[Conditional loading of undotree]], true)
+  require("packer.load")({"undotree"}, {}, _G.packer_plugins)
+time([[Conditional loading of undotree]], false)
+time([[Conditional loading of lsp_signature.nvim]], true)
+  require("packer.load")({"lsp_signature.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of lsp_signature.nvim]], false)
+time([[Conditional loading of asyncrun.vim]], true)
+  require("packer.load")({"asyncrun.vim"}, {}, _G.packer_plugins)
+time([[Conditional loading of asyncrun.vim]], false)
+time([[Conditional loading of vim-dispatch]], true)
+  require("packer.load")({"vim-dispatch"}, {}, _G.packer_plugins)
+time([[Conditional loading of vim-dispatch]], false)
+time([[Conditional loading of lazygit.nvim]], true)
+  require("packer.load")({"lazygit.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of lazygit.nvim]], false)
 time([[Conditional loading of cmp-dap]], true)
   require("packer.load")({"cmp-dap"}, {}, _G.packer_plugins)
 time([[Conditional loading of cmp-dap]], false)
+time([[Conditional loading of gitsigns.nvim]], true)
+  require("packer.load")({"gitsigns.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of gitsigns.nvim]], false)
 time([[Conditional loading of cmp-nvim-lsp]], true)
   require("packer.load")({"cmp-nvim-lsp"}, {}, _G.packer_plugins)
 time([[Conditional loading of cmp-nvim-lsp]], false)
@@ -626,6 +623,14 @@ time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Telekasten lua require("packer.load")({'telekasten.nvim'}, { cmd = "Telekasten", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType rs ++once lua require("packer.load")({'rust-tools.nvim'}, { ft = "rs" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'rust-tools.nvim'}, { ft = "rust" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

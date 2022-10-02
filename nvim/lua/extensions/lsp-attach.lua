@@ -11,10 +11,10 @@ local on_attach = function(client, bufnr)
 
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-    vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>",
+    vim.api.nvim_set_keymap("n", "<leader>rw", "<cmd>Trouble workspace_diagnostics<cr>",
         { silent = true, noremap = true }
     )
-    vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>",
+    vim.api.nvim_set_keymap("n", "<leader>rd", "<cmd>Trouble document_diagnostics<cr>",
         { silent = true, noremap = true }
     )
     local telescope_builtin = require("telescope.builtin")
@@ -56,14 +56,13 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
 
-    vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, bufopts)
     -- vim.keymap.set("v", "ga", function()
     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
     --     action.range_code_action()
     -- end, { silent = true, noremap = true })
 
     if client and client.supports_method("textDocument/formatting") then
-        vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
+        vim.keymap.set('n', '<leader>q', vim.lsp.buf.format, bufopts)
     end
 
     vim.keymap.set('n', '<leader>ta', vim.lsp.buf.add_workspace_folder, bufopts)
