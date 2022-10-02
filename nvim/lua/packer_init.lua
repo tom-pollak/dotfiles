@@ -84,6 +84,7 @@ require('packer').startup({ function()
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
+            vim.cmd(":iunmap <CR>")
             require 'extensions.cmp-setup'
         end
     }
@@ -127,11 +128,17 @@ require('packer').startup({ function()
         requires = { { 'JoosepAlviste/nvim-ts-context-commentstring' } }
     }
 
-    use { 'tmsvg/pear-tree',
-        cond = not vim.g.minimal and not vim.g.vscode,
+    use {
+        "windwp/nvim-autopairs",
+        cond = not vim.g.minimal and not vim.g.vscode, -- Autocmd error if disabled vscode
         config = function()
-            vim.g.pear_tree_repeatable_expand = 0
-            vim.g.pear_tree_map_special_keys = 0
+            require("nvim-autopairs").setup {}
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            local cmp = require('cmp')
+            cmp.event:on(
+                'confirm_done',
+                cmp_autopairs.on_confirm_done()
+            )
         end
     }
 

@@ -79,26 +79,7 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         ['<C-space>'] = cmp.mapping.complete(),
         ['<C-g>'] = cmp.mapping.abort(),
-        ['<CR>'] = function(fallback)
-            -- Don't block <CR> if signature help is active
-            -- https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/issues/13
-            if not cmp.visible() or not cmp.get_selected_entry() or
-                cmp.get_selected_entry().source.name == 'nvim_lsp_signature_help' then
-                -- HACK: This is stupid. For some reason <CR> is remapped to "b",
-                -- and I have no idea how
-                --[[ fallback() ]]
-                local enter = vim.api.nvim_replace_termcodes("<S-CR>", true, false, true)
-                vim.api.nvim_feedkeys(enter, "i", true)
-            else
-                cmp.confirm({
-                    -- Replace word if completing in the middle of a word
-                    -- https://github.com/hrsh7th/nvim-cmp/issues/664
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    -- Don't select first item on CR if nothing was selected
-                    select = false,
-                })
-            end
-        end,
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         --[[ ["<Tab>"] = cmp.mapping.select_next_item(),
@@ -174,7 +155,7 @@ cmp.setup({
             }),
             label_comparator,
         },
-    }
+    },
     -- filetype = ('gitcommit', {
     --     sources = cmp.config.sources({
     --         { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
@@ -182,6 +163,17 @@ cmp.setup({
     --         { name = 'buffer' },
     --     })
     -- })
+    enabled = function()
+        -- disable completion in comments
+        local context = require 'cmp.config.context'
+        -- keep command mode completion enabled when cursor is in a comment
+        if vim.api.nvim_get_mode().mode == 'c' then
+            return true
+        else
+            return not context.in_treesitter_capture("comment")
+                and not context.in_syntax_group("Comment")
+        end
+    end
 })
 
 require("cmp").setup.filetype({ "dap-repl", "dapui_watches" }, {

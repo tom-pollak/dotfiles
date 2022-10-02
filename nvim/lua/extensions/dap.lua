@@ -12,7 +12,7 @@ vim.keymap.set('n', '<M-k>', dap.step_out)
 vim.keymap.set('n', '<M-l>', dap.step_into)
 vim.keymap.set('n', '<M-h>', dap.step_back)
 
-vim.keymap.set('n', '<leader>dg', dap.continue)
+vim.keymap.set('n', '<leader>dl', dap.continue)
 vim.keymap.set('n', '<leader>dn', dap.run_to_cursor)
 
 vim.keymap.set('n', '<leader>dp', dap.pause)
