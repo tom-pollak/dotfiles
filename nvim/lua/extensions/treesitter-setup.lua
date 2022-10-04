@@ -34,6 +34,9 @@ require 'nvim-treesitter.configs'.setup {
         enable = true,
         enable_autocmd = false
     },
+    autotag = {
+        enable = true
+    },
     textobjects = {
         select = {
             enable = true,

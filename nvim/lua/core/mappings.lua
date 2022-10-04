@@ -12,11 +12,20 @@ vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 
-vim.keymap.set({'n'}, '<CR>', function () vim.cmd [[call append(line("."),   repeat([""], v:count1))]] end)
-vim.keymap.set({'n'}, '<S-CR>', function () vim.cmd [[call append(line(".")-1,   repeat([""], v:count1))]] end)
+vim.keymap.set({ 'n' }, '<CR>', function() vim.cmd [[call append(line("."),   repeat([""], v:count1))]] end)
+vim.keymap.set({ 'n' }, '<S-CR>', function() vim.cmd [[call append(line(".")-1,   repeat([""], v:count1))]] end)
 
-vim.cmd[[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']]
-vim.cmd[[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']]
+vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']]
+vim.cmd [[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']]
+
+vim.keymap.set({ "n", "x" }, "j", function()
+  return vim.v.count > 0 and "j" or "gj"
+end, { noremap = true, expr = true })
+vim.keymap.set({ "n", "x" }, "k", function()
+  return vim.v.count > 0 and "k" or "gk"
+end, { noremap = true, expr = true })
+--[[ vim.keymap.set('n', 'j', 'gj') ]]
+--[[ vim.keymap.set('n', 'k', 'gk') ]]
 
 vim.keymap.set('n', '<c-f>', function() return ':e ' .. vim.fn.expand '%:p:h' .. '/' end, { expr = true })
 
@@ -24,11 +33,11 @@ vim.keymap.set('n', '<leader>rp', function() return vim.cmd(":lcd" .. vim.fn.exp
 
 vim.keymap.set('n', '<leader>y', function() return ':!' end, { expr = true })
 
-local t = function (s)
-    return vim.api.nvim_replace_termcodes(s, true, true, true)
+local t = function(s)
+  return vim.api.nvim_replace_termcodes(s, true, true, true)
 end
 
-vim.keymap.set('n', '<c-;>', function() vim.cmd (t('normal <c-6>')) end)
+vim.keymap.set('n', '<c-;>', function() vim.cmd(t('normal <c-6>')) end)
 
 vim.keymap.set('i', '<c-n>', '<c-o>e<c-o>a')
 vim.keymap.set('i', '<c-m>', '<c-o>b<c-o>i')
@@ -58,6 +67,3 @@ vim.keymap.set('n', '_', "<CMD>res +5<CR>")
 vim.keymap.set('n', '+', "<CMD>res -5<CR>")
 vim.keymap.set('n', '=', "<CMD>vertical res +5<CR>")
 vim.keymap.set('n', '-', "<CMD>vertical res -5<CR>")
-
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
