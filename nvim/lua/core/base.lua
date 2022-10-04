@@ -8,7 +8,7 @@ set.clipboard = 'unnamedplus'
 wo.relativenumber = true
 wo.number = true
 g.mapleader = ' '
-g.updatetime = 100
+g.updatetime = 150
 
 set.shell = "bash"
 set.tabstop = 4
@@ -29,6 +29,7 @@ set.cursorline = true
 set.termguicolors = true
 set.lazyredraw = true
 set.pumheight = 12
+set.linebreak = true
 --[[ set.ls = 0 ]]
 --[[ set.ch = 0 ]]
 --[[ set.autochdir = true ]]
@@ -40,7 +41,7 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 
 set.background = 'dark'
 wo.colorcolumn = '80'
---[[ set.mouse = 'a' ]]
+set.mouse = 'a'
 
 
 -- vim.cmd("match errorMsg /\\s\\+$/") -- mark trailing white spaces as red

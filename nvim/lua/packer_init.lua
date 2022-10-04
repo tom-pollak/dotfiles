@@ -84,7 +84,7 @@ require('packer').startup({ function()
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
-            vim.cmd(":iunmap <CR>")
+            --[[ vim.cmd(":iunmap <CR>") ]]
             require 'extensions.cmp-setup'
         end
     }

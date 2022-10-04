@@ -1,0 +1,34 @@
+{
+  "recentFiles": [
+    {
+      "basename": "Dissertation",
+      "path": "dissertation/Dissertation.md"
+    },
+    {
+      "basename": "Networking",
+      "path": "sys4/Networking.md"
+    },
+    {
+      "basename": "Public Key Encryption",
+      "path": "icry/Public Key Encryption.md"
+    },
+    {
+      "basename": "Symmetric Encryption",
+      "path": "icry/Symmetric Encryption.md"
+    },
+    {
+      "basename": "intro to cryptography",
+      "path": "icry/intro to cryptography.md"
+    },
+    {
+      "basename": "backpropagation",
+      "path": "Term 2/INT2/backpropagation.png"
+    },
+    {
+      "basename": "Feature Representation",
+      "path": "Term 2/INT2/Feature Representation.md"
+    }
+  ],
+  "omittedPaths": [],
+  "maxLength": null
+}
