@@ -4,9 +4,9 @@ local format = function()
 end
 
 if vim.fn.executable("python") == 1 then
-    vim.opt.makeprg = "python %"
+    vim.opt.makeprg = "pytest %"
 else
-    vim.opt.makeprg = "python3 %"
+    vim.opt.makeprg = "pytest %"
 end
 
 

@@ -121,7 +121,13 @@
     "coreboarding ",
     "CTAP",
     "CorelDraw",
-    "MoTis-CLIP"
+    "MoTis-CLIP",
+    "ICRY",
+    "HMAC",
+    "KPA",
+    "encryptors",
+    "unrouted",
+    "oTis-CLIP "
   ],
   "foldHeading": false,
   "foldIndent": false,

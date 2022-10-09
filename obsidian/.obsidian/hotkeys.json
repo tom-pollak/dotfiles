@@ -17,7 +17,6 @@
       "key": "O"
     }
   ],
-  "global-search:open": [],
   "backlink:toggle-backlinks-in-document": [
     {
       "modifiers": [
@@ -67,29 +66,14 @@
       "key": "C"
     }
   ],
-  "quick-explorer:browse-current": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "J"
-    }
-  ],
+  "quick-explorer:browse-current": [],
   "quick-explorer:browse-vault": [],
-  "obsidian-another-quick-switcher:grep": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "F"
-    }
-  ],
   "obsidian-another-quick-switcher:search-command_Recommended search": [
     {
       "modifiers": [
-        "Mod"
+        "Ctrl"
       ],
-      "key": "O"
+      "key": "P"
     }
   ],
   "obsidian-plugin-prettier:format-note": [
@@ -98,6 +82,38 @@
         "Mod"
       ],
       "key": "L"
+    }
+  ],
+  "global-search:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
+  "app:toggle-left-sidebar": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "J"
+    }
+  ],
+  "file-explorer:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "L"
+    }
+  ],
+  "editor:focus": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": ";"
     }
   ]
 }

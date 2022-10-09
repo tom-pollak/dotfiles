@@ -9,6 +9,34 @@
       "path": "sys4/Networking.md"
     },
     {
+      "basename": "IND-CPA Security",
+      "path": "icry/IND-CPA Security.md"
+    },
+    {
+      "basename": "ICRY Week 2 Excersises",
+      "path": "icry/excercises/ICRY Week 2 Excersises.md"
+    },
+    {
+      "basename": "Security",
+      "path": "icry/Security.md"
+    },
+    {
+      "basename": "Cryptography",
+      "path": "icry/Cryptography.md"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
+      "basename": "Encryption methods",
+      "path": "icry/Encryption methods.md"
+    },
+    {
+      "basename": "HMAC",
+      "path": "icry/HMAC.md"
+    },
+    {
       "basename": "Public Key Encryption",
       "path": "icry/Public Key Encryption.md"
     },
@@ -17,8 +45,48 @@
       "path": "icry/Symmetric Encryption.md"
     },
     {
-      "basename": "intro to cryptography",
-      "path": "icry/intro to cryptography.md"
+      "basename": "Indistinguishability",
+      "path": "icry/Indistinguishability.md"
+    },
+    {
+      "basename": "IND-CCA Security",
+      "path": "icry/IND-CCA Security.md"
+    },
+    {
+      "basename": "Encryption Algorithm Formal Syntax",
+      "path": "icry/Encryption Algorithm Formal Syntax.md"
+    },
+    {
+      "basename": "IND-CCA-pseudocode",
+      "path": "assets/IND-CCA-pseudocode.png"
+    },
+    {
+      "basename": "IND-CCA",
+      "path": "assets/IND-CCA.png"
+    },
+    {
+      "basename": "IND-CPA-security",
+      "path": "assets/IND-CPA-security.png"
+    },
+    {
+      "basename": "Psudocode-IND-CPA",
+      "path": "assets/Psudocode-IND-CPA.png"
+    },
+    {
+      "basename": "modelling-leakage",
+      "path": "assets/modelling-leakage.png"
+    },
+    {
+      "basename": "1-bit-indistinguishability",
+      "path": "assets/1-bit-indistinguishability.png"
+    },
+    {
+      "basename": "networking-protocol-stack",
+      "path": "assets/networking-protocol-stack.png"
+    },
+    {
+      "basename": "packer-structure",
+      "path": "assets/packer-structure.png"
     },
     {
       "basename": "backpropagation",
