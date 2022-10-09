@@ -23,10 +23,19 @@ vim.api.nvim_set_keymap("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>TroubleToggle<cr>",
     { silent = true, noremap = true }
 )
-vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>Trouble loclist<cr>",
+--[[ vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>Trouble loclist<cr>",
+    { silent = true, noremap = true }
+) ]]
+
+--[[ vim.api.nvim_set_keymap("n", "<leader>rk", "<cmd>Trouble quickfix<cr>",
+    { silent = true, noremap = true }
+) ]]
+
+vim.api.nvim_set_keymap("n", "<leader>rk", "<cmd>QFToggle!<cr>",
     { silent = true, noremap = true }
 )
-vim.api.nvim_set_keymap("n", "<leader>rk", "<cmd>Trouble quickfix<cr>",
+
+vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>LLToggle!<cr>",
     { silent = true, noremap = true }
 )
 

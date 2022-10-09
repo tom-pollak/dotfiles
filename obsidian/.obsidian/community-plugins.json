@@ -1,5 +1,4 @@
 [
-  "sliding-panes-obsidian",
   "cm-editor-syntax-highlight-obsidian",
   "note-refactor-obsidian",
   "better-word-count",
@@ -18,5 +17,6 @@
   "obsidian-admonition",
   "quick-explorer",
   "obsidian-another-quick-switcher",
-  "obsidian-vimrc-support"
+  "obsidian-vimrc-support",
+  "link-headers-directly"
 ]
