@@ -54,8 +54,6 @@
     }
   ],
   "editor:toggle-comments": [],
-  "app:go-back": [],
-  "app:go-forward": [],
   "obsidian-languagetool-plugin:ltclear": [],
   "obsidian-languagetool-plugin:ltautocheck-text": [],
   "obsidian-languagetool-plugin:ltcheck-text": [
@@ -84,14 +82,7 @@
       "key": "L"
     }
   ],
-  "global-search:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "F"
-    }
-  ],
+  "global-search:open": [],
   "app:toggle-left-sidebar": [
     {
       "modifiers": [
@@ -114,6 +105,14 @@
         "Mod"
       ],
       "key": ";"
+    }
+  ],
+  "omnisearch:show-modal": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
     }
   ]
 }

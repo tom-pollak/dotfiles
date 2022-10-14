@@ -2,11 +2,17 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set -gx PATH $HOME/.cargo/bin:$HOME/.local/bin:/opt/apache-maven-3.6.3/bin:$HOME/.emacs.d/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/Users/tom/opt/anaconda3/bin:/usr/local/bin:$HOME/.cabal/bin:/Users/tom/.ghcup/bin $PATH
+set -gx PATH $HOME/.cargo/bin:$HOME/.local/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.poetry/bin:/opt/homebrew/bin:/usr/local/bin $PATH
+
+fish_add_path /opt/homebrew/sbin
+fish_add_path /opt/homebrew/opt/llvm/bin
+fish_add_path /opt/homebrew/opt/openjdk/bin
+fish_add_path /usr/local/opt/node@16/bin
+
+
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
-set -gx PAGER less
+set -gx PAGER bat
 set -gx VIMRC $HOME/.config/nvim/init.lua
-# set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 
 if set -q NVIM
@@ -24,18 +30,13 @@ set -gx GIT_EDITOR nvim
 set -gx LIBGL_ALWAYS_INDIRECT 1
 
 set -gx PROJECT_PATHS ~/projects
-set -gx GRADLE_HOME /usr/share/gradle
-set -gx JAVA_HOME /Users/tom/Library/Java/JavaVirtualMachines/temurin-17.0.2/Contents/Home
-set -gx JDTLS_CONFIG /usr/lib/jvm/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 set -gx WORKSPACE $HOME/projects
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx DYLD_LIBRARY_PATH /usr/local/lib
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 set -gx NVM_DIR $HOME/.nvm
 set -gx fisher_path /Users/tom/.config/fish/
 set -gx DFT_DISPLAY inline
 
 set fish_greeting
+fish_vi_key_bindings
 
 alias cat=bat
 alias v=nvim
@@ -69,28 +70,7 @@ alias .....="cd ../../../.."
 
 starship init fish | source
 
-
-set fish_greeting
-fish_vi_key_bindings
-
-fish_add_path /opt/homebrew/sbin
-fish_add_path /opt/homebrew/opt/llvm/bin
-fish_add_path /opt/homebrew/opt/openjdk/bin
-fish_add_path /usr/local/opt/node@16/bin
 set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
 set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 set _CONDA_ROOT "/Users/tom/opt/anaconda3"
-
-# set -gx LDFLAGS "-L/opt/homebrew/opt/ruby/lib"
-# set -gx CPPFLAGS "-I/opt/homebrew/opt/ruby/include"
-# set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/ruby/lib/pkgconfig"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
-# source /opt/homebrew/opt/asdf/libexec/asdf.fish
-
-# bash $HOME/.config/fish/startup.sh

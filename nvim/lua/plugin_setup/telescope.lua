@@ -110,7 +110,7 @@ vim.keymap.set('n', '<leader>cc', vim_config)
 
 vim.keymap.set('n', "'", bookmarks_all)
 
-vim.keymap.set('n', '<leader>e', function() vim.cmd("Telescope file_browser cwd=" .. vim.fn.expand("%:p:h")) end)
+vim.keymap.set('n', '<leader>e', function() vim.cmd("Telescope file_browser cwd=%") end)
 vim.keymap.set('n', '<leader>rr', require 'telescope'.extensions.project.project)
 
 -- Telekasten

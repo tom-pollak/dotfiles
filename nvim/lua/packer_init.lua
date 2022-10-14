@@ -80,7 +80,8 @@ require('packer').startup({ function()
             { 'hrsh7th/cmp-path', cond = not vim.g.vscode },
             { 'saadparwaiz1/cmp_luasnip', cond = not vim.g.vscode },
             { 'L3MON4D3/LuaSnip' },
-            { 'rcarriga/cmp-dap', cond = not vim.g.vscode }
+            { 'rcarriga/cmp-dap', cond = not vim.g.vscode },
+            --[[ { 'nvim-treesitter/nvim-treesitter' } -- For comment context? not working currently ]]
             -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
@@ -148,7 +149,7 @@ require('packer').startup({ function()
         config = function()
             vim.g.copilot_no_tab_map = true
             vim.g.copilot_assume_mapped = true
-            vim.g.copilot_enabled = false
+            vim.g.copilot_enabled = true
             vim.g.copilot_filetypes = { "python", "lua", "cc", "rust" }
         end
     }
@@ -410,7 +411,7 @@ require('packer').startup({ function()
         end
     }
 
-    use 'christoomey/vim-tmux-navigator'
+    --[[ use 'christoomey/vim-tmux-navigator' ]]
 
     use {
         "akinsho/toggleterm.nvim",
