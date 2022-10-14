@@ -11,10 +11,17 @@ vim.api.nvim_set_keymap("n", "<leader>u", "<CMD>UndotreeToggle<CR>", opts)
 
 
 -- TMUX Navigator
+--[[
 vim.api.nvim_set_keymap("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", opts)
 vim.api.nvim_set_keymap("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", opts)
 vim.api.nvim_set_keymap("n", "<C-k>", "<CMD>TmuxNavigateUp<CR>", opts)
 vim.api.nvim_set_keymap("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", opts)
+]]
+
+vim.keymap.set("n", "<C-h>", "<CMD>wincmd h<CR>")
+vim.keymap.set("n", "<C-j>", "<CMD>wincmd j<CR>")
+vim.keymap.set("n", "<C-k>", "<CMD>wincmd k<CR>")
+vim.keymap.set("n", "<C-l>", "<CMD>wincmd l<CR>")
 
 -- vim.opt.foldmethod="expr"
 -- vim.opt.foldexpr= require'treesitter'nvim_treesitter#foldexpr()

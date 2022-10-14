@@ -127,7 +127,15 @@
     "KPA",
     "encryptors",
     "unrouted",
-    "oTis-CLIP "
+    "oTis-CLIP ",
+    "XORing",
+    "OFB",
+    "UF-CMA",
+    "Unforgeability",
+    "UF",
+    "MACs",
+    "RiR",
+    "IANA"
   ],
   "foldHeading": false,
   "foldIndent": false,

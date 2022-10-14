@@ -123,8 +123,11 @@ keymap('v', '<leader>lr', v_notify 'git.revertSelectedRanges', { silent = true }
 -- REAL SCROLLING
 --[[ keymap('n', '<c-d>', '<c-d>zz') ]]
 --[[ keymap('n', '<c-u>', '<c-u>zz') ]]
---[[ keymap('n', '<c-u>', notify 'germanScroll.bertholdUp', { silent = true }) ]]
---[[ keymap('n', '<c-d>', notify 'germanScroll.bertholdDown', { silent = true }) ]]
+
+--[[ keymap('n', '<c-d>', ) ]]
+
+--[[ keymap('n', '<c-u>', notify 'germanScroll.bertholdUp', { silent = true })
+keymap('n', '<c-d>', notify 'germanScroll.bertholdDown', { silent = true }) ]]
 --[[ keymap('n', '<c-y>', notify 'germanScroll.arminUp', { silent = true }) ]]
 --[[ keymap('n', '<c-e>', notify 'germanScroll.arminDown', { silent = true }) ]]
 
