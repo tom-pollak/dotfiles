@@ -34,7 +34,7 @@ set.linebreak = true
 --[[ set.ch = 0 ]]
 --[[ set.autochdir = true ]]
 
-vim.cmd("set guicursor=n-v-c-i:block")
+--[[ vim.cmd("set guicursor=n-v-c-i:block") ]]
 
 set.showmode = false
 set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*' }

@@ -55,18 +55,6 @@ vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
 vim.keymap.set("n", "<leader>gp", "<cmd>Copilot split<cr>")
 
 
--- Leap
---[[ local leap = require 'leap'
-vim.keymap.set({ 'n', 'x', 'o' }, '<Tab>', function()
-    leap.leap {}
-end, { noremap = true })
-
-vim.keymap.set({ 'n', 'x', 'o' }, '<S-Tab>', function()
-    leap.leap { backward = true }
-end, { noremap = true })
-
-vim.keymap.set({ 'n', 'x', 'o' }, '"', function() require 'extensions.leap-ast'.leap() end, {}) ]]
-
 -- Context
 vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
 
@@ -83,24 +71,16 @@ vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc><CMD>call clever_f#reset()<CR>',
 vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
 vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
 
-
---[[ vim.api.nvim_create_user_command('Load', function() ]]
---[[     vim.g.ide = false ]]
---[[     vim.g.minimal = false ]]
---[[     require 'startup' ]]
---[[ end, { nargs = 0 }) ]]
---[[]]
 vim.api.nvim_create_user_command('LoadIde', function()
     vim.g.ide = true
     vim.g.minimal = false
     require 'startup'
 end, { nargs = 0 })
---[[]]
---[[ vim.api.nvim_create_user_command('LoadMinimal', function() ]]
---[[     vim.g.ide = false ]]
---[[     vim.g.minimal = true ]]
---[[     require 'startup' ]]
---[[ end, { nargs = 0 }) ]]
+
+-- Leap
+vim.keymap.set({'n', 'x', 'o'}, ';', '<Plug>(leap-forward-to)')
+vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)')
+vim.keymap.set({'n', 'x', 'o'}, 'g;', '<Plug>(leap-cross-window)')
 
 vim.cmd [[
     highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen

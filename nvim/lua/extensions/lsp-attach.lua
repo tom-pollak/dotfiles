@@ -61,7 +61,7 @@ local on_attach = function(client, bufnr)
     --     action.range_code_action()
     -- end, { silent = true, noremap = true })
 
-    if client and client.supports_method("textDocument/formatting") then
+    if client and client.supports_method("textDocument/formatting") and not vim.g.vscode then
         vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
     end
 

@@ -1,6 +1,5 @@
 local M = {}
 
-
 local augroup = vim.api.nvim_create_augroup
 local keymap = vim.keymap.set
 
@@ -24,12 +23,14 @@ local function v_notify(cmd)
     return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
 end
 
+vim.cmd(':let mapleader = " "')
+
 keymap('v', '<', '< gv', { silent = true })
 keymap('v', '>', '> gv', { silent = true })
 
-keymap('n', '<Leader>rn', notify 'editor.action.rename', { silent = true })
-keymap('n', '<Leader>rg', notify 'workbench.action.findInFiles', { silent = true })
---[[ keymap('n', '<Leader>rg', notify 'search.action.openEditor', { silent = true }) ]]
+keymap('n', '<leader>rn', notify 'editor.action.rename', { silent = true })
+keymap('n', '<leader>rg', notify 'workbench.action.findInFiles', { silent = true })
+--[[ keymap('n', '<leader>rg', notify 'search.action.openEditor', { silent = true }) ]]
 
 -- Navigation
 keymap('n', '<C-j>', notify 'workbench.action.navigateDown')
@@ -38,8 +39,9 @@ keymap('n', '<C-h>', notify 'workbench.action.navigateLeft')
 keymap('n', '<C-l>', notify 'workbench.action.navigateRight')
 
 -- LSP remaps
-keymap('v', '<leader>rf', v_notify 'editor.action.refactor', { silent = true })
 keymap('n', '<leader>rf', notify 'editor.action.refactor', { silent = true })
+
+keymap('n', '<leader>o', ':noh', { silent = true })
 
 keymap('n', 'ga', notify 'keyboard-quickfix.openQuickFix', { silent = true })
 
@@ -57,8 +59,7 @@ keymap('n', 'gi', notify 'editor.action.goToImplementation', { silent = true })
 keymap('n', 'gj', notify 'editor.action.marker.next', { silent = true })
 keymap('n', 'gk', notify 'editor.action.marker.prev', { silent = true })
 
-
-keymap('n', '<leader>w', notify 'workbench.action.files.save', { silent = true })
+keymap('n', '<leader>w', notify 'workbench.action.files.save', {silent = true})
 
 -- Comments
 vim.keymap.set({'n', 'v', 'x', 'o'}, 'gc', '<Plug>VSCodeCommentary', {silent = true})
@@ -67,27 +68,27 @@ vim.keymap.set('n', 'gcc', '<Plug>VSCodeCommentaryLine', {silent = true})
 
 -- LSP symbols
 keymap('n', '<leader>s', notify 'workbench.action.gotoSymbol', { silent = true })
-keymap('n', '<leader>f', notify 'workbench.action.showAllSymbols', { silent = true })
+keymap('n', '<leader>S', notify 'workbench.action.showAllSymbols', { silent = true })
 
 -- Diagnostics
---[[ keymap('n', '<Leader>tw', notify 'workbench.actions.view.problems', { silent = true }) ]]
+--[[ keymap('n', '<leader>tw', notify 'workbench.actions.view.problems', { silent = true }) ]]
 
 -- Toggle sidebar
-keymap('n', '<Leader>ys', notify 'workbench.action.toggleSidebarVisibility', { silent = true })
-keymap('n', '<Leader>yh', notify 'workbench.action.toggleAuxiliaryBar', { silent = true })
-keymap('n', '<Leader>yp', notify 'workbench.action.togglePanel', { silent = true })
+keymap('n', '<leader>ys', notify 'workbench.action.toggleSidebarVisibility', { silent = true })
+keymap('n', '<leader>yh', notify 'workbench.action.toggleAuxiliaryBar', { silent = true })
+keymap('n', '<leader>yp', notify 'workbench.action.togglePanel', { silent = true })
 
---[[ keymap('n', '<Leader>ff', notify 'workbench.action.quickOpen', { silent = true }) -- find files ]]
+--[[ keymap('n', '<leader>ff', notify 'workbench.action.quickOpen', { silent = true }) -- find files ]]
 
 -- Terminal
 keymap('n', '<c-t>', notify 'workbench.action.terminal.toggleTerminal', { silent = true })
 
 -- Help
-keymap('n', '<Leader>h', notify 'workbench.action.showCommands', { silent = true })
+keymap('n', '<leader>h', notify 'workbench.action.showCommands', { silent = true })
 
 -- Format
-keymap('n', '<Leader>q', notify 'editor.action.formatDocument', { silent = true })
-keymap('v', '<Leader>q', v_notify 'editor.action.formatSelection', { silent = true })
+keymap('n', '<leader>q', notify 'editor.action.formatDocument')
+keymap('v', '<leader>q', v_notify 'editor.action.formatSelection')
 
 -- Bookmarks
 keymap('n', 'm', notify 'bookmarks.toggle', { silent = true })

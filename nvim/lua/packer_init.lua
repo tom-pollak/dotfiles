@@ -589,6 +589,14 @@ require('packer').startup({ function()
         end
     }
 
+    use {
+        "ggandor/leap.nvim",
+        config = function()
+            local leap = require'leap'
+            leap.setup{}
+        end
+    }
+
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()
