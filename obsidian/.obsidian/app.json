@@ -135,7 +135,17 @@
     "UF",
     "MACs",
     "RiR",
-    "IANA"
+    "IANA",
+    "HyperText",
+    "Bell-LaPadula",
+    "Biba",
+    "unreputable",
+    "ToF",
+    "i-th",
+    "i-th",
+    "Merkle",
+    "IPSec",
+    "Non-Mallebility"
   ],
   "foldHeading": false,
   "foldIndent": false,
@@ -154,5 +164,6 @@
   "strictLineBreaks": false,
   "autoPairBrackets": false,
   "autoPairMarkdown": false,
-  "newFileLocation": "root"
+  "newFileLocation": "root",
+  "showInlineTitle": false
 }
