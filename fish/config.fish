@@ -48,7 +48,7 @@ alias sync="sudo ntpdate pool.ntp.org"
 alias c="clear"
 alias dghci="TERM=dumb ghci"
 
-bind -M insert \co 'nvim $(fzf)'
+# bind -M insert \co 'nvim $(fzf)'
 bind -M insert \cj forward-char
 bind -M insert \cf tmux-sessionizer
 bind -M insert \ch beginning-of-line
