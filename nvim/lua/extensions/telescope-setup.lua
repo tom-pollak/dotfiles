@@ -93,9 +93,9 @@ local setup = function()
                     },
                 },
             },
-            dap = {
+            --[[ dap = {
                 theme = "cursor"
-            },
+            }, ]]
             project = {
                 theme = "cursor",
                 base_dirs = {
@@ -111,7 +111,7 @@ local setup = function()
     telescope.load_extension "file_browser"
     telescope.load_extension "project"
     telescope.load_extension "ui-select"
-    telescope.load_extension 'dap'
+    --[[ telescope.load_extension 'dap' ]]
 end
 
 M.setup = setup

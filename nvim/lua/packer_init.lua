@@ -80,7 +80,8 @@ require('packer').startup({ function()
             { 'hrsh7th/cmp-path', cond = not vim.g.vscode },
             { 'saadparwaiz1/cmp_luasnip', cond = not vim.g.vscode },
             { 'L3MON4D3/LuaSnip' },
-            { 'rcarriga/cmp-dap', cond = not vim.g.vscode },
+            { "windwp/nvim-autopairs" }
+            --[[ { 'rcarriga/cmp-dap', cond = not vim.g.vscode }, ]]
             --[[ { 'nvim-treesitter/nvim-treesitter' } -- For comment context? not working currently ]]
             -- 'hrsh7th/cmp-cmdline',
         },
@@ -133,13 +134,8 @@ require('packer').startup({ function()
         "windwp/nvim-autopairs",
         cond = not vim.g.minimal and not vim.g.vscode, -- Autocmd error if disabled vscode
         config = function()
-            require("nvim-autopairs").setup {}
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            local cmp = require('cmp')
-            cmp.event:on(
-                'confirm_done',
-                cmp_autopairs.on_confirm_done()
-            )
+            require("nvim-autopairs").setup {
+            }
         end
     }
 
@@ -211,10 +207,13 @@ require('packer').startup({ function()
         end
     }
 
-    -- -- Not that good
-    -- use {
-    --     'jubnzv/virtual-types.nvim',
-    -- }
+    use {
+        "ggandor/leap.nvim",
+        config = function()
+            local leap = require 'leap'
+            leap.setup {}
+        end
+    }
 
     ---------------------------------------------------------------------------
     -- GIT
@@ -280,7 +279,7 @@ require('packer').startup({ function()
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
-            { 'nvim-telescope/telescope-dap.nvim' },
+            --[[ { 'nvim-telescope/telescope-dap.nvim' }, ]]
         },
         config = function()
             require 'extensions.telescope-setup'.setup()
@@ -389,6 +388,8 @@ require('packer').startup({ function()
         end
     }
 
+    use 'tpope/vim-scriptease'
+
     use 'tpope/vim-repeat'
 
     use {
@@ -477,7 +478,6 @@ require('packer').startup({ function()
                 colors = {
                     bg_search      = "#163356",
                     bg             = '#0d1117',
-                    -- bg_highlight = "orange",
                     cursor_line_nr = "#FFEA00"
                 },
                 overrides = function(_)
@@ -541,7 +541,7 @@ require('packer').startup({ function()
     -- DEBUG
     ---------------------------------------------------------------------------
 
-    use {
+    --[[ use {
         'mfussenegger/nvim-dap',
         cond = not vim.g.minimal and vim.g.ide and not vim.g.vscode,
         requires = {
@@ -557,9 +557,8 @@ require('packer').startup({ function()
             require('extensions.dap-ui').setup()
             require("nvim-dap-virtual-text").setup()
             local dap_python = require('dap-python')
-            dap_python.setup('/usr/local/bin/python3')
+            dap_python.setup('/opt/homebrew/bin/python3')
             dap_python.test_runner = 'pytest'
-
         end
     }
 
@@ -587,16 +586,7 @@ require('packer').startup({ function()
                 },
             })
         end
-    }
-
-    use {
-        "ggandor/leap.nvim",
-        config = function()
-            local leap = require'leap'
-            leap.setup{}
-        end
-    }
-
+    } ]]
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()
