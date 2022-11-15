@@ -8,7 +8,7 @@ require 'nvim-treesitter.configs'.setup {
     sync_install = false,
     indent = {
         enable = true,
-        disable = { 'python' }
+        --[[ disable = { 'python' } ]]
     },
     matchup = {
         enable = in_vim

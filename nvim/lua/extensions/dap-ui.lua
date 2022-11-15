@@ -1,5 +1,6 @@
 local M = {}
 local setup = function()
+    require'extensions.dap'
     require("dapui").setup({
         icons = { expanded = "▾", collapsed = "▸" },
         mappings = {

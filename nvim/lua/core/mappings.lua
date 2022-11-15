@@ -5,6 +5,7 @@ if not vim.g.vscode then
 end
 vim.keymap.set('n', '<Leader><CR>', '<CMD>update<CR><CMD>so %<CR>', { silent = true })
 
+vim.keymap.set('n', '<leader>o', '<CMD>noh<CR>', { silent = true })
 --[[ vim.keymap.set('i', 'jk', '<esc>', { silent = true, }) ]]
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true })
@@ -14,8 +15,10 @@ vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 
-vim.keymap.set({ 'n' }, '<CR>', function() vim.cmd [[call append(line("."),   repeat([""], v:count1))]] end)
-vim.keymap.set({ 'n' }, '<S-CR>', function() vim.cmd [[call append(line(".")-1,   repeat([""], v:count1))]] end)
+if not vim.g.vscode then
+    vim.keymap.set({ 'n' }, '<CR>', function() vim.cmd [[call append(line("."),   repeat([""], v:count1))]] end)
+    vim.keymap.set({ 'n' }, '<S-CR>', function() vim.cmd [[call append(line(".")-1,   repeat([""], v:count1))]] end)
+end
 
 vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']]
 vim.cmd [[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']]
