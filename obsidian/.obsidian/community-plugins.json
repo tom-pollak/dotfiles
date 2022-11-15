@@ -8,14 +8,12 @@
   "obsidian-pandoc",
   "quick-latex",
   "url-into-selection",
-  "obsidian-outliner",
-  "nldates-obsidian",
-  "obsidian-mind-map",
   "markdown-prettifier",
-  "code-block-copy",
   "obsidian-admonition",
   "quick-explorer",
   "obsidian-another-quick-switcher",
   "obsidian-vimrc-support",
-  "omnisearch"
+  "omnisearch",
+  "mrj-jump-to-link",
+  "heycalmdown-navigate-cursor-history"
 ]
