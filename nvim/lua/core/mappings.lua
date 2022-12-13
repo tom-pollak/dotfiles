@@ -12,6 +12,9 @@ vim.keymap.set('n', 'n', 'nzz', { silent = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true })
 vim.keymap.set('n', '*', '*zz', { silent = true })
 
+vim.keymap.set('n', 'H', '^', {silent = true})
+vim.keymap.set('n', 'L', '$', {silent = true})
+
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true })
 

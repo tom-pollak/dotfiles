@@ -40,13 +40,13 @@ fish_vi_key_bindings
 
 alias cat=bat
 alias v=nvim
-alias vv='nvim -u ~/.config/nvim/minimal_init.lua'
 # alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
 alias c="clear"
 alias dghci="TERM=dumb ghci"
+alias hr="history --merge"
 
 # bind -M insert \co 'nvim $(fzf)'
 bind -M insert \cj forward-char
@@ -74,3 +74,8 @@ set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
 set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 set _CONDA_ROOT "/Users/tom/opt/anaconda3"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /opt/homebrew/Caskroom/miniforge/base/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<

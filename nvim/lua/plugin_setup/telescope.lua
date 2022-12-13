@@ -104,6 +104,7 @@ vim.keymap.set('c', '<c-f>', command_history)
 vim.keymap.set('c', '<c-r>', run_history)
 
 vim.keymap.set('n', '<leader>a', builtin.resume)
+vim.keymap.set('n', ',', builtin.resume)
 
 vim.keymap.set('n', '<leader>cd', dotfiles)
 vim.keymap.set('n', '<leader>cc', vim_config)

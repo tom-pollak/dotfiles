@@ -21,7 +21,6 @@ require('packer').startup({ function()
     use {
         'neovim/nvim-lspconfig',
         requires = { 'williamboman/nvim-lsp-installer' },
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             require('nvim-lsp-installer').setup({
                 automatic_installation = true,
@@ -37,7 +36,6 @@ require('packer').startup({ function()
 
     use {
         "ray-x/lsp_signature.nvim",
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             require "lsp_signature".setup {
                 toggle_key = "<C-y>",
@@ -48,7 +46,6 @@ require('packer').startup({ function()
 
     use {
         'kosayoda/nvim-lightbulb',
-        cond = not vim.g.minimal and not vim.g.vscode,
         requires = 'antoinemadec/FixCursorHold.nvim',
         config = function()
             vim.g.cursorhold_updatetime = 100
@@ -73,17 +70,13 @@ require('packer').startup({ function()
 
     use {
         'hrsh7th/nvim-cmp',
-        cond = not vim.g.minimal and not vim.g.vscode, -- Autocmd error if disabled vscode
         requires = {
             -- 'hrsh7th/cmp-buffer',
-            { 'hrsh7th/cmp-nvim-lsp', cond = not vim.g.vscode },
-            { 'hrsh7th/cmp-path', cond = not vim.g.vscode },
-            { 'saadparwaiz1/cmp_luasnip', cond = not vim.g.vscode },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
             { 'L3MON4D3/LuaSnip' },
             { "windwp/nvim-autopairs" }
-            --[[ { 'rcarriga/cmp-dap', cond = not vim.g.vscode }, ]]
-            --[[ { 'nvim-treesitter/nvim-treesitter' } -- For comment context? not working currently ]]
-            -- 'hrsh7th/cmp-cmdline',
         },
         config = function()
             --[[ vim.cmd(":iunmap <CR>") ]]
@@ -132,7 +125,6 @@ require('packer').startup({ function()
 
     use {
         "windwp/nvim-autopairs",
-        cond = not vim.g.minimal and not vim.g.vscode, -- Autocmd error if disabled vscode
         config = function()
             require("nvim-autopairs").setup {
             }
@@ -141,7 +133,6 @@ require('packer').startup({ function()
 
     use {
         'github/copilot.vim',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             vim.g.copilot_no_tab_map = true
             vim.g.copilot_assume_mapped = true
@@ -152,17 +143,14 @@ require('packer').startup({ function()
 
     use {
         'averms/black-nvim',
-        cond = not vim.g.minimal and not vim.g.vscode,
     }
 
     use {
         'stsewd/isort.nvim',
-        cond = not vim.g.minimal and not vim.g.vscode,
     }
 
     use {
         'simrat39/rust-tools.nvim',
-        cond = not vim.g.minimal and not vim.g.vscode,
         ft = { "rust", "rs" },
         config = function()
             local rt = require 'rust-tools'
@@ -221,7 +209,6 @@ require('packer').startup({ function()
 
     use {
         'lewis6991/gitsigns.nvim',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             local function gitsigns_visual_op(op)
                 return function()
@@ -249,7 +236,6 @@ require('packer').startup({ function()
 
     use {
         'rhysd/git-messenger.vim',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             vim.g.git_messenger_always_into_popup = 1
             vim.g.git_messenger_no_default_mappings = 1
@@ -258,7 +244,6 @@ require('packer').startup({ function()
 
     use {
         'kdheepak/lazygit.nvim',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
                 vim.env.GIT_EDITOR = [[nvr -cc split --remote-wait +'set bufhidden=wipe']]
@@ -327,7 +312,6 @@ require('packer').startup({ function()
 
     use {
         'chentoast/marks.nvim',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             require 'marks'.setup {
                 default_mappings = false,
@@ -343,15 +327,6 @@ require('packer').startup({ function()
         end
     }
 
-    --[[ use { ]]
-    --[[     'ggandor/leap.nvim', ]]
-    --[[     config = function() ]]
-    --[[         require 'extensions.leap-ast' ]]
-    --[[         require 'leap'.setup { ]]
-    --[[         } ]]
-    --[[     end ]]
-    --[[ } ]]
-
     ---------------------------------------------------------------------------
     -- UTILS
     ---------------------------------------------------------------------------
@@ -364,13 +339,6 @@ require('packer').startup({ function()
             require "nrpattern".setup()
         end,
     }
-
-    --[[ use {
-        'thirtythreeforty/lessspace.vim',
-        config = function()
-            vim.g.lessspace_blacklist = { 'diff', 'markdown', 'telescope' }
-        end
-    } ]]
 
     use {
         'rhysd/clever-f.vim',
@@ -394,11 +362,9 @@ require('packer').startup({ function()
 
     use {
         'tpope/vim-dispatch',
-        cond = not vim.g.minimal and not vim.g.vscode,
     }
 
     use { 'mbbill/undotree',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             if vim.fn.has("persistent_undo") then
                 local target_path = vim.fn.expand('~/.undodir')
@@ -441,7 +407,6 @@ require('packer').startup({ function()
 
     use {
         'skywind3000/asyncrun.vim',
-        cond = not vim.g.minimal and not vim.g.vscode,
     }
 
     ---------------------------------------------------------------------------
@@ -531,62 +496,10 @@ require('packer').startup({ function()
 
     use {
         'norcalli/nvim-colorizer.lua',
-        cond = not vim.g.minimal and not vim.g.vscode,
         config = function()
             require 'colorizer'.setup()
         end
     }
-
-    ---------------------------------------------------------------------------
-    -- DEBUG
-    ---------------------------------------------------------------------------
-
-    --[[ use {
-        'mfussenegger/nvim-dap',
-        cond = not vim.g.minimal and vim.g.ide and not vim.g.vscode,
-        requires = {
-            'mfussenegger/nvim-dap-python',
-            'theHamsta/nvim-dap-virtual-text',
-            "rcarriga/nvim-dap-ui"
-        },
-        config = function()
-            vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
-            vim.fn.sign_define('DapBreakpointRejected', { text = '🟦', texthl = '', linehl = '', numhl = '' })
-            vim.fn.sign_define('DapBreakpointCondition', { text = '🔵', texthl = '', linehl = '', numhl = '' })
-            vim.fn.sign_define('DapStopped', { text = '⭐️', texthl = '', linehl = '', numhl = '' })
-            require('extensions.dap-ui').setup()
-            require("nvim-dap-virtual-text").setup()
-            local dap_python = require('dap-python')
-            dap_python.setup('/opt/homebrew/bin/python3')
-            dap_python.test_runner = 'pytest'
-        end
-    }
-
-    use {
-        "nvim-neotest/neotest",
-        cond = not vim.g.minimal and vim.g.ide and not vim.g.vscode,
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim",
-            { "nvim-neotest/neotest-vim-test", requires = 'vim-test/vim-test' },
-            "nvim-neotest/neotest-python",
-            "nvim-neotest/neotest-plenary"
-        },
-        config = function()
-            require("neotest").setup({
-                adapters = {
-                    require("neotest-python")({
-                        dap = { justMyCode = false },
-                    }),
-                    require("neotest-plenary"),
-                    require("neotest-vim-test")({
-                        ignore_file_types = { "python", "lua" },
-                    }),
-                },
-            })
-        end
-    } ]]
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()

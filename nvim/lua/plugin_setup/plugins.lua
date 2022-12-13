@@ -79,7 +79,7 @@ end, { nargs = 0 })
 
 -- Leap
 vim.keymap.set({'n', 'x', 'o'}, ';', '<Plug>(leap-forward-to)')
-vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)')
+--[[ vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)') ]]
 vim.keymap.set({'n', 'x', 'o'}, 'g;', '<Plug>(leap-cross-window)')
 
 vim.cmd [[
