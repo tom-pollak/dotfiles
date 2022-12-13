@@ -42,7 +42,7 @@
       "modifiers": [
         "Mod"
       ],
-      "key": "T"
+      "key": "M"
     }
   ],
   "editor:toggle-checklist-status": [
@@ -91,14 +91,7 @@
       "key": "J"
     }
   ],
-  "file-explorer:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "L"
-    }
-  ],
+  "file-explorer:open": [],
   "editor:focus": [
     {
       "modifiers": [
@@ -145,6 +138,42 @@
         "Ctrl"
       ],
       "key": "I"
+    }
+  ],
+  "editor:follow-link": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Enter"
+    }
+  ],
+  "editor:open-link-in-new-leaf": [],
+  "editor:open-link-in-new-window": [],
+  "editor:open-link-in-new-split": [],
+  "editor:open-search-replace": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "F"
+    }
+  ],
+  "app:toggle-right-sidebar": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "K"
+    }
+  ],
+  "editor:insert-link": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "L"
     }
   ]
 }

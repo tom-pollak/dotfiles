@@ -156,24 +156,28 @@ keymap('n', '<leader>p', notify 'workbench.action.editor.previousChange', {
     silent = true
 })
 
-keymap('n', '<leader>lo', notify 'git.openChange', {
+keymap('n', '<leader>lo', notify 'gitlens.toggleFileChanges', {
     silent = true
 })
-keymap('n', '<leader>lh', notify 'git.viewFileHistory', {
+keymap('n', '<leader>lh', notify 'gitlens.views.lineHistory.toggleVisibility', {
     silent = true
 })
 keymap('n', '<leader>lg', notify 'git-graph.view', {
     silent = true
 })
-keymap({'n', 'v'}, '<leader>ls', notify 'git.stageSelectedRanges', {
-    silent = true
-})
-keymap({'n', 'v'}, '<leader>lr', notify 'git.revertSelectedRanges', {
-    silent = true
-})
-keymap({'n', 'v'}, '<leader>lu', notify 'git.unstageSelectedRanges', {
-    silent = true
-})
+keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', { silent = true })
+
+keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', { silent = true })
+
+--[[ keymap({'n', 'v'}, '<leader>ls', notify 'git.stageSelectedRanges', { ]]
+--[[     silent = true ]]
+--[[ }) ]]
+--[[ keymap({'n', 'v'}, '<leader>lr', notify 'git.revertSelectedRanges', { ]]
+--[[     silent = true ]]
+--[[ }) ]]
+--[[ keymap({'n', 'v'}, '<leader>lu', notify 'git.unstageSelectedRanges', { ]]
+--[[     silent = true ]]
+--[[ }) ]]
 
 keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', {
     silent = true
@@ -213,7 +217,7 @@ keymap('n', '<leader>dn', notify 'editor.debug.action.runToCursor', {
     silent = true
 })
 
-keymap({'n', 'v'}, '<leader>de', notify 'editor.debug.action.selectionToRepl', {
+keymap({ 'n', 'v' }, '<leader>de', notify 'editor.debug.action.selectionToRepl', {
     silent = true
 })
 
