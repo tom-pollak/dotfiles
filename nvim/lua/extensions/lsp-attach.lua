@@ -47,9 +47,9 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
 
-    if client and client.supports_method("textDocument/formatting") and not vim.g.vscode then
-        vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
-    end
+    --[[ if client and client.supports_method("textDocument/formatting") and not vim.g.vscode then ]]
+    vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
+    --[[ end ]]
 end
 
 M.on_attach = on_attach

@@ -62,6 +62,7 @@ require('packer').startup({ function()
 
     use {
         'nvim-treesitter/nvim-treesitter',
+        tag = 'v0.8.1',
         requires = {
             { 'p00f/nvim-ts-rainbow' },
             { 'JoosepAlviste/nvim-ts-context-commentstring' },
