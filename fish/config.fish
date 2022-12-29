@@ -39,7 +39,7 @@ set fish_greeting
 fish_vi_key_bindings
 
 alias cat=bat
-alias v=nvim
+alias v=nvim@0.7.2
 # alias fd=fdfind
 alias untar='tar -zxvf '
 alias ipe="curl -w '\n' ipinfo.io/ip"

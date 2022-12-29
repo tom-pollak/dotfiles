@@ -1,6 +1,12 @@
 local builtin = require("telescope.builtin")
 local sorters = require("telescope.sorters")
 
+local opts = require('telescope.themes').get_ivy {
+    sort_lastused = true,
+    sort_mru = true,
+    ignore_current_buffer = true
+}
+
 local check_git_workspace = function()
     local filepath = vim.fn.expand('%:p:h')
     local gitdir = vim.fn.finddir('.git', filepath .. ';')
@@ -14,18 +20,11 @@ local root_dir = function()
 end
 
 local git_files = function()
-    builtin.git_files({
-        --[[ sort_lastused = true, ]]
-        --[[ ignore_current_buffer = true ]]
-    })
+    builtin.git_files(opts)
 end
 
 local find_files = function()
-    builtin.find_files({
-        sort_lastused = true,
-        ignore_current_buffer = true,
-        sort_mru = true
-    })
+    builtin.find_files(opts)
 end
 
 local project_files = function()
@@ -38,10 +37,7 @@ end
 
 
 local buffers = function()
-    builtin.buffers({
-        sort_lastused = true,
-        ignore_current_buffer = true
-    })
+    builtin.buffers(opts)
 end
 
 
@@ -77,7 +73,6 @@ local command_history = function()
     builtin.command_history({
         prompt_title = "< Command History >",
         sorter = sorters.fuzzy_with_index_bias()
-
     })
 end
 
@@ -86,14 +81,11 @@ local run_history = function()
         prompt_title = "< Run History >",
         default_text = [[!]],
         sorter = sorters.fuzzy_with_index_bias()
-
-
     })
 end
 
 -- Telescope
 vim.keymap.set('n', '<c-p>', project_files)
---[[ vim.keymap.set('n', '<c-p>', git_files) ]]
 vim.keymap.set('n', '<leader>h', builtin.help_tags)
 vim.keymap.set('n', '<c-e>', find_files)
 vim.keymap.set('n', '<c-b>', buffers)
@@ -111,7 +103,7 @@ vim.keymap.set('n', '<leader>cc', vim_config)
 
 vim.keymap.set('n', "'", bookmarks_all)
 
-vim.keymap.set('n', '<leader>e', function() vim.cmd("Telescope file_browser cwd=" .. vim.fn.expand("%:p:h")) end)
+vim.keymap.set('n', '<leader>e', function() vim.cmd("Telescope file_browser layout_strategy=vertical cwd=" .. vim.fn.expand("%:p:h")) end)
 vim.keymap.set('n', '<leader>rr', require 'telescope'.extensions.project.project)
 
 -- Telekasten

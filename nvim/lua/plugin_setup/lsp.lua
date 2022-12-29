@@ -1,57 +1,25 @@
+local lsp = require('lsp-zero')
+
+lsp.preset('recommended')
+lsp.ensure_installed({
+    "rust_analyzer",
+    "sumneko_lua",
+    "clangd",
+    "pyright"
+})
+
+lsp.nvim_workspace()
+
+lsp.set_preferences({
+    set_lsp_keymaps = false
+})
+lsp.setup_nvim_cmp(require'extensions.cmp-setup'.cmp_setup)
+
+lsp.on_attach(require 'extensions.lsp-attach'.on_attach)
+lsp.setup()
+
 vim.diagnostic.config({
     virtual_text = {
         severity = { min = vim.diagnostic.severity.ERROR }
     }
 })
-
-local on_attach = require'extensions.lsp-attach'.on_attach
-
-local capabilities = {
-    require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-}
-
-local lspconfig = require('lspconfig')
-
-local root_dir = function(fname)
-    return lspconfig.util.find_git_ancestor(fname)
-        or vim.fn.getcwd()
-end
-
--- LSP servers
-lspconfig.sumneko_lua.setup {
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim', 'use' },
-            },
-        },
-    },
-    root_dir = root_dir,
-    capabilities = capabilities
-}
-
-lspconfig.pyright.setup {
-    on_attach = on_attach,
-    -- root_dir = root_dir,
-    capabilities = capabilities
-}
-
-lspconfig.clangd.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    rootdir = function(fname)
-        return lspconfig.util.root_pattern('compile_commands.json') or root_dir(fname)
-    end
-}
-
-lspconfig.solargraph.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-lspconfig.bashls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}

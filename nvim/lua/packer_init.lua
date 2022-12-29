@@ -19,29 +19,25 @@ require('packer').startup({ function()
     ---------------------------------------------------------------------------
 
     use {
-        'neovim/nvim-lspconfig',
-        requires = { 'williamboman/nvim-lsp-installer' },
-        config = function()
-            require('nvim-lsp-installer').setup({
-                automatic_installation = true,
-                ensure_installed = {
-                    "rust_analyzer",
-                    "sumneko_lua",
-                    "clangd",
-                    "pyright"
-                }
-            })
-        end
-    }
+        'VonHeikemen/lsp-zero.nvim',
+        requires = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
 
-    use {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-            require "lsp_signature".setup {
-                toggle_key = "<C-y>",
-                hint_prefix = ""
-            }
-        end
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
+
+            -- Snippets
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
+        },
     }
 
     use {
@@ -55,10 +51,6 @@ require('packer').startup({ function()
                 },
                 status_text = {
                     enabled = true,
-                    -- text = "💡",
-                    -- -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
-                    -- hl_mode = "combine",
-
                 }
             })
         end
@@ -69,33 +61,16 @@ require('packer').startup({ function()
     ---------------------------------------------------------------------------
 
     use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            -- 'hrsh7th/cmp-buffer',
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'L3MON4D3/LuaSnip' },
-            { "windwp/nvim-autopairs" }
-        },
-        config = function()
-            --[[ vim.cmd(":iunmap <CR>") ]]
-            require 'extensions.cmp-setup'
-        end
-    }
-
-    use {
         'nvim-treesitter/nvim-treesitter',
         requires = {
             { 'p00f/nvim-ts-rainbow' },
             { 'JoosepAlviste/nvim-ts-context-commentstring' },
-            { 'nvim-treesitter/nvim-treesitter-context', bang = true },
-            { 'andymass/vim-matchup' },
-            { 'nvim-treesitter/nvim-treesitter-textobjects', bang = true }
+            --[[ { 'nvim-treesitter/nvim-treesitter-context', bang = true }, ]]
         },
         config = function()
             require 'extensions.treesitter-setup'
-        end
+        end,
+        run = ':TSUpdate'
     }
 
     use {
@@ -124,14 +99,6 @@ require('packer').startup({ function()
     }
 
     use {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup {
-            }
-        end
-    }
-
-    use {
         'github/copilot.vim',
         config = function()
             vim.g.copilot_no_tab_map = true
@@ -142,30 +109,13 @@ require('packer').startup({ function()
     }
 
     use {
-        'averms/black-nvim',
-    }
-
-    use {
-        'stsewd/isort.nvim',
-    }
-
-    use {
         'simrat39/rust-tools.nvim',
         ft = { "rust", "rs" },
         config = function()
             local rt = require 'rust-tools'
-            -- Update this path
-            local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.7.4/'
-            local codelldb_path = extension_path .. 'adapter/codelldb'
-            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-
             local opts = {
                 parameter_hints_prefix = "<- ",
                 other_hints_prefix = "=> ",
-                dap = {
-                    adapter = require('rust-tools.dap').get_codelldb_adapter(
-                        codelldb_path, liblldb_path)
-                },
                 server = {
                     standalone = true,
                     on_attach = function(client, bufnr)
@@ -264,7 +214,6 @@ require('packer').startup({ function()
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
-            --[[ { 'nvim-telescope/telescope-dap.nvim' }, ]]
         },
         config = function()
             require 'extensions.telescope-setup'.setup()
@@ -319,9 +268,9 @@ require('packer').startup({ function()
                     sign = "⚑",
                 },
                 mappings = {
-                    set_bookmark0 = "mm",
+                    set_bookmark0 = "cm",
                     delete_bookmark = "dm",
-                    delete_bookmark0 = "cm"
+                    delete_bookmark0 = "dam"
                 }
             }
         end
@@ -378,8 +327,6 @@ require('packer').startup({ function()
         end
     }
 
-    --[[ use 'christoomey/vim-tmux-navigator' ]]
-
     use {
         "akinsho/toggleterm.nvim",
         config = function()
@@ -388,13 +335,6 @@ require('packer').startup({ function()
                 size = 40,
                 shell = "fish"
             })
-        end
-    }
-
-    use {
-        'andymass/vim-matchup',
-        config = function()
-            vim.g.loaded_matchit = 1
         end
     }
 

@@ -90,6 +90,9 @@ keymap('n', 'gt', notify 'editor.action.goToTypeDefinition', {
 keymap('n', 'gi', notify 'editor.action.goToImplementation', {
     silent = true
 })
+keymap('n', 'gI', notify 'references-view.findImplementations', {
+    silent = true
+})
 keymap('n', 'gj', notify 'editor.action.marker.next', {
     silent = true
 })
@@ -127,6 +130,8 @@ keymap('n', 'dm', notify 'bookmarks.clearFromAllFiles', {
 keymap('n', "'", notify 'bookmarks.listFromAllFiles', {
     silent = true
 })
+
+keymap('n', '<leader>j', notify 'github.copilot.generate', { silent = true })
 
 -- Notes
 keymap('n', '<leader>mm', notify 'vsnotes.listNotes', {
@@ -179,12 +184,22 @@ keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', { silent = true })
 --[[     silent = true ]]
 --[[ }) ]]
 
-keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', {
-    silent = true
-})
-keymap('n', '<leader>df', notify 'workbench.action.debug.run', {
-    silent = true
-})
+if vim.bo.filetype == "rust" then
+    keymap('n', '<leader>dd', notify 'rust-analyzer.debug', {
+        silent = true
+    })
+    keymap('n', '<leader>df', notify 'rust-analyzer.run', {
+        silent = true
+    })
+
+else
+    keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', {
+        silent = true
+    })
+    keymap('n', '<leader>df', notify 'workbench.action.debug.run', {
+        silent = true
+    })
+end
 
 keymap('n', '<leader>dm', notify 'workbench.debug.viewlet.action.toggleBreakpointsActivatedAction', {
     silent = true

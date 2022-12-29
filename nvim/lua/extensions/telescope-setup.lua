@@ -9,7 +9,7 @@ local setup = function()
         defaults = {
             borderchars = { "─", " ", " ", " ", " ", " ", " ", " " },
             shorten_path = true,
-            layout_strategy = "vertical",
+            layout_strategy = "bottom_pane",
             layout_config = {
                 vertical = {
                     height = function(_, _, lines) return lines end,
@@ -67,14 +67,13 @@ local setup = function()
                         ["h"] = fb_actions.goto_parent_dir,
                         ["l"] = "select_default",
                         ["dd"] = fb_actions.remove,
-                        ["<C-i>"] = fb_actions.goto_parent_dir,
-                        ["<C-e>"] = fb_actions.goto_home_dir,
+                        ["<C-h>"] = fb_actions.goto_home_dir,
                         ["<C-w>"] = fb_actions.goto_cwd,
-                        ["<C-h>"] = fb_actions.toggle_hidden,
+                        ["<C-.>"] = fb_actions.toggle_hidden,
                         ["<C-t>"] = fb_actions.change_cwd,
-                        ["<A-r>"] = fb_actions.rename,
-                        ["<A-m>"] = fb_actions.move,
-                        ["<A-d>"] = fb_actions.remove,
+                        ["r"] = fb_actions.rename,
+                        ["m"] = fb_actions.move,
+                        ["d"] = fb_actions.remove,
                         ["<C-r>"] = function(prompt_bufnr)
                             local git_root_path =
                             require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):
@@ -93,9 +92,6 @@ local setup = function()
                     },
                 },
             },
-            --[[ dap = {
-                theme = "cursor"
-            }, ]]
             project = {
                 theme = "cursor",
                 base_dirs = {
@@ -111,7 +107,6 @@ local setup = function()
     telescope.load_extension "file_browser"
     telescope.load_extension "project"
     telescope.load_extension "ui-select"
-    --[[ telescope.load_extension 'dap' ]]
 end
 
 M.setup = setup

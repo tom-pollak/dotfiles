@@ -1,12 +1,6 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-require('cmp').event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-)
-
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and
@@ -67,8 +61,10 @@ local label_comparator = function(entry1, entry2)
     return entry1.completion_item.label < entry2.completion_item.label
 end
 
-cmp.setup({
-    formatting = {
+local M = {}
+
+local cmp_setup = {
+    --[[ formatting = {
         format = function(_, vim_item)
             vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
             return vim_item
@@ -82,22 +78,18 @@ cmp.setup({
     window = {
         -- completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
-    },
+    }, ]]
     mapping = cmp.mapping.preset.insert({
-        ['<C-space>'] = cmp.mapping.complete(),
+        ['<Tab>'] = cmp.mapping.confirm(),
         ['<C-g>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
-        --[[ ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(), ]]
         ['<C-n>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.scroll_docs(4)
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-                --[[ elseif has_words_before() then ]]
-                --[[     cmp.complete() ]]
             else
                 fallback()
             end
@@ -121,14 +113,14 @@ cmp.setup({
             end
         end, { "i", "s" })
     }),
-    sources = cmp.config.sources({
+    --[[ sources = cmp.config.sources({
         { name = "nvim_lsp_signature_help" },
         { name = 'nvim_lsp' },
         { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
         { name = 'path' },
         { name = 'dap' },
         -- { name = 'buffer' },
-    }),
+    }), ]]
     sorting = {
         comparators = {
             comparator({
@@ -163,31 +155,7 @@ cmp.setup({
             label_comparator,
         },
     },
-    -- filetype = ('gitcommit', {
-    --     sources = cmp.config.sources({
-    --         { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    --     }, {
-    --         { name = 'buffer' },
-    --     })
-    -- })
+}
 
-    --[[ enabled = function()
-        -- disable completion in comments
-        local context = require 'cmp.config.context'
-        -- keep command mode completion enabled when cursor is in a comment
-        if vim.api.nvim_get_mode().mode == 'c' then
-            return true
-        else
-            return not context.in_treesitter_capture("comment")
-                and not context.in_syntax_group("Comment")
-        end
-    end ]]
-})
-
-require("cmp").setup.filetype({ "dap-repl", "dapui_watches" }, {
-    sources = {
-        { name = "dap" },
-    },
-})
-
--- Set configuration for specific filetype.
+M.cmp_setup = cmp_setup
+return M
