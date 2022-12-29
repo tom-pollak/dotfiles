@@ -6,7 +6,9 @@ end
 vim.keymap.set('n', '<Leader><CR>', '<CMD>update<CR><CMD>so %<CR>', { silent = true })
 
 vim.keymap.set('n', '<leader>o', '<CMD>noh<CR>', { silent = true })
---[[ vim.keymap.set('i', 'jk', '<esc>', { silent = true, }) ]]
+
+vim.keymap.set('n', 'u', '<CMD>earlier<CR>', {silent = true})
+vim.keymap.set('n', '<C-r>', '<CMD>later<CR>', {silent = true})
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true })
@@ -32,8 +34,6 @@ end, { noremap = true, expr = true })
 vim.keymap.set({ "n", "x" }, "k", function()
   return vim.v.count > 0 and "k" or "gk"
 end, { noremap = true, expr = true })
---[[ vim.keymap.set('n', 'j', 'gj') ]]
---[[ vim.keymap.set('n', 'k', 'gk') ]]
 
 vim.keymap.set('n', '<c-f>', function() return ':e ' .. vim.fn.expand '%:p:h' .. '/' end, { expr = true })
 

@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>m', function()
     vim.cmd(":Telekasten") -- I have no idea why I can't do <CMD>Telekasten<CR> but it don't work
 end)
 
-vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc><CMD>call clever_f#reset()<CR>', { silent = true })
+vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc>', { silent = true })
 
 vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
 vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
