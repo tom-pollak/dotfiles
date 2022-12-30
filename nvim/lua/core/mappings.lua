@@ -1,4 +1,5 @@
 -- Mappings, independant of plugins
+vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc>', { silent = true })
 
 if not vim.g.vscode then
     vim.keymap.set('n', '<Leader>w', '<CMD>update<CR>', { silent = true })

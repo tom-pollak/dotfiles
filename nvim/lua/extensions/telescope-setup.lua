@@ -73,7 +73,7 @@ local setup = function()
                         ["<C-t>"] = fb_actions.change_cwd,
                         ["r"] = fb_actions.rename,
                         ["m"] = fb_actions.move,
-                        ["d"] = fb_actions.remove,
+                        ["mm"] = fb_actions.move,
                         ["<C-r>"] = function(prompt_bufnr)
                             local git_root_path =
                             require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):

@@ -1,48 +1,22 @@
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set('c', '!!', function() return "AsyncRun " end, { expr = true })
-
--- Undotree
-vim.api.nvim_set_keymap("n", "<leader>u", "<CMD>UndotreeToggle<CR>", opts)
-
-
--- Ranger
--- vim.api.nvim_set_keymap("n", "<leader>r", "<CMD>Ranger<CR>", opts)
-
-
--- TMUX Navigator
---[[
-vim.api.nvim_set_keymap("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-k>", "<CMD>TmuxNavigateUp<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", opts)
-]]
 
 vim.keymap.set("n", "<C-h>", "<CMD>wincmd h<CR>")
 vim.keymap.set("n", "<C-j>", "<CMD>wincmd j<CR>")
 vim.keymap.set("n", "<C-k>", "<CMD>wincmd k<CR>")
 vim.keymap.set("n", "<C-l>", "<CMD>wincmd l<CR>")
 
--- vim.opt.foldmethod="expr"
--- vim.opt.foldexpr= require'treesitter'nvim_treesitter#foldexpr()
-
--- Trouble
-vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>TroubleToggle<cr>",
-    { silent = true, noremap = true }
-)
---[[ vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>Trouble loclist<cr>",
-    { silent = true, noremap = true }
-) ]]
-
---[[ vim.api.nvim_set_keymap("n", "<leader>rk", "<cmd>Trouble quickfix<cr>",
-    { silent = true, noremap = true }
-) ]]
-
+-- Quickfix
 vim.api.nvim_set_keymap("n", "<leader>rk", "<cmd>QFToggle!<cr>",
     { silent = true, noremap = true }
 )
 
 vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>LLToggle!<cr>",
+    { silent = true, noremap = true }
+)
+
+-- Trouble
+vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>TroubleToggle<cr>",
     { silent = true, noremap = true }
 )
 
@@ -52,7 +26,7 @@ vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
 )
 
 -- Copilot
-vim.keymap.set("n", "<leader>gp", "<cmd>Copilot split<cr>")
+vim.keymap.set("n", "<leader>u", "<cmd>Copilot split<cr>")
 
 
 -- Context
@@ -66,8 +40,6 @@ vim.keymap.set('n', '<leader>m', function()
     vim.cmd(":Telekasten") -- I have no idea why I can't do <CMD>Telekasten<CR> but it don't work
 end)
 
-vim.keymap.set('n', '<Esc>', '<CMD>nohl<CR><Esc>', { silent = true })
-
 vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
 vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
 
@@ -79,12 +51,5 @@ end, { nargs = 0 })
 
 -- Leap
 vim.keymap.set({'n', 'x', 'o'}, ';', '<Plug>(leap-forward-to)')
---[[ vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)') ]]
+vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)')
 vim.keymap.set({'n', 'x', 'o'}, 'g;', '<Plug>(leap-cross-window)')
-
-vim.cmd [[
-    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-    match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertLeave * match ExtraWhitespace /\s\+$/
-]]

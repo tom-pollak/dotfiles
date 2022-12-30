@@ -8,7 +8,7 @@ set.clipboard = 'unnamedplus'
 wo.relativenumber = true
 wo.number = true
 g.mapleader = ' '
-g.updatetime = 150
+g.updatetime = 50
 
 set.shell = "bash"
 set.tabstop = 4
@@ -44,9 +44,16 @@ set.mouse = 'a'
 
 local yank_augroup = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = yank_augroup,
-  desc = 'Highlight on yank',
-  callback = function(_)
-    vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
-  end
+    group = yank_augroup,
+    desc = 'Highlight on yank',
+    callback = function(_)
+        vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
+    end
 })
+
+vim.cmd [[
+    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+    match ExtraWhitespace /\s\+\%#\@<!$/
+    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    au InsertLeave * match ExtraWhitespace /\s\+$/
+]]
