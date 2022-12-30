@@ -111,6 +111,7 @@ require('packer').startup({ function()
 
     use {
         'simrat39/rust-tools.nvim',
+        after = { "mason-lspconfig.nvim" },
         ft = { "rust", "rs" },
         config = function()
             local rt = require 'rust-tools'
@@ -125,8 +126,8 @@ require('packer').startup({ function()
                         vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
                         -- Code action groups
                         vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
-                        vim.keymap.set('n', '<leader>dd', rt.debuggables.debuggables, { buffer = bufnr })
-                        vim.keymap.set('n', '<leader>df', rt.runnables.runnables, { buffer = bufnr })
+                        --[[ vim.keymap.set('n', '<leader>dd', rt.debuggables.debuggables, { buffer = bufnr }) ]]
+                        vim.keymap.set('n', '<leader>dd', rt.runnables.runnables, { buffer = bufnr })
                         vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
                         -- Gives errors
                         --[[ vim.keymap.set("n", "J", rt.join_lines.join_lines, { buffer = bufnr }) ]]
@@ -138,6 +139,7 @@ require('packer').startup({ function()
                                 -- default: `cargo check`
                                 command = "clippy"
                             },
+                            inlayHints = { locationLinks = false },
                         }
                     }
                 }
@@ -176,10 +178,10 @@ require('packer').startup({ function()
                     vim.keymap.set('n', '<leader>lo', gs.diffthis, opts)
                     vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
                     vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
+                    --[[ vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
                     vim.keymap.set({ 'n', 'v' }, '<leader>lr', gs.reset_hunk, opts)
                     vim.keymap.set('n', '<leader>lu', gs.undo_stage_hunk, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>ll', gitsigns_visual_op "stage_hunk", opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>ll', gitsigns_visual_op "stage_hunk", opts) ]]
                 end
             }
         end
@@ -306,34 +308,14 @@ require('packer').startup({ function()
         end
     }
 
-    use 'tpope/vim-scriptease'
-
     use 'tpope/vim-repeat'
-
-    use {
-        'tpope/vim-dispatch',
-    }
-
-    use { 'mbbill/undotree',
-        config = function()
-            if vim.fn.has("persistent_undo") then
-                local target_path = vim.fn.expand('~/.undodir')
-
-                if not vim.fn.isdirectory(target_path) ~= 0 then
-                    vim.fn.mkdir(target_path, "p", 0700)
-                end
-                vim.opt.undodir = target_path
-            end
-
-        end
-    }
 
     use {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
                 open_mapping = [[<C-t>]],
-                size = 40,
+                size = 25,
                 shell = "fish"
             })
         end
@@ -344,10 +326,6 @@ require('packer').startup({ function()
         config = function()
             require 'impatient'.enable_profile()
         end
-    }
-
-    use {
-        'skywind3000/asyncrun.vim',
     }
 
     ---------------------------------------------------------------------------
@@ -447,5 +425,5 @@ require('packer').startup({ function()
     end
 end,
     config = {
-        compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'plugin_setup', 'packer_compiled.lua')
+        compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua')
     } })

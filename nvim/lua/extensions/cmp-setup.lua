@@ -64,21 +64,6 @@ end
 local M = {}
 
 local cmp_setup = {
-    --[[ formatting = {
-        format = function(_, vim_item)
-            vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
-            return vim_item
-        end,
-    },
-    snippet = {
-        expand = function(args)
-            require 'luasnip'.lsp_expand(args.body)
-        end
-    },
-    window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
-    }, ]]
     mapping = cmp.mapping.preset.insert({
         ['<Tab>'] = cmp.mapping.confirm(),
         ['<C-g>'] = cmp.mapping.abort(),
