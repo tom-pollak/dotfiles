@@ -9,7 +9,7 @@
 	autocrlf = input
 	excludesfile = /Users/Thomas.Pollak/.gitignore_global
 [user]
-	email = tpollak@meraki.com
+	email = tompollak1000@gmail.com
 	name = Thomas Pollak
 	github = tom-pollak
 	signingKey = ""

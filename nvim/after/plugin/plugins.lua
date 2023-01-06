@@ -26,8 +26,7 @@ vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
 )
 
 -- Copilot
-vim.keymap.set("n", "<leader>u", "<cmd>Copilot split<cr>")
-
+vim.keymap.set("n", "<leader>u", "<cmd>Copilot<cr>")
 
 -- Context
 vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
