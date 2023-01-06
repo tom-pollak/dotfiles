@@ -131,7 +131,7 @@ keymap('n', "'", notify 'bookmarks.listFromAllFiles', {
     silent = true
 })
 
-keymap('n', '<leader>j', notify 'github.copilot.generate', { silent = true })
+keymap('n', '<leader>u', notify 'github.copilot.generate', { silent = true })
 
 -- Notes
 keymap('n', '<leader>mm', notify 'vsnotes.listNotes', {

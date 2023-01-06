@@ -61,15 +61,21 @@ local label_comparator = function(entry1, entry2)
     return entry1.completion_item.label < entry2.completion_item.label
 end
 
+--[[ local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+) ]]
+
 local M = {}
 
 local cmp_setup = {
     mapping = cmp.mapping.preset.insert({
-        ['<Tab>'] = cmp.mapping.confirm(),
+        ['<Tab>'] = cmp.mapping.confirm({select = true}),
         ['<C-g>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.scroll_docs(4)
@@ -98,14 +104,6 @@ local cmp_setup = {
             end
         end, { "i", "s" })
     }),
-    --[[ sources = cmp.config.sources({
-        { name = "nvim_lsp_signature_help" },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip', max_item_count = 5 }, -- For luasnip users.
-        { name = 'path' },
-        { name = 'dap' },
-        -- { name = 'buffer' },
-    }), ]]
     sorting = {
         comparators = {
             comparator({

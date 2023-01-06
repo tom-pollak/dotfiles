@@ -29,9 +29,9 @@ set.termguicolors = true
 set.lazyredraw = true
 set.pumheight = 12
 set.linebreak = true
+set.completeopt = 'menu,menuone,noselect'
 
 -- set.signcolumn = 'yes'
--- set.completeopt = 'menu,menuone,noselect'
 -- vim.cmd("set guicursor=n-v-c-i:block")
 
 set.showmode = false
@@ -40,7 +40,6 @@ set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.g
 set.background = 'dark'
 wo.colorcolumn = '80'
 set.mouse = 'a'
-
 
 local yank_augroup = vim.api.nvim_create_augroup('user_cmds', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -51,9 +50,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end
 })
 
-vim.cmd [[
-    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-    match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertLeave * match ExtraWhitespace /\s\+$/
-]]
+if not vim.g.vscode then
+    vim.cmd [[
+        highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+        match ExtraWhitespace /\s\+\%#\@<!$/
+        au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+        au InsertLeave * match ExtraWhitespace /\s\+$/
+    ]]
+end
