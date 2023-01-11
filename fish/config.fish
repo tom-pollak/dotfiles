@@ -1,6 +1,5 @@
 if status is-interactive
-    set -Ux PYENV_ROOT $HOME/.pyenv
-    set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+    starship init fish | source
 end
 
 set fish_greeting
@@ -18,6 +17,7 @@ fish_add_path /home/linuxbrew/.linuxbrew/bin
 fish_add_path $HOME/.poetry/bin
 fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
+fish_add_path /opt/homebrew/opt/ruby@3.1/bin
 
 set -gx EDITOR nvim
 set -gx VISUAL nvim
@@ -29,7 +29,6 @@ set -gx PROJECT_PATHS ~/projects
 set -gx fisher_path /Users/tom/.config/fish/
 set -gx WORKSPACE $HOME/projects
 
-set -gx NVM_DIR $HOME/.nvm
 set -gx DFT_DISPLAY inline
 set -gx LIBGL_ALWAYS_INDIRECT 1
 set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
@@ -49,7 +48,7 @@ alias cat=bat
 alias v=nvim@0.7.2 # STILL got that cmp.nvim <CR> bug
 alias lg=lazygit
 
-alias untar='tar -zxvf '
+alias untar='tar -zxvf'
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias sync="sudo ntpdate pool.ntp.org"
 alias c="clear"
@@ -70,7 +69,12 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-starship init fish | source
+# set -gx NVM_DIR $HOME/.nvm
+# pyenv init - | source
+# set -Ux PYENV_ROOT $HOME/.pyenv
+set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # Nested neovim lazy
 # if set -q NVIM
@@ -82,3 +86,4 @@ starship init fish | source
 #     set -gx EDITOR nvim
 #     set -gx VISUAL nvim
 # end
+
