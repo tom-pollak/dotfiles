@@ -36,7 +36,6 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 
 # TODO ctrl o is alil weird atm
-# bind -M insert \co 'nvim $(fzf)'
 bind -M insert \cj forward-char
 bind -M insert \ca beginning-of-line
 bind -M insert \cp history-prefix-search-backward
@@ -44,7 +43,7 @@ bind -M insert \cn history-prefix-search-forward
 bind -M insert \cs __ethp_commandline_toggle_sudo
 
 alias cat=bat
-alias v=nvim@0.7.2 # STILL got that cmp.nvim <CR> bug
+alias v=nvim
 alias lg=lazygit
 
 alias untar='tar -zxvf'
