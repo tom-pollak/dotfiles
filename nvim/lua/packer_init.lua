@@ -107,13 +107,13 @@ require('packer').startup({ function()
                         enabled = true,
                         auto_trigger = false,
                         keymap = {
-                            accept = "<Tab>",
+                            accept = "<C-l>",
                             accept_word = false,
                             accept_line = false,
                             decline = "<C-g>",
-                            next = "<C-l>",
-                            prev = "<C-h>",
-                            dismiss = "<C-]>",
+                            next = "<C-n>",
+                            prev = "<C-p>",
+                            dismiss = "<C-\\>",
                         },
                     }
 
@@ -442,6 +442,9 @@ require('packer').startup({ function()
     if PACKER_BOOTSTRAP then
         require('packer').sync()
     end
+
+
+
 end,
     config = {
         compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua')
