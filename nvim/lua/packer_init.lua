@@ -9,9 +9,6 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup({ function()
-    if vim.g.vscode then
-        return
-    end
     use 'wbthomason/packer.nvim'
 
     ---------------------------------------------------------------------------
@@ -100,113 +97,29 @@ require('packer').startup({ function()
     }
 
     use {
-        'github/copilot.vim',
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "VimEnter",
         config = function()
-            vim.g.copilot_no_tab_map = true
-            vim.g.copilot_assume_mapped = true
-            vim.g.copilot_enabled = true
-            vim.g.copilot_filetypes = { "python", "lua", "cc", "rust" }
-        end
-    }
-
-    use {
-        'simrat39/rust-tools.nvim',
-        after = { "mason-lspconfig.nvim" },
-        ft = { "rust", "rs" },
-        config = function()
-            local rt = require 'rust-tools'
-            local opts = {
-                parameter_hints_prefix = "<- ",
-                other_hints_prefix = "=> ",
-                server = {
-                    standalone = true,
-                    on_attach = function(client, bufnr)
-                        require 'extensions.lsp-attach'.on_attach(client, bufnr)
-                        -- Hover actions
-                        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
-                        -- Code action groups
-                        vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
-                        --[[ vim.keymap.set('n', '<leader>dd', rt.debuggables.debuggables, { buffer = bufnr }) ]]
-                        vim.keymap.set('n', '<leader>dd', rt.runnables.runnables, { buffer = bufnr })
-                        vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
-                        -- Gives errors
-                        --[[ vim.keymap.set("n", "J", rt.join_lines.join_lines, { buffer = bufnr }) ]]
-
-                    end,
-                    settings = {
-                        ["rust-analyzer"] = {
-                            checkOnSave = {
-                                -- default: `cargo check`
-                                command = "clippy"
-                            },
-                            inlayHints = { locationLinks = false },
-                        }
+            vim.defer_fn(function()
+                require("copilot").setup {
+                    suggestion = {
+                        enabled = true,
+                        auto_trigger = false,
+                        keymap = {
+                            accept = "<Tab>",
+                            accept_word = false,
+                            accept_line = false,
+                            decline = "<C-g>",
+                            next = "<C-l>",
+                            prev = "<C-h>",
+                            dismiss = "<C-]>",
+                        },
                     }
+
                 }
-            }
-            rt.setup(opts)
-        end
-    }
-
-    use {
-        "ggandor/leap.nvim",
-        config = function()
-            local leap = require 'leap'
-            leap.setup {}
-        end
-    }
-
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
-
-    ---------------------------------------------------------------------------
-    -- GIT
-    ---------------------------------------------------------------------------
-
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            local function gitsigns_visual_op(op)
-                return function()
-                    return require('gitsigns')[op]({ vim.fn.line("."), vim.fn.line("v") })
-                end
-            end
-
-            require('gitsigns').setup {
-                on_attach = function(bufnr)
-                    local gs = package.loaded.gitsigns
-                    local opts = { buffer = bufnr }
-                    vim.keymap.set("n", "<leader>n", gs.next_hunk, opts)
-                    vim.keymap.set("n", "<leader>p", gs.prev_hunk, opts)
-                    vim.keymap.set('n', '<leader>lo', gs.diffthis, opts)
-                    vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
-                    vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
-                    --[[ vim.keymap.set({ 'n', 'v' }, '<leader>ls', gs.stage_hunk, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>lr', gs.reset_hunk, opts)
-                    vim.keymap.set('n', '<leader>lu', gs.undo_stage_hunk, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>ll', gitsigns_visual_op "stage_hunk", opts) ]]
-                end
-            }
-        end
-    }
-
-    use {
-        'rhysd/git-messenger.vim',
-        config = function()
-            vim.g.git_messenger_always_into_popup = 1
-            vim.g.git_messenger_no_default_mappings = 1
-        end
-    }
-
-    use {
-        'kdheepak/lazygit.nvim',
-        config = function()
-            if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
-                vim.env.GIT_EDITOR = [[nvr -cc split --remote-wait +'set bufhidden=wipe']]
-            end
-        end
+            end, 100)
+        end,
     }
 
     ---------------------------------------------------------------------------
@@ -285,16 +198,15 @@ require('packer').startup({ function()
     }
 
     ---------------------------------------------------------------------------
-    -- UTILS
+    -- MOVEMENT
     ---------------------------------------------------------------------------
 
-    use 'dstein64/vim-startuptime'
-
     use {
-        'zegervdv/nrpattern.nvim',
+        "ggandor/leap.nvim",
         config = function()
-            require "nrpattern".setup()
-        end,
+            local leap = require 'leap'
+            leap.setup {}
+        end
     }
 
     use {
@@ -304,6 +216,15 @@ require('packer').startup({ function()
             vim.g.clever_f_across_no_line = 1
             vim.g.clever_f_chars_match_any_signs = ';'
         end
+    }
+
+    ---------------------------------------------------------------------------
+    -- UTILS
+    ---------------------------------------------------------------------------
+
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
     }
 
     use {
@@ -327,11 +248,50 @@ require('packer').startup({ function()
     }
 
     use {
-        'lewis6991/impatient.nvim',
+        'zegervdv/nrpattern.nvim',
         config = function()
-            require 'impatient'.enable_profile()
+            require "nrpattern".setup()
+        end,
+    }
+
+    ---------------------------------------------------------------------------
+    -- GIT
+    ---------------------------------------------------------------------------
+
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup {
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+                    local opts = { buffer = bufnr }
+                    vim.keymap.set("n", "<leader>n", gs.next_hunk, opts)
+                    vim.keymap.set("n", "<leader>p", gs.prev_hunk, opts)
+                    vim.keymap.set('n', '<leader>lo', gs.diffthis, opts)
+                    vim.keymap.set('n', '<leader>lb', gs.toggle_current_line_blame, opts)
+                    vim.keymap.set('n', '<leader>ld', gs.toggle_deleted, opts)
+                end
+            }
         end
     }
+
+    use {
+        'rhysd/git-messenger.vim',
+        config = function()
+            vim.g.git_messenger_always_into_popup = 1
+            vim.g.git_messenger_no_default_mappings = 1
+        end
+    }
+
+    use {
+        'kdheepak/lazygit.nvim',
+        config = function()
+            if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
+                vim.env.GIT_EDITOR = [[nvr -cc split --remote-wait +'set bufhidden=wipe']]
+            end
+        end
+    }
+
 
     ---------------------------------------------------------------------------
     -- NOTES
@@ -372,9 +332,6 @@ require('packer').startup({ function()
                 overrides = function(_)
                     return {
                         ColorColumn = { bg = "#292929" },
-                        -- Whitespace = { fg = util.lighten(c.syntax.comment, #292929 0.4) },
-                        Whitespace = { fg = "red" },
-                        ExtraWhitespace = { ctermbg = "red", guibg = "red" },
                         TreesitterContext = { bg = '#090c10' }
                     }
                 end,
@@ -408,7 +365,6 @@ require('packer').startup({ function()
         config = function()
             vim.cmd [[ highlight IndentBlanklineChar guifg=#292929 gui=nocombine ]]
             vim.cmd [[ highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine ]]
-            vim.cmd [[ highlight ExtraWhitespace guifg=#C678DD gui=nocombine ]]
             require 'indent_blankline'.setup {
                 show_trailing_blankline_indent = false,
                 space_char_blankline = " ",
@@ -424,6 +380,64 @@ require('packer').startup({ function()
             require 'colorizer'.setup()
         end
     }
+
+    ---------------------------------------------------------------------------
+    -- DIAGNOSTIC
+    ---------------------------------------------------------------------------
+
+    use 'dstein64/vim-startuptime'
+
+    use {
+        'lewis6991/impatient.nvim',
+        config = function()
+            require 'impatient'.enable_profile()
+        end
+    }
+
+    ---------------------------------------------------------------------------
+    -- RUST
+    ---------------------------------------------------------------------------
+
+    use {
+        'simrat39/rust-tools.nvim',
+        after = { "mason-lspconfig.nvim" },
+        ft = { "rust", "rs" },
+        config = function()
+            local rt = require 'rust-tools'
+            local opts = {
+                parameter_hints_prefix = "<- ",
+                other_hints_prefix = "=> ",
+                server = {
+                    standalone = true,
+                    on_attach = function(client, bufnr)
+                        require 'extensions.lsp-attach'.on_attach(client, bufnr)
+                        -- Hover actions
+                        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+                        -- Code action groups
+                        vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        --[[ vim.keymap.set('n', '<leader>dd', rt.debuggables.debuggables, { buffer = bufnr }) ]]
+                        vim.keymap.set('n', '<leader>dd', rt.runnables.runnables, { buffer = bufnr })
+                        vim.keymap.set("n", "ga", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        -- Gives errors
+                        --[[ vim.keymap.set("n", "J", rt.join_lines.join_lines, { buffer = bufnr }) ]]
+
+                    end,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            checkOnSave = {
+                                -- default: `cargo check`
+                                command = "clippy"
+                            },
+                            inlayHints = { locationLinks = false }, -- Only supports end of line atm
+                        }
+                    }
+                }
+            }
+            rt.setup(opts)
+        end
+    }
+
+    ---------------------------------------------------------------------------
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()

@@ -31,7 +31,7 @@ set.pumheight = 12
 set.linebreak = true
 set.completeopt = 'menu,menuone,noselect'
 
--- set.signcolumn = 'yes'
+set.signcolumn = 'yes'
 -- vim.cmd("set guicursor=n-v-c-i:block")
 
 set.showmode = false

@@ -40,6 +40,8 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set("n", "gh", vim.diagnostic.open_float, { silent = true, noremap = true })
 
+    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { silent = true, noremap = true })
+
     -- show hover doc and press twice will jumpto hover window
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true })
 
@@ -47,9 +49,9 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
 
-    --[[ if client and client.supports_method("textDocument/formatting") and not vim.g.vscode then ]]
-    vim.keymap.set('n', '<leader>q', vim.lsp.buf.formatting, bufopts)
-    --[[ end ]]
+    vim.keymap.set('n', '<leader>q', function()
+        return vim.lsp.buf.format { async = true }
+    end, bufopts)
 end
 
 M.on_attach = on_attach

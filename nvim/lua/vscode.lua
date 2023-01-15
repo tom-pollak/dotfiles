@@ -131,7 +131,7 @@ keymap('n', "'", notify 'bookmarks.listFromAllFiles', {
     silent = true
 })
 
-keymap('n', '<leader>j', notify 'github.copilot.generate', { silent = true })
+keymap('n', '<leader>u', notify 'github.copilot.generate', { silent = true })
 
 -- Notes
 keymap('n', '<leader>mm', notify 'vsnotes.listNotes', {
@@ -279,9 +279,9 @@ keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', {
 
 
 -- Leap
-vim.keymap.set({ 'n', 'x', 'o' }, ';', '<Plug>(leap-forward-to)')
-vim.keymap.set({ 'n', 'x', 'o' }, ',', '<Plug>(leap-backward-to)')
-vim.keymap.set({ 'n', 'x', 'o' }, 'g;', '<Plug>(leap-cross-window)')
+--[[ vim.keymap.set({ 'n', 'x', 'o' }, ';', '<Plug>(leap-forward-to)') ]]
+--[[ vim.keymap.set({ 'n', 'x', 'o' }, ',', '<Plug>(leap-backward-to)') ]]
+--[[ vim.keymap.set({ 'n', 'x', 'o' }, 'g;', '<Plug>(leap-cross-window)') ]]
 
 -- Navigate something
 --[[ keymap('n', 'H', notify '', { silent = true }) ]]
