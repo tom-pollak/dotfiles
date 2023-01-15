@@ -45,7 +45,7 @@ local cmp_setup = {
         ['<C-g>'] = cmp.mapping.abort(),
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping(function(fallback)
+        ['<C-.>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.scroll_docs(4)
             elseif luasnip.expand_or_jumpable() then
@@ -54,7 +54,7 @@ local cmp_setup = {
                 fallback()
             end
         end, { "i", "s" }),
-        ["<C-p>"] = cmp.mapping(function(fallback)
+        ["<C-,>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.scroll_docs(-4)
             elseif luasnip.jumpable(-1) then
