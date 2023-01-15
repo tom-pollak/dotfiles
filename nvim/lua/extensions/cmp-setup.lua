@@ -1,38 +1,14 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and
-        vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-local cmp_kinds = {
-    Text = '  ',
-    Method = '  ',
-    Function = '  ',
-    Constructor = '  ',
-    Field = '  ',
-    Variable = '  ',
-    Class = '  ',
-    Interface = '  ',
-    Module = '  ',
-    Property = '  ',
-    Unit = '  ',
-    Value = '  ',
-    Enum = '  ',
-    Keyword = '  ',
-    Snippet = '  ',
-    Color = '  ',
-    File = '  ',
-    Reference = '  ',
-    Folder = '  ',
-    EnumMember = '  ',
-    Constant = '  ',
-    Struct = '  ',
-    Event = '  ',
-    Operator = '  ',
-    TypeParameter = '  ',
-}
+-- Copilot disabled on autocomplete
+cmp.event:on("menu_opened", function()
+    vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+    vim.b.copilot_suggestion_hidden = false
+end)
 
 -- https://github.com/hrsh7th/nvim-cmp/issues/156
 local comparator = function(conf)
@@ -61,19 +37,12 @@ local label_comparator = function(entry1, entry2)
     return entry1.completion_item.label < entry2.completion_item.label
 end
 
---[[ local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-) ]]
-
 local M = {}
 
 local cmp_setup = {
     mapping = cmp.mapping.preset.insert({
-        ['<Tab>'] = cmp.mapping.confirm({select = true}),
+        ['<Tab>'] = cmp.mapping.confirm({ select = true }),
         ['<C-g>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping(function(fallback)
@@ -94,15 +63,6 @@ local cmp_setup = {
                 fallback()
             end
         end, { "i", "s" }),
-        ["<C-l>"] = cmp.mapping(function(fallback)
-            cmp.mapping.abort()
-            local copilot_keys = vim.fn["copilot#Accept"]()
-            if copilot_keys ~= "" then
-                vim.api.nvim_feedkeys(copilot_keys, "i", true)
-            else
-                fallback()
-            end
-        end, { "i", "s" })
     }),
     sorting = {
         comparators = {

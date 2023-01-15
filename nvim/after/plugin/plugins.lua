@@ -25,9 +25,6 @@ vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
     { noremap = true }
 )
 
--- Copilot
-vim.keymap.set("n", "<leader>u", "<cmd>Copilot<cr>")
-
 -- Context
 vim.keymap.set({ 'n' }, '<leader>i', "<CMD>TSContextToggle<CR>", { silent = true })
 
