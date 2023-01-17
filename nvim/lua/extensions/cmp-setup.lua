@@ -1,6 +1,7 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
+
 -- Copilot disabled on autocomplete
 cmp.event:on("menu_opened", function()
     vim.b.copilot_suggestion_hidden = true
@@ -41,24 +42,36 @@ local M = {}
 
 local cmp_setup = {
     mapping = cmp.mapping.preset.insert({
-        ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-g>'] = cmp.mapping.abort(),
-        ['<C-j>'] = cmp.mapping.select_next_item(),
-        ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<C-.>'] = cmp.mapping(function(fallback)
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.scroll_docs(4)
+                cmp.confirm({ select = true })
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             else
                 fallback()
             end
         end, { "i", "s" }),
-        ["<C-,>"] = cmp.mapping(function(fallback)
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ['<C-g>'] = cmp.mapping.abort(),
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(4)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<C-p>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.scroll_docs(-4)
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
             else
                 fallback()
             end

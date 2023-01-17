@@ -132,13 +132,36 @@ require('packer').startup({ function()
             { 'nvim-lua/plenary.nvim' },
             { 'kyazdani42/nvim-web-devicons' },
             { 'nvim-telescope/telescope-fzf-native.nvim' },
-            { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-project.nvim" },
             { 'nvim-telescope/telescope-ui-select.nvim' },
         },
         config = function()
             require 'extensions.telescope-setup'.setup()
         end
+    }
+
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+        config = function()
+            require("nvim-tree").setup {
+                view = {
+                    side = "right",
+                    width = 40,
+                    mappings = {
+                        list = {
+                            { key = { "<CR>", "o", "<2-LeftMouse>", "l" }, action = "edit" },
+                            { key = "h", action = "parent_node" },
+
+                        }
+                    }
+                }
+
+            }
+        end,
+        tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
 
     use {
@@ -286,6 +309,7 @@ require('packer').startup({ function()
     use {
         'kdheepak/lazygit.nvim',
         config = function()
+            vim.g.lazygit_floating_window_scaling_factor = 0.95
             if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
                 vim.env.GIT_EDITOR = [[nvr -cc split --remote-wait +'set bufhidden=wipe']]
             end

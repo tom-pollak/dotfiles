@@ -3,15 +3,15 @@ local M = {}
 local on_attach = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-    vim.api.nvim_set_keymap("n", "<leader>rw", "<cmd>Trouble workspace_diagnostics<cr>",
+    vim.api.nvim_set_keymap("n", "<leader>x", "<cmd>Trouble workspace_diagnostics<cr>",
         { silent = true, noremap = true }
     )
-    vim.api.nvim_set_keymap("n", "<leader>rd", "<cmd>Trouble document_diagnostics<cr>",
+    vim.api.nvim_set_keymap("n", "<leader>X", "<cmd>Trouble document_diagnostics<cr>",
         { silent = true, noremap = true }
     )
     local telescope_builtin = require("telescope.builtin")
     vim.keymap.set('n', '<leader>s', telescope_builtin.lsp_document_symbols, bufopts)
-    vim.keymap.set('n', '<leader>S', telescope_builtin.lsp_workspace_symbols, bufopts)
+    vim.keymap.set('n', '<leader>S', telescope_builtin.lsp_dynamic_workspace_symbols, bufopts)
 
     vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, bufopts)
     vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, bufopts)

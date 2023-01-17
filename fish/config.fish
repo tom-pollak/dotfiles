@@ -45,6 +45,7 @@ bind -M insert \cs __ethp_commandline_toggle_sudo
 alias cat=bat
 alias v=nvim
 alias lg=lazygit
+alias r=ranger
 
 alias untar='tar -zxvf'
 alias ipe="curl -w '\n' ipinfo.io/ip"
@@ -75,13 +76,10 @@ set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # Nested neovim lazy
-# if set -q NVIM
-#     alias nvim="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-#     alias v="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-#     set -gx EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-#     set -gx VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-# else
-#     set -gx EDITOR nvim
-#     set -gx VISUAL nvim
-# end
+if set -q NVIM_LISTEN_ADDRESS
+    alias nvim="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    alias v="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    set -gx EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    set -gx VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+end
 

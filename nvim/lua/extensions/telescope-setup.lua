@@ -1,7 +1,6 @@
 local M = {}
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
-local fb_actions = require "telescope".extensions.file_browser.actions
 local telescope = require("telescope")
 
 local setup = function()
@@ -50,48 +49,6 @@ local setup = function()
             command_history = { theme = "dropdown" },
         },
         extensions = {
-            fzy_native = {
-                override_generic_sorter = false,
-                override_file_sorter = true,
-            },
-            file_browser = {
-                grouped = true,
-                initial_mode = "normal",
-                -- disables netrw and use telescope-file-browser in its place
-                hijack_netrw = true,
-                mappings = {
-                    ["i"] = {
-                        ["<C-i>"] = fb_actions.goto_parent_dir,
-                    },
-                    ["n"] = {
-                        ["h"] = fb_actions.goto_parent_dir,
-                        ["l"] = "select_default",
-                        ["dd"] = fb_actions.remove,
-                        ["<C-h>"] = fb_actions.goto_home_dir,
-                        ["<C-w>"] = fb_actions.goto_cwd,
-                        ["<C-.>"] = fb_actions.toggle_hidden,
-                        ["<C-t>"] = fb_actions.change_cwd,
-                        ["r"] = fb_actions.rename,
-                        ["m"] = fb_actions.move,
-                        ["mm"] = fb_actions.move,
-                        ["<C-r>"] = function(prompt_bufnr)
-                            local git_root_path =
-                            require("plenary.job"):new({ command = "git", args = { "rev-parse", "--show-toplevel" } }):
-                                sync()
-                                [1]
-                            local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-                            local finder = current_picker.finder
-                            if finder.files then
-                                finder.path = git_root_path
-                            else
-                                finder.cwd = git_root_path
-                            end
-                            require("telescope._extensions.file_browser.utils").redraw_border_title(current_picker)
-                            current_picker:refresh(finder, { reset_prompt = true, multi = current_picker._multi })
-                        end
-                    },
-                },
-            },
             project = {
                 theme = "cursor",
                 base_dirs = {
@@ -103,8 +60,6 @@ local setup = function()
             }
         }
     }
-    -- require('telescope').load_extension('fzy_native')
-    telescope.load_extension "file_browser"
     telescope.load_extension "project"
     telescope.load_extension "ui-select"
 end
