@@ -2,7 +2,6 @@ asdf
 bat
 curl
 db-browser-for-sqlite
-diff-so-fancy
 direnv
 docker
 docker-compose
