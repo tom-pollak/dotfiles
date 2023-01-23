@@ -1,6 +1,7 @@
 asdf
 bat
 curl
+db-browser-for-sqlite
 diff-so-fancy
 direnv
 docker
@@ -16,6 +17,7 @@ gcc
 gh
 git-delta
 git-lfs
+htop
 hyperfine
 latexindent
 lazydocker
@@ -30,6 +32,7 @@ neovim-remote
 nmap
 pandoc
 pigz
+pipx
 poetry
 prettier
 protobuf
