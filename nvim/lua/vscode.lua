@@ -184,22 +184,23 @@ keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', { silent = true })
 --[[     silent = true ]]
 --[[ }) ]]
 
-if vim.bo.filetype == "rust" then
-    keymap('n', '<leader>dd', notify 'rust-analyzer.debug', {
-        silent = true
-    })
-    keymap('n', '<leader>df', notify 'rust-analyzer.run', {
-        silent = true
-    })
+---
 
-else
-    keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', {
-        silent = true
-    })
-    keymap('n', '<leader>df', notify 'workbench.action.debug.run', {
-        silent = true
-    })
-end
+keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', {
+    silent = true
+})
+keymap('n', '<leader>df', notify 'workbench.action.debug.run', {
+    silent = true
+})
+
+keymap('n', '<leader>dR', notify 'rust-analyzer.debug', {
+    silent = true
+})
+keymap('n', '<leader>dr', notify 'rust-analyzer.run', {
+    silent = true
+})
+
+---
 
 keymap('n', '<leader>dm', notify 'workbench.debug.viewlet.action.toggleBreakpointsActivatedAction', {
     silent = true
@@ -214,11 +215,11 @@ keymap('n', '<leader>dh', notify 'editor.debug.action.toggleBreakpoint', {
 keymap('n', '<leader>dH', notify 'editor.debug.action.toggleInlineBreakpoint', {
     silent = true
 })
-keymap('n', '<leader>dg', notify 'editor.debug.action.conditionalBreakpoint', {
+keymap('n', '<leader>dc', notify 'editor.debug.action.conditionalBreakpoint', {
     silent = true
 })
 
-keymap('n', '<leader>dc', notify 'workbench.action.debug.continue', {
+keymap('n', '<leader>dg', notify 'workbench.action.debug.continue', {
     silent = true
 })
 keymap('n', '<leader>dp', notify 'workbench.action.debug.pause', {
@@ -227,15 +228,12 @@ keymap('n', '<leader>dp', notify 'workbench.action.debug.pause', {
 keymap('n', '<leader>dy', notify 'workbench.action.debug.stop', {
     silent = true
 })
-
 keymap('n', '<leader>dn', notify 'editor.debug.action.runToCursor', {
     silent = true
 })
-
-keymap({ 'n', 'v' }, '<leader>de', notify 'editor.debug.action.selectionToRepl', {
+keymap({ 'n', 'v' }, '<leader>di', notify 'editor.debug.action.selectionToRepl', {
     silent = true
 })
-
 keymap('n', '<leader>dj', notify 'workbench.action.debug.callStackDown', {
     silent = true
 })
@@ -248,16 +246,19 @@ keymap('n', '<leader>dJ', notify 'workbench.action.debug.callStackBottom', {
 keymap('n', '<leader>dK', notify 'workbench.action.debug.callStackTop', {
     silent = true
 })
-
 keymap('n', '<leader>du', notify 'debug.jumpToCursor', {
     silent = true
 })
+keymap('n', '<leader>dw', notify 'editor.debug.action.selectionToWatch', {
+    silent = true
+})
+
 
 keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', {
     silent = true
 })
 
-keymap('n', '<leader>di', notify 'editor.debug.action.showDebugHover', {
+keymap('n', '<leader>dl', notify 'editor.debug.action.showDebugHover', {
     silent = true
 })
 

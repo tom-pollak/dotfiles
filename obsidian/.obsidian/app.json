@@ -160,7 +160,9 @@
     "CRYPT-CSA ",
     "hmac",
     "Grainability",
-    "grainable"
+    "grainable",
+    "center",
+    "coords"
   ],
   "foldHeading": false,
   "foldIndent": false,

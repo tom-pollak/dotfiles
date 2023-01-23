@@ -37,21 +37,6 @@ require('packer').startup({ function()
         },
     }
 
-    use {
-        'kosayoda/nvim-lightbulb',
-        requires = 'antoinemadec/FixCursorHold.nvim',
-        config = function()
-            vim.g.cursorhold_updatetime = 100
-            require('nvim-lightbulb').setup({
-                autocmd = {
-                    enabled = true,
-                },
-                status_text = {
-                    enabled = true,
-                }
-            })
-        end
-    }
 
     ---------------------------------------------------------------------------
     -- CODE
@@ -69,6 +54,26 @@ require('packer').startup({ function()
             require 'extensions.treesitter-setup'
         end,
         run = ':TSUpdate'
+    }
+
+    use {
+        'mhartington/formatter.nvim',
+        config = function()
+            local ft = require("formatter.filetypes")
+            require 'formatter'.setup {
+                filetype = {
+                    python = {
+                        ft.python.black,
+                        function()
+                            return {
+                                exe = "black"
+                            }
+                        end
+                    }
+                }
+
+            }
+        end
     }
 
     use {
@@ -275,6 +280,22 @@ require('packer').startup({ function()
         config = function()
             require "nrpattern".setup()
         end,
+    }
+
+    use {
+        'kosayoda/nvim-lightbulb',
+        requires = 'antoinemadec/FixCursorHold.nvim',
+        config = function()
+            vim.g.cursorhold_updatetime = 100
+            require('nvim-lightbulb').setup({
+                autocmd = {
+                    enabled = true,
+                },
+                status_text = {
+                    enabled = true,
+                }
+            })
+        end
     }
 
     ---------------------------------------------------------------------------

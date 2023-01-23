@@ -52,3 +52,6 @@ vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)')
 
 -- nvim tree
 vim.keymap.set({'n', 'x'}, '<leader>e', '<CMD>NvimTreeToggle<CR>')
+
+-- formatter
+vim.keymap.set({'n', 'x'}, '<leader>q', '<CMD>Format<CR>')
