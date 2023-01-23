@@ -104,7 +104,7 @@ require('packer').startup({ function()
     use {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
-        event = "VimEnter",
+        event = "InsertEnter",
         config = function()
             vim.defer_fn(function()
                 require("copilot").setup {
