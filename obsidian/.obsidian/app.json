@@ -162,7 +162,13 @@
     "Grainability",
     "grainable",
     "center",
-    "coords"
+    "coords",
+    "Exitance",
+    "colors",
+    "color",
+    "Color",
+    "Debayering",
+    "Demosaicing"
   ],
   "foldHeading": false,
   "foldIndent": false,
