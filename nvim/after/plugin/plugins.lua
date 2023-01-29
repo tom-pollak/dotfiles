@@ -1,6 +1,5 @@
 local opts = { noremap = true, silent = true }
 
-
 vim.keymap.set("n", "<C-h>", "<CMD>wincmd h<CR>")
 vim.keymap.set("n", "<C-j>", "<CMD>wincmd j<CR>")
 vim.keymap.set("n", "<C-k>", "<CMD>wincmd k<CR>")
@@ -10,7 +9,6 @@ vim.keymap.set("n", "<C-l>", "<CMD>wincmd l<CR>")
 vim.api.nvim_set_keymap("n", "<leader>rk", "<cmd>QFToggle!<cr>",
     { silent = true, noremap = true }
 )
-
 vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>LLToggle!<cr>",
     { silent = true, noremap = true }
 )
@@ -18,11 +16,6 @@ vim.api.nvim_set_keymap("n", "<leader>rl", "<cmd>LLToggle!<cr>",
 -- Trouble
 vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>TroubleToggle<cr>",
     { silent = true, noremap = true }
-)
-
--- Gitmessenger
-vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
-    { noremap = true }
 )
 
 -- Context
@@ -33,25 +26,25 @@ vim.keymap.set('n', '<leader>j', "<CMD>LazyGit<CR>", opts)
 
 -- Telekasten
 vim.keymap.set('n', '<leader>m', function()
-    vim.cmd(":Telekasten") -- I have no idea why I can't do <CMD>Telekasten<CR> but it don't work
+    -- I have no idea why I can't do <CMD>Telekasten<CR> but it don't work
+    vim.cmd(":Telekasten")
 end)
 
-vim.keymap.set('v', '<', '< <CMD>GitMessengerClose<CR>gv', { silent = true })
-vim.keymap.set('v', '>', '> <CMD>GitMessengerClose<CR>gv', { silent = true })
-
-vim.api.nvim_create_user_command('LoadIde', function()
-    vim.g.ide = true
-    vim.g.minimal = false
-    require 'startup'
-end, { nargs = 0 })
+vim.keymap.set('v', '<', '<gv', { silent = true })
+vim.keymap.set('v', '>', '>gv', { silent = true })
 
 -- Leap
 vim.keymap.set({'n', 'x', 'o'}, ';', '<Plug>(leap-forward-to)')
 vim.keymap.set({'n', 'x', 'o'}, ',', '<Plug>(leap-backward-to)')
---[[ vim.keymap.set({'n', 'x', 'o'}, 'g;', '<Plug>(leap-cross-window)') ]]
 
 -- nvim tree
 vim.keymap.set({'n', 'x'}, '<leader>e', '<CMD>NvimTreeToggle<CR>')
 
--- formatter
+-- Formatter
 vim.keymap.set({'n', 'x'}, '<leader>q', '<CMD>Format<CR>')
+
+-- Gitmessenger
+vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>",
+    { noremap = true }
+)
+

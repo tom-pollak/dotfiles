@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+VENV_PATH=${1:-".venv"}
+echo export VENV_PATH=$VENV_PATH > .envrc
+echo "layout venv" >> .envrc
+direnv allow .
+direnv exec . echo
