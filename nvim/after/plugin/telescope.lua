@@ -1,31 +1,28 @@
 local builtin = require("telescope.builtin")
 local sorters = require("telescope.sorters")
 
-local opts = require('telescope.themes').get_ivy {
+local opts = require("telescope.themes").get_ivy({
     sort_lastused = true,
     sort_mru = true,
     ignore_current_buffer = true
-}
+})
 
 local check_git_workspace = function()
-    local filepath = vim.fn.expand('%:p:h')
-    local gitdir = vim.fn.finddir('.git', filepath .. ';')
+    local filepath = vim.fn.expand("%:p:h")
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
     return gitdir and #gitdir > 0 and #gitdir < #filepath
 end
 
 local root_dir = function()
-    return require("plenary.job"):new(
-        { command = "git", args = { "rev-parse", "--show-toplevel" } }
-    ):sync()[1]
+    return require("plenary.job"):new({
+        command = "git",
+        args = {"rev-parse", "--show-toplevel"}
+    }):sync()[1]
 end
 
-local git_files = function()
-    builtin.git_files(opts)
-end
+local git_files = function() builtin.git_files(opts) end
 
-local find_files = function()
-    builtin.find_files(opts)
-end
+local find_files = function() builtin.find_files(opts) end
 
 local project_files = function()
     if check_git_workspace() then
@@ -35,23 +32,14 @@ local project_files = function()
     end
 end
 
-
-local buffers = function()
-    builtin.buffers(opts)
-end
-
+local buffers = function() builtin.buffers(opts) end
 
 local vim_config = function()
-    builtin.find_files({
-        prompt_title = "< VimRC >",
-        cwd = "$HOME/.config/nvim"
-    })
+    builtin.find_files({prompt_title = "< VimRC >", cwd = "$HOME/.config/nvim"})
 end
 
 local live_grep = function(cwd)
-    builtin.live_grep({
-        cwd = cwd
-    })
+    builtin.live_grep({cwd = cwd, disable_coordinates = true})
 end
 
 local dotfiles = function()
@@ -62,11 +50,9 @@ local dotfiles = function()
 end
 
 local bookmarks_all = function()
-    vim.cmd [[BookmarksQFListAll]]
-    builtin.quickfix({
-        prompt_title = "< Bookmarks >"
-    })
-    vim.cmd [[cclose]]
+    vim.cmd([[BookmarksQFListAll]])
+    builtin.quickfix({prompt_title = "< Bookmarks >"})
+    vim.cmd([[cclose]])
 end
 
 local command_history = function()
@@ -85,24 +71,25 @@ local run_history = function()
 end
 
 -- Telescope
-vim.keymap.set('n', '<c-p>', project_files)
-vim.keymap.set('n', '<leader>h', builtin.help_tags)
-vim.keymap.set('n', '<c-e>', find_files)
-vim.keymap.set('n', '<c-b>', buffers)
-vim.keymap.set('n', '<leader>f', function() live_grep(root_dir()) end)
+vim.keymap.set("n", "<c-p>", project_files)
+vim.keymap.set("n", "<leader>h", builtin.help_tags)
+vim.keymap.set("n", "<c-e>", find_files)
+vim.keymap.set("n", "<c-b>", buffers)
+vim.keymap.set("n", "<leader>f", function() live_grep(root_dir()) end)
 
+vim.keymap.set("c", "<c-f>", command_history)
+vim.keymap.set("c", "<c-r>", run_history)
 
-vim.keymap.set('c', '<c-f>', command_history)
-vim.keymap.set('c', '<c-r>', run_history)
+vim.keymap.set("n", "<leader>a", builtin.resume)
 
-vim.keymap.set('n', '<leader>a', builtin.resume)
+vim.keymap.set("n", "<leader>cd", dotfiles)
+vim.keymap.set("n", "<leader>cc", vim_config)
 
-vim.keymap.set('n', '<leader>cd', dotfiles)
-vim.keymap.set('n', '<leader>cc', vim_config)
+vim.keymap.set("n", "'", bookmarks_all)
 
-vim.keymap.set('n', "'", bookmarks_all)
+vim.keymap.set("n", "<leader>rr",
+               require("telescope").extensions.project.project)
 
-vim.keymap.set('n', '<leader>rr', require 'telescope'.extensions.project.project)
-
--- Telekasten
-vim.keymap.set('n', '<leader>cm', function() live_grep('~/projects/notes/notes/') end)
+vim.keymap.set("n", "<leader>m", function()
+    return require("telescope").extensions.notepad.notepad(opts)
+end)

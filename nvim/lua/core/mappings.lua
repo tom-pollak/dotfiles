@@ -55,11 +55,6 @@ vim.keymap.set("n", "<c-;>", function()
 	vim.cmd(t("normal <c-6>"))
 end)
 
-vim.keymap.set("i", "<c-n>", "<c-o>e<c-o>a")
-vim.keymap.set("i", "<c-m>", "<c-o>b<c-o>i")
-vim.keymap.set("n", "<c-n>", "e")
-vim.keymap.set("n", "<c-m>", "b")
-
 -- Forward delete, (BS is C-h)
 vim.keymap.set("i", "<C-d>", "<Del>")
 

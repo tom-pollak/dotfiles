@@ -46,3 +46,4 @@ starship
 tldr
 tree-sitter
 wget
+xonsh
