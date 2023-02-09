@@ -37,13 +37,11 @@ keymap('v', '>', '> gv', {
 keymap('n', '<CR>', notify 'editor.action.insertLineAfter')
 -- Shift enter is not possible in vim, done in keybindings
 
+keymap('n', '<C-n>', 'zz')
+
 keymap('n', '<leader>rn', notify 'editor.action.rename', {
     silent = true
 })
-keymap('n', '<leader>rg', notify 'workbench.action.findInFiles', {
-    silent = true
-})
-
 keymap('n', '<leader>rf', notify 'editor.action.refactor', {
     silent = true
 })

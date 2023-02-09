@@ -168,7 +168,11 @@
     "color",
     "Color",
     "Debayering",
-    "Demosaicing"
+    "Demosaicing",
+    "Epipole",
+    "epipolar",
+    "mitm",
+    "wrt"
   ],
   "foldHeading": false,
   "foldIndent": false,
