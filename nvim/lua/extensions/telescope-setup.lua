@@ -40,7 +40,6 @@ local setup = function()
                     ["<esc>"] = actions.close,
                     ["<c-t>"] = trouble.open_with_trouble,
                     ["<c-q>"] = trouble.open_with_trouble,
-                    --[[ ["i"] = function() vim.cmd "startinsert" end, ]]
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous
                 }
@@ -53,7 +52,10 @@ local setup = function()
         extensions = {
             project = {theme = "cursor", base_dirs = {"~/projects"}},
             ["ui-select"] = {require"telescope.themes".get_cursor()},
-            notepad = {notes_directory = "~/Desktop/notes"}
+            notepad = {
+                notes_directory = "~/Desktop/notes",
+                ignore_files = {".git/", ".DS_Store", "imgs/"}
+            }
         }
     }
     telescope.load_extension "project"
