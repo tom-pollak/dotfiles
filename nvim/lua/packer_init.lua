@@ -23,11 +23,11 @@ require("packer").startup({
             requires = {
                 -- LSP Support
                 {"neovim/nvim-lspconfig"}, {"williamboman/mason.nvim"},
-                {"williamboman/mason-lspconfig.nvim"}, -- Autocompletion
-                {"hrsh7th/nvim-cmp"}, {"hrsh7th/cmp-buffer"},
-                {"hrsh7th/cmp-path"}, {"saadparwaiz1/cmp_luasnip"},
-                {"hrsh7th/cmp-nvim-lsp"}, {"hrsh7th/cmp-nvim-lua"}, -- Snippets
-                {"L3MON4D3/LuaSnip"}, {"rafamadriz/friendly-snippets"}
+                {"williamboman/mason-lspconfig.nvim"}, {"hrsh7th/nvim-cmp"},
+                {"hrsh7th/cmp-buffer"}, {"hrsh7th/cmp-path"},
+                {"saadparwaiz1/cmp_luasnip"}, {"hrsh7th/cmp-nvim-lsp"},
+                {"hrsh7th/cmp-nvim-lua"}, {"L3MON4D3/LuaSnip"},
+                {"rafamadriz/friendly-snippets"}, {"ray-x/lsp_signature.nvim"}
             }
         })
 
@@ -37,11 +37,10 @@ require("packer").startup({
 
         use({
             "nvim-treesitter/nvim-treesitter",
-            tag = "v0.8.1",
             requires = {
                 {"p00f/nvim-ts-rainbow"},
-                {"JoosepAlviste/nvim-ts-context-commentstring"}
-                --[[ { 'nvim-treesitter/nvim-treesitter-context', bang = true }, ]]
+                {"JoosepAlviste/nvim-ts-context-commentstring"},
+                {'nvim-treesitter/nvim-treesitter-context', bang = true}
             },
             config = function()
                 require("extensions.treesitter-setup")
@@ -129,7 +128,6 @@ require("packer").startup({
             "nvim-telescope/telescope.nvim",
             requires = {
                 {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"},
-                {"nvim-telescope/telescope-fzf-native.nvim"},
                 {"nvim-telescope/telescope-project.nvim"},
                 {"nvim-telescope/telescope-ui-select.nvim"},
                 {"/Users/tom/projects/notepad.nvim"}
@@ -141,9 +139,7 @@ require("packer").startup({
 
         use({
             "nvim-tree/nvim-tree.lua",
-            requires = {
-                "nvim-tree/nvim-web-devicons" -- optional, for file icons
-            },
+            requires = {"nvim-tree/nvim-web-devicons"},
             config = function()
                 require("nvim-tree").setup({
                     update_focused_file = {enable = true, update_cwd = true},
@@ -259,7 +255,7 @@ require("packer").startup({
             config = function()
                 require("toggleterm").setup({
                     open_mapping = [[<C-t>]],
-                    size = 25,
+                    size = 15,
                     shell = "fish"
                 })
             end
@@ -344,15 +340,11 @@ require("packer").startup({
                 require("github-theme").setup({
                     theme_style = "dark_default",
                     sidebars = {"qf", "packer", "terminal", "trouble"},
-                    colors = {
-                        bg_search = "#163356",
-                        bg = "#0d1117",
-                        cursor_line_nr = "#FFEA00"
-                    },
+                    colors = {bg_search = "#163356", cursor_line_nr = "#FFEA00"},
                     overrides = function(_)
                         return {
-                            ColorColumn = {bg = "#292929"},
-                            TreesitterContext = {bg = "#090c10"}
+                            ColorColumn = {bg = "#1e2228"},
+                            TreesitterContext = {bg = "#22272e"}
                         }
                     end,
                     dark_float = true,
@@ -378,7 +370,7 @@ require("packer").startup({
             "lukas-reineke/indent-blankline.nvim",
             config = function()
                 vim.cmd(
-                    [[ highlight IndentBlanklineChar guifg=#292929 gui=nocombine ]])
+                    [[ highlight IndentBlanklineChar guifg=#1e2228 gui=nocombine ]])
                 vim.cmd(
                     [[ highlight IndentBlanklineContextChar guifg=#C678DD gui=nocombine ]])
                 require("indent_blankline").setup({

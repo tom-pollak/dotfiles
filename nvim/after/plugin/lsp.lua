@@ -1,7 +1,7 @@
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
-lsp.ensure_installed({"rust_analyzer", "sumneko_lua", "clangd", "pyright"})
+lsp.ensure_installed({"rust_analyzer", "lua_ls", "clangd", "pyright"})
 
 lsp.configure("pyright", {
     settings = {
@@ -27,6 +27,7 @@ lsp.set_preferences({
 lsp.setup_nvim_cmp(require("extensions.cmp-setup").cmp_setup)
 lsp.on_attach(require("extensions.lsp-attach").on_attach)
 
+require"lsp_signature".setup({bind = true})
 lsp.setup()
 
 vim.diagnostic.config({

@@ -7,29 +7,23 @@ local opts = require("telescope.themes").get_ivy({
     ignore_current_buffer = true
 })
 
-local check_git_workspace = function()
-    local filepath = vim.fn.expand("%:p:h")
-    local gitdir = vim.fn.finddir(".git", filepath .. ";")
-    return gitdir and #gitdir > 0 and #gitdir < #filepath
-end
-
 local root_dir = function()
-    return require("plenary.job"):new({
+    local gitdir = require("plenary.job"):new({
         command = "git",
         args = {"rev-parse", "--show-toplevel"}
     }):sync()[1]
+    print(gitdir)
+    if gitdir ~= nil then return gitdir end
+
+    if vim.lsp.get_active_clients()[1] ~= nil then
+        return vim.lsp.get_active_clients()[1].config.root_dir
+    end
+
+    return vim.fn.getcwd()
 end
 
-local git_files = function() builtin.git_files(opts) end
-
-local find_files = function() builtin.find_files(opts) end
-
 local project_files = function()
-    if check_git_workspace() then
-        return git_files()
-    else
-        return find_files()
-    end
+    builtin.find_files({cwd = root_dir(), disable_coordinates = true})
 end
 
 local buffers = function() builtin.buffers(opts) end
@@ -38,8 +32,8 @@ local vim_config = function()
     builtin.find_files({prompt_title = "< VimRC >", cwd = "$HOME/.config/nvim"})
 end
 
-local live_grep = function(cwd)
-    builtin.live_grep({cwd = cwd, disable_coordinates = true})
+local live_grep = function()
+    builtin.live_grep({cwd = root_dir(), disable_coordinates = true})
 end
 
 local dotfiles = function()
@@ -72,10 +66,8 @@ end
 
 -- Telescope
 vim.keymap.set("n", "<c-p>", project_files)
-vim.keymap.set("n", "<leader>h", builtin.help_tags)
-vim.keymap.set("n", "<c-e>", find_files)
+vim.keymap.set("n", "<leader>f", live_grep)
 vim.keymap.set("n", "<c-b>", buffers)
-vim.keymap.set("n", "<leader>f", function() live_grep(root_dir()) end)
 
 vim.keymap.set("c", "<c-f>", command_history)
 vim.keymap.set("c", "<c-r>", run_history)
@@ -85,6 +77,8 @@ vim.keymap.set("n", "<leader>a", builtin.resume)
 vim.keymap.set("n", "<leader>cd", dotfiles)
 vim.keymap.set("n", "<leader>cc", vim_config)
 
+vim.keymap.set("n", "<leader>h", builtin.help_tags)
+
 vim.keymap.set("n", "'", bookmarks_all)
 
 vim.keymap.set("n", "<leader>rr",
@@ -92,4 +86,8 @@ vim.keymap.set("n", "<leader>rr",
 
 vim.keymap.set("n", "<leader>m", function()
     return require("telescope").extensions.notepad.notepad(opts)
+end)
+
+vim.keymap.set("n", "<leader>rd", function ()
+    print(root_dir())
 end)
