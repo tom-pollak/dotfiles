@@ -172,7 +172,9 @@
     "Epipole",
     "epipolar",
     "mitm",
-    "wrt"
+    "wrt",
+    "Keypoint",
+    "De-perimeterization"
   ],
   "foldHeading": false,
   "foldIndent": false,
