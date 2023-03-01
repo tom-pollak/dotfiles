@@ -36,6 +36,10 @@ end
 local M = {}
 
 local cmp_setup = {
+    completion = {
+        autocomplete = require('cmp.types').cmp.TriggerEvent.TextChanged and
+            not require("copilot.suggestion").is_visible()
+    },
     mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping(function(fallback)
             if not cmp.visible() then
