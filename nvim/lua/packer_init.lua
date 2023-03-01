@@ -106,7 +106,7 @@ require("packer").startup({
                             auto_trigger = true,
                             keymap = {
                                 accept = "<C-l>",
-                                accept_word = false,
+                                accept_word = "<C-n>",
                                 accept_line = false,
                                 decline = "<C-g>",
                                 next = "<C-.>",
@@ -382,10 +382,22 @@ require("packer").startup({
             end
         })
 
-        use({
+        use {
             "norcalli/nvim-colorizer.lua",
             config = function() require("colorizer").setup() end
-        })
+        }
+
+        use {
+            "karb94/neoscroll.nvim",
+            config = function()
+
+                require'neoscroll'.setup {
+                    mappings = {'<C-y>', '<C-e>'},
+                    respect_scrolloff = true,
+                    easing_function = "cubic"
+                }
+            end
+        }
 
         ---------------------------------------------------------------------------
         -- DIAGNOSTIC

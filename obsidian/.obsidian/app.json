@@ -174,7 +174,9 @@
     "mitm",
     "wrt",
     "Keypoint",
-    "De-perimeterization"
+    "De-perimeterization",
+    "MPDU",
+    "Lambertian"
   ],
   "foldHeading": false,
   "foldIndent": false,
