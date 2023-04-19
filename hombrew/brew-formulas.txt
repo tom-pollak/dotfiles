@@ -1,4 +1,5 @@
 asdf
+autojump
 bat
 curl
 db-browser-for-sqlite

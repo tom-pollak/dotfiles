@@ -1,5 +1,4 @@
 -- Base config, independant of plugins
-
 local set = vim.opt
 local g = vim.g
 local wo = vim.wo
@@ -8,6 +7,7 @@ set.clipboard = 'unnamedplus'
 wo.relativenumber = true
 wo.number = true
 g.mapleader = ' '
+g.maplocalleader = "`"
 g.updatetime = 50
 
 set.shell = "bash"
@@ -38,22 +38,24 @@ g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
 set.showmode = false
-set.wildignore = { '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*' }
+set.wildignore = {
+    '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*'
+}
 
 set.background = 'dark'
 wo.colorcolumn = '80'
 set.mouse = 'a'
 
-local yank_augroup = vim.api.nvim_create_augroup('user_cmds', { clear = true })
+local yank_augroup = vim.api.nvim_create_augroup('user_cmds', {clear = true})
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = yank_augroup,
     desc = 'Highlight on yank',
     callback = function(_)
-        vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
+        vim.highlight.on_yank({higroup = 'Visual', timeout = 200})
     end
 })
 
-if not vim.g.vscode then
+if vim.g.vscode == nil then
     vim.cmd [[
         highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
         match ExtraWhitespace /\s\+\%#\@<!$/

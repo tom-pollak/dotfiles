@@ -31,7 +31,10 @@ vim.keymap.set({"n", "x", "o"}, ",", "<Plug>(leap-backward-to)", opts)
 vim.keymap.set({"n", "x"}, "<leader>e", "<CMD>NvimTreeToggle<CR>", opts)
 
 -- Formatter
-vim.keymap.set({"n", "x"}, "<leader>q", "<CMD>Format<CR>", opts)
+vim.keymap.set({"n", "x"}, "<leader>q", function()
+    vim.cmd("update")
+    vim.cmd("Format")
+end, opts)
 
 -- Gitmessenger
 vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>GitMessenger<cr>", opts)
@@ -48,3 +51,9 @@ vim.keymap.set('i', '<ScrollWheelDown>', '<C-o><C-e>')
 vim.keymap.set('v', '<ScrollWheelUp>', '<C-y>')
 vim.keymap.set('v', '<ScrollWheelDown>', '<C-e>')
 
+local function toggle_virtual_text()
+    local vt = vim.diagnostic.config().virtual_text
+    vim.diagnostic.config({virtual_text = not vt})
+end
+
+vim.keymap.set('n', '<leader>u', toggle_virtual_text)

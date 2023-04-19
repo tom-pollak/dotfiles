@@ -33,6 +33,17 @@ set -gx LIBGL_ALWAYS_INDIRECT 1
 set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
 set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
+# # TKINTER
+# fish_add_path /opt/homebrew/Cellar/tcl-tk/8.6.13_1
+# set -l ldflags_tk "-L/opt/homebrew/Cellar/tcl-tk/8.6.13_1/lib"
+# set -l cppflags_tk "-I/opt/homebrew/Cellar/tcl-tk/8.6.13_1/include"
+#
+# set -gx LDFLAGS "$LDFLAGS" "$ldflags_tk"
+# set -gx CPPFLAGS "$CPPFLAGS" "$cppflags_tk"
+# set -gx PKG_CONFIG_PATH "/opt/homebrew/Cellar/tcl-tk/8.6.13_1/lib/pkgconfig"
+# set -gx PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/opt/homebrew/Cellar/tcl-tk/8.6.13_1/include' --with-tcltk-libs='-L/opt/homebrew/Cellar/tcl-tk/8.6.13_1/lib'"
+# # ----------
+
 bind -M insert \cp history-prefix-search-backward
 bind -M insert \cn history-prefix-search-forward
 bind -M insert \cj forward-char
@@ -43,6 +54,7 @@ bind -M insert \ck history-prefix-search-backward
 
 bind -M insert \ca beginning-of-line
 bind -M insert \cs __ethp_commandline_toggle_sudo
+
 
 alias cat=$PAGER
 alias v=nvim
@@ -62,6 +74,10 @@ alias llm='exa -labGd --git --sort=modified' # long list, modified date sort
 alias la='exa -abG --git'
 alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
+alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
+
+alias mamba="micromamba"
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -76,3 +92,24 @@ if set -q NVIM_LISTEN_ADDRESS
     set -gx VISUAL "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 end
 
+function fuzz_nvim
+    set file (fzf)
+    if test (count $file) -gt 0
+        nvim $file
+    end
+end
+
+bind -M insert \co fuzz_nvim
+
+[ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
+
+alias jf="cd \$(sort -nr ~/Library/autojump/autojump.txt | awk 'BEGIN {FS = \"\\t\"} {print \$2}' | fzf)"
+
+bind -M insert \cf jf
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+set -gx MAMBA_EXE "/opt/homebrew/bin/micromamba"
+set -gx MAMBA_ROOT_PREFIX "/Users/tom/micromamba"
+$MAMBA_EXE shell hook --shell fish --prefix $MAMBA_ROOT_PREFIX | source
+# <<< mamba initialize <<<

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+ENV_NAME=${1:-$(basename $PWD)}
+PYTHON_VERSION=${2:-3.11}
+echo export ENV_NAME=$ENV_NAME > .envrc
+echo export PYTHON_VERSION=$PYTHON_VERSION >> .envrc
+echo "layout mamba" >> .envrc
+direnv allow .
+direnv exec . echo

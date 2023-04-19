@@ -57,9 +57,6 @@ local on_attach = function(client, bufnr)
 
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
 
-    --[[ vim.keymap.set('n', '<leader>q', function()
-        return vim.lsp.buf.format { async = true }
-    end, bufopts) ]]
 end
 
 M.on_attach = on_attach

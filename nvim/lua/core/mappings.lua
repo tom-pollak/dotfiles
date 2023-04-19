@@ -1,23 +1,26 @@
 -- Mappings, independant of plugins
 vim.keymap.set("n", "<Esc>", "<CMD>nohl<CR><Esc>", {silent = true})
 
-if not vim.g.vscode then
+if vim.g.vscode == nil then
     vim.keymap.set("n", "<Leader>w", "<CMD>update<CR>", {silent = true})
 end
+
 vim.keymap.set("n", "<Leader><CR>", "<CMD>update<CR><CMD>so %<CR>",
                {silent = true})
 
 vim.keymap.set("n", "<leader>o", "<CMD>noh<CR>", {silent = true})
 
-vim.keymap.set("n", "u", "<CMD>earlier<CR>", {silent = true})
-vim.keymap.set("n", "<C-r>", "<CMD>later<CR>", {silent = true})
+vim.keymap.set("n", "U", "<CMD>earlier<CR>", {silent = true})
+vim.keymap.set("n", "R", "<CMD>later<CR>", {silent = true})
 
-vim.keymap.set("n", "n", "nzz", {silent = true})
-vim.keymap.set("n", "N", "Nzz", {silent = true})
-vim.keymap.set("n", "*", "*zz", {silent = true})
+if vim.g.vscode == nil then
+    vim.keymap.set("n", "n", "nzz", {silent = true})
+    vim.keymap.set("n", "N", "Nzz", {silent = true})
+    vim.keymap.set("n", "*", "*zz", {silent = true})
+end
 
-vim.keymap.set("n", "H", "^", {silent = true})
-vim.keymap.set("n", "L", "$", {silent = true})
+vim.keymap.set({"n", "v"}, "H", "^", {silent = true})
+vim.keymap.set({"n", "v"}, "L", "$", {silent = true})
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", {silent = true})
 vim.keymap.set("n", "<C-u>", "<C-u>zz", {silent = true})
