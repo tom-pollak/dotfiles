@@ -1,17 +1,12 @@
 local M = {}
 
-local augroup = vim.api.nvim_create_augroup
 local keymap = vim.keymap.set
 
 vim.opt.ei = 'all'
 
-M.my_vscode = augroup('MyVSCode', {})
-
 vim.filetype.add {
     pattern = {
         ['.*%.ipynb.*'] = 'python'
-        -- uses lua pattern matching
-        -- rathen than naive matching
     }
 }
 
@@ -24,6 +19,15 @@ local function v_notify(cmd)
 end
 
 vim.cmd(':let mapleader = " "')
+
+keymap('n', '/', notify 'actions.find')
+keymap('v', '/', notify 'actions.findWithSelection')
+keymap('n', '*', notify 'editor.action.addSelectionToNextFindMatch')
+keymap('n', 'n', notify 'editor.action.nextMatchFindAction', {nowait = true})
+keymap('n', 'N', notify 'editor.action.previousMatchFindAction', {nowait = true})
+
+keymap('n', '[', notify 'editor.gotoPreviousFold', {nowait = true})
+keymap('n', ']', notify 'editor.gotoNextFold', {nowait = true})
 
 keymap('n', '<leader>w', notify 'workbench.action.files.save', {silent = true})
 keymap('v', '<', '< gv', {silent = true})

@@ -27,3 +27,12 @@ layout_venv() {
     export VENV_ACTIVE=1
     export VIRTUAL_ENV="$VENV_PATH"
 }
+
+layout_mamba() {
+    eval "$(micromamba shell hook --shell=bash --prefix=~/micromamba 2> /dev/null)"
+    micromamba activate ${ENV_NAME} 2> /dev/null
+    if [[ $? -ne 0 ]]; then
+        micromamba create -n ${ENV_NAME} -y python=${PYTHON_VERSION} -c conda-forge
+    fi
+    export VENV_ACTIVE=1
+}

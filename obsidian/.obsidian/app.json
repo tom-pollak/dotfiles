@@ -176,7 +176,9 @@
     "Keypoint",
     "De-perimeterization",
     "MPDU",
-    "Lambertian"
+    "Lambertian",
+    "precomputation",
+    "Neo-Darwinism"
   ],
   "foldHeading": false,
   "foldIndent": false,

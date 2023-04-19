@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+
 local luasnip = require("luasnip")
 
 -- Copilot disabled on autocomplete
@@ -37,8 +38,10 @@ local M = {}
 
 local cmp_setup = {
     completion = {
-        autocomplete = require('cmp.types').cmp.TriggerEvent.TextChanged and
-            not require("copilot.suggestion").is_visible()
+        autocomplete = {require("cmp.types").cmp.TriggerEvent.TextChanged},
+        completeopt = 'menu,menuone,noselect',
+        keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+        keyword_length = 1
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping(function(fallback)

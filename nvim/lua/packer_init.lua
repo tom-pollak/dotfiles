@@ -57,7 +57,8 @@ require("packer").startup({
                         python = {ft.python.black},
                         rust = {ft.rust.rustfmt},
                         lua = {ft.lua.luaformat},
-                        markdown = {ft.markdown.prettier}
+                        markdown = {ft.markdown.prettier},
+                        json = {ft.json.prettier}
                     }
                 })
             end
@@ -66,30 +67,10 @@ require("packer").startup({
         use({
             "numToStr/Comment.nvim",
             config = function()
-                require("Comment").setup({
-                    -- Treesitter comment context setup
-                    pre_hook = function(ctx)
-                        local U = require("Comment.utils")
-
-                        local location = nil
-                        if ctx.ctype == U.ctype.block then
-                            location =
-                                require("ts_context_commentstring.utils").get_cursor_location()
-                        elseif ctx.cmotion == U.cmotion.v or ctx.cmotion ==
-                            U.cmotion.V then
-                            location =
-                                require("ts_context_commentstring.utils").get_visual_start_location()
-                        end
-
-                        return
-                            require("ts_context_commentstring.internal").calculate_commentstring(
-                                {
-                                    key = ctx.ctype == U.ctype.line and
-                                        "__default" or "__multiline",
-                                    location = location
-                                })
-                    end
-                })
+                require("Comment").setup()
+                local ft = require('Comment.ft')
+                ft.lua = {'-- %s', '--[[ %s ]]'}
+                ft.python = {'# %s'}
             end,
             requires = {{"JoosepAlviste/nvim-ts-context-commentstring"}}
         })
@@ -111,7 +92,7 @@ require("packer").startup({
                                 decline = "<C-g>",
                                 next = "<C-.>",
                                 prev = "<C-,>",
-                                dismiss = "<C-\\>"
+                                dismiss = "<C-g>"
                             }
                         },
                         filetypes = {markdown = true}
@@ -119,6 +100,16 @@ require("packer").startup({
                 end, 100)
             end
         })
+
+        --[[ use {
+            "github/copilot.vim",
+            config = function()
+                vim.g.copilot_no_tab_map = true
+                vim.keymap.set("i", "<C-l>", "<Plug>(copilot-accept)")
+                vim.keymap.set("i", "<C-l>", "<Plug>(copilot-suggest)")
+                vim.keymap.set("i", "<C-g>", "<Plug>(copilot-dismiss)")
+            end
+        } ]]
 
         ---------------------------------------------------------------------------
         -- NAVIGATION
