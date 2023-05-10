@@ -1,0 +1,47 @@
+{
+  "title": "Launch new Chrome or kitty windows via keybindings",
+  "rules": [
+    {
+      "description": "f4 launches kitty",
+      "manipulators": [
+        {
+          "from": { "key_code": "f4" },
+          "to": [
+            {
+              "shell_command": "osascript ~/projects/dotfiles/scripts/kitty_new_window.scpt"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "f3 launches new chrome window",
+      "manipulators": [
+        {
+          "from": { "key_code": "f3" },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell app \"Google Chrome\"' -e 'make new window' -e activate -e end"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "f5 launches new marta window",
+      "manipulators": [
+        {
+          "from": { "key_code": "f5" },
+          "to": [
+            {
+              "shell_command": "osascript ~/projects/dotfiles/scripts/marta_new_window.scpt"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
