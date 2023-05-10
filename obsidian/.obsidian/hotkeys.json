@@ -175,5 +175,13 @@
       ],
       "key": "L"
     }
+  ],
+  "obsidian-another-quick-switcher:search-command_recent-search": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "P"
+    }
   ]
 }

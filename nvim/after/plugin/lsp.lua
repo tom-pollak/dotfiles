@@ -1,7 +1,7 @@
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
-lsp.ensure_installed({"rust_analyzer", "lua_ls", "clangd", "pyright"})
+lsp.ensure_installed({"rust_analyzer", "lua_ls", "clangd", "pyright", "ruff_lsp"})
 
 lsp.configure("pyright", {
     settings = {
@@ -17,6 +17,16 @@ lsp.configure("pyright", {
         }
     }
 })
+
+lsp.configure("ruff-lsp", {
+    settings = {
+        args = {
+            "--ignore=E501,F821"
+        }
+    }
+})
+
+lsp.use("ruff")
 
 lsp.nvim_workspace({library = vim.api.nvim_get_runtime_file('', true)})
 

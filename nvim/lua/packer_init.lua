@@ -102,7 +102,7 @@ require("packer").startup({
         })
 
         --[[ use {
-            "github/copilot.vim",
+                "github/copilot.vim",
             config = function()
                 vim.g.copilot_no_tab_map = true
                 vim.keymap.set("i", "<C-l>", "<Plug>(copilot-accept)")
@@ -121,7 +121,7 @@ require("packer").startup({
                 {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"},
                 {"nvim-telescope/telescope-project.nvim"},
                 {"nvim-telescope/telescope-ui-select.nvim"},
-                {"/Users/tom/projects/notepad.nvim"}
+                {"tom-pollak/notepad.nvim"}
             },
             config = function()
                 require("extensions.telescope-setup").setup()
@@ -329,20 +329,72 @@ require("packer").startup({
             "projekt0n/github-nvim-theme",
             config = function()
                 require("github-theme").setup({
-                    theme_style = "dark_default",
-                    sidebars = {"qf", "packer", "terminal", "trouble"},
-                    colors = {bg_search = "#163356", cursor_line_nr = "#FFEA00"},
-                    overrides = function(_)
-                        return {
+                    specs = {
+                        github_dark_high_contrast = {bg_search = "#163356"}
+                    },
+                    groups = {
+                        all = {
                             ColorColumn = {bg = "#1e2228"},
-                            TreesitterContext = {bg = "#22272e"}
+                            TreesitterContext = {bg = "#22272e"},
+                            CursorLineNr = {fg = 'palette.yellow.bright'},
+                            Search = {
+                                fg = 'palette.white.bright',
+                                bg = '#163356'
+                            },
+                            IncSearch = {
+                                fg = 'palette.white.bright',
+                                bg = '#163356'
+                            },
+                            IlluminatedWordText = {
+                                gui = 'NONE',
+                                bg = '#2d3340',
+                                fg = 'NONE'
+                            },
+                            IlluminatedWordRead = {
+                                gui = 'NONE',
+                                bg = '#2d3340',
+                                fg = 'NONE'
+                            },
+                            IlluminatedWordWrite = {
+                                gui = 'NONE',
+                                bg = '#2d3340',
+                                fg = 'NONE'
+                            },
+                            IndentBlanklineChar = {
+                                guifg = '#1e2228',
+                                gui = 'nocombine'
+                            },
+                            IndentBlanklineContextChar = {
+                                guifg = '#C678DD',
+                                gui = 'nocombine'
+                            },
+                            TelescopeSelection = {
+                                fg = 'palette.white.bright',
+                                bg = '#163356'
+                            },
+                            PmenuSel = {
+                                fg = 'palette.white.bright',
+                                bg = '#163356'
+                            },
                         }
-                    end,
-                    dark_float = true,
-                    dark_sidebar = true
+                    },
+                    darken = {
+                        floats = true,
+                        sidebars = {
+                            enable = true,
+                            list = {"qf", "packer", "terminal", "trouble"}
+                        }
+                    }
                 })
+                vim.cmd('colorscheme github_dark_high_contrast')
             end
         })
+
+        use {
+            "RRethy/vim-illuminate",
+            config = function() require('illuminate').configure({}) end
+
+        }
 
         use({
             "nvim-lualine/lualine.nvim",

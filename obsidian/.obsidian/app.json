@@ -178,7 +178,11 @@
     "MPDU",
     "Lambertian",
     "precomputation",
-    "Neo-Darwinism"
+    "Neo-Darwinism",
+    "BRDF",
+    "RoI",
+    "mAP",
+    "Henyey-Greenstein"
   ],
   "foldHeading": false,
   "foldIndent": false,
