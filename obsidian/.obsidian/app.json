@@ -182,7 +182,10 @@
     "BRDF",
     "RoI",
     "mAP",
-    "Henyey-Greenstein"
+    "Henyey-Greenstein",
+    "Ouput",
+    "NeRF",
+    "NN"
   ],
   "foldHeading": false,
   "foldIndent": false,

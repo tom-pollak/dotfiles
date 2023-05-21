@@ -25,7 +25,7 @@ disabled = false
 display_private = true
 
 [python]
-python_binary = ["python3"]
+python_binary = ["python"]
 
 [battery]
 disabled = true
