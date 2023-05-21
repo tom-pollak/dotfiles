@@ -375,7 +375,7 @@ require("packer").startup({
                             PmenuSel = {
                                 fg = 'palette.white.bright',
                                 bg = '#163356'
-                            },
+                            }
                         }
                     },
                     darken = {

@@ -1,5 +1,4 @@
 local cmp = require("cmp")
-
 local luasnip = require("luasnip")
 
 -- Copilot disabled on autocomplete
@@ -45,11 +44,13 @@ local cmp_setup = {
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping(function(fallback)
-            if not cmp.visible() then
-                cmp.complete()
+            if cmp.visible() then
+                print("toggle doc")
+                if vim.fn.exists("*cmp#documentation#toggle") == 1 then
+                    vim.api.nvim_exec("call cmp#documentation#toggle()", false)
+                end
             else
-                -- TODO: Toggle documentation window
-                fallback()
+                -- fallback()
             end
         end, {"i", "s"}),
         ["<Tab>"] = cmp.mapping(function(fallback)
