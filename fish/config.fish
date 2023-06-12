@@ -103,8 +103,15 @@ bind -M insert \co fuzz_nvim
 
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
 
-alias jf="cd \$(sort -nr ~/Library/autojump/autojump.txt | awk 'BEGIN {FS = \"\\t\"} {print \$2}' | fzf)"
 
+function fzf_autojump
+  set path (sort -k1,1nr ~/Library/autojump/autojump.txt | awk 'BEGIN {FS = "\t"} {print $2}' | fzf --tiebreak=index)
+  if test -n "$path"
+    cd $path
+  end
+end
+
+alias jf=fzf_autojump
 bind -M insert \cf jf
 
 # >>> mamba initialize >>>
