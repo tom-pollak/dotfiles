@@ -4,11 +4,10 @@ local keymap = vim.keymap.set
 
 vim.opt.ei = 'all'
 
-vim.filetype.add {
-    pattern = {
-        ['.*%.ipynb.*'] = 'python'
-    }
-}
+vim.filetype.add {pattern = {['.*%.ipynb.*'] = 'python'}}
+
+-- fix cursor block jupyter notebook bug
+vim.cmd [[autocmd BufEnter *.ipynb#* if mode() == 'n' | call feedkeys("a\<C-c>")]]
 
 local function notify(cmd)
     return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)

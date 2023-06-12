@@ -37,14 +37,7 @@
   "editor:open-search": [],
   "editor:toggle-bold": [],
   "file-explorer:new-file-in-new-pane": [],
-  "editor:cycle-list-checklist": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "M"
-    }
-  ],
+  "editor:cycle-list-checklist": [],
   "editor:toggle-checklist-status": [
     {
       "modifiers": [
