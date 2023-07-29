@@ -19,6 +19,20 @@ end
 
 vim.cmd(':let mapleader = " "')
 
+keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', {silent = true})
+
+keymap('n', 's<Esc>', '<Esc>')
+keymap('n', 'd<Esc>', '<Esc>')
+keymap('n', 'c<Esc>', '<Esc>')
+keymap('n', 'q<Esc>', '<Esc>')
+keymap('n', 'y<Esc>', '<Esc>')
+keymap('n', 'f<Esc>', '<Esc>')
+keymap('n', 't<Esc>', '<Esc>')
+keymap('n', 'g<Esc>', '<Esc>')
+keymap('n', 'r<Esc>', '<Esc>')
+keymap('n', 'z<Esc>', '<Esc>')
+keymap('n', 'm<Esc>', '<Esc>')
+
 keymap('n', '/', notify 'actions.find')
 keymap('v', '/', notify 'actions.findWithSelection')
 keymap('n', '*', notify 'editor.action.addSelectionToNextFindMatch')
@@ -83,50 +97,26 @@ keymap('n', 'm', notify 'bookmarks.toggle', {silent = true})
 keymap('n', 'dm', notify 'bookmarks.clearFromAllFiles', {silent = true})
 keymap('n', "'", notify 'bookmarks.listFromAllFiles', {silent = true})
 
-keymap('n', '<leader>u', notify 'github.copilot.generate', {silent = true})
-
--- Notes
-keymap('n', '<leader>mm', notify 'vsnotes.listNotes', {silent = true})
-keymap('n', '<leader>mn', notify 'vsnotes.newNote', {silent = true})
-keymap('n', '<leader>mN', notify 'vsnotes.newNoteInWorkspace', {silent = true})
-keymap('n', '<leader>mt', notify 'vsnotes.listTags', {silent = true})
-keymap('n', '<leader>mf', notify 'vsnotes.search', {silent = true})
-keymap('n', '<leader>mo', notify 'vsnotes.openNoteFolder', {silent = true})
-
 -- Git
 keymap('n', '<leader>n', notify 'workbench.action.editor.nextChange',
        {silent = true})
 keymap('n', '<leader>p', notify 'workbench.action.editor.previousChange',
        {silent = true})
 
-keymap('n', '<leader>lo', notify 'gitlens.toggleFileChanges', {silent = true})
-keymap('n', '<leader>lh', notify 'gitlens.views.lineHistory.toggleVisibility',
-       {silent = true})
+keymap('n', '<leader>lh', notify 'git.viewLineHistory', {silent = true})
+keymap('n', '<leader>lo', notify 'git.openChange', {silent = true})
+keymap('n', '<leader>lO', notify 'gitlens.diffLineWithPrevious', {silent = true})
+keymap({'v', 'n'}, '<leader>ls', notify 'git.stageSelectedRanges')
 keymap('n', '<leader>lg', notify 'git-graph.view', {silent = true})
 keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', {silent = true})
-
 keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', {silent = true})
 
---[[ keymap({'n', 'v'}, '<leader>ls', notify 'git.stageSelectedRanges', { ]]
---[[     silent = true ]]
---[[ }) ]]
---[[ keymap({'n', 'v'}, '<leader>lr', notify 'git.revertSelectedRanges', { ]]
---[[     silent = true ]]
---[[ }) ]]
---[[ keymap({'n', 'v'}, '<leader>lu', notify 'git.unstageSelectedRanges', { ]]
---[[     silent = true ]]
---[[ }) ]]
-
----
 
 keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart',
        {silent = true})
-keymap('n', '<leader>df', notify 'workbench.action.debug.run', {silent = true})
 
 keymap('n', '<leader>dR', notify 'rust-analyzer.debug', {silent = true})
 keymap('n', '<leader>dr', notify 'rust-analyzer.run', {silent = true})
-
----
 
 keymap('n', '<leader>dm',
        notify 'workbench.debug.viewlet.action.toggleBreakpointsActivatedAction',
@@ -161,9 +151,6 @@ keymap('n', '<leader>dK', notify 'workbench.action.debug.callStackTop',
 keymap('n', '<leader>du', notify 'debug.jumpToCursor', {silent = true})
 keymap('n', '<leader>dw', notify 'editor.debug.action.selectionToWatch',
        {silent = true})
-
-keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', {silent = true})
-
 keymap('n', '<leader>dl', notify 'editor.debug.action.showDebugHover',
        {silent = true})
 
@@ -175,11 +162,4 @@ keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor',
        {silent = true})
 
 -- Leap
---[[ vim.keymap.set({ 'n', 'x', 'o' }, ';', '<Plug>(leap-forward-to)') ]]
---[[ vim.keymap.set({ 'n', 'x', 'o' }, ',', '<Plug>(leap-backward-to)') ]]
---[[ vim.keymap.set({ 'n', 'x', 'o' }, 'g;', '<Plug>(leap-cross-window)') ]]
-
--- Navigate something
---[[ keymap('n', 'H', notify '', { silent = true }) ]]
---[[ keymap('n', 'L', notify '', { silent = true }) ]]
 return M

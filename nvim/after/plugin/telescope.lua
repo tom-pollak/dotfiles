@@ -39,7 +39,7 @@ end
 local dotfiles = function()
     builtin.find_files({
         prompt_title = "< Dotfiles >",
-        cwd = "$HOME/projects/dotfiles"
+        cwd = "$HOME/.dotfiles"
     })
 end
 
