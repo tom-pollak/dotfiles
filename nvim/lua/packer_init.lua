@@ -252,10 +252,10 @@ require("packer").startup({
             end
         })
 
-        use({
-            "zegervdv/nrpattern.nvim",
-            config = function() require("nrpattern").setup() end
-        })
+        -- use({
+        --     "zegervdv/nrpattern.nvim",
+        --     config = function() require("nrpattern").setup() end
+        -- })
 
         use({
             "kosayoda/nvim-lightbulb",

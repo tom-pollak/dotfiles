@@ -1,5 +1,3 @@
-local M = {}
-
 local keymap = vim.keymap.set
 
 vim.opt.ei = 'all'
@@ -64,7 +62,6 @@ keymap('n', '<C-l>', notify 'workbench.action.navigateRight')
 
 -- LSP remaps
 keymap('n', 'ga', notify 'keyboard-quickfix.openQuickFix', {silent = true})
-
 keymap('n', 'gd', notify 'editor.action.revealDefinition', {silent = true})
 keymap('n', 'gD', notify 'editor.action.showDefinitionPreviewHover',
        {silent = true})
@@ -106,7 +103,7 @@ keymap('n', '<leader>p', notify 'workbench.action.editor.previousChange',
 keymap('n', '<leader>lh', notify 'git.viewLineHistory', {silent = true})
 keymap('n', '<leader>lo', notify 'git.openChange', {silent = true})
 keymap('n', '<leader>lO', notify 'gitlens.diffLineWithPrevious', {silent = true})
-keymap({'v', 'n'}, '<leader>ls', notify 'git.stageSelectedRanges')
+keymap({'n', 'v'}, '<leader>ls', notify 'git.stageSelectedRanges')
 keymap('n', '<leader>lg', notify 'git-graph.view', {silent = true})
 keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', {silent = true})
 keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', {silent = true})
@@ -114,7 +111,7 @@ keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', {silent = true})
 
 keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart',
        {silent = true})
-
+keymap('n', '<leader>dt', notify 'test-explorer.pick-and-run', {silent = true})
 keymap('n', '<leader>dR', notify 'rust-analyzer.debug', {silent = true})
 keymap('n', '<leader>dr', notify 'rust-analyzer.run', {silent = true})
 
@@ -154,12 +151,7 @@ keymap('n', '<leader>dw', notify 'editor.debug.action.selectionToWatch',
 keymap('n', '<leader>dl', notify 'editor.debug.action.showDebugHover',
        {silent = true})
 
-keymap('n', '<leader>tt', notify 'test-explorer.pick-and-run', {silent = true})
 keymap('n', '<leader>tr', notify 'test-explorer.reset', {silent = true})
 keymap('n', '<leader>td', notify 'test-explorer.redebug', {silent = true})
 keymap('n', '<leader>tl', notify 'test-explorer.show-log', {silent = true})
-keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor',
-       {silent = true})
-
--- Leap
-return M
+keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', {silent = true})
