@@ -1,7 +1,13 @@
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
-lsp.ensure_installed({"rust_analyzer", "lua_ls", "clangd", "pyright", "ruff_lsp"})
+lsp.ensure_installed({"rust_analyzer", "lua_ls", "clangd", "pyright"})
+
+lsp.set_server_config({
+    capabilities = {
+        offsetEncoding = "utf-8"
+    }
+})
 
 lsp.configure("pyright", {
     settings = {
@@ -18,7 +24,7 @@ lsp.configure("pyright", {
     }
 })
 
-lsp.configure("ruff-lsp", {
+lsp.configure("ruff_lsp", {
     settings = {
         args = {
             "--ignore=E501,F821"
@@ -26,14 +32,13 @@ lsp.configure("ruff-lsp", {
     }
 })
 
-lsp.use("ruff")
-
 lsp.nvim_workspace({library = vim.api.nvim_get_runtime_file('', true)})
 
 lsp.set_preferences({
     set_lsp_keymaps = false,
     sign_icons = {error = "", warn = "", hint = "", info = ""}
 })
+
 lsp.setup_nvim_cmp(require("extensions.cmp-setup").cmp_setup)
 lsp.on_attach(require("extensions.lsp-attach").on_attach)
 

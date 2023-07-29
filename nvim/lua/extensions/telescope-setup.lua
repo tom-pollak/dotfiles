@@ -53,8 +53,8 @@ local setup = function()
             project = {theme = "cursor", base_dirs = {"~/projects"}},
             ["ui-select"] = {require"telescope.themes".get_cursor()},
             notepad = {
-                notes_directory = "~/Desktop/notes",
-                ignore_files = {".git/", ".DS_Store", "imgs/"}
+                notes_directory = "~/notes/inbox/",
+                ignore_files = {".git/", ".DS_Store", "_assets/"}
             }
         }
     }
