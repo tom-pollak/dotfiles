@@ -1,11 +1,12 @@
 [core]
     editor = nvim
     pager = delta
+    excludesfile = ~/.gitignore
 [interactive]
     diffFilter = delta --color-only
 [user]
-	email = tompollak1000@gmail.com
-	name = Thomas Pollak
+	email = tpollak@meraki.com
+	name = tom pollak
 	github = tom-pollak
 [init]
 	defaultBranch = main

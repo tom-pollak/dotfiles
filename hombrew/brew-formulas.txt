@@ -11,6 +11,7 @@ exa
 fd
 ffmpeg
 fish
+fisher
 fontforge
 fzf
 gcc
@@ -30,6 +31,7 @@ mosh
 neovim
 neovim-remote
 nmap
+nushell
 pandoc
 pigz
 pipx

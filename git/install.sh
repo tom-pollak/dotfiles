@@ -2,6 +2,7 @@
 
 source ../install_module.sh
 install_module "git" "git/gitconfig" "$HOME/.gitconfig"
+install_module "git" "git/gitignore" "$HOME/.gitignore"
 
 # If hub is found, use https: instead of git: or ssh::
 if command -v hub >/dev/null 2>&1; then

@@ -5,3 +5,5 @@ edc/bass
 eth-p/fish-plugin-sudo
 jhillyerd/plugin-git
 patrickf1/fzf.fish
+rstacruz/fish-asdf
+/Users/tom/.dotfiles/fish/fish_plugins
