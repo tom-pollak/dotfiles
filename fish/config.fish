@@ -1,6 +1,6 @@
 if status is-interactive
     starship init fish | source
-    source /opt/homebrew/opt/asdf/libexec/asdf.fish
+    source /opt/homebrew/Cellar/asdf/0.11.3/libexec/asdf.fish
 end
 
 set fish_greeting
@@ -9,7 +9,6 @@ fish_vi_key_bindings
 fish_add_path /opt/homebrew/sbin
 fish_add_path /opt/homebrew/opt/llvm/bin
 fish_add_path /opt/homebrew/opt/openjdk/bin
-fish_add_path /usr/local/opt/node@16/bin
 
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.local/bin
@@ -32,6 +31,9 @@ set -gx DFT_DISPLAY inline
 set -gx LIBGL_ALWAYS_INDIRECT 1
 set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
 set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
+set -gx CC /opt/homebrew/opt/llvm/bin/clang
+set -gx CXX /opt/homebrew/opt/llvm/bin/clang++
+
 
 # # TKINTER
 # fish_add_path /opt/homebrew/Cellar/tcl-tk/8.6.13_1
@@ -62,8 +64,9 @@ alias lg=lazygit
 alias r=ranger
 
 alias untar='tar -zxvf'
+alias sync='rsync -rlptzv --progress'
 alias ipe="curl -w '\n' ipinfo.io/ip"
-alias sync="sudo ntpdate pool.ntp.org"
+alias tsync="sudo ntpdate pool.ntp.org"
 alias c="clear"
 alias hr="history --merge"
 
@@ -77,6 +80,8 @@ alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + 
 alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
 
 alias mamba="micromamba"
+alias m="micromamba"
+alias conda="micromamba"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -107,12 +112,11 @@ bind -M insert \co fuzz_nvim
 function fzf_autojump
   set path (sort -k1,1nr ~/Library/autojump/autojump.txt | awk 'BEGIN {FS = "\t"} {print $2}' | fzf --tiebreak=index)
   if test -n "$path"
-    cd $path
+    pushd $path
   end
 end
 
-alias jf=fzf_autojump
-bind -M insert \cf jf
+bind -M insert \cf fzf_autojump
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!

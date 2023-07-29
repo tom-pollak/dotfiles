@@ -1,0 +1,12 @@
+.DS_Store
+
+.vscode
+
+.envrc
+.env.local
+.env.*.local
+*-workspace
+
+__pycache__/
+.ipynb_checkpoints/
+*.egg-info

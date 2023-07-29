@@ -1,14 +1,24 @@
 {
-  "title": "Launch new Chrome or kitty windows via keybindings",
+  "title": "Hyper Quick Launcher",
   "rules": [
     {
-      "description": "f4 launches kitty",
+      "description": "H-a: kitty",
       "manipulators": [
         {
-          "from": { "key_code": "f4" },
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_option",
+                "left_command",
+                "left_shift"
+              ]
+            }
+          },
           "to": [
             {
-              "shell_command": "osascript ~/projects/dotfiles/scripts/kitty_new_window.scpt"
+              "shell_command": "osascript ~/.dotfiles/scripts/kitty_new_window.scpt"
             }
           ],
           "type": "basic"
@@ -16,10 +26,20 @@
       ]
     },
     {
-      "description": "f3 launches new chrome window",
+      "description": "H-s: chrome",
       "manipulators": [
         {
-          "from": { "key_code": "f3" },
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_option",
+                "left_command",
+                "left_shift"
+              ]
+            }
+          },
           "to": [
             {
               "shell_command": "osascript -e 'tell app \"Google Chrome\"' -e 'make new window' -e activate -e end"
@@ -30,13 +50,47 @@
       ]
     },
     {
-      "description": "f5 launches new marta window",
+      "description": "H-d: code",
       "manipulators": [
         {
-          "from": { "key_code": "f5" },
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_option",
+                "left_command",
+                "left_shift"
+              ]
+            }
+          },
           "to": [
             {
-              "shell_command": "osascript ~/projects/dotfiles/scripts/marta_new_window.scpt"
+              "shell_command": "osascript ~/.dotfiles/scripts/vscode_new_window.scpt"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "M-f: marta",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_option",
+                "left_command",
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript ~/.dotfiles/scripts/marta_new_window.scpt"
             }
           ],
           "type": "basic"
