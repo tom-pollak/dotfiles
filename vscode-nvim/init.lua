@@ -10,7 +10,6 @@ local keymap = vim.keymap.set
 vim.g.mapleader = ' '
 
 set.clipboard = 'unnamedplus'
-
 set.smartcase = true
 set.ignorecase = true
 
@@ -63,6 +62,8 @@ keymap('n', '<CR>', notify 'editor.action.insertLineAfter')
 
 keymap('n', 'ga', notify 'keyboard-quickfix.openQuickFix', {silent = true})
 
+keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', {silent = true})
+
 -- Code jumping
 keymap('n', 'gd', notify 'editor.action.revealDefinition', {silent = true})
 keymap('n', 'gD', notify 'editor.action.showDefinitionPreviewHover', {silent = true})
@@ -75,14 +76,12 @@ keymap('n', 'gj', notify 'editor.action.marker.next', {silent = true})
 keymap('n', 'gk', notify 'editor.action.marker.prev', {silent = true})
 
 -- Comments
-vim.keymap.set({'n', 'v', 'x', 'o'}, 'gc', '<Plug>VSCodeCommentary',
-               {silent = true})
-vim.keymap.set('n', 'gcc', '<Plug>VSCodeCommentaryLine', {silent = true})
+keymap({'n', 'v', 'x', 'o'}, 'gc', '<Plug>VSCodeCommentary', {silent = true})
+keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine', {silent = true})
 
 -- LSP symbols
 keymap('n', '<leader>s', notify 'workbench.action.gotoSymbol', {silent = true})
-keymap('n', '<leader>S', notify 'workbench.action.showAllSymbols',
-       {silent = true})
+keymap('n', '<leader>S', notify 'workbench.action.showAllSymbols', {silent = true})
 
 -- Format
 keymap('n', '<leader>q', notify 'editor.action.formatDocument')
@@ -99,7 +98,8 @@ keymap('n', '<leader>p', notify 'workbench.action.editor.previousChange', {silen
 keymap('n', '<leader>lh', notify 'git.viewLineHistory', {silent = true})
 keymap('n', '<leader>lo', notify 'git.openChange', {silent = true})
 keymap('n', '<leader>lO', notify 'gitlens.diffLineWithPrevious', {silent = true})
-keymap({'n', 'v'}, '<leader>ls', notify 'git.stageSelectedRanges')
+keymap('n', '<leader>ls', notify 'git.stageSelectedRanges')
+keymap ('v', '<leader>ls', v_notify 'git.stageSelectedRanges')
 keymap('n', '<leader>lg', notify 'git-graph.view', {silent = true})
 keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', {silent = true})
 keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', {silent = true})
@@ -128,7 +128,8 @@ keymap('n', '<leader>dk', notify 'workbench.action.debug.callStackUp', {silent =
 keymap('n', '<leader>dJ', notify 'workbench.action.debug.callStackBottom', {silent = true})
 keymap('n', '<leader>dK', notify 'workbench.action.debug.callStackTop', {silent = true})
 
-keymap({'n', 'v'}, '<leader>di', notify 'editor.debug.action.selectionToRepl', {silent = true})
+keymap('n', '<leader>di', notify 'editor.debug.action.selectionToRepl', {silent = true})
+keymap('v', '<leader>di', v_notify 'editor.debug.action.selectionToRepl', {silent = true})
 
 -- Tests
 keymap('n', '<leader>dt', notify 'test-explorer.pick-and-run', {silent = true})
