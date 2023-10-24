@@ -1,10 +1,5 @@
-# on is_running(appName)
-# 	tell application "System Events" to (name of processes) contains appName
-# end is_running
-
 on is_running(appName)
 	tell application "System Events" to set isRunning to (name of processes) contains appName
-	log isRunning
 	return isRunning
 end is_running
 

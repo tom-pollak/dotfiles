@@ -6,7 +6,7 @@
     diffFilter = delta --color-only
 [user]
 	email = tpollak@meraki.com
-	name = tom pollak
+	name = Tom Pollak
 	github = tom-pollak
 [init]
 	defaultBranch = main
@@ -15,10 +15,12 @@
 [gitreview]
 	username = tpollak
 	remote = origin
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [diff]
     colorMoved = default
-[merge]
-    conflictstyle = diff3
 [delta]
     navigate = true
     features = line-numbers zebra-dark

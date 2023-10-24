@@ -1,5 +1,7 @@
 vim.cmd("set noloadplugins")
 
+local vscode_neovim = require("vscode-neovim")
+
 -- Plugins
 vim.cmd("source ~/.dotfiles/vscode-nvim/surround.vim")
 
@@ -12,6 +14,12 @@ vim.g.mapleader = ' '
 set.clipboard = 'unnamedplus'
 set.smartcase = true
 set.ignorecase = true
+
+keymap({'n', 'v'}, '<C-d>', '16jzz')
+keymap({'n', 'v'}, '<C-u>', '16kzz')
+
+keymap('n', '<C-n>', 'zz')
+keymap('n', '<C-m>', 'zt')
 
 -- Keymaps
 keymap({"n", "v"}, "d", '"_d')
@@ -53,9 +61,13 @@ local function notify(cmd)
     return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
 end
 
-local function v_notify(cmd)
-    return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
+local function v_notify(cmd, leave_selection)
+    local line1 = vim.fn.getpos("'<")[2]
+    local line2 = vim.fn.getpos("'>")[2]
+    leave_selection = leave_selection ~= nil and leave_selection
+    vscode_neovim.notify_range(cmd, line1, line2, leave_selection)
 end
+
 
 keymap('n', '<leader>w', notify 'workbench.action.files.save', {silent = true})
 keymap('n', '<CR>', notify 'editor.action.insertLineAfter')
@@ -63,6 +75,13 @@ keymap('n', '<CR>', notify 'editor.action.insertLineAfter')
 keymap('n', 'ga', notify 'keyboard-quickfix.openQuickFix', {silent = true})
 
 keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', {silent = true})
+
+keymap('n', '<leader>rn', notify 'editor.action.rename', {silent = true})
+keymap('n', '<leader>rf', notify 'editor.action.refactor', {silent = true})
+
+keymap('n', '<leader>k', notify 'docsView.documentation.focus', {silent = true})
+keymap('n', 'K', notify 'editor.action.showHover', {silent = true})
+
 
 -- Code jumping
 keymap('n', 'gd', notify 'editor.action.revealDefinition', {silent = true})
@@ -95,18 +114,21 @@ keymap('n', "'", notify 'bookmarks.listFromAllFiles', {silent = true})
 keymap('n', '<leader>n', notify 'workbench.action.editor.nextChange', {silent = true})
 keymap('n', '<leader>p', notify 'workbench.action.editor.previousChange', {silent = true})
 
-keymap('n', '<leader>lh', notify 'git.viewLineHistory', {silent = true})
-keymap('n', '<leader>lo', notify 'git.openChange', {silent = true})
+keymap('n', '<leader>lo', notify 'gitlens.diffWithPrevious', {silent = true})
 keymap('n', '<leader>lO', notify 'gitlens.diffLineWithPrevious', {silent = true})
+
 keymap('n', '<leader>ls', notify 'git.stageSelectedRanges')
-keymap ('v', '<leader>ls', v_notify 'git.stageSelectedRanges')
+keymap('n', '<leader>lu', notify 'git.unstageSelectedRanges')
+keymap ('v', '<leader>ls', function() v_notify('git.stageSelectedRanges') end)
+keymap ('v', '<leader>lu', function() v_notify('git.unstageSelectedRanges') end)
+
 keymap('n', '<leader>lg', notify 'git-graph.view', {silent = true})
+
+keymap('n', '<leader>lc', notify 'gitlens.toggleFileChanges', {silent = true})
 keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', {silent = true})
 keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', {silent = true})
 
 -- Debug
-keymap('n', '<leader>dd', notify 'workbench.action.debug.selectandstart', {silent = true})
-
 keymap('n', '<leader>du', notify 'debug.jumpToCursor', {silent = true})
 keymap('n', '<leader>dw', notify 'editor.debug.action.selectionToWatch', {silent = true})
 keymap('n', '<leader>dl', notify 'editor.debug.action.showDebugHover', {silent = true})
@@ -129,7 +151,7 @@ keymap('n', '<leader>dJ', notify 'workbench.action.debug.callStackBottom', {sile
 keymap('n', '<leader>dK', notify 'workbench.action.debug.callStackTop', {silent = true})
 
 keymap('n', '<leader>di', notify 'editor.debug.action.selectionToRepl', {silent = true})
-keymap('v', '<leader>di', v_notify 'editor.debug.action.selectionToRepl', {silent = true})
+-- keymap('v', '<leader>di', v_notify 'editor.debug.action.selectionToRepl', {silent = true})
 
 -- Tests
 keymap('n', '<leader>dt', notify 'test-explorer.pick-and-run', {silent = true})

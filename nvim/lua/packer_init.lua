@@ -205,27 +205,6 @@ require("packer").startup({
         })
 
         ---------------------------------------------------------------------------
-        -- MOVEMENT
-        ---------------------------------------------------------------------------
-
-        use({
-            "ggandor/leap.nvim",
-            config = function()
-                local leap = require("leap")
-                leap.setup({})
-            end
-        })
-
-        use({
-            "rhysd/clever-f.vim",
-            config = function()
-                vim.g.clever_f_smart_case = 1
-                vim.g.clever_f_across_no_line = 1
-                vim.g.clever_f_chars_match_any_signs = ";"
-            end
-        })
-
-        ---------------------------------------------------------------------------
         -- UTILS
         ---------------------------------------------------------------------------
 
@@ -251,11 +230,6 @@ require("packer").startup({
                 })
             end
         })
-
-        -- use({
-        --     "zegervdv/nrpattern.nvim",
-        --     config = function() require("nrpattern").setup() end
-        -- })
 
         use({
             "kosayoda/nvim-lightbulb",
