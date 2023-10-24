@@ -4,7 +4,6 @@ set.wrap = true
 set.tabstop = 2
 set.shiftwidth = 2
 set.softtabstop = 2
-set.makeprg = [[nvr --remote-send '<CMD>MarkdownPreview<CR>']]
 set.showbreak = "++"
 
 vim.bo.tw = 80

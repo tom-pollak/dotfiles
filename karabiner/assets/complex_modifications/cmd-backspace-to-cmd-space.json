@@ -1,0 +1,25 @@
+{
+  "title": "cmd+- -> cmd+space",
+  "rules": [
+    {
+      "description": "cmd+- -> cmd+space",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "mandatory": ["left_command"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "spacebar",
+              "modifiers": ["left_command"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

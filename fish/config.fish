@@ -1,6 +1,5 @@
 if status is-interactive
     starship init fish | source
-    source /opt/homebrew/Cellar/asdf/0.11.3/libexec/asdf.fish
 end
 
 set fish_greeting
@@ -55,7 +54,6 @@ bind -M insert \ck history-prefix-search-backward
 # bind -M insert \cl forward-char
 
 bind -M insert \ca beginning-of-line
-bind -M insert \cs __ethp_commandline_toggle_sudo
 
 
 alias cat=$PAGER
@@ -122,5 +120,5 @@ bind -M insert \cf fzf_autojump
 # !! Contents within this block are managed by 'mamba init' !!
 set -gx MAMBA_EXE "/opt/homebrew/bin/micromamba"
 set -gx MAMBA_ROOT_PREFIX "/Users/tom/micromamba"
-$MAMBA_EXE shell hook --shell fish --prefix $MAMBA_ROOT_PREFIX | source
+$MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
