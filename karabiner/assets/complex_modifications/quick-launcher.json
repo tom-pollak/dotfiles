@@ -26,7 +26,7 @@
       ]
     },
     {
-      "description": "H-s: chrome",
+      "description": "H-s: firefox",
       "manipulators": [
         {
           "from": {
@@ -42,7 +42,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'tell app \"Google Chrome\"' -e 'make new window' -e activate -e end"
+              "shell_command": "bash ~/.dotfiles/scripts/firefox_new_window.sh"
             }
           ],
           "type": "basic"

@@ -8,6 +8,7 @@ vim.cmd("source ~/.dotfiles/vscode-nvim/surround.vim")
 -- Base config
 local set = vim.opt
 local keymap = vim.keymap.set
+local wo = vim.wo
 
 vim.g.mapleader = ' '
 
@@ -15,16 +16,17 @@ set.clipboard = 'unnamedplus'
 set.smartcase = true
 set.ignorecase = true
 
-keymap({'n', 'v'}, '<C-d>', '16jzz')
-keymap({'n', 'v'}, '<C-u>', '16kzz')
+wo.relativenumber = true
+wo.number = true
 
-keymap('n', '<C-n>', 'zz')
-keymap('n', '<C-m>', 'zt')
+-- keymap({'n', 'v'}, '<C-o>', '<C-o>')
+-- keymap({'n', 'v'}, '<C-i>', '<C-i>')
 
--- Keymaps
+-- Remap delete
 keymap({"n", "v"}, "d", '"_d')
 keymap({"n", "v"}, "s", "d")
 keymap({"n", "v"}, "c", '"_c')
+keymap("v", "p", '"_dP')
 
 keymap("n", "D", '"_D')
 keymap("n", "S", "D")
@@ -33,6 +35,7 @@ keymap("n", "C", '"_C')
 keymap("n", "x", '"_x')
 keymap("n", "ss", "dd")
 
+-- Keymaps
 keymap("n", "<Esc>", "<CMD>nohl<CR><Esc>", {silent = true})
 
 keymap({"n", "v"}, "H", "^", {silent = true})
@@ -45,8 +48,30 @@ keymap("n", "U", "<CMD>earlier<CR>", {silent = true})
 keymap("n", "R", "<CMD>later<CR>", {silent = true})
 
 -- Add to jump list
-vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']])
-vim.cmd([[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']])
+-- Done by default
+-- vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']])
+-- vim.cmd([[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']])
+
+keymap({'n', 'v'}, '<C-d>', '16j')
+keymap({'n', 'v'}, '<C-u>', '16k')
+
+vim.cmd [[
+    nnoremap k :<C-u>call VSCodeCall('cursorMove', { 'to': 'up', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
+    nnoremap j :<C-u>call VSCodeCall('cursorMove', { 'to': 'down', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
+]]
+
+-- vim.cmd [[
+--     nnoremap <C-u> :<C-u>call VSCodeCall('cursorMove', { 'to': 'up', 'by': 'wrappedLine', 'value': v:count ? v:count : 16 })<CR>
+--     nnoremap <C-d> :<C-u>call VSCodeCall('cursorMove', { 'to': 'down', 'by': 'wrappedLine', 'value': v:count ? v:count : 16 })<CR>
+-- ]]
+
+-- vim.cmd [[
+--     nnoremap <silent> <expr> <C-d> VSCodeExtensionCall('scroll', 'halfPage', 'down')
+--     xnoremap <silent> <expr> <C-d> VSCodeExtensionCall('scroll', 'halfPage', 'down')
+--     nnoremap <silent> <expr> <C-u> VSCodeExtensionCall('scroll', 'halfPage', 'up')
+--     xnoremap <silent> <expr> <C-u> VSCodeExtensionCall('scroll', 'halfPage', 'up')
+-- ]]
+
 
 -- Highlights
 vim.cmd [[
