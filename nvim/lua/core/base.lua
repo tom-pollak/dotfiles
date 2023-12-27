@@ -34,9 +34,6 @@ set.completeopt = 'menu,menuone,noselect'
 set.signcolumn = 'yes'
 -- vim.cmd("set guicursor=n-v-c-i:block")
 
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-
 set.showmode = false
 set.wildignore = {
     '*/cache/*', '*/tmp/*', '*/venv/*', '*/node_modules/*', '*/.git/*'
