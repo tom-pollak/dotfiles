@@ -60,6 +60,7 @@ vim.keymap.set("i", "<C-d>", "<Del>")
 vim.keymap.set({"n", "v"}, "d", '"_d')
 vim.keymap.set({"n", "v"}, "s", "d")
 vim.keymap.set({"n", "v"}, "c", '"_c')
+vim.keymap.set("v", "p", '"_dP', { noremap = true })
 
 vim.keymap.set("n", "D", '"_D')
 vim.keymap.set("n", "S", "D")

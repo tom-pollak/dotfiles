@@ -206,6 +206,30 @@
                         ]
                     },
                     {
+                        "description": "H-s: chrome",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -e 'tell app \"Google Chrome\"' -e 'make new window' -e activate -e end"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "M-f: marta",
                         "manipulators": [
                             {
@@ -254,23 +278,23 @@
                         ]
                     },
                     {
-                        "description": "H-s: firefox",
+                        "description": "cmd+- -> cmd+space",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "s",
+                                    "key_code": "hyphen",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_control",
-                                            "left_option",
-                                            "left_command",
-                                            "left_shift"
+                                            "left_command"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "bash ~/.dotfiles/scripts/firefox_new_window.sh"
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"

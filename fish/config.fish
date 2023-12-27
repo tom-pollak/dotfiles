@@ -60,9 +60,10 @@ alias cat=$PAGER
 alias v=nvim
 alias lg=lazygit
 alias r=ranger
+alias firefox=/Applications/Firefox.app/Contents/MacOS/firefox
 
 alias untar='tar -zxvf'
-alias sync='rsync -rlptzv --progress'
+alias sync='rsync -rlptzav --progress'
 alias ipe="curl -w '\n' ipinfo.io/ip"
 alias tsync="sudo ntpdate pool.ntp.org"
 alias c="clear"

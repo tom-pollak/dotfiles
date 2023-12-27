@@ -254,6 +254,30 @@
                         ]
                     },
                     {
+                        "description": "cmd+- -> cmd+space",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "hyphen",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "H-s: firefox",
                         "manipulators": [
                             {
@@ -270,7 +294,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "bash ~/.dotfiles/scripts/firefox_new_window.sh"
+                                        "shell_command": "/Applications/Firefox.app/Contents/MacOS/firefox"
                                     }
                                 ],
                                 "type": "basic"
