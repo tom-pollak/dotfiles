@@ -48,19 +48,8 @@ local setup = function()
         pickers = {
             buffers = {theme = "dropdown"},
             command_history = {theme = "dropdown"}
-        },
-        extensions = {
-            project = {theme = "cursor", base_dirs = {"~/projects"}},
-            ["ui-select"] = {require"telescope.themes".get_cursor()},
-            notepad = {
-                notes_directory = "~/notes/inbox/",
-                ignore_files = {".git/", ".DS_Store", "_assets/"}
-            }
         }
     }
-    telescope.load_extension "project"
-    telescope.load_extension "ui-select"
-    telescope.load_extension "notepad"
 end
 
 M.setup = setup

@@ -22,10 +22,15 @@ require("packer").startup({
             "nvim-treesitter/nvim-treesitter",
             requires = {
                 {"p00f/nvim-ts-rainbow"},
-                {"JoosepAlviste/nvim-ts-context-commentstring"},
             },
             config = function()
-                require("extensions.treesitter-setup")
+                require('nvim-treesitter.configs').setup ({
+                    ensure_installed = "all",
+                    ignore_install = {"phpdoc"},
+                    sync_install = false,
+                    highlight = {enable = true},
+                    rainbow = {enable = true, extended_mode = true, max_file_lines = nil},
+                })
             end,
             run = ":TSUpdate"
         })
@@ -62,12 +67,7 @@ require("packer").startup({
 
         use({
             "nvim-telescope/telescope.nvim",
-            requires = {
-                {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"},
-                {"nvim-telescope/telescope-project.nvim"},
-                {"nvim-telescope/telescope-ui-select.nvim"},
-                {"tom-pollak/notepad.nvim"}
-            },
+            requires = { {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"}},
             config = function()
                 require("extensions.telescope-setup").setup()
             end
@@ -214,7 +214,7 @@ require("packer").startup({
         use({
             "nvim-lualine/lualine.nvim",
             requires = {{"kyazdani42/nvim-web-devicons", opt = true}},
-            config = function() require("extensions.lualine") end
+            config = function() require("extensions.lualine-setup") end
         })
 
         use({
