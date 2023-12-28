@@ -1,3 +1,2 @@
-require('core.base')
-require('core.mappings')
+require('core')
 require('packer_init')

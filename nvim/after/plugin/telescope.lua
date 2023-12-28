@@ -69,9 +69,6 @@ vim.keymap.set("n", "<c-p>", project_files)
 vim.keymap.set("n", "<leader>f", live_grep)
 vim.keymap.set("n", "<c-b>", buffers)
 
-vim.keymap.set("c", "<c-f>", command_history)
-vim.keymap.set("c", "<c-r>", run_history)
-
 vim.keymap.set("n", "<leader>a", builtin.resume)
 
 vim.keymap.set("n", "<leader>cd", dotfiles)
@@ -80,14 +77,3 @@ vim.keymap.set("n", "<leader>cc", vim_config)
 vim.keymap.set("n", "<leader>h", builtin.help_tags)
 
 vim.keymap.set("n", "'", bookmarks_all)
-
-vim.keymap.set("n", "<leader>rr",
-               require("telescope").extensions.project.project)
-
-vim.keymap.set("n", "<leader>m", function()
-    return require("telescope").extensions.notepad.notepad(opts)
-end)
-
-vim.keymap.set("n", "<leader>rd", function ()
-    print(root_dir())
-end)

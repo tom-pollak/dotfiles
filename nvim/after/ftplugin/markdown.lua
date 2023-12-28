@@ -8,5 +8,3 @@ set.showbreak = "++"
 
 vim.bo.tw = 80
 vim.cmd([[filetype indent plugin on]])
-
-require("cmp").setup.buffer({enabled = false})
