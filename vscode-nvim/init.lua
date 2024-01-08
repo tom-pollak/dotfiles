@@ -104,6 +104,7 @@ keymap('n', '<leader>rf', notify 'editor.action.refactor', {silent = true})
 keymap('n', '<leader>k', notify 'docsView.documentation.focus', {silent = true})
 keymap('n', 'K', notify 'editor.action.showHover', {silent = true})
 
+keymap('n', '<leader>a', notify 'breadcrumbs.focusAndSelect', {silent = true})
 
 -- Code jumping
 keymap('n', 'gd', notify 'editor.action.revealDefinition', {silent = true})
