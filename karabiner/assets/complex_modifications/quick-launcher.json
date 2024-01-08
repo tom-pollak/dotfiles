@@ -42,7 +42,7 @@
           },
           "to": [
             {
-              "shell_command": "bash ~/.dotfiles/scripts/firefox_new_window.sh"
+              "shell_command": "osascript ~/.dotfiles/scripts/firefox_new_window.scpt"
             }
           ],
           "type": "basic"
