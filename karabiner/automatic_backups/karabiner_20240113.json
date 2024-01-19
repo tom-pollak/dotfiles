@@ -154,6 +154,128 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change right option to Hyper (i.e., command+control+option+shift)",
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "H-a: kitty",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/.dotfiles/scripts/kitty_new_window.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "M-f: marta",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/.dotfiles/scripts/marta_new_window.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "H-d: code",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/.dotfiles/scripts/vscode_new_window.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "H-s: firefox",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/.dotfiles/scripts/firefox_new_window.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
