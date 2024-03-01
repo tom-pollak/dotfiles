@@ -43,5 +43,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[includeIf "gitdir:~/work/"]
-    path = ~/work/.gitconfig
+[includeIf "gitdir:~/co/"]
+    path = ~/co/.gitconfig

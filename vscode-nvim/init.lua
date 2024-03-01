@@ -179,3 +179,9 @@ keymap('n', '<leader>di', notify 'editor.debug.action.selectionToRepl', {silent 
 -- Tests
 keymap('n', '<leader>dt', notify 'test-explorer.pick-and-run', {silent = true})
 keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', {silent = true})
+
+
+-- Copilot chat
+keymap('n', '<leader>ee', notify 'workbench.action.chat.openInEditor', {silent = true})
+keymap('n', '<leader>eq', notify 'workbench.action.openQuickChat.copilot', {silent = true})
+
