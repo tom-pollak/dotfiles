@@ -1,0 +1,50 @@
+#!/usr/bin/env sh
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+
+
+# yabai -m signal --add event=window_focused action='yabai -m window $YABAI_WINDOW_ID --insert stack'
+# yabai -m signal --add event=application_front_switched action='yabai -m window --insert stack'
+
+yabai -m config external_bar               all:30:0     \
+                mouse_follows_focus        off          \
+                focus_follows_mouse        off          \
+                window_zoom_persist        off          \
+                window_placement           second_child \
+                window_topmost             off          \
+                window_shadow              float        \
+                window_opacity             on           \
+                window_opacity_duration    0.2          \
+                active_window_opacity      1.0          \
+                normal_window_opacity      0.95         \
+                window_animation_duration  0.0          \
+                insert_feedback_color      0x009dd274   \
+                split_ratio                0.50         \
+                auto_balance               off          \
+                auto_padding               on           \
+                mouse_modifier             ctrl          \
+                mouse_action1              move         \
+                mouse_action2              resize       \
+                mouse_drop_action          swap         \
+                                                        \
+                top_padding                5           \
+                bottom_padding             3            \
+                left_padding               3            \
+                right_padding              3            \
+                window_gap                 6
+
+# Exclude problematic apps from being managed:
+yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor|Cisco AnyConnect Secure Mobility Client)$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+
+yabai -m config layout bsp
+
+# delete monocle mode lock files from previous sessions
+# find "${TMPDIR}" -type f -perm +111 -name "yabai_${USER}_monocle_mode_*" -delete
+
+echo "yabai configuration loaded.."

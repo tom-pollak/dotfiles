@@ -8,6 +8,7 @@ fish_vi_key_bindings
 fish_add_path /opt/homebrew/sbin
 fish_add_path /opt/homebrew/opt/llvm/bin
 fish_add_path /opt/homebrew/opt/openjdk/bin
+fish_add_path /opt/homebrew/opt/sqlite/bin
 
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.local/bin
@@ -123,3 +124,4 @@ set -gx MAMBA_EXE "/opt/homebrew/bin/micromamba"
 set -gx MAMBA_ROOT_PREFIX "/Users/tom/micromamba"
 $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
+

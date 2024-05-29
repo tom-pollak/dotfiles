@@ -70,11 +70,48 @@ vim.cmd("source ~/.dotfiles/vscode-nvim/surround.vim")
 
 local vscode_neovim = require("vscode-neovim")
 
+-- Comments
+-- keymap({'n', 'v', 'x', 'o'}, 'gc', '<Plug>VSCodeCommentary', {silent = true})
+-- keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine', {silent = true})
+
+local comment = vscode_neovim.to_op(function(ctx)
+  local cmd = ctx.is_linewise and "editor.action.commentLine" or "editor.action.blockComment"
+  local opts = { range = ctx.range, callback = esc }
+  if ctx.is_linewise and ctx.is_current_line then
+    opts.range = nil
+  end
+  vscode_neovim.action(cmd, opts)
+end)
+
+
+local comment_block = vscode_neovim.to_op(function(ctx)
+  local cmd = "editor.action.blockComment"
+  local opts = { range = ctx.range, callback = esc }
+  if ctx.is_linewise and ctx.is_current_line then
+    opts.range = nil
+  end
+  vscode_neovim.action(cmd, opts)
+end)
+
+local comment_line = function()
+  return comment() .. "_"
+end
+
+local k = function(mode, lhs, rhs)
+  vim.keymap.set(mode, lhs, rhs, { expr = true }) -- expr is required
+end
+
+k({ "n", "x", "v"}, "gc", comment)
+k({ "n" }, "gcc", comment_line)
+k({ "n", "x", "v"}, "gb", comment_block)
+
+
+
 -- wrapped lines don't unwrap when moving up/down
-vim.cmd [[
-    nnoremap k :<C-u>call VSCodeCall('cursorMove', { 'to': 'up', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
-    nnoremap j :<C-u>call VSCodeCall('cursorMove', { 'to': 'down', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
-]]
+-- vim.cmd [[
+--     nnoremap k :<C-u>call VSCodeCall('cursorMove', { 'to': 'up', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
+--     nnoremap j :<C-u>call VSCodeCall('cursorMove', { 'to': 'down', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
+-- ]]
 
 -- Vscode commands --
 local function notify(cmd)
@@ -116,10 +153,6 @@ keymap('n', 'gi', notify 'editor.action.goToImplementation', {silent = true})
 keymap('n', 'gI', notify 'references-view.findImplementations', {silent = true})
 keymap('n', 'gj', notify 'editor.action.marker.next', {silent = true})
 keymap('n', 'gk', notify 'editor.action.marker.prev', {silent = true})
-
--- Comments
-keymap({'n', 'v', 'x', 'o'}, 'gc', '<Plug>VSCodeCommentary', {silent = true})
-keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine', {silent = true})
 
 -- LSP symbols
 keymap('n', '<leader>s', notify 'workbench.action.gotoSymbol', {silent = true})
