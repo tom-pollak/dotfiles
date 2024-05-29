@@ -46,6 +46,6 @@ mouse_clicked() {
 case "$SENDER" in
   "mouse.clicked") mouse_clicked
   ;;
-  "window_focus") window_state 
+  "window_focus") window_state
   ;;
 esac
