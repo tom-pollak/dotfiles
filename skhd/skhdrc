@@ -1,0 +1,78 @@
+## HOTKEYS
+
+ralt - a : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+ralt - s : /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+ralt - d : code --new-window
+
+lalt - a : ~/.config/yabai/most_recent_window.sh "kitty"
+lalt - s : ~/.config/yabai/most_recent_window.sh "Google Chrome"
+lalt - d : ~/.config/yabai/most_recent_window.sh "Code"
+
+## WM
+
+# Window Navigation
+lalt - j    : yabai -m window --focus south || yabai -m window --focus stack.next || yabai -m window --focus stack.first || yabai -m window --focus next || yabai -m window --focus first || yabai -m window --focus float.next || yabai -m window --focus float.first
+lalt - k    : yabai -m window --focus north || yabai -m window --focus stack.prev || yabai -m window --focus stack.last || yabai -m window --focus prev || yabai -m window --focus last || yabai -m window --focus float.prev || yabai -m window --focus float.last
+lalt - h    : yabai -m window --focus west || yabai -m window --focus stack.prev  || yabai -m window --focus stack.last
+lalt - l    : yabai -m window --focus east || yabai -m window --focus stack.next  || yabai -m window --focus stack.first
+
+# space cycle
+lalt - i : ~/.config/yabai/space_cycle_prev.sh
+lalt - o : ~/.config/yabai/space_cycle_next.sh
+
+# space management
+lalt - c : yabai -m space --create && yabai -m space --focus last
+lalt -  x : yabai -m space --destroy
+
+## Window Movement (shift + lalt - ...)
+# Moving windows in spaces: shift + lalt - {j, k, l, l}
+ctrl + lalt - h : yabai -m window --warp west || yabai -m window --move rel:-30:0
+ctrl + lalt - j : yabai -m window --warp south || yabai -m window --move rel:0:30
+ctrl + lalt - k : yabai -m window --warp north || yabai -m window --move rel:0:-30
+ctrl + lalt - l : yabai -m window --warp east || yabai -m window --move rel:30:0
+
+# rotate
+lalt - y : ~/.config/yabai/cycle_counterclockwise.sh
+
+# zoom
+lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+
+# stack
+lalt - u : ~/.config/yabai/toggle_stack.sh south; sketchybar --trigger window_focus
+
+# float
+lalt - m : yabai -m window --toggle float; sketchybar --trigger window_focus
+ctrl + lalt - m : ~/.config/yabai/toggle_layout.sh; sketchybar --trigger window_focus
+
+lalt - 0x2B : yabai -m window --grid 12:13:4:3:5:6 # ,
+lalt - 0x2F : yabai -m window --grid 5:4:1:1:2:3 # .
+lalt - 0x2C : yabai -m window --grid 8:6:1:1:4:6 # /
+
+# throw to next window
+lalt - p : yabai -m window --space prev && yabai -m space --focus prev
+lalt - n : yabai -m window --space next && yabai -m space --focus next
+
+## Resize (ctrl + lalt - ...)
+shift + lalt - h    : yabai -m window --resize right:-100:0 || yabai -m window --resize left:-100:0
+shift + lalt - j    : yabai -m window --resize bottom:0:100 || yabai -m window --resize top:0:100
+shift + lalt - k    : yabai -m window --resize bottom:0:-100 || yabai -m window --resize top:0:-100
+shift + lalt - l    : yabai -m window --resize right:100:0 || yabai -m window --resize left:100:0
+shift + lalt - e    : yabai -m space --balance
+
+# toggle space
+lalt - s : yabai -m window --toggle split
+
+
+####
+
+# Enable / Disable gaps in current workspace: ctrl + lalt - g
+ctrl + lalt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
+
+# Enable / Disable gaps in current workspace: ctrl + lalt - g
+ctrl + lalt - b : yabai -m config window_border off
+shift + ctrl + lalt - b : yabai -m config window_border on
+
+# Toggle sketchybar
+shift + lalt - space : sketchybar --bar hidden=toggle
+shift + lalt - r : sketchybar --remove '/.*/' && sh -c 'export CONFIG_DIR=$HOME/.config/sketchybar && $CONFIG_DIR/sketchybarrc'
+

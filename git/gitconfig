@@ -45,3 +45,5 @@
 	required = true
 [includeIf "gitdir:~/co/"]
     path = ~/co/.gitconfig
+[alias]
+    fomo = !git fetch origin main && git rebase origin/main
