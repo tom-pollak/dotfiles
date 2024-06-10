@@ -35,10 +35,7 @@ do
 done
 
 space_creator=(
-  padding_left=10
-  padding_right=8
-  display=active
-  click_script='yabai -m space --create'
+  # display=active
   script="$PLUGIN_DIR/space_windows.sh"
 )
 
