@@ -70,6 +70,7 @@ set.linebreak = true
 set.completeopt = 'menu,menuone,noselect'
 set.signcolumn = 'yes'
 set.jumpoptions = "stack"
+set.linebreak = true
 
 set.showmode = false
 set.wildignore = {
