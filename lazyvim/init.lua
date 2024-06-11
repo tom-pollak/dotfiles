@@ -253,10 +253,6 @@ require("lazy").setup({
                 }):sync()[1]
                 if gitdir ~= nil then return gitdir end
 
-                if vim.lsp.get_active_clients()[1] ~= nil then
-                    return vim.lsp.get_active_clients()[1].config.root_dir
-                end
-
                 return vim.fn.getcwd()
             end
 
