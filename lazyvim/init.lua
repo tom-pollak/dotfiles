@@ -15,6 +15,18 @@ set.ignorecase = true
 wo.relativenumber = true
 wo.number = true
 
+-- Keymaps --
+keymap('n', '<leader>w', "<CMD>:update<CR>", {silent = true})
+keymap("n", "<Esc>", "<CMD>nohl<CR><Esc>", {silent = true})
+
+keymap({"n", "v"}, "H", "^", {silent = true})
+keymap({"n", "v"}, "L", "$", {silent = true})
+
+keymap('v', '<', '< gv', {silent = true})
+keymap('v', '>', '> gv', {silent = true})
+
+keymap("n", "U", "<CMD>earlier<CR>", {silent = true})
+keymap("n", "R", "<CMD>later<CR>", {silent = true})
 
 -- Remap delete --
 keymap({"n", "v"}, "d", '"_d')
@@ -29,18 +41,6 @@ keymap("n", "C", '"_C')
 keymap("n", "x", '"_x')
 keymap("n", "ss", "dd")
 
--- Keymaps --
-keymap('n', '<leader>w', "<CMD>:update<CR>", {silent = true})
-keymap("n", "<Esc>", "<CMD>nohl<CR><Esc>", {silent = true})
-
-keymap({"n", "v"}, "H", "^", {silent = true})
-keymap({"n", "v"}, "L", "$", {silent = true})
-
-keymap('v', '<', '< gv', {silent = true})
-keymap('v', '>', '> gv', {silent = true})
-
-keymap("n", "U", "<CMD>earlier<CR>", {silent = true})
-keymap("n", "R", "<CMD>later<CR>", {silent = true})
 
 -- Highlights --
 vim.cmd [[
@@ -50,8 +50,8 @@ vim.cmd [[
   augroup END
 ]]
 
-----
 
+-- Settings
 set.shell = "bash"
 set.tabstop = 4
 set.shiftwidth = 4
@@ -59,7 +59,7 @@ set.softtabstop = 4
 set.expandtab = true
 set.encoding = "utf-8"
 set.wrap = false
-set.scrolloff = 6
+set.scrolloff = 10
 set.undofile = true
 set.hidden = true
 set.cursorline = true
@@ -69,6 +69,7 @@ set.pumheight = 12
 set.linebreak = true
 set.completeopt = 'menu,menuone,noselect'
 set.signcolumn = 'yes'
+set.jumpoptions = "stack"
 
 set.showmode = false
 set.wildignore = {
@@ -83,16 +84,13 @@ set.background = 'dark'
 wo.colorcolumn = '80'
 set.mouse = 'a'
 
-
--- this isn't working
+-- TODO: this isn't working
 vim.cmd [[
     highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
     match ExtraWhitespace /\s\+\%#\@<!$/
     au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
     au InsertLeave * match ExtraWhitespace /\s\+$/
 ]]
-
-
 
 -- Change windows
 keymap("n", "<C-h>", "<CMD>wincmd h<CR>")
@@ -111,22 +109,55 @@ keymap({"n"}, "<CR>", function()
     vim.cmd([[call append(line("."), repeat([""], v:count1))]])
 end)
 
-vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']])
-vim.cmd([[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']])
-
+-- j k keys in jump list
 keymap({"n", "x"}, "j",
-   function() return vim.v.count > 0 and "j" or "gj" end,
-   {noremap = true, expr = true})
+    function()
+        print(vim.v.count)
+        if vim.v.count == 0 then return 'gj'
+        elseif vim.v.count > 5 then
+            return "m'" .. vim.v.count .. 'j'
+        else return vim.v.count .. 'j'
+        end
+    end,
+{noremap = true, expr = true})
 keymap({"n", "x"}, "k",
-   function() return vim.v.count > 0 and "k" or "gk" end,
-   {noremap = true, expr = true})
+    function()
+        if vim.v.count == 0 then return 'gk'
+        elseif vim.v.count > 5 then
+            return "m'" .. vim.v.count .. 'k'
+        else return vim.v.count .. 'k'
+        end
+    end,
+{noremap = true, expr = true})
 
+-- Toggle notes
+keymap("n", "<C-7>", function()
+    local notes_file = vim.fn.expand("$HOME/fun/notes/notes.md")
+    if vim.fn.expand("%:p") == notes_file then
+        vim.cmd("b#")
+    else
+        vim.cmd('e ' .. notes_file)
+    end
+end)
+
+-- cd around
 keymap("n", "<c-f>",
    function() return ":e " .. vim.fn.expand("%:p:h") .. "/" end,
    {expr = true})
 
+-- Expand path (:cd %%)
+keymap('c', '%%', function()
+    if (vim.fn.getcmdtype() == ':') then
+        return vim.fn.expand('%:h')..'/'
+    else
+        return '%%'
+    end
+end,
+{expr = true})
+   
+
 -- Plugins --
--- telescope, gitsigns, vim-surround, git-messenger or something else
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
@@ -134,13 +165,53 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
     end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    { "tpope/vim-surround" },
+    { 
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require('gitsigns').setup({
+            on_attach = function(bufnr)
+                local gitsigns = require('gitsigns')
+
+                local function map(mode, l, r, opts)
+                    opts = opts or {}
+                    opts.buffer = bufnr
+                    vim.keymap.set(mode, l, r, opts)
+                end
+
+                -- Navigation
+                map('n', '<leader>n', function()
+                    if vim.wo.diff then
+                        vim.cmd.normal({'<leader>n', bang = true})
+                    else
+                        gitsigns.nav_hunk('next')
+                    end
+                end)
+
+                map('n', '<leader>p', function()
+                    if vim.wo.diff then
+                        vim.cmd.normal({'<leader>p', bang = true})
+                    else
+                        gitsigns.nav_hunk('prev')
+                    end
+                end)
+
+                -- Actions
+                map('n', '<leader>lc', function() gitsigns.blame_line{full=true} end)
+                map('n', '<leader>lb', gitsigns.toggle_current_line_blame)
+                map('n', '<leader>lo', gitsigns.diffthis)
+                map('n', '<leader>ld', gitsigns.toggle_deleted)
+            end
+        })
+    end
+    },
     {
         'sainnhe/everforest',
         lazy = false,
@@ -150,8 +221,84 @@ require("lazy").setup({
             vim.cmd.colorscheme('everforest')
         end
     },
-    { "tpope/vim-surround" },
-    { "lewis6991/gitsigns.nvim" },
+    {
+        'nvim-telescope/telescope.nvim', tag = '0.1.6',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            local actions = require("telescope.actions")
+            require("telescope").setup({
+            defaults = {
+                    mappings = {
+                        i = {
+                            ["<esc>"] = actions.close,
+                            ["<C-j>"] = actions.move_selection_next,
+                            ["<C-k>"] = actions.move_selection_previous,
+                            ["<C-l>"] = function()
+                                vim.cmd "stopinsert"
+                            end,
+                        },
+                        n = {
+                            ["<esc>"] = actions.close,
+                            ["<C-j>"] = actions.move_selection_next,
+                            ["<C-k>"] = actions.move_selection_previous
+                        }
+                    }
+                }
+            })
+
+            local root_dir = function()
+                local gitdir = require("plenary.job"):new({
+                    command = "git",
+                    args = {"rev-parse", "--show-toplevel"}
+                }):sync()[1]
+                if gitdir ~= nil then return gitdir end
+
+                if vim.lsp.get_active_clients()[1] ~= nil then
+                    return vim.lsp.get_active_clients()[1].config.root_dir
+                end
+
+                return vim.fn.getcwd()
+            end
+
+            local builtin = require('telescope.builtin')
+            keymap("n", "<c-b>", function() builtin.buffers({  sort_lastused = true, sort_mru = true, ignore_current_buffer = true }) end)
+            keymap("n", "<c-p>", function() builtin.find_files({  sort_lastused = true, sort_mru = true, ignore_current_buffer = true, cwd = root_dir() }) end)
+            keymap("n", "<leader>cc", function() builtin.find_files({ prompt_title = "< Dotfiles >", cwd = "$HOME/.dotfiles" }) end)
+            keymap("n", "<leader>f", function() builtin.live_grep({cwd = root_dir(), disable_coordinates = true}) end)
+        end,
+    },
+    {
+        -- mouse scrolling
+        "karb94/neoscroll.nvim",
+        config = function ()
+            require('neoscroll').setup({
+                mappings = {'<C-y>', '<C-e>'}, 
+                respect_scrolloff = true,
+                easing_function = "cubic"
+            })
+            keymap('n', '<ScrollWheelUp>', '<C-y>')
+            keymap('n', '<ScrollWheelDown>', '<C-e>')
+            keymap('i', '<ScrollWheelUp>', '<C-o><C-y>')
+            keymap('i', '<ScrollWheelDown>', '<C-o><C-e>')
+            keymap('v', '<ScrollWheelUp>', '<C-y>')
+            keymap('v', '<ScrollWheelDown>', '<C-e>')
+        end
+    },
+    {
+        "kdheepak/lazygit.nvim",
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        -- optional for floating window border decoration
+        dependencies = { "nvim-lua/plenary.nvim" },
+        -- setting the keybinding for LazyGit with 'keys' is recommended in
+        -- order to load the plugin when the command is run for the first time
+        keys = { { "<leader>j", "<cmd>LazyGit<cr>", desc = "LazyGit" } }
+    }
 })
 
 
