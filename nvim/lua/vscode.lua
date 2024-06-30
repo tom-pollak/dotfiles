@@ -1,78 +1,19 @@
--- Disable all plugins
-vim.cmd("set noloadplugins")
-
-----------
--- BASE --
-----------
-
-local set = vim.opt
-local keymap = vim.keymap.set
-local wo = vim.wo
-
-vim.g.mapleader = ' '
-
-set.clipboard = 'unnamedplus'
-set.smartcase = true
-set.ignorecase = true
-
-wo.relativenumber = true
-wo.number = true
-
--- Remap delete
-keymap({"n", "v"}, "d", '"_d')
-keymap({"n", "v"}, "s", "d")
-keymap({"n", "v"}, "c", '"_c')
-keymap("v", "p", '"_dP')
-
-keymap("n", "D", '"_D')
-keymap("n", "S", "D")
-keymap("n", "C", '"_C')
-
-keymap("n", "x", '"_x')
-keymap("n", "ss", "dd")
-
--- Keymaps --
-keymap("n", "<Esc>", "<CMD>nohl<CR><Esc>", {silent = true})
-
-keymap({"n", "v"}, "H", "^", {silent = true})
-keymap({"n", "v"}, "L", "$", {silent = true})
-
-keymap('v', '<', '< gv', {silent = true})
-keymap('v', '>', '> gv', {silent = true})
-
-keymap("n", "U", "<CMD>earlier<CR>", {silent = true})
-keymap("n", "R", "<CMD>later<CR>", {silent = true})
-
--- Highlights --
-vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=200})
-  augroup END
-]]
-
--- Not available VSCode specifics --
---
--- Add to jump list
--- vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']])
--- vim.cmd([[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']])
---
--- Recenter on n and N
--- Recenter on <C-u> and <C-d> (workaround in VSCode)
-
-
--- Plugins
-vim.cmd("source ~/.dotfiles/vscode-nvim/surround.vim")
-
 ------------
 -- VSCODE --
 ------------
 
+-- Only surround pluging
+vim.cmd("set noloadplugins")
+vim.cmd("source ~/.dotfiles/nvim/surround.vim")
+
+-- Add to jump list -- doesn't work vscode
+-- vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']])
+-- vim.cmd([[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k']])
+
+
 local vscode_neovim = require("vscode-neovim")
 
--- Comments
--- keymap({'n', 'v', 'x', 'o'}, 'gc', '<Plug>VSCodeCommentary', {silent = true})
--- keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine', {silent = true})
+-- Comments --
 
 local comment = vscode_neovim.to_op(function(ctx)
   local cmd = ctx.is_linewise and "editor.action.commentLine" or "editor.action.blockComment"
@@ -82,7 +23,6 @@ local comment = vscode_neovim.to_op(function(ctx)
   end
   vscode_neovim.action(cmd, opts)
 end)
-
 
 local comment_block = vscode_neovim.to_op(function(ctx)
   local cmd = "editor.action.blockComment"
@@ -106,13 +46,6 @@ k({ "n" }, "gcc", comment_line)
 k({ "n", "x", "v"}, "gb", comment_block)
 
 
-
--- wrapped lines don't unwrap when moving up/down
--- vim.cmd [[
---     nnoremap k :<C-u>call VSCodeCall('cursorMove', { 'to': 'up', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
---     nnoremap j :<C-u>call VSCodeCall('cursorMove', { 'to': 'down', 'by': 'wrappedLine', 'value': v:count ? v:count : 1 })<CR>
--- ]]
-
 -- Vscode commands --
 local function notify(cmd)
     return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
@@ -125,8 +58,8 @@ local function v_notify(cmd, leave_selection)
     vscode_neovim.notify_range(cmd, line1, line2, leave_selection)
 end
 
-
 -- Keymaps --
+local keymap = vim.keymap.set
 
 keymap('n', '<leader>w', notify 'workbench.action.files.save', {silent = true})
 keymap('n', '<CR>', notify 'editor.action.insertLineAfter')
