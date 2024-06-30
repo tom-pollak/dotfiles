@@ -159,7 +159,7 @@ keymap('n', '<leader>s', notify 'workbench.action.gotoSymbol', {silent = true})
 keymap('n', '<leader>S', notify 'workbench.action.showAllSymbols', {silent = true})
 
 -- Format
-keymap('n', '<leader>q', notify 'editor.action.formatDocument')
+keymap('n', '<leader>e', notify 'editor.action.formatDocument')
 
 -- Bookmarks
 keymap('n', 'm', notify 'bookmarks.toggle', {silent = true})
@@ -215,6 +215,5 @@ keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', {silent = t
 
 
 -- Copilot chat
-keymap('n', '<leader>ee', notify 'workbench.action.chat.openInEditor', {silent = true})
-keymap('n', '<leader>eq', notify 'workbench.action.openQuickChat.copilot', {silent = true})
+keymap('n', '<leader>o', notify 'workbench.action.chat.openInEditor', {silent = true})
 

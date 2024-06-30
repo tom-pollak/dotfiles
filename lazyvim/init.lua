@@ -113,7 +113,6 @@ end)
 -- j k keys in jump list
 keymap({"n", "x"}, "j",
     function()
-        print(vim.v.count)
         if vim.v.count == 0 then return 'gj'
         elseif vim.v.count > 5 then
             return "m'" .. vim.v.count .. 'j'
