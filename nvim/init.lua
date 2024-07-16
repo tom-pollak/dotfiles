@@ -1,7 +1,7 @@
 require('core')
 
 if vim.g.vscode == nil then
-    require('config')
+    require('neovim_config')
 else
-    require('vscode')
+    require('vscode_config')
 end

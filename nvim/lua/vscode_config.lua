@@ -4,7 +4,7 @@
 
 -- Only surround pluging
 vim.cmd("set noloadplugins")
-vim.cmd("source ~/.dotfiles/nvim/surround.vim")
+vim.cmd("source ~/.dotfiles/nvim/lua/surround.vim")
 
 -- Add to jump list -- doesn't work vscode
 -- vim.cmd([[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j']])
