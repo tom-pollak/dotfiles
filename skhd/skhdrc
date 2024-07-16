@@ -22,6 +22,10 @@ lalt - 0x29 : yabai -m window --focus stack.next || yabai -m window --focus stac
 lalt - i : ~/.config/yabai/space_cycle_prev.sh
 lalt - o : ~/.config/yabai/space_cycle_next.sh
 
+# display cycle
+ctrl + lalt - i : ~/.config/yabai/display_cycle_prev.sh
+ctrl + lalt - o : ~/.config/yabai/display_cycle_next.sh
+
 # space management
 lalt - c : yabai -m space --create && yabai -m space --focus last
 lalt + ctrl - x : yabai -m space --destroy

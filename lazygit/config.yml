@@ -1,24 +1,17 @@
 notARepository: 'skip'
 gui:
-  editCommand: 'nvim'
-  editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'
-  mouseEvents: false
+  mouseEvents: true
   showFileTree: true
-  showIcons: true
-  theme:
-    selectedLineBgColor:
-      - default
-    selectedRangeBgColor:
-      - default
-    cherryPickedCommitBgColor:
-      - reverse
-    cherryPickedCommitFgColor:
-      - reverse
+  showIcons: false
 keybinding:
   universal:
     prevPage: '<c-u>' # go to next page in list
     nextPage: '<c-d>' # go to previous page in list
+os:
+  editPreset: 'nvim'
+  open: '/opt/homebrew/bin/code {{filename}}'
+  openDirInEditor: '/opt/homebrew/bin/code {{dir}}'
 git:
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: /opt/homebrew/bin/delta --paging=never
