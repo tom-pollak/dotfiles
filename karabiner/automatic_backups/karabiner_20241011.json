@@ -6,12 +6,14 @@
                 "parameters": { "basic.to_if_alone_timeout_milliseconds": 500 },
                 "rules": [
                     {
-                        "description": "Change left_shift to cmd+8 if pressed alone in Cursor",
+                        "description": "Change left_shift to cmd+8 if pressed alone in VsCode & Cursor",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "com\\.microsoft\\.VSCode",
+                                            "com\\.microsoft\\.VSCodeInsiders",
                                             "com\\.todesktop\\.230313mzl4w4u92"
                                         ],
                                         "type": "frontmost_application_if"
@@ -252,11 +254,7 @@
                 }
             ],
             "name": "Default profile",
-            "selected": true,
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "keyboard_type_v2": "ansi"
-            }
+            "selected": true
         }
     ]
 }
