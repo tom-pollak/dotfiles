@@ -5,7 +5,7 @@
 [interactive]
     diffFilter = delta --color-only
 [user]
-	email = tompollak100@gmail.com
+	email = tompollak1000@gmail.com
 	name = Tom Pollak
 	github = tom-pollak
 [init]
