@@ -106,16 +106,8 @@ keymap('n', '<leader>p', notify 'workbench.action.editor.previousChange', {silen
 keymap('n', '<leader>lo', notify 'gitlens.diffWithPrevious', {silent = true})
 keymap('n', '<leader>lO', notify 'gitlens.diffLineWithPrevious', {silent = true})
 
-keymap('n', '<leader>ls', notify 'git.stageSelectedRanges')
-keymap('n', '<leader>lu', notify 'git.unstageSelectedRanges')
-keymap ('v', '<leader>ls', function() v_notify('git.stageSelectedRanges') end)
-keymap ('v', '<leader>lu', function() v_notify('git.unstageSelectedRanges') end)
-
-keymap('n', '<leader>lg', notify 'git-graph.view', {silent = true})
-
 keymap('n', '<leader>lc', notify 'gitlens.toggleFileChanges', {silent = true})
 keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', {silent = true})
-keymap('n', '<leader>lm', notify 'gitlens.toggleFileHeatmap', {silent = true})
 
 -- Debug
 keymap('n', '<leader>du', notify 'debug.jumpToCursor', {silent = true})
@@ -140,13 +132,7 @@ keymap('n', '<leader>dJ', notify 'workbench.action.debug.callStackBottom', {sile
 keymap('n', '<leader>dK', notify 'workbench.action.debug.callStackTop', {silent = true})
 
 keymap('n', '<leader>di', notify 'editor.debug.action.selectionToRepl', {silent = true})
--- keymap('v', '<leader>di', v_notify 'editor.debug.action.selectionToRepl', {silent = true})
 
 -- Tests
 keymap('n', '<leader>dt', notify 'test-explorer.pick-and-run', {silent = true})
 keymap('n', '<leader>tc', notify 'test-explorer.run-test-at-cursor', {silent = true})
-
-
--- Copilot chat
-keymap('n', '<leader>o', notify 'workbench.action.chat.openInEditor', {silent = true})
-

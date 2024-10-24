@@ -1,0 +1,19 @@
+notARepository: 'skip'
+gui:
+  mouseEvents: true
+  showFileTree: true
+  showIcons: false
+keybinding:
+  universal:
+    prevPage: '<c-u>' # go to next page in list
+    nextPage: '<c-d>' # go to previous page in list
+os:
+  edit: '/usr/local/bin/cursor {{filename}}'
+  editAtLine: '/usr/local/bin/cursor --line={{line}} {{filename}}'
+  editAtLineAndWait: '/usr/local/bin/cursor --block --line={{line}} {{filename}}'
+  editInTerminal: true
+  openDirInEditor: '/usr/local/bin/cursor {{dir}}'
+git:
+  paging:
+    colorArg: always
+    pager: /opt/homebrew/bin/delta --paging=never
