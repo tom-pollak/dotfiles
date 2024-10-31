@@ -73,7 +73,7 @@ alias hr="history --merge"
 alias ls='exa -bG --git'
 alias l='exa -bG --git'
 alias ll='exa -labG --git'
-alias llm='exa -labGd --git --sort=modified' # long list, modified date sort
+#alias llm='exa -labGd --git --sort=modified' # long list, modified date sort
 alias la='exa -abG --git'
 alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
@@ -117,6 +117,9 @@ function fzf_autojump
 end
 
 bind -M insert \cf fzf_autojump
+
+source ~/.dotfiles/fish/llm_git_complete.fish
+
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
