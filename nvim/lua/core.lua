@@ -50,3 +50,44 @@ vim.cmd [[
   augroup END
 ]]
 
+-- Blocks --
+vim.api.nvim_create_user_command('Blocks', function(opts)
+  local count = tonumber(opts.args) or 80
+  local blocks = string.rep('█', count)
+  vim.api.nvim_put({blocks}, 'c', true, true)
+end, {nargs = '?'})
+
+vim.api.nvim_create_user_command('BlocksT', function(opts)
+    local args = vim.split(opts.args, ' ', { trimempty = true })
+    local text = ''
+    local line_length = 80
+
+    -- Combine args into text until we hit a number (line_length) or run out of args
+    while #args > 0 do
+    local arg = table.remove(args, 1)
+    if tonumber(arg) then
+        line_length = tonumber(arg)
+        break
+    else
+        if text ~= '' then text = text .. ' ' end
+        text = text .. arg
+    end
+    end
+
+    text = text:gsub('^"(.*)"$', '%1'):gsub("^'(.*)'$", '%1')
+
+    local text_length = vim.fn.strdisplaywidth(text)
+    local total_padding = 4  -- Two spaces on each side
+    local blocks_needed = line_length - text_length - total_padding
+
+    if blocks_needed < 2 then
+    print("Error: Line length too small for the given text")
+    return
+    end
+
+    local left_blocks = string.rep('█', math.floor(blocks_needed / 2))
+    local right_blocks = string.rep('█', math.ceil(blocks_needed / 2))
+
+    local result = left_blocks .. '  ' .. text .. '  ' .. right_blocks
+        vim.api.nvim_put({result}, 'l', true, true)
+    end, {nargs = '+'})
