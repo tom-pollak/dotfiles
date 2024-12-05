@@ -43,7 +43,17 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [includeIf "gitdir:~/co/"]
     path = ~/co/.gitconfig
 [alias]
     fomo = !git fetch origin main && git rebase origin/main
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
+[safe]
+	directory = /home/tom/co/
+	directory = /home/tom/co/psec-python/
+	directory = /home/tom/co/psec-python
+	directory = /home/tom/work/psec-python
+[credential]
+	helper = store

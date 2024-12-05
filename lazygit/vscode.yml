@@ -8,12 +8,12 @@ keybinding:
     prevPage: '<c-u>' # go to next page in list
     nextPage: '<c-d>' # go to previous page in list
 os:
-  edit: '/usr/local/bin/cursor {{filename}}'
-  editAtLine: '/usr/local/bin/cursor --line={{line}} {{filename}}'
-  editAtLineAndWait: '/usr/local/bin/cursor --block --line={{line}} {{filename}}'
+  edit: 'cursor {{filename}}'
+  editAtLine: 'cursor --line={{line}} {{filename}}'
+  editAtLineAndWait: 'cursor --block --line={{line}} {{filename}}'
   editInTerminal: true
-  openDirInEditor: '/usr/local/bin/cursor {{dir}}'
+  openDirInEditor: 'cursor {{dir}}'
 git:
   paging:
     colorArg: always
-    pager: /opt/homebrew/bin/delta --paging=never
+    pager: delta --paging=never
