@@ -43,9 +43,14 @@ keymap("n", "C", '"_C')
 keymap("n", "x", '"_x')
 keymap("n", "ss", "dd")
 
+-- Naviate on line
 keymap('i', '<C-f>', '<Right>')
+keymap('i', '<C-d>', '<Left>')
 keymap('i', '<C-g>', '<End>', { noremap = true })
 keymap('i', '<C-s>', '<C-o>^')
+
+-- Forward Delete
+keymap('i', '<C-h>', '<Delete>')
 
 -- Highlights --
 vim.cmd [[
