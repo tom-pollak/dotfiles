@@ -70,12 +70,12 @@ alias tsync="sudo ntpdate pool.ntp.org"
 alias c="clear"
 alias hr="history --merge"
 
-alias ls='exa -bG --git'
-alias l='exa -bG --git'
-alias ll='exa -labG --git'
-#alias llm='exa -labGd --git --sort=modified' # long list, modified date sort
-alias la='exa -abG --git'
-alias lx='exa -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+alias ls='eza -bG --git'
+alias l='eza -bG --git'
+alias ll='eza -labG --git'
+#alias llm='eza -labGd --git --sort=modified' # long list, modified date sort
+alias la='eza -abG --git'
+alias lx='eza -labhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
 alias pf="fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
 
@@ -88,6 +88,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
+
+alias kssh="kitty +kitten ssh"
 
 # Nested neovim lazy
 if set -q NVIM_LISTEN_ADDRESS

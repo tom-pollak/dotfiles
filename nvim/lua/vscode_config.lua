@@ -64,6 +64,9 @@ local keymap = vim.keymap.set
 keymap('n', '<leader>w', notify 'workbench.action.files.save', {silent = true})
 keymap('n', '<CR>', notify 'editor.action.insertLineAfter')
 
+keymap('n', '<C-j>', notify 'workbench.action.focusBelowGroup', {silent = true})
+keymap('n', '<C-k>', notify 'workbench.action.focusAboveGroup', {silent = true})
+
 keymap('n', 'ga', notify 'keyboard-quickfix.openQuickFix', {silent = true})
 
 keymap('n', '<leader>i', notify 'editor.action.toggleMinimap', {silent = true})

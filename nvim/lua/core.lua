@@ -15,6 +15,8 @@ set.ignorecase = true
 wo.relativenumber = true
 wo.number = true
 
+g.surround_no_insert_mappings = 1 -- vim-surround
+
 -- Keymaps --
 keymap("n", "<Esc>", "<CMD>nohl<CR><Esc>", {silent = true})
 keymap('n', '<leader>w', "<CMD>:update<CR>", {silent = true})
@@ -41,6 +43,9 @@ keymap("n", "C", '"_C')
 keymap("n", "x", '"_x')
 keymap("n", "ss", "dd")
 
+keymap('i', '<C-f>', '<Right>')
+keymap('i', '<C-g>', '<End>', { noremap = true })
+keymap('i', '<C-s>', '<C-o>^')
 
 -- Highlights --
 vim.cmd [[
