@@ -12,6 +12,7 @@ g.mapleader = " "
 set.clipboard = "unnamedplus"
 set.smartcase = true
 set.ignorecase = true
+set.expandtab = true
 wo.relativenumber = true
 wo.number = true
 

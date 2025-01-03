@@ -171,15 +171,31 @@ require("lazy").setup({
 			})
 		end,
 	},
-	{
-		"sainnhe/everforest",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			vim.g.everforest_enable_italic = true
-			vim.cmd.colorscheme("everforest")
-		end,
-	},
+    {
+        'echasnovski/mini.nvim',
+        version = '*',
+        config = function()
+            require('mini.comment').setup()
+        end
+    },
+--     {
+--       "folke/tokyonight.nvim",
+--       lazy = false,
+--       priority = 1000,
+--       opts = {},
+--       config = function()
+--         vim.cmd.colorscheme("tokyonight-night")
+--       end,
+--     },
+ 	{
+ 		"sainnhe/everforest",
+ 		lazy = false,
+ 		priority = 1000,
+ 		config = function()
+ 			vim.g.everforest_enable_italic = true
+ 			vim.cmd.colorscheme("everforest")
+ 		end,
+ 	},
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.6",
