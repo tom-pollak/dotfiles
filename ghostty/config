@@ -1,0 +1,17 @@
+theme = tokyonight
+# font-family = SFMono Nerd Font 
+font-size = 12.25
+shell-integration = fish
+
+# macos-titlebar-style = transparent
+cursor-style = block
+
+mouse-hide-while-typing = true
+
+# tabs
+keybind = cmd+t=new_tab
+keybind = cmd+j=next_tab
+keybind = cmd+k=previous_tab
+
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
