@@ -46,6 +46,9 @@ yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Selec
 
 yabai -m config layout bsp
 
+yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --focus next; sleep 0.01; yabai -m space --focus prev'
+yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --focus next; sleep 0.01; yabai -m space --focus prev'
+
 # delete monocle mode lock files from previous sessions
 # find "${TMPDIR}" -type f -perm +111 -name "yabai_${USER}_monocle_mode_*" -delete
 
