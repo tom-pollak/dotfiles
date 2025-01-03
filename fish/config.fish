@@ -34,6 +34,7 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 set -gx CC /opt/homebrew/opt/llvm/bin/clang
 set -gx CXX /opt/homebrew/opt/llvm/bin/clang++
 
+set -gx PATH $PATH $HOME/.krew/bin
 
 # # TKINTER
 # fish_add_path /opt/homebrew/Cellar/tcl-tk/8.6.13_1
