@@ -44,13 +44,29 @@ set.background = "dark"
 wo.colorcolumn = "80"
 set.mouse = "a"
 
--- TODO: this isn't working
-vim.cmd([[
-    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-    match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertLeave * match ExtraWhitespace /\s\+$/
-]])
+vim.api.nvim_create_autocmd({"BufEnter", "WinEnter"}, {
+  pattern = "*",
+  callback = function()
+    if vim.fn.mode() == "n" then
+      vim.fn.matchadd("ExtraWhitespace", "\\s\\+$")
+      vim.cmd("highlight ExtraWhitespace ctermbg=22 guibg=#9575CD")
+    end
+  end
+})
+
+vim.api.nvim_create_autocmd({"InsertEnter"}, {
+  pattern = "*",
+  callback = function()
+    vim.fn.clearmatches()
+  end
+})
+
+vim.api.nvim_create_autocmd({"InsertLeave"}, {
+  pattern = "*",
+  callback = function()
+    vim.fn.matchadd("ExtraWhitespace", "\\s\\+$")
+  end
+})
 
 -- Change windows
 keymap("n", "<C-h>", "<CMD>wincmd h<CR>")
