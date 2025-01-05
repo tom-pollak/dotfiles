@@ -146,6 +146,22 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{ "tpope/vim-surround" },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        -- version = "v0.8.5.2", -- last support for v0.9.5
+        build = ":TSUpdate",
+        config = function ()
+            local configs = require("nvim-treesitter.configs")
+            configs.setup({
+                ensure_installed = "all",
+                indent = { enable = true },
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
+                },
+            })
+        end
+    },
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -189,7 +205,6 @@ require("lazy").setup({
 	},
 	{
 		"echasnovski/mini.nvim",
-		version = "*",
 		config = function()
 			require("mini.comment").setup()
 		end,
@@ -199,7 +214,7 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.g.everforest_enable_italic = true
+			-- vim.g.everforest_enable_italic = false
 			vim.cmd.colorscheme("everforest")
 		end,
 	},
@@ -294,7 +309,7 @@ require("lazy").setup({
 	},
 	{
 		"stevearc/conform.nvim",
-		version = "v7.1.0", -- last supported 0.9.0
+		-- version = "v7.1.0", -- last supported 0.9.5
 		opts = {
 			formatters_by_ft = {
 				python = { "isort", "black" },
