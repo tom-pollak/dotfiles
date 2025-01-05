@@ -276,6 +276,9 @@ require("lazy").setup({
 			keymap("n", "<leader>f", function()
 				builtin.live_grep({ cwd = root_dir(), disable_coordinates = true })
 			end)
+            keymap("n", "<leader>a", function()
+                builtin.resume()
+            end)
 		end,
 	},
 	{
