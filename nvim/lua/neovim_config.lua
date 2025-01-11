@@ -68,6 +68,10 @@ vim.api.nvim_create_autocmd({"InsertLeave"}, {
   end
 })
 
+
+-- Change directory
+vim.api.nvim_create_user_command('CDC', 'cd %:p:h', {})
+
 -- Change windows
 keymap("n", "<C-h>", "<CMD>wincmd h<CR>")
 keymap("n", "<C-j>", "<CMD>wincmd j<CR>")
@@ -316,7 +320,7 @@ require("lazy").setup({
 		opts = {
 			formatters_by_ft = {
 				python = { "isort", "black" },
-				markdown = { "mdformat" },
+				markdown = { "markdownfmt" },
 				lua = { "stylua" },
 				["*"] = { "trim_whitespace", "codespell" },
 			},
@@ -334,4 +338,13 @@ require("lazy").setup({
 			},
 		},
 	},
+    -- {
+    --     -- blink.nvim
+    --     "neovim/nvim-lspconfig",
+    --     config = function()
+    --         local lspconfig = require('lspconfig')
+    --         -- lspconfig.pyright.setup()
+    --         -- lspconfig.ruff.setup()
+    --     end,
+    -- }
 })
