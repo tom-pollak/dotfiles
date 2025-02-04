@@ -7,8 +7,9 @@ local keymap = vim.keymap.set
 local wo = vim.wo
 local g = vim.g
 
--- Basic -- 
+-- Basic --
 g.mapleader = " "
+g.maplocalleader = " "
 set.clipboard = "unnamedplus"
 set.smartcase = true
 set.ignorecase = true
