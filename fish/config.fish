@@ -122,6 +122,7 @@ end
 bind -M insert \cf fzf_autojump
 
 source ~/.dotfiles/fish/llm_git_complete.fish
+source ~/.dotfiles/fish/grep-ctx.fish
 
 
 # >>> mamba initialize >>>

@@ -28,14 +28,14 @@ function grep-ctx -d "Generate repository context with grep-like pattern matchin
         string join " " $glob > /dev/null # Convert array to space-separated string
     end
 
-    # The Python script as a multi-line string
     set python_script '
-        from toolslm.xml import *
-        print(folder2ctx(
-            path="'$path'",
-            prefix=False,
-            file_glob="'$glob'"
-        ))
-    '
+from toolslm.xml import *
+patterns = "'$glob'".split()
+print(folder2ctx(
+    folder="'$path'",
+    prefix=False,
+    file_glob=patterns
+))
+'
     uv run --with toolslm python -c "$python_script"
 end
