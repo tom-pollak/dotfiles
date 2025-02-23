@@ -30,7 +30,7 @@ set.pumheight = 12
 set.linebreak = true
 set.completeopt = "menu,menuone,noselect"
 set.signcolumn = "yes"
-set.updatetime = 250
+set.updatetime = 10
 set.timeoutlen = 300
 set.jumpoptions = "stack"
 set.linebreak = true
@@ -153,6 +153,21 @@ keymap("c", "%%", function()
 	end
 end, { expr = true })
 
+vim.keymap.set("n", "<leader>k", function()
+	local has_loc_list = #vim.fn.getloclist(0) > 0
+	local winid = vim.fn.getloclist(0, { winid = 0 }).winid
+
+	if winid == 0 then
+		if has_loc_list then
+			vim.cmd("lopen")
+		else
+			vim.notify("No location list")
+		end
+	else
+		vim.cmd("lclose")
+	end
+end, { noremap = true, silent = true })
+
 -- Plugins --
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -169,9 +184,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- Detect tabstop and shiftwidth automatically
-	-- { 'tpope/vim-sleuth', },
-
 	{
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
@@ -221,7 +233,7 @@ require("lazy").setup({
 			},
 
 			{
-				"<leader>r",
+				"<leader>t",
 				function()
 					Snacks.explorer.open()
 				end,
@@ -304,12 +316,14 @@ require("lazy").setup({
 			})
 		end,
 	},
+
 	{
 		"echasnovski/mini.nvim",
 		config = function()
 			require("mini.comment").setup()
 		end,
 	},
+
 	{
 		"sainnhe/everforest",
 		lazy = false,
@@ -356,7 +370,7 @@ require("lazy").setup({
 		-- version = "v7.1.0", -- last supported 0.9.5
 		opts = {
 			formatters_by_ft = {
-				python = { "isort", "black" },
+				python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
 				markdown = { "markdownfmt" },
 				lua = { "stylua" },
 				["*"] = { "trim_whitespace", "codespell" },
@@ -374,175 +388,5 @@ require("lazy").setup({
 				desc = "Format buffer",
 			},
 		},
-	},
-
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
-	},
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			{ "williamboman/mason.nvim", opts = {} },
-			"williamboman/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			{ "j-hui/fidget.nvim", opts = {} },
-			"hrsh7th/cmp-nvim-lsp",
-		},
-		config = function()
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
-				callback = function(event)
-					local map = function(keys, func, desc, mode)
-						mode = mode or "n"
-						desc = desc or ""
-						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-					end
-
-					local picker = require("snacks").picker
-					map("gd", picker.lsp_definitions)
-					map("gr", picker.lsp_references)
-					map("<leader>s", picker.lsp_symbols)
-
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					map("ga", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-					-- WARN: This is not Goto Definition, this is Goto Declaration.
-					--  For example, in C this would take you to the header.
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
-                    -- Highlight references
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-						local highlight_augroup =
-							vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-							buffer = event.buf,
-							group = highlight_augroup,
-							callback = vim.lsp.buf.document_highlight,
-						})
-
-						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-							buffer = event.buf,
-							group = highlight_augroup,
-							callback = vim.lsp.buf.clear_references,
-						})
-
-						vim.api.nvim_create_autocmd("LspDetach", {
-							group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-							callback = function(event2)
-								vim.lsp.buf.clear_references()
-								vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
-							end,
-						})
-					end
-
-					-- The following code creates a keymap to toggle inlay hints in your
-					-- code, if the language server you are using supports them
-					--
-					-- This may be unwanted, since they displace some of your code
-					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-						map("<leader>th", function()
-							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "[T]oggle Inlay [H]ints")
-					end
-				end,
-			})
-
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-			if vim.g.have_nerd_font then
-				local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
-				local diagnostic_signs = {}
-				for type, icon in pairs(signs) do
-					diagnostic_signs[vim.diagnostic.severity[type]] = icon
-				end
-				vim.diagnostic.config({ signs = { text = diagnostic_signs } })
-			end
-
-			local servers = {
-				clangd = {},
-				gopls = {},
-				pyright = {},
-				rust_analyzer = {},
-				lua_ls = {
-					settings = {
-						Lua = {
-							diagnostics = { disable = { "missing-fields" } },
-						},
-					},
-				},
-			}
-
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-			require("mason-lspconfig").setup({
-				ensure_installed = ensure_installed,
-				automatic_installation = true,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
-			})
-		end,
-	},
-
-	{ -- Autocompletion
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-		},
-		config = function()
-			-- See `:help cmp`
-			local cmp = require("cmp")
-			cmp.setup({
-				completion = { completeopt = "menu,menuone,noinsert" },
-
-				-- For an understanding of why these mappings were
-				-- chosen, you will need to read `:help ins-completion`
-				--
-				-- No, but seriously. Please read `:help ins-completion`, it is really good!
-				mapping = cmp.mapping.preset.insert({
-					-- Select the [n]ext item
-					["<C-j>"] = cmp.mapping.select_next_item(),
-					-- Select the [p]revious item
-					["<C-k>"] = cmp.mapping.select_prev_item(),
-
-					-- Scroll the documentation window [b]ack / [f]orward
-					["<C-p>"] = cmp.mapping.scroll_docs(-4),
-					["<C-n>"] = cmp.mapping.scroll_docs(4),
-
-					["<C-l>"] = cmp.mapping.confirm({ select = true }),
-					["<C-space>"] = cmp.mapping.complete({}),
-				}),
-				sources = {
-					{
-						name = "lazydev",
-						-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-						group_index = 0,
-					},
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-				},
-			})
-		end,
 	},
 })
