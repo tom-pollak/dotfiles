@@ -13,7 +13,11 @@ os:
   editAtLineAndWait: 'code --block --line={{line}} {{filename}}'
   editInTerminal: true
   openDirInEditor: 'code {{dir}}'
+  open: 'code {{filename}}'
+  suspend: false
 git:
   paging:
     colorArg: always
     pager: delta --paging=never
+
+promptToReturnFromSubprocess: false
