@@ -8,11 +8,11 @@ keybinding:
     prevPage: '<c-u>' # go to next page in list
     nextPage: '<c-d>' # go to previous page in list
 os:
-  edit: 'code {{filename}}'
-  editAtLine: 'code --line={{line}} {{filename}}'
-  editAtLineAndWait: 'code --block --line={{line}} {{filename}}'
+  edit: 'cursor {{filename}}'
+  editAtLine: 'cursor --line={{line}} {{filename}}'
+  editAtLineAndWait: 'cursor --block --line={{line}} {{filename}}'
   editInTerminal: true
-  openDirInEditor: 'code {{dir}}'
+  openDirInEditor: 'cursor {{dir}}'
 git:
   paging:
     colorArg: always
