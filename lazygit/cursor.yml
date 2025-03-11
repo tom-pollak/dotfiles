@@ -13,6 +13,7 @@ os:
   editAtLineAndWait: 'cursor --block --line={{line}} {{filename}}'
   editInTerminal: true
   openDirInEditor: 'cursor {{dir}}'
+  suspend: false
 git:
   paging:
     colorArg: always
