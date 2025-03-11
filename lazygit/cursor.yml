@@ -11,10 +11,12 @@ os:
   edit: 'cursor {{filename}}'
   editAtLine: 'cursor --line={{line}} {{filename}}'
   editAtLineAndWait: 'cursor --block --line={{line}} {{filename}}'
-  editInTerminal: true
   openDirInEditor: 'cursor {{dir}}'
+  open: 'cursor {{filename}}'
   suspend: false
 git:
   paging:
     colorArg: always
     pager: delta --paging=never
+
+promptToReturnFromSubprocess: false
