@@ -548,5 +548,6 @@
         "quarto",
         "scminput",
         "racket"
-    ]
+    ],
+    "cursor.cpp.enablePartialAccepts": true
 }
