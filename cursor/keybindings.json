@@ -2301,10 +2301,6 @@
     "command": "-workbench.action.files.copyPathOfActiveFile"
   },
   {
-    "key": "cmd+8 r",
-    "command": "workbench.action.files.revealActiveFileInWindows"
-  },
-  {
     "key": "cmd+r r",
     "command": "-workbench.action.files.revealActiveFileInWindows"
   },
