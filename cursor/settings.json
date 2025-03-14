@@ -1,9 +1,15 @@
 {
     "markdown-preview-github-styles.colorTheme": "light",
     "scm.experimental.showHistoryGraph": true,
-    "lazygit-vscode.configPath": "/Users/tom/.dotfiles/lazygit/vscode.yml",
+    // lazygit vscode
+    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/vscode.yml",
     "lazygit-vscode.autoMaximizeWindow": true,
-    "lazygit-vscode.autoHidePanel": true,
+    "lazygit-vscode.panels": {
+        "sidebar": "hideRestore",
+        "panel": "hideRestore",
+        // "secondarySidebar": "hide",
+    },
+    /////////////////////////////////////////
     "remote.SSH.useLocalServer": false,
     "gitlens.defaultGravatarsStyle": "monsterid",
     "C_Cpp.intelliSenseEngine": "disabled",
@@ -256,6 +262,7 @@
         "kmeans",
         "kwargs",
         "Labelbox",
+        "lazygit",
         "libncnn",
         "lualatex",
         "Matplotlib",
@@ -282,6 +289,7 @@
         "tpollak",
         "Tranby",
         "unlines",
+        "Unmaximize",
         "vsintellicode",
         "xlabel",
         "xlim",
@@ -353,9 +361,11 @@
     "python.analysis.exclude": [
         "**/node_modules",
         "**/venv",
+        "**/.venv",
         "**/.vscode/",
         ".git",
-        "**/__pycache__"
+        "**/__pycache__",
+        ".venv"
     ],
     "rust-analyzer.check.command": "clippy",
     "rust-analyzer.check.extraArgs": [
@@ -549,5 +559,8 @@
         "scminput",
         "racket"
     ],
-    "cursor.cpp.enablePartialAccepts": true
+    "cursor.cpp.enablePartialAccepts": true,
+    "cursor.composer.collapsePaneInputBoxPills": true,
+    "cursor.chat.terminalShowHoverHint": false,
+    "cursor.terminal.usePreviewBox": true
 }

@@ -2554,10 +2554,6 @@
     "command": "-workbench.files.action.compareWithClipboard"
   },
   {
-    "key": "cmd+8 d",
-    "command": "workbench.files.action.compareWithSaved"
-  },
-  {
     "key": "cmd+r d",
     "command": "-workbench.files.action.compareWithSaved"
   },
@@ -2918,5 +2914,9 @@
     "key": "cmd+right",
     "command": "-editor.action.inlineSuggest.acceptNextWord",
     "when": "cppSuggestion && !editorReadonly || inlineSuggestionVisible && !editorReadonly"
+  },
+  {
+    "key": "cmd+8 shift+;",
+    "command": "python.analysis.restartLanguageServer"
   }
 ]
