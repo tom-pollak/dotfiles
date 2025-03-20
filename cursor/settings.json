@@ -2,12 +2,12 @@
     "markdown-preview-github-styles.colorTheme": "light",
     "scm.experimental.showHistoryGraph": true,
     // lazygit vscode
-    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/vscode.yml",
+    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/cursor.yml",
     "lazygit-vscode.autoMaximizeWindow": true,
     "lazygit-vscode.panels": {
-        "sidebar": "hideRestore",
-        "panel": "hideRestore",
-        // "secondarySidebar": "hide",
+        "sidebar": "hide",
+        "panel": "hide",
+        "secondarySidebar": "hide",
     },
     /////////////////////////////////////////
     "remote.SSH.useLocalServer": false,

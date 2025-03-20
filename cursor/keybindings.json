@@ -51,7 +51,7 @@
         "workbench.action.focusActiveEditorGroup",
         "workbench.action.closePanel",
         "workbench.action.closeSidebar",
-        "aichat.close-sidebar"
+        "aichat.close-sidebar",
       ]
     }
   },
@@ -2901,11 +2901,6 @@
     "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible"
   },
   {
-    "key": "ctrl+m",
-    "command": "cursorDown",
-    "when": "textInputFocus"
-  },
-  {
     "key": "ctrl+n",
     "command": "editor.action.inlineSuggest.acceptNextWord",
     "when": "cppSuggestion && !editorReadonly || inlineSuggestionVisible && !editorReadonly"
@@ -2918,5 +2913,10 @@
   {
     "key": "cmd+8 shift+;",
     "command": "python.analysis.restartLanguageServer"
+  },
+  {
+    "key": "ctrl+m",
+    "command": "cursorRight",
+    "when": "textInputFocus"
   }
 ]
