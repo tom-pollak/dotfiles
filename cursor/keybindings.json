@@ -1,4 +1,26 @@
 [
+  // toggle editors
+  {
+    "key": "ctrl+6",
+    "command": "-workbench.action.openEditorAtIndex6"
+  },
+  {
+    "key": "ctrl+6",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        {
+          "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
+        },
+        {
+          "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
+        },
+        {
+          "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup"
+        },
+      ]
+    }
+  },
   // CMD+J Macro
   {
     "key": "ctrl+u",
@@ -225,10 +247,6 @@
     "when": "terminalFocus"
   },
   //////////////////////////////////////////////////////////////////////////////
-  {
-    "key": "cmd+i",
-    "command": "workbench.action.toggleSidebarVisibility"
-  },
   {
     "key": "cmd+;",
     "command": "workbench.action.navigateEditorGroups"
@@ -2918,5 +2936,17 @@
     "key": "ctrl+m",
     "command": "cursorRight",
     "when": "textInputFocus"
-  }
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "cmd+l",
+    "command": "composerMode.chat"
+  },
+  {
+    "key": "cmd+a",
+    "command": "composerMode.edit"
+  },
 ]

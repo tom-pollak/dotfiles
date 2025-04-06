@@ -7,3 +7,7 @@ ignore = ["E741", "F401", "F403", "F405", "F722", "E731", "E402", "E701", "E501"
 [format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.ruff]
+fix = true
+unfixable = ["F401", "F841"]

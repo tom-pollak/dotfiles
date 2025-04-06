@@ -217,47 +217,41 @@ require("lazy").setup({
 			words = { enabled = true },
 			scratch = { enabled = true },
 			lazygit = { enabled = true },
+			gitbrowse = { enabled = true },
+			terminal = { enabled = true },
 		},
+        -- stylua: ignore start
 		keys = {
-			{
-				"<C-p>",
-				function()
-					Snacks.picker.smart()
-				end,
-			},
-			{
-				"<C-b>",
-				function()
-					Snacks.picker.buffers({ current = false })
-				end,
-			},
+            -- pickers
+			{ "<C-p>", function() Snacks.picker.smart() end },
+			{ "<C-b>", function() Snacks.picker.buffers({ current = false }) end },
+			{ "<leader>a", function() Snacks.picker.resume() end },
+			{ "<leader>f", function() Snacks.picker.grep() end },
+			{ "<leader>cc", function() Snacks.picker.files({ cwd = vim.fn.expand("$HOME/.dotfiles/") }) end, desc = "Find Config File" },
 
-			{
-				"<leader>t",
-				function()
-					Snacks.explorer.open()
-				end,
-			},
-			{
-				"<leader>a",
-				function()
-					Snacks.picker.resume()
-				end,
-			},
-			{
-				"<leader>f",
-				function()
-					Snacks.picker.grep()
-				end,
-			},
-			{
-				"<leader>cc",
-				function()
-					Snacks.picker.files({ cwd = vim.fn.expand("$HOME/.dotfiles/") })
-				end,
-				desc = "Find Config File",
-			},
+            -- quickfix
+            { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+            { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+
+            -- explorer
+			{ "<leader>t", function() Snacks.explorer.open() end },
+
+            -- terminal
+            { "<c-'>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+
+            -- lazygit
+			{ "<leader>j", function() Snacks.lazygit.open() end },
+
+            -- git
+            { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+            { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+            { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+            { "<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+
+            -- notifications
+            { "<leader>gn", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
 		},
+		-- stylua: ignore end
 	},
 
 	{
@@ -350,19 +344,6 @@ require("lazy").setup({
 			keymap("v", "<ScrollWheelUp>", "<C-y>")
 			keymap("v", "<ScrollWheelDown>", "<C-e>")
 		end,
-	},
-
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = { { "<leader>j", "<cmd>LazyGit<cr>", desc = "LazyGit" } },
 	},
 
 	{

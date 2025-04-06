@@ -234,7 +234,7 @@
             "foreground": "#84cc16"
         }
     },
-    "cSpell.enabled": true,
+    "cSpell.enabled": false,
     "cSpell.userWords": [
         "alot",
         "aswell",
@@ -257,6 +257,7 @@
         "huggingface",
         "IADD",
         "IALU",
+        "imshow",
         "interpretability",
         "kalman",
         "kmeans",
@@ -328,14 +329,20 @@
         }
     ],
     "python.venvPath": "~/micromamba/envs",
+    ///// ruff
+    "ruff.configuration": "~/ruff.toml",
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.sortImports": "explicit",
+            "source.fixAll": "explicit",
+        },
         "editor.rulers": [
             88
         ]
     },
-    "ruff.configuration": "~/ruff.toml",
     "python.testing.pytestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
     "python.terminal.activateEnvironment": false,
