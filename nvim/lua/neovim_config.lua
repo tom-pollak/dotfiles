@@ -168,6 +168,23 @@ vim.keymap.set("n", "<leader>k", function()
 	end
 end, { noremap = true, silent = true })
 
+vim.keymap.set("n", "gq", function()
+	local lspconfig = require("lspconfig")
+	local clients = vim.lsp.get_clients()
+	local servers = lspconfig.util.available_servers()
+
+	-- Check if we have any active clients to determine current state
+	if vim.tbl_isempty(clients) then
+		vim.cmd("LspStart")
+		vim.notify("LSP enabled globally", vim.log.levels.INFO)
+	else
+		for _, client in pairs(clients) do
+			client.stop()
+		end
+		vim.notify("LSP disabled globally", vim.log.levels.INFO)
+	end
+end)
+
 -- Plugins --
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
