@@ -230,8 +230,8 @@ require("lazy").setup({
 			{ "<leader>cc", function() Snacks.picker.files({ cwd = vim.fn.expand("$HOME/.dotfiles/") }) end, desc = "Find Config File" },
 
             -- quickfix
-            { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
-            { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+            { "<leader>qq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+            { "<leader>ql", function() Snacks.picker.loclist() end, desc = "Location List" },
 
             -- explorer
 			{ "<leader>t", function() Snacks.explorer.open() end },
@@ -249,7 +249,17 @@ require("lazy").setup({
             { "<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
 
             -- notifications
-            { "<leader>gn", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+            { "gN",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+            { "gn", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+
+            -- lsp
+            { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+            { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+            { "ge", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+            { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+            { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+            { "<leader>s", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+            { "<leader>S", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 		},
 		-- stylua: ignore end
 	},
@@ -370,4 +380,159 @@ require("lazy").setup({
 			},
 		},
 	},
+
+	-- lsp
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{ "williamboman/mason.nvim", opts = {} },
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			"saghen/blink.cmp", -- autocomplete
+			{ "j-hui/fidget.nvim", opts = {} }, -- status updates for LSP in bottom right
+		},
+		config = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(event)
+					local map = function(keys, func, desc, mode)
+						mode = mode or "n"
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					end
+
+					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("ga", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+				end,
+			})
+
+			-- Diagnostic Config
+			-- See :help vim.diagnostic.Opts
+			vim.diagnostic.config({
+				severity_sort = true,
+				float = { border = "rounded", source = "if_many" },
+				underline = { severity = vim.diagnostic.severity.ERROR },
+				signs = vim.g.have_nerd_font and {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "󰅚 ",
+						[vim.diagnostic.severity.WARN] = "󰀪 ",
+						[vim.diagnostic.severity.INFO] = "󰋽 ",
+						[vim.diagnostic.severity.HINT] = "󰌶 ",
+					},
+				} or {},
+			})
+
+			-- Capabilities
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities =
+				vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+
+			local servers = {
+				-- clangd = {},
+				-- gopls = {},
+				-- ruff = {
+				-- 	init_options = {
+				-- 		settings = {
+				-- 			logLevel = "debug",
+				-- 		},
+				-- 	},
+				-- },
+				pyright = {
+					settings = {
+						python = {
+							analysis = {
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								autoImportCompletions = false,
+								-- typeCheckingMode = "off",
+								-- diagnosticMode = "off",
+							},
+							linting = {
+								-- enabled = false,
+							},
+						},
+					},
+					-- handlers = {
+					-- 	["textDocument/publishDiagnostics"] = function() end,
+					-- },
+				},
+				-- rust_analyzer = {},
+
+				lua_ls = {
+					settings = {
+						Lua = {
+							completion = {
+								callSnippet = "Replace",
+							},
+							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+							-- diagnostics = { disable = { 'missing-fields' } },
+						},
+					},
+				},
+			}
+
+			local ensure_installed = vim.tbl_keys(servers or {})
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
+			require("mason-lspconfig").setup({
+				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+				automatic_installation = false,
+				handlers = {
+					function(server_name)
+						local server = servers[server_name] or {}
+						-- This handles overriding only values explicitly passed
+						-- by the server configuration above. Useful when disabling
+						-- certain features of an LSP (for example, turning off formatting for ts_ls)
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+						require("lspconfig")[server_name].setup(server)
+					end,
+				},
+			})
+		end,
+	},
+
+	{
+		"saghen/blink.cmp",
+		version = "1.*",
+		opts = {
+			keymap = {
+				preset = "none",
+				["<C-f>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-l>"] = { "select_and_accept" },
+				["<C-g>"] = { "hide" },
+
+				["<C-k>"] = { "select_prev" },
+				["<C-j>"] = { "select_next" },
+
+				["<C-h>"] = { "show_signature", "hide_signature" },
+				["<C-p>"] = { "scroll_documentation_up", "fallback" },
+				["<C-n>"] = { "scroll_documentation_down", "fallback" },
+			},
+
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+
+			-- Only show the documentation popup when manually triggered
+			completion = { documentation = { auto_show = false } },
+
+			signature = { enabled = true },
+
+			sources = { default = { "lsp", "path" } },
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+		},
+		opts_extend = { "sources.default" },
+	},
+
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	opts = {
+	-- 		linters_by_ft = {},
+	-- 		linters = {},
+	-- 	},
+	-- },
 })
