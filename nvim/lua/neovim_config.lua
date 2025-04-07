@@ -45,9 +45,10 @@ set.wildignore = {
 	"*/node_modules/*",
 	"*/.git/*",
 }
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-vim.opt.inccommand = "split"
+set.list = true
+set.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+set.inccommand = "split"
+vim.o.shell = "fish"
 
 wo.colorcolumn = "80"
 
@@ -55,9 +56,16 @@ wo.colorcolumn = "80"
 vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 vim.cmd("autocmd BufEnter * setlocal formatoptions-=cro")
 
-vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+-- extra whitespace
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "ModeChanged" }, {
 	pattern = "*",
 	callback = function()
+		-- Skip terminal buffers
+		if vim.bo.buftype == "terminal" then
+			vim.fn.clearmatches()
+			return
+		end
+
 		if vim.fn.mode() == "n" then
 			vim.fn.matchadd("ExtraWhitespace", "\\s\\+$")
 			vim.cmd("highlight ExtraWhitespace ctermbg=22 guibg=#9575CD")
@@ -254,7 +262,7 @@ require("lazy").setup({
 			{ "<leader>t", function() Snacks.explorer.open() end },
 
             -- terminal
-            { "<c-'>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+            { "<c-'>",      function() Snacks.terminal() end, mode = {"n", "t"}, desc = "Toggle Terminal" },
 
             -- lazygit
 			{ "<leader>j", function() Snacks.lazygit.open() end },
