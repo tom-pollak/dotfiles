@@ -631,12 +631,14 @@ require("lazy").setup({
 				function()
 					require("notebook-navigator").run_cell()
 				end,
+                mode = {"n", "i"},
 			},
 			{
 				"<S-CR>",
 				function()
 					require("notebook-navigator").run_and_move()
 				end,
+                mode = {"n", "i"},
 			},
 		},
 		dependencies = {
