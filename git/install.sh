@@ -2,6 +2,8 @@
 
 source ../install_module.sh
 install_module "git" "git/gitconfig" "$HOME/.gitconfig"
+mkdir -p "$HOME/fun"
+install_module "git" "git/gitconfig_pers" "$HOME/fun/.gitconfig"
 install_module "git" "git/gitignore" "$HOME/.gitignore"
 
 # If hub is found, use https: instead of git: or ssh::
