@@ -16,4 +16,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # No genie effect from dock
 defaults write com.apple.dock mineffect -string scale
 
+# Drag with cmd+ctrl click
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
 killall Dock
