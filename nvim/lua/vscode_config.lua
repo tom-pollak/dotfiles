@@ -115,11 +115,12 @@ keymap('n', '<leader>lb', notify 'gitlens.toggleFileBlame', {silent = true})
 -- Debug
 keymap('n', '<leader>du', notify 'debug.jumpToCursor', {silent = true})
 keymap('n', '<leader>dw', notify 'editor.debug.action.selectionToWatch', {silent = true})
-keymap('n', '<leader>dl', notify 'editor.debug.action.showDebugHover', {silent = true})
+keymap('n', '<leader>dL', notify 'editor.debug.action.showDebugHover', {silent = true})
 
 keymap('n', '<leader>dh', notify 'editor.debug.action.toggleBreakpoint', {silent = true})
 keymap('n', '<leader>dH', notify 'editor.debug.action.toggleInlineBreakpoint', {silent = true})
 keymap('n', '<leader>dc', notify 'editor.debug.action.conditionalBreakpoint', {silent = true})
+keymap('n', '<leader>dl', notify 'editor.debug.action.addLogPoint', {silent = true})
 
 keymap('n', '<leader>dm', notify 'workbench.debug.viewlet.action.toggleBreakpointsActivatedAction', {silent = true})
 keymap('n', '<leader>dM', notify 'workbench.debug.viewlet.action.removeAllBreakpoints', {silent = true})

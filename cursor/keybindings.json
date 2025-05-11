@@ -2949,4 +2949,18 @@
     "key": "cmd+a",
     "command": "composerMode.edit"
   },
+  {
+    "key": "cmd+8 cmd+k",
+    "command": "editor.action.defineKeybinding",
+    "when": "resource == 'vscode-userdata:/Users/tomp/Library/Application%20Support/Cursor/User/keybindings.json'"
+  },
+  {
+    "key": "cmd+r cmd+k",
+    "command": "-editor.action.defineKeybinding",
+    "when": "resource == 'vscode-userdata:/Users/tomp/Library/Application%20Support/Cursor/User/keybindings.json'"
+  },
+  {
+    "key": "cmd+8 j",
+    "command": "composer.showComposerHistory"
+  },
 ]

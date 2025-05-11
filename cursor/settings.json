@@ -1,15 +1,11 @@
 {
     "markdown-preview-github-styles.colorTheme": "light",
     "scm.experimental.showHistoryGraph": true,
-    // lazygit vscode
-    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/cursor.yml",
+    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/vscode.yml",
     "lazygit-vscode.autoMaximizeWindow": true,
     "lazygit-vscode.panels": {
-        "sidebar": "hide",
-        "panel": "hide",
-        "secondarySidebar": "hide",
+        "sidebar": "hide"
     },
-    /////////////////////////////////////////
     "remote.SSH.useLocalServer": false,
     "gitlens.defaultGravatarsStyle": "monsterid",
     "C_Cpp.intelliSenseEngine": "disabled",
@@ -234,7 +230,7 @@
             "foreground": "#84cc16"
         }
     },
-    "cSpell.enabled": false,
+    "cSpell.enabled": true,
     "cSpell.userWords": [
         "alot",
         "aswell",
@@ -257,13 +253,11 @@
         "huggingface",
         "IADD",
         "IALU",
-        "imshow",
         "interpretability",
         "kalman",
         "kmeans",
         "kwargs",
         "Labelbox",
-        "lazygit",
         "libncnn",
         "lualatex",
         "Matplotlib",
@@ -290,7 +284,6 @@
         "tpollak",
         "Tranby",
         "unlines",
-        "Unmaximize",
         "vsintellicode",
         "xlabel",
         "xlim",
@@ -329,20 +322,14 @@
         }
     ],
     "python.venvPath": "~/micromamba/envs",
-    ///// ruff
-    "ruff.configuration": "~/ruff.toml",
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": false,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit",
-            "source.sortImports": "explicit",
-            "source.fixAll": "explicit",
-        },
         "editor.rulers": [
             88
         ]
     },
+    "ruff.configuration": "~/ruff.toml",
     "python.testing.pytestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
     "python.terminal.activateEnvironment": false,
@@ -368,11 +355,10 @@
     "python.analysis.exclude": [
         "**/node_modules",
         "**/venv",
-        "**/.venv",
+        "**.venv/",
         "**/.vscode/",
         ".git",
-        "**/__pycache__",
-        ".venv"
+        "**/__pycache__"
     ],
     "rust-analyzer.check.command": "clippy",
     "rust-analyzer.check.extraArgs": [
@@ -492,16 +478,25 @@
     "editor.unicodeHighlight.invisibleCharacters": false,
     "diffEditor.hideUnchangedRegions.enabled": true,
     "python.defaultInterpreterPath": "/Users/tom/micromamba/envs/core/bin/python",
+    "workbench.activityBar.location": "hidden",
     "remote.autoForwardPortsSource": "hybrid",
     "extensions.ignoreRecommendations": true,
     "editor.minimap.autohide": true,
-    "window.commandCenter": false,
     "git.openRepositoryInParentFolders": "never",
     "remote.SSH.remotePlatform": {
         "bigbox": "linux",
         "euc141": "linux",
         "gpu18": "linux",
-        "bb": "linux"
+        "bb": "linux",
+        "coder-vscode.software.coder.sw.graphcore.ai--tomp--coral-halibut-39": "linux",
+        "129.80.86.81": "linux",
+        "tomp-cold-vocoder": "linux",
+        "104.171.203.145": "linux",
+        "coder.coral-halibut-39.dev": "linux",
+        "tomp-adiabatic-gulch": "linux",
+        "ll": "linux",
+        "coder-vscode.software.coder.sw.graphcore.ai--tomp--dist-cpu.dev": "linux",
+        "node3": "linux"
     },
     "gitlens.ai.experimental.provider": "openai",
     "gitlens.ai.experimental.openai.model": "gpt-4-turbo-preview",
@@ -561,13 +556,11 @@
     "editor.wordWrap": "on",
     "workbench.colorTheme": "Tokyo Night - Muted",
     "workbench.iconTheme": "vscode-icons",
+    "remote.SSH.connectTimeout": 1800,
     "cursor.cpp.disabledLanguages": [
         "quarto",
         "scminput",
         "racket"
     ],
-    "cursor.cpp.enablePartialAccepts": true,
-    "cursor.composer.collapsePaneInputBoxPills": true,
-    "cursor.chat.terminalShowHoverHint": false,
-    "cursor.terminal.usePreviewBox": true
+    "diffEditor.renderSideBySide": false
 }

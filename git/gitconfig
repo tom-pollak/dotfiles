@@ -8,9 +8,6 @@
 	defaultBranch = main
 [pull]
 	rebase = true
-[gitreview]
-	username = tpollak
-	remote = origin
 [merge]
     tool = vscode
 [mergetool "vscode"]
@@ -48,3 +45,14 @@
 [includeIf "gitdir:~/.dotfiles/"]
     path = ~/fun/.gitconfig
 
+[user]
+	email = tomp@graphcore.ai
+	name = Tom Pollak
+[url "git@github-gcai:Software-GCAI/"]
+	insteadOf = git@github.com:Software-GCAI/
+[url "ssh://git@github-gcai/Software-GCAI/"]
+	insteadOf = ssh://git@github.com/Software-GCAI/
+[url "git@github-gcai:tomp_gcai/"]
+	insteadOf = git@github.com:tomp_gcai/
+[url "ssh://git@github-gcai/tomp_gcai/"]
+	insteadOf = ssh://git@github.com/tomp_gcai/
