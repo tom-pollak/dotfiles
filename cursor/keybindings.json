@@ -201,26 +201,6 @@
   //////////////////////////////////////////////////////////////////////////////
   // DEBUG
   {
-    "key": "alt+right",
-    "command": "workbench.action.debug.stepInto",
-    "when": "debugState != 'inactive'"
-  },
-  {
-    "key": "alt+up",
-    "command": "workbench.action.debug.stepOut",
-    "when": "debugState == 'stopped'"
-  },
-  {
-    "key": "alt+down",
-    "command": "workbench.action.debug.stepOver",
-    "when": "debugState == 'stopped'"
-  },
-  {
-    "key": "alt+left",
-    "command": "workbench.action.debug.stepIntoTarget",
-    "when": "inDebugMode && stepIntoTargetsSupported && debugState == 'stopped'"
-  },
-  {
     "key": "shift+cmd+enter",
     "command": "jupyter.debugcurrentcell.palette"
   },
@@ -2962,5 +2942,14 @@
   {
     "key": "cmd+8 j",
     "command": "composer.showComposerHistory"
-  },
+},
+{
+  "key": "shift+enter",
+  "command": "-workbench.action.terminal.sendSequence",
+  "when": "terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'"
+},
+{
+  "key": "shift+cmd+e",
+  "command": "composerMode.background"
+},
 ]

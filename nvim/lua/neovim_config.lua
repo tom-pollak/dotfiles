@@ -35,6 +35,8 @@ set.updatetime = 10
 set.jumpoptions = "stack"
 set.linebreak = true
 set.breakindent = true
+set.smartindent = true
+-- vim.cmd('filetype indent off')
 set.showmode = false
 set.splitright = true
 set.splitbelow = true
@@ -298,7 +300,7 @@ require("lazy").setup({
 		main = "nvim-treesitter.configs", -- Sets main module to use for opts
 		opts = {
 			ensure_installed = "all",
-			indent = { enable = true },
+			-- indent = { enable = true },
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = false,
@@ -555,133 +557,155 @@ require("lazy").setup({
 		opts_extend = { "sources.default" },
 	},
 
-	-- Interactive python window
-	{
-		"hkupty/iron.nvim",
-		event = "VeryLazy",
-		config = function()
-			local iron = require("iron.core")
-			local view = require("iron.view")
-			local common = require("iron.fts.common")
-			iron.setup({
-				config = {
-					repl_open_cmd = view.split.vertical("50%"),
-					rcratch_repl = true,
-					repl_definition = {
-						python = {
-							command = { "ipython", "--no-autoindent" },
-							format = common.bracketed_paste,
-							block_dividers = { "# %%", "#%%" },
-						},
-					},
-				},
-				keymaps = {
-					toggle_repl = "<leader>rr",
-					restart_repl = "<leader>rR",
-					send_file = "<leader>rf",
-					send_until_cursor = "<leader>ru",
-					interrupt = "<leader>ri",
-					exit = "<leader>rq",
-					clear = "<space>rl",
-				},
-			})
-		end,
-	},
-	{
-		"nvimtools/hydra.nvim",
-		config = {
-			on_enter = function()
-				local cursorlinenr_hl = vim.api.nvim_get_hl(0, { name = "CursorLineNr" })
-				vim.g.original_cursorlinenr = {
-					fg = cursorlinenr_hl.fg,
-					bg = cursorlinenr_hl.bg,
-					bold = cursorlinenr_hl.bold,
-				}
+	-- -- Interactive python window
+	-- {
+	-- 	"hkupty/iron.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		local iron = require("iron.core")
+	-- 		local view = require("iron.view")
+	-- 		local common = require("iron.fts.common")
+	-- 		iron.setup({
+	-- 			config = {
+	-- 				repl_open_cmd = view.split.vertical("50%"),
+	-- 				rcratch_repl = true,
+	-- 				repl_definition = {
+	-- 					python = {
+	-- 						command = { "ipython", "--no-autoindent" },
+	-- 						format = common.bracketed_paste,
+	-- 						block_dividers = { "# %%", "#%%" },
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 			keymaps = {
+	-- 				toggle_repl = "<leader>rr",
+	-- 				restart_repl = "<leader>rR",
+	-- 				send_file = "<leader>rf",
+	-- 				send_until_cursor = "<leader>ru",
+	-- 				interrupt = "<leader>ri",
+	-- 				exit = "<leader>rq",
+	-- 				clear = "<space>rl",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+	-- {
+	-- 	"nvimtools/hydra.nvim",
+	-- 	config = {
+	-- 		on_enter = function()
+	-- 			local cursorlinenr_hl = vim.api.nvim_get_hl(0, { name = "CursorLineNr" })
+	-- 			vim.g.original_cursorlinenr = {
+	-- 				fg = cursorlinenr_hl.fg,
+	-- 				bg = cursorlinenr_hl.bg,
+	-- 				bold = cursorlinenr_hl.bold,
+	-- 			}
+	--
+	-- 			vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff00ff", bold = true })
+	--
+	-- 			vim.bo.modifiable = false -- temporarily set `nomodifiable` while Hydra is active
+	-- 		end,
+	--
+	-- 		on_exit = function()
+	-- 			-- Restore original settings
+	-- 			vim.api.nvim_set_hl(0, "CursorLineNr", vim.g.original_cursorlinenr)
+	--
+	-- 			vim.bo.modifiable = true
+	-- 		end,
+	-- 	},
+	-- },
+	-- {
+	-- 	"GCBallesteros/NotebookNavigator.nvim",
+	-- 	keys = {
+	-- 		{
+	-- 			"]]",
+	-- 			function()
+	-- 				require("notebook-navigator").move_cell("d")
+	-- 			end,
+	-- 		},
+	-- 		{
+	-- 			"[[",
+	-- 			function()
+	-- 				require("notebook-navigator").move_cell("u")
+	-- 			end,
+	-- 		},
+	-- 		{
+	-- 			"<C-CR>",
+	-- 			function()
+	-- 				require("notebook-navigator").run_cell()
+	-- 			end,
+	--                mode = {"n", "i"},
+	-- 		},
+	-- 		{
+	-- 			"<S-CR>",
+	-- 			function()
+	-- 				require("notebook-navigator").run_and_move()
+	-- 			end,
+	--                mode = {"n", "i"},
+	-- 		},
+	-- 	},
+	-- 	dependencies = {
+	-- 		"echasnovski/mini.comment",
+	-- 		"nvimtools/hydra.nvim",
+	-- 	},
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		local nn = require("notebook-navigator")
+	-- 		nn.setup({
+	-- 			activate_hydra_keys = "<leader>h",
+	-- 			repl_provider = "iron",
+	-- 		})
+	-- 	end,
+	-- },
+	--
+	-- {
+	-- 	"echasnovski/mini.ai",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
+	-- 	opts = function()
+	-- 		local nn = require("notebook-navigator")
+	--
+	-- 		local opts = { custom_textobjects = { h = nn.miniai_spec } }
+	-- 		return opts
+	-- 	end,
+	-- },
+	--
+	-- {
+	-- 	"echasnovski/mini.hipatterns",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
+	-- 	opts = function()
+	-- 		local nn = require("notebook-navigator")
+	-- 		local opts = { highlighters = { cells = nn.minihipatterns_spec } }
+	-- 		return opts
+	-- 	end,
+	-- },
+	--
+	-- {
+	-- 	"GCBallesteros/jupytext.nvim",
+	-- 	config = true,
+	-- 	-- Depending on your nvim distro or config you may need to make the loading not lazy
+	-- 	-- lazy=false,
+	-- },
 
-				vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff00ff", bold = true })
-
-				vim.bo.modifiable = false -- temporarily set `nomodifiable` while Hydra is active
-			end,
-
-			on_exit = function()
-				-- Restore original settings
-				vim.api.nvim_set_hl(0, "CursorLineNr", vim.g.original_cursorlinenr)
-
-				vim.bo.modifiable = true
-			end,
-		},
-	},
-	{
-		"GCBallesteros/NotebookNavigator.nvim",
-		keys = {
-			{
-				"]]",
-				function()
-					require("notebook-navigator").move_cell("d")
-				end,
-			},
-			{
-				"[[",
-				function()
-					require("notebook-navigator").move_cell("u")
-				end,
-			},
-			{
-				"<C-CR>",
-				function()
-					require("notebook-navigator").run_cell()
-				end,
-                mode = {"n", "i"},
-			},
-			{
-				"<S-CR>",
-				function()
-					require("notebook-navigator").run_and_move()
-				end,
-                mode = {"n", "i"},
-			},
-		},
-		dependencies = {
-			"echasnovski/mini.comment",
-			"nvimtools/hydra.nvim",
-		},
-		event = "VeryLazy",
-		config = function()
-			local nn = require("notebook-navigator")
-			nn.setup({
-				activate_hydra_keys = "<leader>h",
-				repl_provider = "iron",
-			})
-		end,
-	},
-
-	{
-		"echasnovski/mini.ai",
-		event = "VeryLazy",
-		dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
-		opts = function()
-			local nn = require("notebook-navigator")
-
-			local opts = { custom_textobjects = { h = nn.miniai_spec } }
-			return opts
-		end,
-	},
-
-	{
-		"echasnovski/mini.hipatterns",
-		event = "VeryLazy",
-		dependencies = { "GCBallesteros/NotebookNavigator.nvim" },
-		opts = function()
-			local nn = require("notebook-navigator")
-			local opts = { highlighters = { cells = nn.minihipatterns_spec } }
-			return opts
-		end,
-	},
-
-	{
-		"GCBallesteros/jupytext.nvim",
-		config = true,
-		-- Depending on your nvim distro or config you may need to make the loading not lazy
-		-- lazy=false,
-	},
+    -- {
+    --   "zbirenbaum/copilot.lua",
+    --   cmd = "Copilot",
+    --   event = "InsertEnter",
+    --   config = function()
+    --     require("copilot").setup({
+    --         suggestion = {
+    --             auto_trigger = true,
+    --             keymap = {
+    --                 accept = "<Tab>",
+    --                 accept_word = "<C-n>",
+    --             },
+    --             filetypes = {
+    --                 text = false,
+    --             }
+    --         }
+    --     })
+    --     keymap("n", "<leader>ct", "<CMD>Copilot toggle<CR>")
+    --     keymap("i", "<C-m>", "<CMD>Copilot panel<CR>")
+    --   end,
+    -- }
 })

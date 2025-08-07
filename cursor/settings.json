@@ -1,7 +1,7 @@
 {
     "markdown-preview-github-styles.colorTheme": "light",
     "scm.experimental.showHistoryGraph": true,
-    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/vscode.yml",
+    "lazygit-vscode.configPath": "~/.dotfiles/lazygit/cursor.yml",
     "lazygit-vscode.autoMaximizeWindow": true,
     "lazygit-vscode.panels": {
         "sidebar": "hide"
@@ -321,7 +321,7 @@
             ]
         }
     ],
-    "python.venvPath": "~/micromamba/envs",
+    // "python.venvPath": "~/micromamba/envs",
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": false,
@@ -329,17 +329,19 @@
             88
         ]
     },
+    "basedpyright.analysis.autoImportCompletions": true,
     "ruff.configuration": "~/ruff.toml",
     "python.testing.pytestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
     "python.terminal.activateEnvironment": false,
-    "python.languageServer": "Pylance",
+    "python.languageServer": "None",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
     "python.analysis.autoImportCompletions": false,
     "python.analysis.diagnosticMode": "workspace",
     "python.analysis.typeCheckingMode": "standard",
+    "basedpyright.analysis.typeCheckingMode": "standard",
     "python.analysis.indexing": true,
     "python.analysis.completeFunctionParens": false,
     "python.analysis.inlayHints.functionReturnTypes": true,
@@ -359,6 +361,37 @@
         "**/.vscode/",
         ".git",
         "**/__pycache__"
+    ],
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "sklearn",
+            "depth": 2
+        },
+        {
+            "name": "matplotlib",
+            "depth": 2
+        },
+        {
+            "name": "scipy",
+            "depth": 2
+        },
+        {
+            "name": "django",
+            "depth": 2
+        },
+        {
+            "name": "flask",
+            "depth": 2
+        },
+        {
+            "name": "fastapi",
+            "depth": 2
+        },
+        {
+            "name": "inspect_ai",
+            "depth": 2
+        }
     ],
     "rust-analyzer.check.command": "clippy",
     "rust-analyzer.check.extraArgs": [
@@ -496,7 +529,9 @@
         "tomp-adiabatic-gulch": "linux",
         "ll": "linux",
         "coder-vscode.software.coder.sw.graphcore.ai--tomp--dist-cpu.dev": "linux",
-        "node3": "linux"
+        "node3": "linux",
+        "coder-vscode.software.coder.sw.graphcore.ai--tomp--vllm.dev": "linux",
+        "coder-vscode.software.coder.sw.graphcore.ai--tomp--prof.dev": "linux"
     },
     "gitlens.ai.experimental.provider": "openai",
     "gitlens.ai.experimental.openai.model": "gpt-4-turbo-preview",
@@ -508,40 +543,9 @@
     "files.trimTrailingWhitespace": true,
     "github.copilot.editor.enableAutoCompletions": true,
     "editor.inlayHints.enabled": "offUnlessPressed",
-    "python.analysis.inlayHints.callArgumentNames": "all",
     "interactiveWindow.executeWithShiftEnter": true,
     "editor.minimap.enabled": false,
     "githubPullRequests.pullBranch": "never",
-    "python.analysis.packageIndexDepths": [
-        {
-            "name": "sklearn",
-            "depth": 2
-        },
-        {
-            "name": "matplotlib",
-            "depth": 2
-        },
-        {
-            "name": "scipy",
-            "depth": 2
-        },
-        {
-            "name": "django",
-            "depth": 2
-        },
-        {
-            "name": "flask",
-            "depth": 2
-        },
-        {
-            "name": "fastapi",
-            "depth": 2
-        },
-        {
-            "name": "inspect_ai",
-            "depth": 2
-        }
-    ],
     "debug.showVariableTypes": true,
     "notebook.output.lineHeight": 1.4,
     "notebook.markdown.lineHeight": 18,
@@ -562,5 +566,10 @@
         "scminput",
         "racket"
     ],
-    "diffEditor.renderSideBySide": false
+    "diffEditor.renderSideBySide": false,
+    "cursor.cpp.enablePartialAccepts": true,
+    "vs-kubernetes": {
+        "vscode-kubernetes.helm-path-mac": "/Users/tomp/.vs-kubernetes/tools/helm/darwin-arm64/helm",
+        "vscode-kubernetes.minikube-path-mac": "/Users/tomp/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+    }
 }

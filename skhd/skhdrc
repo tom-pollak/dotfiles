@@ -2,12 +2,12 @@
 
 ralt - a : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 ralt - s : /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-ralt - d : cursor --new-window
+ralt - d : code --new-window
 ralt - f : code --new-window
 
 lalt - a : ~/.config/yabai/most_recent_window.sh "kitty"
 lalt - s : ~/.config/yabai/most_recent_window.sh "Google Chrome"
-lalt - d : ~/.config/yabai/most_recent_window.sh "Cursor"
+lalt - d : ~/.config/yabai/most_recent_window.sh "Code"
 
 ## WM
 
